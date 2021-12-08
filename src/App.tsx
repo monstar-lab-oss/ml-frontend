@@ -1,28 +1,39 @@
-import { useTranslation } from "react-i18next";
+import { lazy, Suspense, useEffect } from "react";
 
-import logo from "./logo.svg";
+import { BrowserRouter } from "react-router-dom";
 
-import "./App.scss";
+import {
+  PermissionEnum,
+  setPermissions,
+} from "./features/permissions/permissions";
+import { useAppDispatch } from "./redux/store";
 
-function App() {
-  const { t } = useTranslation();
+// Routes are lazy loaded so they will access to correct permissions
+const Routes = lazy(() => import("./routes/Routes"));
+
+const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setPermissions(
+        Object.values(PermissionEnum).filter(
+          x =>
+            // HACK: added here to play around with the permissions
+            // permissions listed here will be removed from user's permissions
+            ![PermissionEnum.USERS_DELETE].includes(x)
+        )
+      )
+    );
+  }, [dispatch]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{t("welcomeString")}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Suspense>
   );
-}
+};
 
 export default App;

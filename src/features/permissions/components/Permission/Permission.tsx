@@ -1,6 +1,6 @@
 import { memo, ReactNode } from "react";
 
-import { Navigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { PermissionEnum } from "../../constants/permissions.scopes";
 import usePermissions from "../../hooks/permissions.hooks";
@@ -56,7 +56,7 @@ const Permission = ({
    * to wrap the whole thing in a fragment.
    */
   if (allowed) return <>{children}</>;
-  if (redirectTo) return <Navigate to={redirectTo} />;
+  if (redirectTo) return <Redirect to={redirectTo} />;
   if (fallback) return <>{fallback}</>;
   return null;
 };
