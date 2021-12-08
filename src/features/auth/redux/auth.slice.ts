@@ -1,13 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
+import storage from "redux-persist/lib/storage";
 
 import { AUTH_FEATURE_KEY } from "@app/features/auth/auth";
 
-import { clearTokens } from "../helpers/auth.helpers";
-import { InitialStateDef } from "../types/auth.types";
+import { InitialStateDef, LoginResponseDef } from "../types/auth.types";
 
 const initialState: InitialStateDef = {
-  user: null,
-  isAuthenticated: false,
+  accessToken: null,
   error: false,
   loading: false,
 };
@@ -17,16 +18,25 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     clearUser(state) {
-      state.user = null;
-      state.isAuthenticated = false;
-      clearTokens();
+      state.accessToken = null;
     },
-  },
-  extraReducers: () => {
-    //
+
+    updateToken(state, action: PayloadAction<LoginResponseDef>) {
+      const { token } = action.payload;
+      state.accessToken = token;
+    },
   },
 });
 
-export const { clearUser } = authSlice.actions;
+export const { clearUser, updateToken } = authSlice.actions;
 
-export const authReducer = authSlice.reducer;
+const authConfig = {
+  key: AUTH_FEATURE_KEY,
+  storage,
+  stateReconciler: autoMergeLevel2,
+  whitelist: ["accessToken"],
+};
+export const authReducer = persistReducer<ReturnType<typeof authSlice.reducer>>(
+  authConfig,
+  authSlice.reducer
+);

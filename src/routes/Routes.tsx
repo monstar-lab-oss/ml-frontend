@@ -24,8 +24,8 @@ import { PRIVATE_LIST, PUBLIC_LIST } from "./routes.config";
 const DefaultLayout = HeaderLayout;
 
 const Routes = () => {
-  const { isAuthenticated } = useAppSelector(state => ({
-    isAuthenticated: state.auth?.isAuthenticated,
+  const { accessToken } = useAppSelector(state => ({
+    accessToken: state.auth?.accessToken,
   }));
 
   const routeWrapper = (
@@ -38,7 +38,7 @@ const Routes = () => {
         key={id}
         path={path}
         render={routeProps => {
-          if (isProtectedRoute && !isAuthenticated) {
+          if (isProtectedRoute && !accessToken) {
             return <LoginRedirect />;
           }
           const Component = component as RouteComponentDef;

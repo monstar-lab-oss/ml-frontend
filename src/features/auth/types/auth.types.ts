@@ -1,21 +1,17 @@
 /**
- * Types are specific for regres login =>
+ * For redux slice and helper function
  */
-
-export type TokenDef = {
-  /* TODO: check if TYPE needs changing when AUTH method is changed ? */
-  /* login system is for demo use (regres.in) */
-  accessToken?: string;
-  refreshToken?: string;
-  expiresAt?: string;
-  tokenType?: string;
-};
+export interface InitialStateDef {
+  accessToken: string | null;
+  error: boolean;
+  loading: boolean;
+}
 
 /**
  * For Demo - regres - api, only token is returned from api,
  * but expiresIn is added in code
  */
-export type ApiResponseDef = {
+export type LoginResponseDef = {
   token: string;
   expiresIn?: string;
 };
@@ -23,31 +19,4 @@ export type ApiResponseDef = {
 export type LoginRequestDef = {
   email: string;
   password: string;
-};
-
-export type UserDef = {
-  email: string;
-  name: string;
-  avatar: string;
-};
-
-/**
- * For redux slice and helper function
- */
-export interface InitialStateDef {
-  user: UserDef | null;
-  isAuthenticated: boolean;
-  error: boolean;
-  loading: boolean;
-}
-
-/* eslint-disable camelcase */
-export type UserResponseDef = {
-  data: {
-    id: number;
-    first_name: string;
-    last_name: string;
-    avatar: string;
-    email: string;
-  };
 };
