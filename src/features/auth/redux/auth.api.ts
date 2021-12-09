@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { baseQuery } from "@app/api/base-query";
+import { ApiMethods } from "@app/constants/api.constants";
 
 import {
   AuthEndpointsEnum,
@@ -16,7 +17,7 @@ export const authApi = createApi({
     postLogin: builder.mutation<LoginResponseDef, LoginRequestDef>({
       query: data => ({
         url: AuthEndpointsEnum.LOGIN,
-        method: "POST",
+        method: ApiMethods.POST,
         body: data,
       }),
     }),

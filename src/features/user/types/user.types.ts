@@ -4,6 +4,9 @@ export type UserDef = {
   avatar: string;
 };
 
+/**
+ * For Demo - regres - api
+ */
 /* eslint-disable camelcase */
 export type UserResponseDef = {
   data: {

@@ -8,3 +8,13 @@ export enum ApiStatusCodes {
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
 }
+
+/**
+ * API methods enum
+ */
+export enum ApiMethods {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}

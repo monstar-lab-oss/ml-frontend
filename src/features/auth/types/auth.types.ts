@@ -3,8 +3,6 @@
  */
 export interface InitialStateDef {
   accessToken: string | null;
-  error: boolean;
-  loading: boolean;
 }
 
 /**
