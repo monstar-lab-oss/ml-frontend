@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
 
 import { AUTH_FEATURE_KEY } from "../constants/auth.keys";
-import { InitialStateDef, LoginResponseDef } from "../types/auth.types";
+import { InitialStateDef } from "../types/auth.types";
+import { authApi } from "./auth.api";
 
 const initialState: InitialStateDef = {
   accessToken: null,
@@ -17,14 +18,20 @@ const authSlice = createSlice({
     clearUser(state) {
       state.accessToken = null;
     },
-    updateToken(state, action: PayloadAction<LoginResponseDef>) {
-      const { token } = action.payload;
-      state.accessToken = token;
-    },
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      authApi.endpoints.postLogin.matchFulfilled,
+      (state, action) => {
+        const { token } = action.payload;
+
+        state.accessToken = token;
+      }
+    );
   },
 });
 
-export const { clearUser, updateToken } = authSlice.actions;
+export const { clearUser } = authSlice.actions;
 
 const authConfig = {
   key: AUTH_FEATURE_KEY,
