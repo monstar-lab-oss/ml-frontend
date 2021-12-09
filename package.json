@@ -1,0 +1,23 @@
+{
+  "name": "reactjs-boilerplate",
+  "version": "0.1.0",
+  "private": true,
+  "repository": "git@github.com:monstar-lab-oss/reactjs-boilerplate.git",
+  "author": "山下 仁麻 <jinma.yamashita@monstar-lab.com>",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.37",
+    "@types/react-dom": "17.0.11",
+    "@vitejs/plugin-react": "1.1.1",
+    "typescript": "4.5.2",
+    "vite": "2.7.1"
+  },
+  "dependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}
