@@ -1,1 +1,3 @@
-export const App = () => <div />;
+import { routes } from "@/routes";
+
+export const App = () => <>{routes()}</>;
