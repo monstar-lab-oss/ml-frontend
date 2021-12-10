@@ -6,6 +6,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   resolve: {
     alias: {
+      "@/__mocks__": path.resolve(__dirname, "./__mocks__"),
       "@": path.resolve(__dirname, "./src"),
     },
   },
