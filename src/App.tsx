@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
 import {
@@ -10,6 +11,8 @@ import { useAppDispatch } from "./redux/store";
 
 // Routes are lazy loaded so they will access to correct permissions
 const Routes = lazy(() => import("./routes/Routes"));
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -29,9 +32,11 @@ const App = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      </QueryClientProvider>
     </Suspense>
   );
 };
