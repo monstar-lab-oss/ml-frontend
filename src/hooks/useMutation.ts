@@ -4,6 +4,7 @@ import {
   UseMutationOptions,
 } from "react-query";
 
+import { ApiMethods } from "@app/constants/api.constants";
 import useApi from "@app/hooks/useApi";
 import { Response } from "@app/types/api.types";
 
@@ -14,7 +15,10 @@ type Options<ResponseData = unknown, RequestData = void> = Omit<
 
 export default function useMutation<ResponseData = unknown, RequestData = void>(
   url: string,
-  method: "POST" | "PUT" | "DELETE" = "POST",
+  method:
+    | ApiMethods.POST
+    | ApiMethods.PUT
+    | ApiMethods.DELETE = ApiMethods.POST,
   options?: Options<ResponseData, RequestData>
 ): UseMutationResult<Response<ResponseData>, unknown, RequestData> {
   const api = useApi();
@@ -26,6 +30,7 @@ export default function useMutation<ResponseData = unknown, RequestData = void>(
     // A little trick to use mutation dynamically, for example url is /users/:id
     // and request data will be { ":id": 1, name: "Example" }
     // :id in the url will be replace with :id in the request data
+    // Note: Waiting this discussion https://github.com/tannerlinsley/react-query/discussions/1226
     let parsedUrl = url;
     if (typeof data === "object") {
       Object.keys(data).forEach(paramStr => {

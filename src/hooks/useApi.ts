@@ -2,6 +2,7 @@ import { useMemo } from "react";
 
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 
+import { ApiStatusCodes } from "@app/constants/api.constants";
 import { ENV } from "@app/constants/env";
 import { useAuth, AuthEndpointsEnum } from "@app/features/auth/auth";
 import { Response } from "@app/types/api.types";
@@ -46,7 +47,7 @@ export default function useApi() {
       (response: AxiosResponse<Response>) => response.data,
       (error: AxiosError<Response>) => {
         // Process error here
-        if (error.response?.status === 401) {
+        if (error.response?.status === ApiStatusCodes.UNAUTHORIZED) {
           // Redirect to login URL
         }
 
