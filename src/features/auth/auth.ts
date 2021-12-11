@@ -12,3 +12,9 @@ export * from "./types/auth.types";
 export * from "./constants/auth.paths";
 export * from "./constants/auth.endpoints";
 export * from "./constants/auth.keys";
+
+// CONTEXTS
+export * from "./contexts/AuthContext";
+
+// HOOKS
+export { default as useAuth } from "./hooks/useAuth";

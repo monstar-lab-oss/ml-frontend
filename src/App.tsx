@@ -3,6 +3,8 @@ import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
+import { AuthProvider } from "@app/features/auth/auth";
+
 import {
   PermissionEnum,
   setPermissions,
@@ -33,9 +35,11 @@ const App = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes />
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes />
+          </BrowserRouter>
+        </AuthProvider>
       </QueryClientProvider>
     </Suspense>
   );
