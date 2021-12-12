@@ -3,8 +3,8 @@ import { ElementType, memo } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import HeaderLayout from "@app/components/layouts/HeaderLayout/HeaderLayout";
+import { useAuth } from "@app/features/auth/auth";
 import { Permission } from "@app/features/permissions/permissions";
-import { useAppSelector } from "@app/redux/store";
 import {
   RouteComponentDef,
   RouteItemDef,
@@ -24,9 +24,7 @@ import { PRIVATE_LIST, PUBLIC_LIST } from "./routes.config";
 const DefaultLayout = HeaderLayout;
 
 const Routes = () => {
-  const { accessToken } = useAppSelector(state => ({
-    accessToken: state.auth?.accessToken,
-  }));
+  const { isLoggedIn } = useAuth();
 
   const routeWrapper = (
     { id, path, layout, component, permissions }: RouteItemDef,
@@ -38,7 +36,7 @@ const Routes = () => {
         key={id}
         path={path}
         render={routeProps => {
-          if (isProtectedRoute && !accessToken) {
+          if (isProtectedRoute && !isLoggedIn) {
             return <LoginRedirect />;
           }
           const Component = component as RouteComponentDef;

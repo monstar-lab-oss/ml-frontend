@@ -20,13 +20,15 @@ interface LoginResponseData {
   token: string;
 }
 
+// TODO: interface or type?
 interface Auth {
   isLoggedIn: boolean;
-  token?: string;
+  accessToken?: string;
   login: (
     username: string,
     password: string
   ) => Promise<Response<LoginResponseData>>;
+  isLoggingIn: boolean;
 }
 
 export const AuthContext = createContext<Auth>({} as Auth);
@@ -37,9 +39,9 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState("");
+  const [accessToken, setAccessToken] = useState("");
 
-  const { mutateAsync: mutateLogin } = useMutation<
+  const { mutateAsync: mutateLogin, isLoading: isLoggingIn } = useMutation<
     LoginResponseData,
     LoginRequestData
   >(AuthEndpointsEnum.LOGIN);
@@ -53,25 +55,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (res.token) {
         setIsLoggedIn(true);
-        setToken(res.token);
+        setAccessToken(res.token);
       }
 
       return res;
     },
-    [mutateLogin, setIsLoggedIn, setToken]
+    [mutateLogin, setIsLoggedIn, setAccessToken]
   );
 
   useEffect(() => {
     // Maybe in the future we need persistent authentication, so can get token from localStorage here
-  }, [setIsLoggedIn, setToken]);
+  }, [setIsLoggedIn, setAccessToken]);
 
   const value = useMemo(
     () => ({
       isLoggedIn,
-      token,
+      accessToken,
       login,
+      isLoggingIn,
     }),
-    [isLoggedIn, token, login]
+    [isLoggedIn, accessToken, login, isLoggingIn]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

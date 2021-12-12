@@ -1,22 +1,22 @@
-import { usePostLoginMutation } from "../../auth";
+import { useCallback } from "react";
+
+import { useAuth } from "@app/features/auth/auth";
+
 import useRedirectAfterLogin from "../../hooks/useRedirectAfterLogin";
 
 const LoginScreen = () => {
   useRedirectAfterLogin();
-  const [postLogin, { isLoading }] = usePostLoginMutation();
+  const { login, isLoggingIn } = useAuth();
 
-  const handleLogin = () => {
-    postLogin({
-      email: "george.bluth@reqres.in",
-      password: "password",
-    });
-  };
+  const handleLogin = useCallback(() => {
+    login("george.bluth@reqres.in", "password");
+  }, [login]);
 
   return (
     <div>
       <div>LoginScreen</div>
-      <button onClick={handleLogin} disabled={isLoading}>
-        {isLoading ? "Loading..." : "Login"}
+      <button onClick={handleLogin} disabled={isLoggingIn}>
+        {isLoggingIn ? "Loading..." : "Login"}
       </button>
     </div>
   );

@@ -4,16 +4,22 @@ export type UserDef = {
   avatar: string;
 };
 
+/* eslint-disable camelcase */
+export type UserResponseData = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+  email: string;
+};
+
 /**
  * For Demo - regres - api
  */
-/* eslint-disable camelcase */
 export type UserResponseDef = {
-  data: {
-    id: number;
-    first_name: string;
-    last_name: string;
-    avatar: string;
-    email: string;
-  };
+  data: UserResponseData;
 };
+
+export interface User extends UserResponseData {
+  name: string;
+}

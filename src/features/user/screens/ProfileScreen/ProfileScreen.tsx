@@ -1,18 +1,18 @@
-import { useGetUserQuery } from "../../user";
+import { useUserQuery } from "@app/features/user/user";
 
 const ProfileScreen = () => {
-  const { data, isLoading } = useGetUserQuery(1);
+  const { user, isLoading } = useUserQuery(1);
 
   return (
     <div>
       <div>ProfileScreen</div>
       <div>{isLoading && "Loading..."}</div>
-      {!isLoading && !!data && (
+      {!isLoading && !!user && (
         <div>
-          <div>Name: {data.name}</div>
-          <div>email: {data.email}</div>
+          <div>Name: {user.name}</div>
+          <div>email: {user.email}</div>
           <div>
-            <img src={data.avatar} alt="avatar" />
+            <img src={user.avatar} alt="avatar" />
           </div>
         </div>
       )}

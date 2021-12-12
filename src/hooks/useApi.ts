@@ -10,7 +10,7 @@ import { Response } from "@app/types/api.types";
 const anonymousEndpoints = [AuthEndpointsEnum.LOGIN.toString()];
 
 export default function useApi() {
-  const { token } = useAuth();
+  const { accessToken } = useAuth();
 
   const api = useMemo(() => {
     const apiInstance = axios.create({
@@ -28,12 +28,13 @@ export default function useApi() {
           request.headers = {};
         }
 
-        if (token) {
-          request.headers.Authorization = `Bearer ${token}`;
+        // TODO: Maybe add accessToken to headers above
+        if (accessToken) {
+          request.headers.Authorization = `Bearer ${accessToken}`;
           return request;
         }
 
-        if (!token && !isAnonymous) {
+        if (!accessToken && !isAnonymous) {
           // TODO: handle when UNAUTHORIZED;
           // return Promise.reject(ApiStatusCodes.UNAUTHORIZED);
           return request;
@@ -56,7 +57,7 @@ export default function useApi() {
     );
 
     return apiInstance;
-  }, [token]);
+  }, [accessToken]);
 
   return api;
 }
