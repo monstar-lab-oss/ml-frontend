@@ -3,8 +3,10 @@ import { useMemo } from "react";
 import { UserResponseDef, User } from "@app/features/user/user";
 import useQuery from "@app/hooks/useQuery";
 
-export default function useUserQuery(id: number) {
-  const query = useQuery<UserResponseDef>(`/user/${id}`);
+export default function useUserQuery(id: number, isQueryEnabled = true) {
+  const query = useQuery<UserResponseDef>(`/users/${id}`, {
+    enabled: isQueryEnabled,
+  });
   const { data } = query;
 
   const user = useMemo<User | undefined>(() => {

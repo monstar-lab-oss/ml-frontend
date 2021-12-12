@@ -1,7 +1,30 @@
-import { useUserQuery } from "@app/features/user/user";
+import { useCallback, useState } from "react";
+
+import { useQueryClient } from "react-query";
+
+import { useUserQuery, UserResponseData } from "@app/features/user/user";
+
+import UserForm from "../../components/UserForm";
 
 const ProfileScreen = () => {
-  const { user, isLoading } = useUserQuery(1);
+  const queryClient = useQueryClient();
+
+  const [isEditingUser, setIsEditingUser] = useState(false);
+
+  // User a flag named isEditingUser to prevent re-fetching user when editing user
+  const { user, isLoading } = useUserQuery(1, !isEditingUser);
+
+  const handleUserUpdated = useCallback(
+    (updatedUser: UserResponseData) => {
+      // Have to comment out the following line because reqres.in returns mock data after re-fetching user
+      // setIsEditingUser(false);
+
+      queryClient.setQueryData(`/users/${user?.id}`, {
+        data: updatedUser,
+      });
+    },
+    [queryClient, user]
+  );
 
   return (
     <div>
@@ -14,7 +37,11 @@ const ProfileScreen = () => {
           <div>
             <img src={user.avatar} alt="avatar" />
           </div>
+          <button onClick={() => setIsEditingUser(true)}>Edit</button>
         </div>
+      )}
+      {isEditingUser && user && (
+        <UserForm user={user} handleUserUpdated={handleUserUpdated} />
       )}
     </div>
   );

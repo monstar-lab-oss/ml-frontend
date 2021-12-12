@@ -1,15 +1,13 @@
-import React, {
-  createContext,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, ReactNode, useCallback, useMemo } from "react";
+
+import createPersistedState from "use-persisted-state";
 
 import { AuthEndpointsEnum } from "@app/features/auth/auth";
 import useMutation from "@app/hooks/useMutation";
 import { Response } from "@app/types/api.types";
+
+const useIsLoggedInState = createPersistedState("isLoggedIn");
+const useAccessTokenState = createPersistedState("accessToken");
 
 interface LoginRequestData {
   username: string;
@@ -38,8 +36,8 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useIsLoggedInState(false);
+  const [accessToken, setAccessToken] = useAccessTokenState("");
 
   const { mutateAsync: mutateLogin, isLoading: isLoggingIn } = useMutation<
     LoginResponseData,
@@ -62,10 +60,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     },
     [mutateLogin, setIsLoggedIn, setAccessToken]
   );
-
-  useEffect(() => {
-    // Maybe in the future we need persistent authentication, so can get token from localStorage here
-  }, [setIsLoggedIn, setAccessToken]);
 
   const value = useMemo(
     () => ({

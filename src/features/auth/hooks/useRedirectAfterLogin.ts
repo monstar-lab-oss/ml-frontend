@@ -10,13 +10,13 @@ function useRedirectAfterLogin() {
   const history = useHistory();
   const location = useLocation<RedirectDef>();
   const { redirect } = qs.parse(location.search);
-  const { accessToken } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    if (accessToken) {
+    if (isLoggedIn) {
       history.push((redirect as string) ?? "/");
     }
-  }, [redirect, history, accessToken]);
+  }, [redirect, history, isLoggedIn]);
   return null;
 }
 
