@@ -1,3 +1,13 @@
-import { routes } from "@/routes";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Routes } from "@/routes";
+import { AuthProvider } from "@/hooks/useAuth";
 
-export const App = () => <>{routes()}</>;
+const queryClient = new QueryClient();
+
+export const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  </QueryClientProvider>
+);

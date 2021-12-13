@@ -1,12 +1,20 @@
-import { http } from "@/utils/http";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Login = () => {
-  const login = async () => {
-    const { token } = await http.post<{ token: string }>("/login", {
+  const { login } = useAuth();
+
+  const onClick = () =>
+    login({
       email: "eve.holt@reqres.in",
       password: "cityslicka",
     });
-    console.log(token);
-  };
-  return <button onClick={login}>Login</button>;
+
+  return (
+    <div>
+      <div>LoginScreen</div>
+      <button onClick={onClick} disabled={login.isLoading}>
+        {login.isLoading ? "Loading..." : "Login"}
+      </button>
+    </div>
+  );
 };
