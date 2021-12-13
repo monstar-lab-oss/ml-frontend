@@ -14,10 +14,10 @@ const HeaderLayout = ({ children }: HeaderLayoutProps) => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/profile">Profile</Link>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/users">User List</Link>
         </li>
       </ul>
       <div>{children}</div>

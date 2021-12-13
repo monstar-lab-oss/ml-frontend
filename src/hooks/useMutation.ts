@@ -45,7 +45,10 @@ export default function useMutation<ResponseData = unknown, RequestData = void>(
       });
     }
 
-    return api[method.toLowerCase() as "post" | "put" | "delete"](url, data);
+    return api[method.toLowerCase() as "post" | "put" | "delete"](
+      parsedUrl,
+      data
+    );
   }, options);
 
   return mutation;

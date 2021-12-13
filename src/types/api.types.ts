@@ -10,4 +10,14 @@ export type Response<Data = unknown> = {
 };
  *
  */
-export type Response<Data = unknown> = Data;
+export type Response<ResponseData = unknown> = ResponseData;
+
+export type PaginationResponse<ResponseData = unknown> = {
+  data: ResponseData;
+  page: number;
+  // eslint-disable-next-line camelcase
+  per_page: number;
+  total: number;
+  // eslint-disable-next-line camelcase
+  total_pages: number;
+};
