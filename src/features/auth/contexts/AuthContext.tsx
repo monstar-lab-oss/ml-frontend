@@ -9,17 +9,16 @@ import { Response } from "@app/types/api.types";
 const useIsLoggedInState = createPersistedState("isLoggedIn");
 const useAccessTokenState = createPersistedState("accessToken");
 
-interface LoginRequestData {
+type LoginRequestData = {
   username: string;
   password: string;
-}
+};
 
-interface LoginResponseData {
+type LoginResponseData = {
   token: string;
-}
+};
 
-// TODO: interface or type?
-interface Auth {
+type Auth = {
   isLoggedIn: boolean;
   accessToken?: string;
   login: (
@@ -28,7 +27,7 @@ interface Auth {
   ) => Promise<Response<LoginResponseData>>;
   isLoggingIn: boolean;
   logout: () => void;
-}
+};
 
 export const AuthContext = createContext<Auth>({} as Auth);
 

@@ -6,10 +6,10 @@ import { ApiMethods } from "@app/constants/api.constants";
 import { User, UserResponseData } from "@app/features/user/user";
 import useMutation from "@app/hooks/useMutation";
 
-export type UserFormProps = {
+export interface UserFormProps {
   user: UserResponseData;
   handleUserUpdated: (updatedUser: UserResponseData) => void;
-};
+}
 
 const UserForm: React.FC<UserFormProps> = ({ user, handleUserUpdated }) => {
   const {

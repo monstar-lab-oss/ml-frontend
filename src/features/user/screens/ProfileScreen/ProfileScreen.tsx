@@ -11,7 +11,7 @@ const ProfileScreen = () => {
 
   const [isEditingUser, setIsEditingUser] = useState(false);
 
-  // User a flag named isEditingUser to prevent re-fetching user when editing user
+  // Use a flag named isEditingUser to prevent re-fetching user when editing user
   const { user, isLoading } = useUserQuery(1, !isEditingUser);
 
   const handleUserUpdated = useCallback(
