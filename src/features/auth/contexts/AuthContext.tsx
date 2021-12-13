@@ -27,6 +27,7 @@ interface Auth {
     password: string
   ) => Promise<Response<LoginResponseData>>;
   isLoggingIn: boolean;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<Auth>({} as Auth);
@@ -61,14 +62,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     [mutateLogin, setIsLoggedIn, setAccessToken]
   );
 
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setAccessToken("");
+  }, [setIsLoggedIn, setAccessToken]);
+
   const value = useMemo(
     () => ({
       isLoggedIn,
       accessToken,
       login,
       isLoggingIn,
+      logout,
     }),
-    [isLoggedIn, accessToken, login, isLoggingIn]
+    [isLoggedIn, accessToken, login, isLoggingIn, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
