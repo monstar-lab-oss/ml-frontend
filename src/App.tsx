@@ -34,13 +34,13 @@ const App = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <BrowserRouter>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
             <Routes />
-          </BrowserRouter>
-        </AuthProvider>
-      </QueryClientProvider>
+          </AuthProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
     </Suspense>
   );
 };

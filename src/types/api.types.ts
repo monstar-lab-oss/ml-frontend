@@ -21,3 +21,5 @@ export type PaginationResponse<ResponseData = unknown> = {
   // eslint-disable-next-line camelcase
   total_pages: number;
 };
+
+export type ApiError = unknown;

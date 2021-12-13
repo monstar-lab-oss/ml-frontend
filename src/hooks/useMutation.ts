@@ -6,10 +6,10 @@ import {
 
 import { ApiMethods } from "@app/constants/api.constants";
 import useApi from "@app/hooks/useApi";
-import { Response } from "@app/types/api.types";
+import { Response, ApiError } from "@app/types/api.types";
 
 type Options<ResponseData = unknown, RequestData = void> = Omit<
-  UseMutationOptions<Response<ResponseData>, unknown, RequestData>,
+  UseMutationOptions<Response<ResponseData>, ApiError, RequestData>,
   "mutationKey"
 >;
 
@@ -20,7 +20,7 @@ export default function useMutation<ResponseData = unknown, RequestData = void>(
     | ApiMethods.PUT
     | ApiMethods.DELETE = ApiMethods.POST,
   options?: Options<ResponseData, RequestData>
-): UseMutationResult<Response<ResponseData>, unknown, RequestData> {
+): UseMutationResult<Response<ResponseData>, ApiError, RequestData> {
   const api = useApi();
   const mutation = useReactQueryMutation<
     Response<ResponseData>,
