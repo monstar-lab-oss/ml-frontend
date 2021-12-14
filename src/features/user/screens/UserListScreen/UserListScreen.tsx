@@ -37,15 +37,16 @@ const UserListScreen = () => {
 
   const { isLoading: isDeleting, mutateAsync: deleteUser } = useMutation<
     unknown,
-    { ":id": number }
+    null,
+    { id: number }
   >(`users/:id`, ApiMethods.DELETE);
 
   const handleDeleting = useCallback(
     async (deletingUser: UserResponseData) => {
       // eslint-disable-next-line no-restricted-globals
       if (confirm(`Do you want to delete: ${deletingUser.first_name}`)) {
-        await deleteUser({
-          ":id": deletingUser.id,
+        await deleteUser(null, {
+          id: deletingUser.id,
         });
 
         queryClient.setQueryData(

@@ -1,7 +1,9 @@
+import { useCallback } from "react";
+
 import {
   useMutation as useReactQueryMutation,
-  UseMutationResult,
   UseMutationOptions,
+  MutateOptions,
 } from "react-query";
 
 import { ApiMethods } from "@app/constants/api.constants";
@@ -13,43 +15,81 @@ type Options<ResponseData = unknown, RequestData = void> = Omit<
   "mutationKey"
 >;
 
-export default function useMutation<ResponseData = unknown, RequestData = void>(
+type TParams = { [key: string]: string | number };
+
+type RequestDataWithParams<
+  RequestData = void,
+  Params = TParams
+> = RequestData & {
+  params?: Params;
+};
+
+export default function useMutation<
+  ResponseData = unknown,
+  RequestData = void,
+  Params = TParams
+>(
   url: string,
   method:
+    | ApiMethods.GET
     | ApiMethods.POST
     | ApiMethods.PUT
     | ApiMethods.DELETE = ApiMethods.POST,
   options?: Options<ResponseData, RequestData>
-): UseMutationResult<Response<ResponseData>, ApiError, RequestData> {
+) {
   const api = useApi();
   const mutation = useReactQueryMutation<
     Response<ResponseData>,
     unknown,
-    RequestData
+    RequestDataWithParams<RequestData, Params>
   >(async data => {
     // A little trick to use mutation dynamically, for example url is /users/:id
-    // and request data will be { ":id": 1, name: "Example" }
-    // :id in the url will be replace with :id in the request data
     // Note: Waiting this discussion https://github.com/tannerlinsley/react-query/discussions/1226
     let parsedUrl = url;
-    if (typeof data === "object") {
-      Object.keys(data).forEach(paramStr => {
-        const param = paramStr as keyof RequestData;
-        if ((param as string).startsWith(":")) {
-          parsedUrl = parsedUrl.replace(
-            new RegExp(param as string, "g"),
-            data[param] as unknown as string
-          );
-          delete data[param];
-        }
+    if (typeof data === "object" && typeof data.params === "object") {
+      Object.keys(data.params).forEach(paramStr => {
+        const param = paramStr as keyof Params;
+
+        parsedUrl = parsedUrl.replace(
+          new RegExp(`:${param as string}`, "g"),
+          data.params?.[param] as unknown as string
+        );
       });
     }
 
-    return api[method.toLowerCase() as "post" | "put" | "delete"](
+    // Delete temporary params before sending to API
+    const requestData: RequestData = data;
+    delete data.params;
+
+    return api[method.toLowerCase() as "post" | "put" | "delete" | "get"](
       parsedUrl,
-      data
+      requestData
     );
   }, options);
 
-  return mutation;
+  const { mutateAsync: mutateAsyncReactQuery } = mutation;
+
+  const mutateAsync = useCallback(
+    async (
+      data: RequestData,
+      params?: Params,
+      mutateOptions?: MutateOptions<
+        Response<ResponseData>,
+        ApiError,
+        RequestDataWithParams<RequestData, Params>
+      >
+    ): Promise<Response<ResponseData>> => {
+      return mutateAsyncReactQuery({
+        ...data,
+        params,
+        mutateOptions,
+      });
+    },
+    [mutateAsyncReactQuery]
+  );
+
+  return {
+    ...mutation,
+    mutateAsync,
+  };
 }
