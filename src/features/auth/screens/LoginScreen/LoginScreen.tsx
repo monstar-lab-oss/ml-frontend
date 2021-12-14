@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 
-import { useAuth } from "@app/features/auth/auth";
+import { useLogin } from "@app/features/auth/auth";
 
 import useRedirectAfterLogin from "../../hooks/useRedirectAfterLogin";
 
 const LoginScreen = () => {
   useRedirectAfterLogin();
-  const { login, isLoggingIn } = useAuth();
+  const { login, isLoggingIn } = useLogin();
 
   const handleLogin = useCallback(() => {
     login("george.bluth@reqres.in", "password");

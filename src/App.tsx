@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
+import { ApiProvider } from "@app/contexts/ApiContext";
 import { AuthProvider } from "@app/features/auth/auth";
 
 import {
@@ -37,7 +38,9 @@ const App = () => {
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <Routes />
+            <ApiProvider>
+              <Routes />
+            </ApiProvider>
           </AuthProvider>
         </QueryClientProvider>
       </BrowserRouter>

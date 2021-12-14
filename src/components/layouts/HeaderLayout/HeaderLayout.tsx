@@ -2,14 +2,15 @@ import { ReactNode } from "react";
 
 import { Link } from "react-router-dom";
 
-import { useAuth } from "@app/features/auth/auth";
+import { useAuth, useLogout } from "@app/features/auth/auth";
 
 type HeaderLayoutProps = {
   children: ReactNode;
 };
 
 const HeaderLayout = ({ children }: HeaderLayoutProps) => {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn } = useAuth();
+  const { logout } = useLogout();
 
   return (
     <div>

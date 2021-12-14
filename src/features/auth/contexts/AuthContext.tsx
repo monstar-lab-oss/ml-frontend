@@ -2,31 +2,18 @@ import React, { createContext, ReactNode, useCallback, useMemo } from "react";
 
 import createPersistedState from "use-persisted-state";
 
-import { AuthEndpointsEnum } from "@app/features/auth/auth";
-import useMutation from "@app/hooks/useMutation";
-import { Response } from "@app/types/api.types";
-
 const useIsLoggedInState = createPersistedState("isLoggedIn");
 const useAccessTokenState = createPersistedState("accessToken");
 
-type LoginRequestData = {
-  username: string;
-  password: string;
-};
-
-type LoginResponseData = {
-  token: string;
-};
-
-type Auth = {
-  isLoggedIn: boolean;
+type LoginData = {
   accessToken?: string;
-  login: (
-    username: string,
-    password: string
-  ) => Promise<Response<LoginResponseData>>;
-  isLoggingIn: boolean;
-  logout: () => void;
+  refreshToken?: string; // TODO: Maybe need refreshToken to fetch access token automatically
+};
+
+type Auth = LoginData & {
+  isLoggedIn: boolean;
+  handleLogin: (data: LoginData) => void;
+  handleLogout: () => void;
 };
 
 export const AuthContext = createContext<Auth>({} as Auth);
@@ -39,29 +26,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useIsLoggedInState(false);
   const [accessToken, setAccessToken] = useAccessTokenState("");
 
-  const { mutateAsync: mutateLogin, isLoading: isLoggingIn } = useMutation<
-    LoginResponseData,
-    LoginRequestData
-  >(AuthEndpointsEnum.LOGIN);
-
-  const login = useCallback(
-    async (username: string, password: string) => {
-      const res = await mutateLogin({
-        username,
-        password,
-      });
-
-      if (res.token) {
+  const handleLogin = useCallback(
+    (data: LoginData) => {
+      if (data.accessToken) {
         setIsLoggedIn(true);
-        setAccessToken(res.token);
+        setAccessToken(data.accessToken);
       }
-
-      return res;
     },
-    [mutateLogin, setIsLoggedIn, setAccessToken]
+    [setIsLoggedIn, setAccessToken]
   );
 
-  const logout = useCallback(() => {
+  const handleLogout = useCallback(() => {
     setIsLoggedIn(false);
     setAccessToken("");
   }, [setIsLoggedIn, setAccessToken]);
@@ -70,11 +45,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     () => ({
       isLoggedIn,
       accessToken,
-      login,
-      isLoggingIn,
-      logout,
+      handleLogin,
+      handleLogout,
     }),
-    [isLoggedIn, accessToken, login, isLoggingIn, logout]
+    [isLoggedIn, accessToken, handleLogout, handleLogin]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

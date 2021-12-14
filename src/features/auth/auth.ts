@@ -13,3 +13,5 @@ export * from "./contexts/AuthContext";
 
 // HOOKS
 export { default as useAuth } from "./hooks/useAuth";
+export { default as useLogin } from "./hooks/useLogin";
+export { default as useLogout } from "./hooks/useLogout";
