@@ -49,9 +49,9 @@ const UserListScreen = () => {
           id: deletingUser.id,
         });
 
+        // Delete user in user list data
         queryClient.setQueryData(
           url,
-          // eslint-disable-next-line
           (
             listData: PaginationResponse<UserResponseData[]> | undefined
           ): PaginationResponse<UserResponseData[]> => {
@@ -73,9 +73,9 @@ const UserListScreen = () => {
 
   const handleUserUpdated = useCallback(
     (updatedUser: UserResponseData) => {
+      // Update user in user list data
       queryClient.setQueryData(
         url,
-        // eslint-disable-next-line
         (
           listData: PaginationResponse<UserResponseData[]> | undefined
         ): PaginationResponse<UserResponseData[]> => {
