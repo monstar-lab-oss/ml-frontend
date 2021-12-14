@@ -17,11 +17,13 @@ type Options<ResponseData = unknown, RequestData = void> = Omit<
 
 type TParams = { [key: string]: string | number };
 
+const PARAMS_KEY = Symbol("params");
+
 type RequestDataWithParams<
   RequestData = void,
   Params = TParams
 > = RequestData & {
-  params?: Params;
+  [PARAMS_KEY]?: Params;
 };
 
 export default function useMutation<
@@ -46,20 +48,20 @@ export default function useMutation<
     // A little trick to use mutation dynamically, for example url is /users/:id
     // Note: Waiting this discussion https://github.com/tannerlinsley/react-query/discussions/1226
     let parsedUrl = url;
-    if (typeof data === "object" && typeof data.params === "object") {
-      Object.keys(data.params).forEach(paramStr => {
+    if (typeof data === "object" && typeof data[PARAMS_KEY] === "object") {
+      Object.keys(data[PARAMS_KEY] as unknown as TParams).forEach(paramStr => {
         const param = paramStr as keyof Params;
 
         parsedUrl = parsedUrl.replace(
           new RegExp(`:${param as string}`, "g"),
-          data.params?.[param] as unknown as string
+          data[PARAMS_KEY]?.[param] as unknown as string
         );
       });
     }
 
     // Delete temporary params before sending to API
     const requestData: RequestData = data;
-    delete data.params;
+    delete data[PARAMS_KEY];
 
     return api[method.toLowerCase() as "post" | "put" | "delete" | "get"](
       parsedUrl,
@@ -79,11 +81,13 @@ export default function useMutation<
         RequestDataWithParams<RequestData, Params>
       >
     ): Promise<Response<ResponseData>> => {
-      return mutateAsyncReactQuery({
-        ...data,
-        params,
-        mutateOptions,
-      });
+      return mutateAsyncReactQuery(
+        {
+          ...data,
+          [PARAMS_KEY]: params,
+        },
+        mutateOptions
+      );
     },
     [mutateAsyncReactQuery]
   );
