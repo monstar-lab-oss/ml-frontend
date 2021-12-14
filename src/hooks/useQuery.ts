@@ -4,7 +4,7 @@ import useApi from "@app/hooks/useApi";
 import { Response, ApiError } from "@app/types/api.types";
 
 type Options<ResponseData = unknown> = Omit<
-  UseQueryOptions<Response<ResponseData>, unknown, Response<ResponseData>>,
+  UseQueryOptions<Response<ResponseData>, ApiError, Response<ResponseData>>,
   "queryKey"
 >;
 

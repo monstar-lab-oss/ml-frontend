@@ -42,7 +42,7 @@ export default function useMutation<
   const api = useApi();
   const mutation = useReactQueryMutation<
     Response<ResponseData>,
-    unknown,
+    ApiError,
     RequestDataWithParams<RequestData, Params>
   >(async data => {
     // A little trick to use mutation dynamically, for example url is /users/:id
