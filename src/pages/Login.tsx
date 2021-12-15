@@ -1,7 +1,8 @@
 import { useAuth } from "@/hooks/useAuth";
+import { Redirect } from "wouter";
 
 export const Login = () => {
-  const { login } = useAuth();
+  const { isLoggedIn, login } = useAuth();
 
   const onClick = () =>
     login({
@@ -9,7 +10,9 @@ export const Login = () => {
       password: "cityslicka",
     });
 
-  return (
+  return isLoggedIn ? (
+    <Redirect to="/home" />
+  ) : (
     <div>
       <div>LoginScreen</div>
       <button onClick={onClick} disabled={login.isLoading}>

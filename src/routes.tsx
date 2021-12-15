@@ -1,44 +1,70 @@
-import { PropsWithChildren } from "react";
-import { Redirect, Route, Switch } from "wouter";
+import { ComponentProps } from "react";
+import { Route as _Route, Redirect, Switch, useLocation } from "wouter";
 import { Home } from "@/pages/Home";
 import { Login } from "@/pages/Login";
 import { Profile } from "@/pages/Profile";
 import { NotFound } from "@/pages/NotFound";
+import { useAuth } from "@/hooks/useAuth";
 import { HeaderLayout } from "@/components/layouts/HeaderLayout";
-import { LOCAL_STORAGE_TOKEN_KEY } from "@/constants/localStorage";
+import { SideLayout } from "@/components/layouts/SideLayout";
+import { BlankLayout } from "@/components/layouts/BlankLayout";
+import { Path } from "@/types/path";
 
 // TODO
 // RestrictAccess.tsx
 
-const PrivateRoute = ({
-  path,
-  children,
-}: PropsWithChildren<{ path: string }>) => {
-  // TODO should we validate a access token on backend?
-  const hasToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
-  const renderChildren = () => (hasToken ? children : <Redirect to="/login" />);
+// page layouts
+const blankLayout: Path[] = ["/login"];
+const sidebarLayout: Path[] = [];
+
+const getPageLayout = (path: Path) => {
+  if (blankLayout.includes(path)) return BlankLayout;
+  if (sidebarLayout.includes(path)) return SideLayout;
+
+  return HeaderLayout;
+};
+
+// routes
+type RouteProps = ComponentProps<typeof _Route> & { path?: Path };
+const Route = ({ children, path }: RouteProps) => {
+  return <_Route path={path}>{children}</_Route>;
+};
+
+const PrivateRoute = ({ path, children }: RouteProps) => {
+  const { isLoggedIn } = useAuth();
+
+  const params = new URL(document.location.href).searchParams.toString();
+  const qs = params ? `?redirect=${path}&${params}` : `?redirect=${path}`;
+
+  const renderChildren = () =>
+    isLoggedIn ? children : <Redirect to={`/login${qs}`} />;
 
   return <Route path={path}>{renderChildren}</Route>;
 };
 
-export const Routes = () => (
-  <HeaderLayout>
-    <Switch>
-      <Route path="/">
-        <Redirect to={"home"} />
-      </Route>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/home">
-        <Home />
-      </Route>
-      <PrivateRoute path="/profile">
-        <Profile />
-      </PrivateRoute>
-      <Route>
-        <NotFound />
-      </Route>
-    </Switch>
-  </HeaderLayout>
-);
+export const Routes = () => {
+  const [location] = useLocation();
+  const Layout = getPageLayout(location as Path);
+
+  return (
+    <Layout>
+      <Switch>
+        <Route path="/">
+          <Redirect to={"home"} />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/home">
+          <Home />
+        </Route>
+        <PrivateRoute path="/profile">
+          <Profile />
+        </PrivateRoute>
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
+    </Layout>
+  );
+};
