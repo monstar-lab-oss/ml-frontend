@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { render } from "react-dom";
 import { App } from "@/App";
+import "./main.scss";
 
 const prepare = async (): Promise<void> => {
   if (import.meta.env.DEV && !import.meta.env.VITE_REACT_APP_API_HOST) {
