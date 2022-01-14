@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Home } from "./Home";
-import * as HeaderStories from "../components/molecules/Header.stories";
+import * as HeaderStories from "@/components/molecules/Header.stories";
 
 export default {
-  title: "Example/Home",
+  title: "Pages/Home",
   component: Home,
 } as ComponentMeta<typeof Home>;
 

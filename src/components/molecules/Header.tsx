@@ -1,7 +1,8 @@
 import { Button } from "@/components/atoms/Button";
-import "./header.css";
+import "./header.scss";
 
-interface HeaderProps {
+interface Props {
+  title: string;
   user?: {};
   onLogin?: () => void;
   onLogout?: () => void;
@@ -9,11 +10,12 @@ interface HeaderProps {
 }
 
 export const Header = ({
+  title,
   user,
   onLogin,
   onLogout,
   onCreateAccount,
-}: HeaderProps) => (
+}: Props) => (
   <header>
     <div className="wrapper">
       <div>
@@ -38,19 +40,19 @@ export const Header = ({
             />
           </g>
         </svg>
-        <h1>Acme</h1>
+        <h1>{title}</h1>
       </div>
       <div>
         {user ? (
-          <Button size="small" onClick={onLogout} label="Log out" />
+          <Button size="small" onClick={onLogout} label="Logout" />
         ) : (
           <>
-            <Button size="small" onClick={onLogin} label="Log in" />
+            <Button size="small" onClick={onLogin} label="Login" />
             <Button
               primary
               size="small"
               onClick={onCreateAccount}
-              label="Sign up"
+              label="Signup"
             />
           </>
         )}
