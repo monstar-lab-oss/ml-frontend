@@ -4,6 +4,8 @@ import { Home } from "@/pages/Home";
 import { Login } from "@/pages/Login";
 import { Profile } from "@/pages/Profile";
 import { NotFound } from "@/pages/NotFound";
+import { Count } from "@/pages/Count";
+import { SetCount } from "@/pages/SetCount";
 import { useAuth } from "@/hooks/useAuth";
 import { HeaderLayout } from "@/components/layouts/HeaderLayout";
 import { SideLayout } from "@/components/layouts/SideLayout";
@@ -60,6 +62,12 @@ export const Routes = () => {
         </Route>
         <PrivateRoute path="/profile">
           <Profile />
+        </PrivateRoute>
+        <PrivateRoute path="/count">
+          <Count />
+        </PrivateRoute>
+        <PrivateRoute path="/setcount">
+          <SetCount />
         </PrivateRoute>
         <Route>
           <NotFound />
