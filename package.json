@@ -9,19 +9,29 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "7.16.7",
+    "@babel/preset-env": "7.16.8",
+    "@babel/preset-react": "7.16.7",
+    "@babel/preset-typescript": "7.16.7",
     "@storybook/addon-actions": "6.5.0-alpha.16",
     "@storybook/addon-essentials": "6.5.0-alpha.16",
     "@storybook/addon-links": "6.5.0-alpha.16",
     "@storybook/react": "6.5.0-alpha.16",
+    "@storybook/testing-react": "1.2.3",
+    "@testing-library/jest-dom": "5.16.1",
+    "@testing-library/react": "12.1.2",
+    "@testing-library/user-event": "13.5.0",
     "@types/node": "17.0.8",
     "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
     "@vitejs/plugin-react": "1.1.4",
     "babel-loader": "8.2.3",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "27.4.7",
     "msw": "0.36.4",
     "sass": "1.48.0",
     "storybook-builder-vite": "0.1.13",
@@ -38,5 +48,14 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-setup.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
   }
 }
