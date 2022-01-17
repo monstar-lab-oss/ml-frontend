@@ -1,6 +1,8 @@
 import "./button.scss";
+import { Link } from "wouter";
+import { ButtonHTMLAttributes } from "react";
 
-interface Props {
+type Props = {
   /**
    * Is this the principal call to action on the page?
    */
@@ -21,7 +23,11 @@ interface Props {
    * Optional click handler
    */
   onClick?: () => void;
-}
+  /**
+   * Optional click handler
+   */
+  to?: string;
+};
 
 /**
  * Primary UI component for user interaction
@@ -31,11 +37,13 @@ export const Button = ({
   size = "medium",
   backgroundColor,
   label,
+  to,
   ...props
-}: Props) => {
+}: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
   const mode = primary
     ? "storybook-button--primary"
     : "storybook-button--secondary";
+
   return (
     <button
       type="button"
@@ -45,7 +53,7 @@ export const Button = ({
       style={{ backgroundColor }}
       {...props}
     >
-      {label}
+      {to ? <Link to={to}>{label}</Link> : label}
     </button>
   );
 };

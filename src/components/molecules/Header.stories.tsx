@@ -14,8 +14,18 @@ const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
-  user: {},
+  useAuth: () => ({
+    login: async () => {},
+    logout: () => {},
+    isLoggedIn: true,
+  }),
 };
 
 export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+LoggedOut.args = {
+  useAuth: () => ({
+    login: async () => {},
+    logout: () => {},
+    isLoggedIn: false,
+  }),
+};

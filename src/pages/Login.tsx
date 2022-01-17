@@ -1,3 +1,4 @@
+import { Button } from "@/components/atoms/Button";
 import { useAuth } from "@/hooks/useAuth";
 import { Redirect } from "wouter";
 
@@ -15,9 +16,11 @@ export const Login = () => {
   ) : (
     <>
       <h2>LoginScreen</h2>
-      <button onClick={onClick} disabled={login.isLoading}>
-        {login.isLoading ? "Loading..." : "Login"}
-      </button>
+      <Button
+        onClick={onClick}
+        disabled={login.isLoading}
+        label={login.isLoading ? "Loading..." : "Login"}
+      />
     </>
   );
 };

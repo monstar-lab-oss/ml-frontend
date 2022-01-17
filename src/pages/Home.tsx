@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import "./Home.scss";
 
-export const Home = () => {
+type Props = {};
+export const Home = ({}: Props) => {
   const { t } = useTranslation();
 
   return (
