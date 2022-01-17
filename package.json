@@ -4,6 +4,9 @@
   "private": true,
   "repository": "git@github.com:monstar-lab-oss/reactjs-boilerplate.git",
   "author": "山下 仁麻 <jinma.yamashita@monstar-lab.com>",
+  "engines": {
+    "node": ">=16.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
