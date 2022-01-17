@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { render } from "react-dom";
+import { useI18next } from "@/i18next";
 import { App } from "@/App";
 import "./main.scss";
 
@@ -13,6 +14,7 @@ const prepare = async (): Promise<void> => {
 };
 
 prepare().then(() => {
+  useI18next();
   render(
     <StrictMode>
       <App />

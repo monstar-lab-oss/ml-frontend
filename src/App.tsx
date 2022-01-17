@@ -5,14 +5,12 @@ import { CounterProvider } from "@/hooks/useCounter";
 
 const queryClient = new QueryClient();
 
-export const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <CounterProvider initialCount={10}>
-          <Routes />
-        </CounterProvider>
-      </AuthProvider>
-    </QueryClientProvider>
-  );
-};
+export const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <CounterProvider initialCount={10}>
+        <Routes />
+      </CounterProvider>
+    </AuthProvider>
+  </QueryClientProvider>
+);

@@ -13,11 +13,11 @@ export const Login = () => {
   return isLoggedIn ? (
     <Redirect to="/home" />
   ) : (
-    <div>
-      <div>LoginScreen</div>
+    <>
+      <h2>LoginScreen</h2>
       <button onClick={onClick} disabled={login.isLoading}>
         {login.isLoading ? "Loading..." : "Login"}
       </button>
-    </div>
+    </>
   );
 };

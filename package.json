@@ -40,9 +40,11 @@
   },
   "dependencies": {
     "constate": "3.3.0",
+    "i18next": "21.6.6",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "7.23.0",
+    "react-i18next": "11.15.3",
     "react-query": "3.34.8",
     "wouter": "2.8.0-alpha.2"
   },
