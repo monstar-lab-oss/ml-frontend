@@ -4,7 +4,7 @@ import "./header.scss";
 
 type Props = {
   title: string;
-  useAuth: typeof _useAuth;
+  useAuth?: typeof _useAuth;
 };
 
 export const Header = ({ title, useAuth = _useAuth }: Props) => {
@@ -42,7 +42,6 @@ export const Header = ({ title, useAuth = _useAuth }: Props) => {
           {isLoggedIn ? (
             <>
               <Button size="small" to="/count" label="Count" />
-              <Button size="small" to="/setcount" label="SetCount" />
               <Button size="small" onClick={logout} label="Logout" />
             </>
           ) : null}
