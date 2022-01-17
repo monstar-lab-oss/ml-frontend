@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 
-export const NotFound = () => (
+const NotFound = () => (
   <>
     <div>
       <h1>404 - Not found</h1>
@@ -11,3 +11,4 @@ export const NotFound = () => (
     </div>
   </>
 );
+export default NotFound;

@@ -16,7 +16,7 @@ const SetCount = () => {
   return <button onClick={increment}>+</button>;
 };
 
-export const SharedStateCount = () => {
+const SharedStateCount = () => {
   return (
     <>
       <Count />
@@ -24,3 +24,4 @@ export const SharedStateCount = () => {
     </>
   );
 };
+export default SharedStateCount;

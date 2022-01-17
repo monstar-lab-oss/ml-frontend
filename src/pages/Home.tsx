@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
-import "./Home.scss";
 
-type Props = {};
-export const Home = ({}: Props) => {
+const Home = () => {
   const { t } = useTranslation();
 
   return (
@@ -13,3 +11,4 @@ export const Home = ({}: Props) => {
     </>
   );
 };
+export default Home;

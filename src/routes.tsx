@@ -1,15 +1,17 @@
-import { ComponentProps } from "react";
+import { ComponentProps, lazy, Suspense } from "react";
 import { Route as _Route, Redirect, Switch, useLocation } from "wouter";
-import { Home } from "@/pages/Home";
-import { Login } from "@/pages/Login";
-import { Profile } from "@/pages/Profile";
-import { NotFound } from "@/pages/NotFound";
-import { SharedStateCount } from "@/pages/SharedStateCount";
 import { useAuth } from "@/hooks/useAuth";
 import { HeaderLayout } from "@/components/layouts/HeaderLayout";
 import { SideLayout } from "@/components/layouts/SideLayout";
 import { BlankLayout } from "@/components/layouts/BlankLayout";
 import { Path } from "@/types/path";
+
+// pages
+const Home = lazy(() => import("@/pages/Home"));
+const Login = lazy(() => import("@/pages/Login"));
+const Profile = lazy(() => import("@/pages/Profile"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const SharedStateCount = lazy(() => import("@/pages/SharedStateCount"));
 
 // TODO
 // RestrictAccess.tsx
@@ -48,27 +50,29 @@ export const Routes = () => {
   const Layout = getPageLayout(location as Path);
 
   return (
-    <Layout>
-      <Switch>
-        <Route path="/">
-          <Redirect to={"home"} />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
-        <PrivateRoute path="/profile">
-          <Profile />
-        </PrivateRoute>
-        <PrivateRoute path="/count">
-          <SharedStateCount />
-        </PrivateRoute>
-        <Route>
-          <NotFound />
-        </Route>
-      </Switch>
-    </Layout>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Layout>
+        <Switch>
+          <Route path="/">
+            <Redirect to={"home"} />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <PrivateRoute path="/profile">
+            <Profile />
+          </PrivateRoute>
+          <PrivateRoute path="/count">
+            <SharedStateCount />
+          </PrivateRoute>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </Layout>
+    </Suspense>
   );
 };

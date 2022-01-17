@@ -12,7 +12,7 @@ const updateUser = async (payload: User) => {
   return response;
 };
 
-export const Profile = () => {
+const Profile = () => {
   const { isLoading, data, isFetched, isError } = useGetUserQuery({ id: "1" });
 
   useEffect(() => {
@@ -60,3 +60,4 @@ export const Profile = () => {
     </div>
   );
 };
+export default Profile;

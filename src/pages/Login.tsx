@@ -2,7 +2,7 @@ import { Button } from "@/components/atoms/Button";
 import { useAuth } from "@/hooks/useAuth";
 import { Redirect } from "wouter";
 
-export const Login = () => {
+const Login = () => {
   const { isLoggedIn, login } = useAuth();
 
   const onClick = () =>
@@ -24,3 +24,4 @@ export const Login = () => {
     </>
   );
 };
+export default Login;
