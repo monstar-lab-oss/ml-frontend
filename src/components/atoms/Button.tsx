@@ -1,6 +1,9 @@
-import "./button.scss";
+import classNames from "classnames/bind";
+import styles from "./button.module.scss";
 import { Link } from "wouter";
 import { ButtonHTMLAttributes } from "react";
+
+const cx = classNames.bind(styles);
 
 type Props = {
   /**
@@ -40,16 +43,16 @@ export const Button = ({
   to,
   ...props
 }: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const mode = primary
-    ? "storybook-button--primary"
-    : "storybook-button--secondary";
+  const className = cx([
+    "storybook-button",
+    `storybook-button--${size}`,
+    primary ? "storybook-button--primary" : "storybook-button--secondary",
+  ]);
 
   return (
     <button
       type="button"
-      className={["storybook-button", `storybook-button--${size}`, mode].join(
-        " "
-      )}
+      className={className}
       style={{ backgroundColor }}
       {...props}
     >
