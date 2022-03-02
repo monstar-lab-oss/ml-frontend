@@ -5,4 +5,5 @@ export type Path =
   | "/home"
   | "/profile"
   | "/count"
-  | "/setcount";
+  | "/setcount"
+  | "/count_with_history";
