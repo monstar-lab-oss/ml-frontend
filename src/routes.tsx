@@ -14,7 +14,7 @@ const NotFound = lazy(() => import("@/pages/NotFound"));
 const SharedStateCount = lazy(() => import("@/pages/SharedStateCount"));
 const StateHistoryCount = lazy(() => import("@/pages/StateHistoryCount"));
 
-// TODO
+// TODO:
 // RestrictAccess.tsx
 
 // page layouts
