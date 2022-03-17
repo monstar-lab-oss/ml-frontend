@@ -16,7 +16,13 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
   - [x] Jest
   - [ ] React Testing Library
   - [ ] React Hooks Testing Library
-  - [x] Storybook
+  - [ ] Storybook
+    - [x] base
+    - [ ] msw
+    - [ ] state management
+    - [ ] router
+    - [ ] css
+    - [ ] i18n
 - Mock API server
   - [x] msw
 
