@@ -51,6 +51,7 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
     - Tailwind CSS
     - Chakra UI
     - Material UI
+    - Ant Design
   - Animations
 
 ### Application security
