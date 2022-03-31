@@ -28,6 +28,8 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
 
 ### Application design
 
+- API Interface
+  - [REST and GraphQL](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/14)
 - State management
   - Client state
     - [ ] useContext
@@ -62,7 +64,6 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
 ### DX
 
 - CI / CD
-- [REST and GraphQL](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/14)
 - [Deployment](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/5)
   - Deploy to Amazon S3 + CloudFront
 - Update Dependencies Safely and Automatically
