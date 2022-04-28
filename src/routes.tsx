@@ -43,7 +43,7 @@ const PrivateRoute = ({ path, children }: RouteProps) => {
   const renderChildren = () =>
     isLoggedIn ? children : <Redirect to={`/login${qs}`} />;
 
-  return <Route path={path}>{renderChildren}</Route>;
+  return <Route path={path}>{renderChildren()}</Route>;
 };
 
 export const Routes = () => {
