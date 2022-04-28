@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { useI18next } from "@/i18next";
 import { App } from "@/App";
 import "./main.scss";
@@ -15,10 +15,14 @@ const prepare = async (): Promise<void> => {
 
 prepare().then(() => {
   useI18next();
-  render(
+
+  const container = document.getElementById("root");
+  if (!container) throw new Error("container element is missing.");
+
+  const root = createRoot(container);
+  root.render(
     <StrictMode>
       <App />
-    </StrictMode>,
-    document.getElementById("root")
+    </StrictMode>
   );
 });
