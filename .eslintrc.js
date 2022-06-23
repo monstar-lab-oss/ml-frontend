@@ -38,6 +38,6 @@ module.exports = {
       "error",
       { allow: ["arrowFunctions", "methods", "asyncMethods"] },
     ],
-    "react/jsx-filename-extension": ["error", { extensions: [".jsx", ".tsx"] }],
+    "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
   },
 };
