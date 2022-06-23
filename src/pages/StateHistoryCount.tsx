@@ -27,7 +27,7 @@ const RedoCountButton: React.FC = () => {
   );
 };
 
-const SetCountButton: React.FC = ({}) => {
+const SetCountButton: React.FC = () => {
   const getCount = useCountStore((state) => state.getCurr);
   const set = useCountStore((state) => state.set);
 
@@ -39,7 +39,7 @@ const SetCountButton: React.FC = ({}) => {
   );
 };
 
-const ResetCountButton: React.FC = ({}) => {
+const ResetCountButton: React.FC = () => {
   const reset = useCountStore((state) => state.reset);
 
   return <button onClick={() => reset(0)}>reset to 0</button>;

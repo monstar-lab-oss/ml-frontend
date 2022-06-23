@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Header } from "@/components/molecules/Header";
 
-type Props = PropsWithChildren<{}>;
+type Props = PropsWithChildren<Record<string, unknown>>;
 
 export const HeaderLayout = ({ children }: Props) => (
   <div>

@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { useI18next } from "@/i18next";
 import { App } from "@/App";
 import "./main.scss";
@@ -15,10 +15,11 @@ const prepare = async (): Promise<void> => {
 
 prepare().then(() => {
   useI18next();
-  render(
+
+  const root = createRoot(document.getElementById("root")!);
+  root.render(
     <StrictMode>
       <App />
-    </StrictMode>,
-    document.getElementById("root")
+    </StrictMode>
   );
 });
