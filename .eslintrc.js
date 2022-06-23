@@ -27,7 +27,17 @@ module.exports = {
     // react/jsx-uses-react and react/react-in-jsx-scope rules are no longer necessary and can be turned off or removed.
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "_",
+        varsIgnorePattern: "_",
+      },
+    ],
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      { allow: ["arrowFunctions", "methods", "asyncMethods"] },
+    ],
     "react/jsx-filename-extension": ["error", { extensions: [".jsx", ".tsx"] }],
   },
 };
