@@ -26,7 +26,9 @@ const AuthContext = createContext<AuthContextData>({
   isLoggedIn: false,
 });
 
-export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
+export const AuthProvider = ({
+  children,
+}: PropsWithChildren<Record<string, unknown>>) => {
   const [_, setLocation] = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(
     // TODO: We should validate a access token via request to backend

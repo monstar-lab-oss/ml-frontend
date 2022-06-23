@@ -22,6 +22,7 @@ const request = async <T>(url: string, opts?: RequestInit): Promise<T> => {
 
 export const http = {
   get: <T>(url: string) => request<T>(url),
+  // FIXME: parameter used in hooks/useAuth.tsx may be wrong.
   post: <T>(url: string, body: any) =>
     request<T>(url, { method: "POST", body }),
 };
