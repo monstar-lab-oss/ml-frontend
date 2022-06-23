@@ -16,10 +16,7 @@ const prepare = async (): Promise<void> => {
 prepare().then(() => {
   useI18next();
 
-  const container = document.getElementById("root");
-  if (!container) throw new Error("container element is missing.");
-
-  const root = createRoot(container);
+  const root = createRoot(document.getElementById("root")!);
   root.render(
     <StrictMode>
       <App />
