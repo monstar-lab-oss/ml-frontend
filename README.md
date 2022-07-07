@@ -24,7 +24,7 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
     - [ ] css
     - [ ] i18n
   - [ ] E2E
-    - [ ] Playwright
+    - [x] Playwright
     - [ ] Cypress
 - Mock API server
   - [x] msw
