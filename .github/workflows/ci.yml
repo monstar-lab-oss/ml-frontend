@@ -8,21 +8,21 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
 
+      # Create cache for node_modules
       - name: Restore Dependencies Cache
         uses: actions/cache@v2
         id: yarn-cache
         with:
-          path: |
-            node_modules
-            */*/node_modules
+          path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
+      # Install Dependencies if yarn.lock changed
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
@@ -30,6 +30,7 @@ jobs:
       - name: Run UT
         run: yarn test
 
+      # Create cache for Playwright installation
       - name: Restore Playwright Installation Cache
         id: playwright-cache
         uses: actions/cache@v3
@@ -37,6 +38,7 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
       
+      # Install Playwright if yarn.lock changed
       - name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: ./node_modules/.bin/playwright install
