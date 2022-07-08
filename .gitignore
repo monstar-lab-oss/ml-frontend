@@ -25,3 +25,6 @@ yarn-error.log*
 
 # env variables
 .env
+
+# e2e
+tests/e2e/utils/storageState.json

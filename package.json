@@ -14,6 +14,7 @@
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "e2e": "playwright test",
     "test": "jest",
     "type": "tsc --noEmit"
   },
@@ -22,6 +23,7 @@
     "@babel/preset-env": "7.16.8",
     "@babel/preset-react": "7.16.7",
     "@babel/preset-typescript": "7.16.7",
+    "@playwright/test": "1.23.1",
     "@storybook/addon-actions": "6.5.0-alpha.16",
     "@storybook/addon-essentials": "6.5.0-alpha.16",
     "@storybook/addon-links": "6.5.0-alpha.16",
