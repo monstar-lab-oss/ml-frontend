@@ -16,6 +16,21 @@ const createEmployee = async (payload: Payload) => {
   return response;
 };
 
+// TODO: not yet implemented
+const updateEmployee = async (id: string, payload: Payload) => {
+  const response = await http.put<{ message: string }>(
+    `/employee/${id}`,
+    payload
+  );
+  return response;
+};
+
+// TODO: not yet implemented
+const removeEmployee = async (id: string) => {
+  const response = await http.delete<{ message: string }>(`/employee/${id}`);
+  return response;
+};
+
 // components
 type EmployeeFormProps = {
   values?: Payload;
