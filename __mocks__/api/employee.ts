@@ -1,19 +1,24 @@
 import { rest } from "../rest";
+import type { Employee } from "../../src/types/employee";
+import { getItem, setItem, setInitalItem } from "../mockDatabase";
 
-type Employee = { id: string; name: string };
-
-const items: Employee[] = [
-  { id: "1", name: "foo" },
-  { id: "2", name: "bar" },
-  { id: "3", name: "baz" },
-];
+setInitalItem({
+  employee: [
+    { id: "1", name: "foo" },
+    { id: "2", name: "bar" },
+    { id: "3", name: "baz" },
+  ],
+});
 
 // Simple validator to check response status code
-const hasValidParams = (params: Partial<Employee>) => {
+const hasValidParams = (
+  params: Partial<Employee>,
+  employeeList: Employee[]
+) => {
   // check if an id already exists in data
-  if (items.find((x) => x.id === params?.id)) return false;
+  if (employeeList.find((x) => x.id === params?.id)) return false;
 
-  const diffs = [params, items[0]];
+  const diffs = [params, employeeList[0]];
   const allKeys = diffs.reduce(
     (k, o) => k.concat(Object.keys(o)),
     [] as string[]
@@ -23,35 +28,43 @@ const hasValidParams = (params: Partial<Employee>) => {
 };
 
 export const employee = [
-  rest.post<Employee>("/employee", (req, res, ctx) =>
-    hasValidParams(req.body)
-      ? res(ctx.json([...items, req.body]))
-      : res(ctx.status(400))
-  ),
+  rest.post<Employee>("/employee", (req, res, ctx) => {
+    const employeeData: Employee[] = getItem("employee");
+    if (!hasValidParams(req.body, employeeData)) return res(ctx.status(400));
+
+    setItem("employee", [...employeeData, req.body]);
+    return res(ctx.json(req.body));
+  }),
 
   rest.get("/employee/:id", (req, res, ctx) => {
-    const item = items.find((x) => x.id === req.params.id);
+    const employeeData: Employee[] = getItem("employee");
+    const item = employeeData.find((x) => x.id === req.params.id);
 
     return item ? res(ctx.json(item)) : res(ctx.status(400));
   }),
 
-  rest.put<Employee>("/employee/:id", (req, res, ctx) =>
-    items.find((x) => x.id === req.params.id)
-      ? res(
-          ctx.json(
-            items.map((x) =>
-              x.id === req.params.id ? { ...x, ...req.body } : x
-            )
-          )
-        )
-      : res(ctx.status(400))
-  ),
+  rest.put<Employee>("/employee/:id", (req, res, ctx) => {
+    const employeeData: Employee[] = getItem("employee");
 
-  rest.delete<{ id: string }>("/employee/:id", (req, res, ctx) =>
-    items.find((x) => x.id === req.params.id)
-      ? res(ctx.json(items.filter((x) => x.id === req.params.id)))
-      : res(ctx.status(400))
-  ),
+    if (!employeeData.find((x) => x.id === req.params.id))
+      return res(ctx.status(400));
 
-  rest.get("/employee", (_, res, ctx) => res(ctx.json(items))),
+    setItem("employee", [...employeeData, req.body]);
+    return res(ctx.json({ id: req.params.id }));
+  }),
+
+  rest.delete<{ id: string }>("/employee/:id", (req, res, ctx) => {
+    const employeeData: Employee[] = getItem("employee");
+
+    if (!employeeData.find((x) => x.id === req.params.id))
+      return res(ctx.status(400));
+
+    setItem("employee", [...employeeData, req.body]);
+    return res(ctx.json({ id: req.params.id }));
+  }),
+
+  rest.get("/employee", (_, res, ctx) => {
+    const employeeData: Employee[] = getItem("employee");
+    return res(ctx.json(employeeData));
+  }),
 ];
