@@ -19,10 +19,13 @@ const request = async <T>(url: string, opts?: RequestInit): Promise<T> => {
   const data: T = await response.json();
   return data;
 };
-
+// FIXME: parameter used in hooks/useAuth.tsx may be wrong.
 export const http = {
   get: <T>(url: string) => request<T>(url),
-  // FIXME: parameter used in hooks/useAuth.tsx may be wrong.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post: <T>(url: string, body: any) =>
     request<T>(url, { method: "POST", body }),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  put: <T>(url: string, body: any) => request<T>(url, { method: "PUT", body }),
+  delete: <T>(url: string) => request<T>(url, { method: "DELETE" }),
 };
