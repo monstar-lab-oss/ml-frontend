@@ -43,6 +43,7 @@ export const Header = ({ title, useAuth = _useAuth }: Props) => {
             <>
               <Button size="small" to="/count" label="Count" />
               <Button size="small" to="/count_with_history" label="Undo/Redo" />
+              <Button size="small" to="/employee" label="Employee management" />
               <Button size="small" onClick={logout} label="Logout" />
             </>
           ) : null}
