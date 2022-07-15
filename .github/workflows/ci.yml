@@ -16,7 +16,7 @@ jobs:
 
       # Create cache for node_modules
       - name: Restore Dependencies Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: yarn-cache
         with:
           path: node_modules
