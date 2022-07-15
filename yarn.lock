@@ -1497,6 +1497,15 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+"@joshwooding/vite-plugin-react-docgen-typescript@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@joshwooding/vite-plugin-react-docgen-typescript/-/vite-plugin-react-docgen-typescript-0.0.2.tgz#e0ae8c94f468da3a273a7b0acf23ba3565f86cbc"
+  integrity sha512-0hbsoX2c7Z3lJKY+88ToduiQDyh+Mggpd6Go0vVV3PchMRyE9iOCVUBiqd4FFfgNdFdk6iNKrO9bdIiHOpW6jA==
+  dependencies:
+    glob "^7.2.0"
+    glob-promise "^4.2.0"
+    react-docgen-typescript "^2.1.1"
+
 "@mdx-js/loader@^1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-1.6.22.tgz#d9e8fe7f8185ff13c9c8639c048b123e30d322c4"
@@ -11244,11 +11253,12 @@ store2@^2.12.0:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.13.1.tgz#fae7b5bb9d35fc53dc61cd262df3abb2f6e59022"
   integrity sha512-iJtHSGmNgAUx0b/MCS6ASGxb//hGrHHRgzvN+K5bvkBTN7A9RTpPSf1WSp+nPGvWCJ1jRnvY7MKnuqfoi3OEqg==
 
-storybook-builder-vite@0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/storybook-builder-vite/-/storybook-builder-vite-0.1.13.tgz#b53aefbd205980bcee16697b900f39e67eb077e2"
-  integrity sha512-eSfCluvVFit46iaYYyv9l/WhHuztHQflN6EvjPc63yr5PESVQawEDZnmVPvcLxO1r7NOOJGVO4LtSPJmGIg0Qw==
+storybook-builder-vite@0.1.23:
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/storybook-builder-vite/-/storybook-builder-vite-0.1.23.tgz#6ffe2b04c09abb0c1d039f91330802f210785821"
+  integrity sha512-PmeeYKHaBNQgRVJEwhfyo4Psev1Y7Gj51nlYxUDIG3dpy1e1aGzFubDgsmg9W/BhyHKcLIKp98JBpa1DwL702A==
   dependencies:
+    "@joshwooding/vite-plugin-react-docgen-typescript" "0.0.2"
     "@mdx-js/mdx" "^1.6.22"
     "@storybook/csf-tools" "^6.3.3"
     "@storybook/source-loader" "^6.3.12"
@@ -11256,6 +11266,7 @@ storybook-builder-vite@0.1.13:
     es-module-lexer "^0.9.3"
     glob "^7.2.0"
     glob-promise "^4.2.0"
+    slash "^3.0.0"
     vite-plugin-mdx "^3.5.6"
 
 stream-browserify@^2.0.1:
