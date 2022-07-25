@@ -25,7 +25,6 @@ const updateEmployee = async (id: string, payload: Payload) => {
   return response;
 };
 
-// TODO: not yet implemented
 const removeEmployee = async (id: string) => {
   const response = await http.delete<{ message: string }>(`/employee/${id}`);
   return response;
@@ -59,27 +58,36 @@ const EmployeeForm = ({ values, onSubmit, onCancel }: EmployeeFormProps) => {
 
 type EmployeeListProps = {
   data: Payload[];
+  onRemoveClick: (id: string) => void;
 };
-const EmployeeList = ({ data }: EmployeeListProps) => (
-  <ul>
-    {data.map(({ id, name }) => (
-      <li key={id}>{name}</li>
-    ))}
-  </ul>
-);
+const EmployeeList = ({ data, onRemoveClick }: EmployeeListProps) => {
+  return (
+    <ul>
+      {data.map(({ id, name }) => (
+        <li key={id}>
+          {name} <button onClick={() => onRemoveClick(id)}>remove</button>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 const Employee = () => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
   const { isLoading, data, isFetched, isError } = useGetEmployeeListQuery();
 
-  const { mutate } = useMutation(createEmployee, {
+  const { mutate: createMutate } = useMutation(createEmployee, {
     onSuccess: ({ message }) => alert(message),
     onError: (error) => alert(error),
   });
 
-  const onSubmit = (data: Payload) => {
-    mutate(data);
-  };
+  const { mutate: removeMutate } = useMutation(removeEmployee, {
+    onSuccess: ({ message }) => alert(message),
+    onError: (error) => alert(error),
+  });
+
+  const onSubmit = (data: Payload) => createMutate(data);
+
   return (
     <div>
       <div>EmployeeScreen</div>
@@ -90,7 +98,9 @@ const Employee = () => {
       )}
       <div>{isLoading && "Loading..."}</div>
       <div>{isError && "Failed to fetch"}</div>
-      {isFetched && data ? <EmployeeList data={data} /> : null}
+      {isFetched && data ? (
+        <EmployeeList data={data} onRemoveClick={removeMutate} />
+      ) : null}
       {isVisibleForm && (
         <>
           <div>EmployeeForm</div>

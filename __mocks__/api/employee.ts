@@ -56,11 +56,15 @@ export const employee = [
   rest.delete<{ id: string }>("/employee/:id", (req, res, ctx) => {
     const employeeData: Employee[] = getItem("employee");
 
-    if (!employeeData.find((x) => x.id === req.params.id))
-      return res(ctx.status(400));
+    const id = req.params.id;
 
-    setItem("employee", [...employeeData, req.body]);
-    return res(ctx.json({ id: req.params.id }));
+    if (!employeeData.find((x) => x.id === id)) return res(ctx.status(400));
+
+    setItem(
+      "employee",
+      employeeData.filter((x) => x.id !== id)
+    );
+    return res(ctx.json({ message: "remove success" }));
   }),
 
   rest.get("/employee", (_, res, ctx) => {
