@@ -98,9 +98,11 @@ const Employee = () => {
       )}
       <div>{isLoading && "Loading..."}</div>
       <div>{isError && "Failed to fetch"}</div>
-      {isFetched && data ? (
+      {isFetched && data?.length ? (
         <EmployeeList data={data} onRemoveClick={removeMutate} />
-      ) : null}
+      ) : (
+        <>No Employee Found</>
+      )}
       {isVisibleForm && (
         <>
           <div>EmployeeForm</div>
