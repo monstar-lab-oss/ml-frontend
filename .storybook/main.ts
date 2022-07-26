@@ -9,6 +9,11 @@ module.exports = {
   async viteFinal(config) {
     return {
       ...config,
+      css: {
+        preprocessorOptions: {
+          scss: { additionalData: `@import "src/main.scss";` },
+        },
+      },
       resolve: {
         alias: [
           {
