@@ -2,7 +2,6 @@ import { ComponentProps, lazy, Suspense } from "react";
 import { Route as _Route, Redirect, Switch, useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { HeaderLayout } from "@/components/layouts/HeaderLayout";
-import { SideLayout } from "@/components/layouts/SideLayout";
 import { BlankLayout } from "@/components/layouts/BlankLayout";
 import { Path } from "@/types/path";
 
@@ -19,11 +18,9 @@ const StateHistoryCount = lazy(() => import("@/pages/StateHistoryCount"));
 
 // page layouts
 const blankLayout: Path[] = ["/login"];
-const sidebarLayout: Path[] = [];
 
 const getPageLayout = (path: Path) => {
   if (blankLayout.includes(path)) return BlankLayout;
-  if (sidebarLayout.includes(path)) return SideLayout;
 
   return HeaderLayout;
 };
