@@ -15,6 +15,7 @@ type AuthContextData = {
   login: {
     (authRequest: AuthRequest): Promise<void>;
     isLoading?: boolean;
+    isError?: boolean;
   };
   logout(): void;
   isLoggedIn: boolean;
@@ -36,9 +37,12 @@ export const AuthProvider = ({
   );
   const queryClient = useQueryClient();
 
-  const { mutateAsync: authenticateAsync, isLoading } = useMutation(
-    (authRequest: AuthRequest) =>
-      http.post<AuthResponse>("/login", { body: authRequest })
+  const {
+    mutateAsync: authenticateAsync,
+    isLoading,
+    isError,
+  } = useMutation((authRequest: AuthRequest) =>
+    http.post<AuthResponse>("/login", authRequest)
   );
 
   const login = useCallback(
@@ -60,6 +64,7 @@ export const AuthProvider = ({
   ) as AuthContextData["login"];
 
   login.isLoading = isLoading;
+  login.isError = isError;
 
   const logout = useCallback(() => {
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);

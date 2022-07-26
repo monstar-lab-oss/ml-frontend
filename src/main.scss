@@ -1,7 +1,39 @@
 @import url(https://fonts.xz.style/serve/inter.css);
 @import url(https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css);
-
+:root {
+  --error-color: #d9534f;
+}
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+// form styling
+label {
+  cursor: pointer;
+  display: block;
+}
+
+input {
+  width: 100%;
+
+  &[aria-errormessage] {
+    margin-bottom: 0;
+  }
+
+  &[aria-invalid="true"] {
+    outline: 1px solid var(--error-color);
+  }
+
+  &[aria-invalid="true"] + span.errormessage {
+    visibility: visible;
+  }
+}
+
+span {
+  &.errormessage {
+    visibility: hidden;
+    font-size: 0.9rem;
+    color: var(--error-color);
+  }
 }
