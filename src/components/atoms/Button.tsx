@@ -1,62 +1,45 @@
 import classNames from "classnames/bind";
-import styles from "./button.module.scss";
+import styles from "./Button.module.scss";
 import { Link } from "wouter";
 import { ButtonHTMLAttributes } from "react";
+import type { PropsWithChildren } from "react";
 
 const cx = classNames.bind(styles);
 
 type Props = {
   /**
-   * Is this the principal call to action on the page?
+   * How large should the button be?
    */
-  primary?: boolean;
+  size?: "medium" | "large";
+  /**
+   * Optional link handler
+   */
+  to?: string;
   /**
    * What background color to use
    */
   backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
-  size?: "small" | "medium" | "large";
-  /**
-   * Button contents
-   */
-  label: string;
-  /**
-   * Optional click handler
-   */
-  onClick?: () => void;
-  /**
-   * Optional click handler
-   */
-  to?: string;
 };
 
-/**
- * Primary UI component for user interaction
- */
 export const Button = ({
-  primary = false,
   size = "medium",
-  backgroundColor,
-  label,
   to,
+  backgroundColor,
+  children,
   ...props
-}: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const className = cx([
-    "storybook-button",
-    `storybook-button--${size}`,
-    primary ? "storybook-button--primary" : "storybook-button--secondary",
-  ]);
+}: PropsWithChildren<Props> & ButtonHTMLAttributes<HTMLButtonElement>) => {
+  const className = cx(["button", size && `size--${size}`]);
 
   return (
     <button
       type="button"
       className={className}
-      style={{ backgroundColor }}
+      style={{
+        backgroundColor,
+      }}
       {...props}
     >
-      {to ? <Link to={to}>{label}</Link> : label}
+      {to ? <Link to={to}>{children}</Link> : children}
     </button>
   );
 };
