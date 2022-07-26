@@ -5,7 +5,7 @@ type Props = PropsWithChildren<Record<string, unknown>>;
 
 export const HeaderLayout = ({ children }: Props) => (
   <div>
-    <Header title="Admin app" />
-    <main style={{ padding: 24 }}>{children}</main>
+    <Header title="React boilerplate" />
+    <main>{children}</main>
   </div>
 );

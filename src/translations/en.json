@@ -1,8 +1,8 @@
 {
-  "title": "Welcome to react using react-i18next and typescript",
+  "title": "Welcome to React boilerplate",
+  "toc": "Table of Contents",
   "description": {
-    "part1": "This is an example without namespaces.",
-    "part2": "In order to infer the appropriate type for t function, you should use type augmentation to override the Resources type.",
-    "part3": "Check out the react-i18next.d.ts to see an example."
+    "part1": "Quick setup for new React project, developer experience-first boilerplate",
+    "not_logged_in": "You must be logged in to view protected demo contents"
   }
 }
