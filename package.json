@@ -57,7 +57,7 @@
     "react-dom": "18.1.0",
     "react-hook-form": "7.23.0",
     "react-i18next": "11.18.3",
-    "react-query": "3.34.8",
+    "react-query": "3.39.2",
     "wouter": "2.8.0-alpha.2",
     "zustand": "3.7.2"
   },
