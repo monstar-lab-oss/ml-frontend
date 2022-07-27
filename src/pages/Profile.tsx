@@ -13,51 +13,90 @@ const updateUser = async (payload: User) => {
 };
 
 const Profile = () => {
-  const { isLoading, data, isFetched, isError } = useGetUserQuery({ id: "1" });
+  const { isLoading, data, isFetched, isError } = useGetUserQuery({
+    id: "1",
+  });
 
   useEffect(() => {
     if (isFetched) reset(data);
   }, [isFetched]);
 
-  const { register, handleSubmit, reset } = useForm<User>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<User>({
     mode: "onChange",
     defaultValues: useMemo(() => data || {}, [data]),
   });
 
-  const { mutate } = useMutation(updateUser, {
+  const { mutateAsync } = useMutation(updateUser, {
     onSuccess: ({ message }) => alert(message),
     onError: (error) => alert(error),
   });
 
-  const onSubmit = (data: User) => mutate(data);
+  const onSubmit = (data: User) => mutateAsync(data);
+
+  if (isError) return <div>Failed to fetch</div>;
 
   return (
-    <div>
-      <div>ProfileScreen</div>
-      <div>{isLoading && "Loading..."}</div>
-      <div>{isError && "Failed to fetch"}</div>
-      {isFetched && data ? (
-        <div>
-          <div>
-            Name: {data.first_name} {data.last_name}
-          </div>
-          <div>email: {data.email}</div>
-          <div>
-            <img
-              src={data.avatar}
-              alt={`${data.first_name} ${data.last_name}`}
-              width={data.avatar_size_width}
-              height={data.avatar_size_height}
-              style={{ backgroundColor: "#eee" }}
+    <>
+      <h2>Profile</h2>
+      <p>{isLoading && "Loading..."}</p>
+
+      <div style={{ width: 400 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <fieldset>
+            {isFetched && data ? (
+              <img
+                src={data.avatar}
+                alt={`${data.first_name} ${data.last_name}`}
+                width={data.avatar_size_width}
+                height={data.avatar_size_height}
+                style={{ backgroundColor: "#F6F8FA" }}
+              />
+            ) : null}
+            <label htmlFor="email">email</label>
+            <input
+              type="email"
+              id="email"
+              disabled={isSubmitting}
+              {...register("email", { required: true })}
             />
-          </div>
-        </div>
-      ) : null}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("email")} />
-        <input type="submit" value="Update Email" />
-      </form>
-    </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                columnGap: "10px",
+              }}
+            >
+              <div>
+                <label htmlFor="first_name">first name</label>
+                <input
+                  id="first_name"
+                  disabled={isSubmitting}
+                  {...register("first_name", { required: true })}
+                />
+              </div>
+              <div>
+                <label htmlFor="last_name">last name</label>
+                <input
+                  id="last_name"
+                  disabled={isSubmitting}
+                  {...register("last_name", { required: true })}
+                />
+              </div>
+            </div>
+            <input
+              type="submit"
+              value={isSubmitting ? "Submitting..." : "Update"}
+              disabled={isSubmitting}
+            />
+          </fieldset>
+        </form>
+      </div>
+    </>
   );
 };
 export default Profile;

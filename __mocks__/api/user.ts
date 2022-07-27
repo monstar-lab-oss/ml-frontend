@@ -30,7 +30,11 @@ export const user = [
 
     return res(ctx.json(getItem("testUser")));
   }),
-  rest.post<{ email: string }>("/user/1", (req, res, ctx) => {
+  rest.post<{
+    email: string;
+    first_name: string;
+    last_name: string;
+  }>("/user/1", (req, res, ctx) => {
     const token = req.headers.get("Authorization")?.split(" ").at(-1);
 
     if (!isValidatedAccessToken(token)) {
@@ -42,20 +46,18 @@ export const user = [
       );
     }
 
-    if (!req.body.email || typeof req.body.email !== "string") {
-      return res(
-        ctx.status(400),
-        ctx.json({
-          error: "Invalid Payload",
-        })
-      );
-    }
-
     setItem("testUser", {
       ...testUser,
       email: req.body.email,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
     });
 
-    return res(ctx.json({ message: "Update success" }));
+    return res(
+      ctx.delay(1000),
+      ctx.json({
+        message: "Update success!\nYou can check with reload or refresh a page",
+      })
+    );
   }),
 ];
