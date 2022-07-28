@@ -17,30 +17,28 @@ const EmployeeList = () => {
 
       <Link to="/new">Create new employee</Link>
 
-      <table>
-        {isFetched && data?.length ? (
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
+      {isFetched && data?.length ? (
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(({ id, name }) => (
+              <tr key={id}>
+                <td>
+                  <Link to={`/${id}`}>{id}</Link>
+                </td>
+                <td>{name}</td>
               </tr>
-            </thead>
-            <tbody>
-              {data.map(({ id, name }) => (
-                <tr key={id}>
-                  <td>
-                    <Link to={`/${id}`}>{id}</Link>
-                  </td>
-                  <td>{name}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          "No Employee Found"
-        )}
-      </table>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        "No Employee Found"
+      )}
     </>
   );
 };
