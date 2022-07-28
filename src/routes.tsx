@@ -13,6 +13,7 @@ const Profile = lazy(() => import("@/pages/Profile"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const SharedStateCount = lazy(() => import("@/pages/SharedStateCount"));
 const StateHistoryCount = lazy(() => import("@/pages/StateHistoryCount"));
+const Employee = lazy(() => import("@/pages/Employee"));
 
 // TODO:
 // RestrictAccess.tsx
@@ -71,6 +72,9 @@ export const Routes = () => {
           </PrivateRoute>
           <PrivateRoute path="/count_with_history">
             <StateHistoryCount />
+          </PrivateRoute>
+          <PrivateRoute path="/employees/:rest*">
+            <Employee />
           </PrivateRoute>
           <Route>
             <NotFound />
