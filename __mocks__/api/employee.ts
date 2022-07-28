@@ -1,6 +1,6 @@
 import { rest } from "../rest";
 import type { Employee } from "../../src/types/employee";
-import { getItem, setInitalItem } from "../mockDatabase";
+import { getItem, setItem, setInitalItem } from "../mockDatabase";
 
 const createId = () => String(Math.floor(Date.now() * Math.random()));
 
@@ -23,5 +23,13 @@ export const employee = [
   rest.get("/employee/:id", (req, res, ctx) => {
     const employee = getEmployeeById(req.params.id as string);
     return employee ? res(ctx.json(employee)) : res(ctx.status(400));
+  }),
+
+  rest.post<Omit<Employee, "id">>("/employee", (req, res, ctx) => {
+    setItem("employee", [
+      ...getItem("employee"),
+      { id: createId(), ...req.body },
+    ]);
+    return res(ctx.json({ message: "create success" }));
   }),
 ];

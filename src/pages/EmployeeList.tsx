@@ -15,6 +15,8 @@ const EmployeeList = () => {
       <div>{isLoading && "Loading..."}</div>
       <div>{isError && "Failed to fetch"}</div>
 
+      <Link to="/new">Create new employee</Link>
+
       <table>
         {isFetched && data?.length ? (
           <table>

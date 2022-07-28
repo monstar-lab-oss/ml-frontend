@@ -1,9 +1,7 @@
 import { Route, Router, Switch } from "wouter";
 import EmployeeList from "@/pages/EmployeeList";
 import EmployeeUpdate from "@/pages/EmployeeUpdate";
-
-// TODO: not yet implemented
-const EmployeeCreate = () => <>create</>;
+import EmployeeCreate from "@/pages/EmployeeCreate";
 
 const Employee = () => {
   return (
