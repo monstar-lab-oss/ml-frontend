@@ -2,6 +2,7 @@ import { EmployeeForm } from "@/components/organisms/EmployeeForm";
 import { http } from "@/utils/http";
 import { Employee as Payload } from "@/types/employee";
 import { useMutation, useQuery } from "react-query";
+import { useLocation } from "wouter";
 
 type Props = { id: string };
 
@@ -23,8 +24,12 @@ const removeEmployee = async (id: Payload["id"]) => {
 };
 
 const RemoveButton = ({ id }: { id: string }) => {
+  const [, setLocation] = useLocation();
   const { mutateAsync } = useMutation(removeEmployee, {
-    onSuccess: ({ message }) => alert(message),
+    onSuccess: ({ message }) => {
+      alert(message);
+      setLocation("/");
+    },
     onError: (error) => alert(error),
   });
 
