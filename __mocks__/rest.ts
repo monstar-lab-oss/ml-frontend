@@ -7,4 +7,5 @@ export const rest = {
   get: (url: string, fn) => _rest.get(`${BASE_API_URL}${url}`, fn),
   post: (url: string, fn) => _rest.post(`${BASE_API_URL}${url}`, fn),
   put: (url: string, fn) => _rest.put(`${BASE_API_URL}${url}`, fn),
+  delete: (url: string, fn) => _rest.delete(`${BASE_API_URL}${url}`, fn),
 } as typeof _rest;

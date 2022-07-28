@@ -17,6 +17,20 @@ const updateEmployee = async (payload: Payload) => {
   return response;
 };
 
+const removeEmployee = async (id: Payload["id"]) => {
+  const response = await http.delete<{ message: string }>(`/employee/${id}`);
+  return response;
+};
+
+const RemoveButton = ({ id }: { id: string }) => {
+  const { mutateAsync } = useMutation(removeEmployee, {
+    onSuccess: ({ message }) => alert(message),
+    onError: (error) => alert(error),
+  });
+
+  return <button onClick={() => mutateAsync(id)}>Remove</button>;
+};
+
 const EmployeeUpdate = ({ id }: Props) => {
   const { isLoading, data, isError } = useGetEmployeeQuery(id);
 
@@ -29,7 +43,12 @@ const EmployeeUpdate = ({ id }: Props) => {
   if (isError) return <>Failed to fetch</>;
 
   return data ? (
-    <EmployeeForm values={data} onUpdate={mutateAsync} />
+    <>
+      <h3 style={{ display: "flex", justifyContent: "space-between" }}>
+        {data.name} <RemoveButton id={id} />
+      </h3>
+      <EmployeeForm values={data} onUpdate={mutateAsync} />
+    </>
   ) : (
     <>No Employee Found</>
   );

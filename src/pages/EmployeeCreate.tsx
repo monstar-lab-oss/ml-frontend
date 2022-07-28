@@ -16,6 +16,11 @@ const EmployeeCreate = () => {
     onError: (error) => alert(error),
   });
 
-  return <EmployeeForm onCreate={mutateAsync} isSuccess={isSuccess} />;
+  return (
+    <>
+      <h3>Create Employee</h3>
+      <EmployeeForm onCreate={mutateAsync} isSuccess={isSuccess} />
+    </>
+  );
 };
 export default EmployeeCreate;

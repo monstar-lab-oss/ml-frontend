@@ -27,4 +27,5 @@ export const http = {
     request<T>(url, { method: "POST", body }),
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   put: <T>(url: string, body: any) => request<T>(url, { method: "PUT", body }),
+  delete: <T>(url: string) => request<T>(url, { method: "DELETE" }),
 };

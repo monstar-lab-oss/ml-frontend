@@ -46,7 +46,6 @@ export const EmployeeForm = ({
 
   return (
     <>
-      <h3>{values ? `Update ${values.name}` : "Create Employee"}</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register("name", { required: true })} />
 
