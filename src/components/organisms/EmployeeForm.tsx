@@ -2,24 +2,43 @@ import { Employee } from "@/types/employee";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-type Props = {
-  onCreate: (payload: Omit<Employee, "id">) => void;
-  isSuccess: boolean;
-};
+type Props =
+  | {
+      values: Employee;
+      onUpdate: (payload: Employee) => void;
+      onCreate?: never;
+      isSuccess?: never;
+    }
+  | {
+      values?: undefined;
+      onUpdate?: never;
+      onCreate: (payload: Omit<Employee, "id">) => void;
+      isSuccess: boolean;
+    };
 
-export const EmployeeForm = ({ onCreate, isSuccess }: Props) => {
+export const EmployeeForm = ({
+  values,
+  onUpdate,
+  onCreate,
+  isSuccess,
+}: Props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors },
   } = useForm<Employee>({
-    defaultValues: { name: "" },
+    defaultValues: values ?? { name: "" },
   });
 
   const onSubmit = (data: Omit<Employee, "id">) => {
-    onCreate(data);
+    values ? onUpdate({ id: values.id, ...data }) : onCreate(data);
   };
+
+  useEffect(() => {
+    values?.name && setValue("name", values.name);
+  }, [values]);
 
   useEffect(() => {
     isSuccess && reset();
@@ -27,7 +46,7 @@ export const EmployeeForm = ({ onCreate, isSuccess }: Props) => {
 
   return (
     <>
-      <h3>Create Employee</h3>
+      <h3>{values ? `Update ${values.name}` : "Create Employee"}</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register("name", { required: true })} />
 
