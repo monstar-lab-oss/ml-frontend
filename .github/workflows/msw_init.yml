@@ -1,13 +1,14 @@
-name: CREATING_THE_MOCK_SERVICE_WORKER
+name: Creating the mock service worker file
 
 on:
-  pull_request:
+  pull_request_target:
     branches:
-      - "renovate/msw-**"
+      - main
     types: [opened]
 
 jobs:
-  build:
+  create_msw_file:
+    if: startsWith(github.head_ref, 'renovate/msw-')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
