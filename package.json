@@ -43,6 +43,7 @@
     "eslint-plugin-react": "7.30.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "28.1.3",
+    "jest-environment-jsdom": "28.1.3",
     "msw": "0.44.2",
     "sass": "1.53.0",
     "storybook-builder-vite": "0.1.23",
@@ -72,6 +73,8 @@
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy"
     },
-    "testPathIgnorePatterns": ["<rootDir>/tests/e2e"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/e2e"
+    ]
   }
 }
