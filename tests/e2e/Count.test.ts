@@ -15,10 +15,10 @@ test.afterAll(async () => {
 test.describe("Count page", () => {
   test("should count up from 10 to 11", async () => {
     // Make sure the initial count is 10
-    await expect(page.locator("span")).toHaveText(["10"]);
+    await expect(page.locator("h3")).toHaveText(["10"]);
     // Click the button to increase the count
     await page.locator("button", { hasText: /^\+$/ }).click();
     // Make sure the count now has 11
-    await expect(page.locator("span")).toHaveText(["11"]);
+    await expect(page.locator("h3")).toHaveText(["11"]);
   });
 });

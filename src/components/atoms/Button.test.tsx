@@ -4,19 +4,19 @@ import * as stories from "./Button.stories";
 
 describe("Button", () => {
   // Returns a component that already contain all decorators from story level, meta level and global level.
-  const { Primary } = composeStories(stories);
+  const { Default } = composeStories(stories);
 
   it("reuses args from composed story", () => {
-    render(<Primary />);
+    render(<Default />);
     const buttonElement = screen.getByRole("button");
 
-    expect(buttonElement.textContent).toEqual(Primary.args?.label);
+    expect(buttonElement.textContent).toEqual(Default.args?.children);
   });
 
   it("onClick handler is called", () => {
     const onClick = jest.fn();
     const { getByText } = render(
-      <Primary {...Primary.args} onClick={onClick} />
+      <Default {...Default.args} onClick={onClick} />
     );
 
     fireEvent.click(getByText("Button"));

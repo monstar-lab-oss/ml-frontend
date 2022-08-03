@@ -1,13 +1,48 @@
+// The @import CSS link here is just for Demo, you can remove it or move it to the index.html file by tag `<link>` in your project for best practice
+@import url(https://fonts.xz.style/serve/inter.css);
+@import url(https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css);
+:root {
+  --error-color: #d9534f;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+a {
+  cursor: pointer;
+}
+
+// form styling
+label {
+  cursor: pointer;
+  display: block;
+}
+
+input {
+  width: 100%;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  &[aria-errormessage] {
+    margin-bottom: 0;
+  }
+
+  &[aria-invalid="true"] {
+    outline: 1px solid var(--error-color);
+  }
+
+  &[aria-invalid="true"] + span.errormessage {
+    visibility: visible;
+  }
+}
+
+span {
+  &.errormessage {
+    visibility: hidden;
+    font-size: 0.9rem;
+    color: var(--error-color);
+  }
 }

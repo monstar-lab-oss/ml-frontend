@@ -1,3 +1,4 @@
+import { Button } from "@/components/atoms/Button";
 import { useCount, useIncrement } from "@/hooks/useCounter";
 
 const Count = () => {
@@ -5,7 +6,7 @@ const Count = () => {
   console.log("render Count");
 
   const count = useCount();
-  return <span>{count}</span>;
+  return <h3>{count}</h3>;
 };
 
 const SetCount = () => {
@@ -13,14 +14,34 @@ const SetCount = () => {
   console.log("render SetCount");
 
   const increment = useIncrement();
-  return <button onClick={increment}>+</button>;
+  return (
+    <Button size="large" onClick={increment}>
+      +
+    </Button>
+  );
 };
 
 const SharedStateCount = () => {
   return (
     <>
-      <Count />
-      <SetCount />
+      <h2>Count</h2>
+      <p>You can check logs on browser console.</p>
+      <p>
+        (use <kbd>Option + ⌘ + J</kbd> or <kbd>Shift + CTRL + J</kbd>)
+      </p>
+      <fieldset style={{ width: 70 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            textAlign: "center",
+          }}
+        >
+          <Count />
+          <SetCount />
+        </div>
+      </fieldset>
     </>
   );
 };

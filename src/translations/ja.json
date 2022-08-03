@@ -1,8 +1,8 @@
 {
-  "title": "react-i18nextとtypescriptのreactへようこそ",
+  "title": "React boilerplateへようこそ",
+  "toc": "目次",
   "description": {
-    "part1": "名前空間を使わない例です。",
-    "part2": "t関数に適切な型を推論するためには、型補強を使ってResourcesの型を上書きする必要があります。",
-    "part3": "詳しくはreact-i18next.d.tsをご覧ください。"
+    "part1": "新しいReactプロジェクトを簡単に始められる、開発体験を重視したReactボイラープレートです。",
+    "not_logged_in": "デモ機能を利用するには、ログインが必要です。"
   }
 }
