@@ -1,0 +1,18 @@
+.form {
+  padding: 16px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  color: #333;
+
+  label {
+    font-size: 14px;
+  }
+
+  p {
+    color: white;
+    font-weight: bold;
+    display: block;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: lightblue;
+  }
+}
