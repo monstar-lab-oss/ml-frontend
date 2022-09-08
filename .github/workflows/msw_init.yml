@@ -1,0 +1,21 @@
+name: Creating the mock service worker file
+
+on:
+  pull_request_target:
+    branches:
+      - main
+    types: [opened]
+
+jobs:
+  create_msw_file:
+    if: startsWith(github.head_ref, 'renovate/msw-')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          npx msw init ./public
+          git add .
+          git commit -m "create service worker file"
+          git push
