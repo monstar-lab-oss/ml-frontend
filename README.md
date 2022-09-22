@@ -11,23 +11,20 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
     - Optimisation of Minify code in production mode
 - Coding Standards and Guidelines (Statically analyzes our codes)
   - [ ] ESLint with our rules
-  - [ ] Prettier
-- Testing framework
-  - [x] Jest
-  - [ ] React Testing Library
-  - [ ] React Hooks Testing Library
-  - [ ] Storybook
-    - [x] base
-    - [ ] msw
-    - [ ] state management
-    - [ ] router
-    - [ ] css
-    - [ ] i18n
-  - [ ] E2E
-    - [x] Playwright
-    - [ ] Cypress
+  - [x] Prettier
 - Mock API server
   - [x] msw
+
+### Testing
+
+- Visual regression testing
+  - [x] Storybook
+- Unit testing
+  - [x] Jest
+  - [x] React Testing Library
+  - [ ] React Hooks Testing Library
+- End-to-end testing
+  - [x] Playwright
 
 ### Application design
 
@@ -35,9 +32,9 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
   - [REST and GraphQL](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/14)
 - State management
   - Client state
-    - [ ] useContext
+    - [x] useContext
       - Need to have logic to prevent unnecessary rerender
-    - [ ] Use state management libraries
+    - [x] Use state management libraries
       - [x] zustand
       - Continued consideration of other proposals
   - Server state
@@ -52,12 +49,9 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
   - Preprocessors
     - [x] Sass
     - PostCSS
-  - Frameworks
-    - Tailwind CSS
-    - Chakra UI
-    - Material UI
-    - Ant Design
   - Animations
+- Multi Language
+  - [x] i18n
 
 ### Application security
 
@@ -70,7 +64,7 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
 - [Deployment](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/5)
   - Deploy to Amazon S3 + CloudFront
 - Update Dependencies Safely and Automatically
-  - [ ] Renovate
+  - [x] Renovate
 
 ### UX
 
