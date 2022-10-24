@@ -39,5 +39,12 @@ module.exports = {
       { allow: ["arrowFunctions", "methods", "asyncMethods"] },
     ],
     "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
+    "no-restricted-imports": ["error", {
+      "paths": [{
+        "name": "@testing-library/react",
+        "importNames": ["render"],
+        "message": "Please use render or renderWithQueryClient from '@/tests/utils' instead."
+      }]
+    }],
   },
 };

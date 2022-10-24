@@ -1,8 +1,4 @@
 import { setupWorker } from "msw";
-import { user } from "./api/user";
-import { employee } from "./api/employee";
-import { login } from "./api/login";
+import handlers from './handlers'
 
-const requestHandler = [...login, ...user, ...employee];
-
-export const mockServer = setupWorker(...requestHandler);
+export const mockServer = setupWorker(...handlers);

@@ -32,8 +32,12 @@ export const EmployeeForm = ({
     defaultValues: values ?? { name: "" },
   });
 
-  const onSubmit = (data: Omit<Employee, "id">) => {
-    values ? onUpdate({ id: values.id, ...data }) : onCreate(data);
+  const onSubmit = async (data: Omit<Employee, "id">) => {
+    try {
+      values ? await onUpdate({ id: values.id, ...data }) : await onCreate(data);
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   useEffect(() => {
@@ -47,11 +51,11 @@ export const EmployeeForm = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name", { required: true })} />
+        <input {...register("name", { required: true })} data-testid="input-name" />
 
         {errors.name && <span>This field is required</span>}
 
-        <input type="submit" />
+        <input type="submit" data-testid="button-update" />
       </form>
     </>
   );

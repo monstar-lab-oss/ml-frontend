@@ -15,7 +15,7 @@ type Actions = {
   reset: (value: State["curr"]) => void;
 };
 
-type Store = State & Selectors & Actions;
+export type Store = State & Selectors & Actions;
 export const useCountStore = create<Store>((set, get) => ({
   // state
   prev: [],

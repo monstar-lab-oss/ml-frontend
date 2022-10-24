@@ -1,6 +1,7 @@
 import { LOCAL_STORAGE_TOKEN_KEY } from "@/constants/localStorage";
+import { getApiHost } from '@/utils/env'
 
-const ENDPOINT = import.meta.env.VITE_REACT_APP_API_HOST || "/api/v1";
+const ENDPOINT = getApiHost() || "/api/v1";
 
 const request = async <T>(url: string, opts?: RequestInit): Promise<T> => {
   const fullPath = /^https?:\/\/[\w]/.test(url) ? url : `${ENDPOINT}${url}`;
@@ -16,8 +17,12 @@ const request = async <T>(url: string, opts?: RequestInit): Promise<T> => {
     body: JSON.stringify(opts?.body),
   });
   // TODO handle error
-  const data: T = await response.json();
-  return data;
+  try {
+    const data: T = await response.json();
+    return data;
+  } catch (e) {
+    throw new HttpError('Server error') 
+  }
 };
 // FIXME: parameter used in hooks/useAuth.tsx may be wrong.
 export const http = {
@@ -29,3 +34,10 @@ export const http = {
   put: <T>(url: string, body: any) => request<T>(url, { method: "PUT", body }),
   delete: <T>(url: string) => request<T>(url, { method: "DELETE" }),
 };
+
+export class HttpError extends Error {
+  constructor(msg: string) {
+    super(msg);
+    Object.setPrototypeOf(this, HttpError.prototype);
+  }
+}

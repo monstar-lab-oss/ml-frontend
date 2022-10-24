@@ -23,7 +23,7 @@ const EmployeeCreate = () => {
 
   return (
     <>
-      <h3>Create Employee</h3>
+      <h3 data-testid="employee-create-title">Create Employee</h3>
       <EmployeeForm onCreate={mutateAsync} isSuccess={isSuccess} />
     </>
   );

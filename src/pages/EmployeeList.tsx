@@ -11,7 +11,7 @@ const EmployeeList = () => {
 
   return (
     <>
-      <h2>Employee</h2>
+      <h2 data-testid="employee-list-title">Employee</h2>
       <div>{isLoading && "Loading..."}</div>
       <div>{isError && "Failed to fetch"}</div>
 
