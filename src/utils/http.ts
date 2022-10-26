@@ -17,6 +17,8 @@ const request = async <T>(url: string, opts?: RequestInit): Promise<T> => {
     body: JSON.stringify(opts?.body),
   });
   // TODO handle error
+  // - Use toast to show error of 5xx error
+  // - Internationalize error message
   try {
     const data: T = await response.json();
     return data;
