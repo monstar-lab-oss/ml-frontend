@@ -31,6 +31,9 @@ jobs:
       # - name: Run UT
       #   run: yarn test
 
+      - name: Run type checks
+        run: yarn type
+
       # Create cache for Playwright installation
       - name: Restore Playwright Installation Cache
         id: playwright-cache
