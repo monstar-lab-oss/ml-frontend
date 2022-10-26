@@ -18,7 +18,7 @@ Our roadmap for the ReactJS Boilerplate is where you can learn about what featur
 ### Testing
 
 - Visual regression testing
-  - [x] Storybook
+  - [ ] Storybook
 - Unit testing
   - [x] Jest
   - [x] React Testing Library
