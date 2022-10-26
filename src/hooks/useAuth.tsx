@@ -54,7 +54,7 @@ export const AuthProvider = ({
       setIsLoggedIn(true);
 
       // e.g http://localhost:3000/search?foo=bar&baz=99
-      const params = new URL(document.location.href).searchParams;
+      const params = new URL(window.location.href).searchParams;
       const from = params.get("redirect");
       params.delete("redirect");
 

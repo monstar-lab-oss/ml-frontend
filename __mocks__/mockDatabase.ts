@@ -1,4 +1,7 @@
-export const setItem = (itemName: string, data: Record<string, unknown>) => {
+export const setItem = (
+  itemName: string,
+  data: Record<string, unknown> | Record<string, unknown>[]
+) => {
   localStorage.setItem(itemName, JSON.stringify(data));
 };
 
