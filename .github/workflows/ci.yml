@@ -27,9 +27,8 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
-      # TODO: Uncomment after adding Unit test sample
-      # - name: Run UT
-      #   run: yarn test
+      - name: Run UT
+        run: yarn test
 
       - name: Run type checks
         run: yarn type

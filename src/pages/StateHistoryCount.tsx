@@ -2,7 +2,7 @@ import { useCountStore } from "@/stores/countStore";
 
 const Count = () => {
   const count = useCountStore((state) => state.curr);
-  return <h3>{count}</h3>;
+  return <h3 data-testid="count">{count}</h3>;
 };
 
 const UndoCountButton: React.FC = () => {
@@ -34,10 +34,10 @@ const SetCountButton: React.FC = () => {
 
   return (
     <>
-      <button disabled={hasNext} onClick={() => set(getCount() - 1)}>
+      <button disabled={hasNext} onClick={() => set(getCount() - 1)} data-testid="button-decrease">
         -
       </button>
-      <button disabled={hasNext} onClick={() => set(getCount() + 1)}>
+      <button disabled={hasNext} onClick={() => set(getCount() + 1)} data-testid="button-increase">
         +
       </button>
     </>
@@ -58,7 +58,7 @@ const HistoryStack = () => {
   const { prev, curr, next } = useCountStore((state) => state);
 
   return (
-    <div>
+    <div data-testid="history">
       <h3>History stack</h3>
       <table>
         <tbody>

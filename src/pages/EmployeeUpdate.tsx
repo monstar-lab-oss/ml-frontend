@@ -25,7 +25,7 @@ const removeEmployee = async (id: Payload["id"]) => {
 
 const RemoveButton = ({ id }: { id: string }) => {
   const [, setLocation] = useLocation();
-  const { mutateAsync } = useMutation(removeEmployee, {
+  const { mutate } = useMutation(removeEmployee, {
     onSuccess: ({ message }) => {
       alert(message);
       setLocation("/");
@@ -33,7 +33,7 @@ const RemoveButton = ({ id }: { id: string }) => {
     onError: (error) => alert(error),
   });
 
-  return <button onClick={() => mutateAsync(id)}>Remove</button>;
+  return <button onClick={() => mutate(id)} data-testid="button-remove">Remove</button>;
 };
 
 const EmployeeUpdate = ({ id }: Props) => {
@@ -49,7 +49,7 @@ const EmployeeUpdate = ({ id }: Props) => {
 
   return data ? (
     <>
-      <h3 style={{ display: "flex", justifyContent: "space-between" }}>
+      <h3 style={{ display: "flex", justifyContent: "space-between" }} data-testid="employee-update-title">
         {data.name} <RemoveButton id={id} />
       </h3>
       <EmployeeForm values={data} onUpdate={mutateAsync} />
