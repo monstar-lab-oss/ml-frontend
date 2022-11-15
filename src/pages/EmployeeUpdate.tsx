@@ -7,10 +7,10 @@ import { useLocation } from "wouter";
 type Props = { id: string };
 
 const useGetEmployeeQuery = (id: string) =>
-  useQuery(
-    ["employee", id],
-    async () => await http.get<Payload>(`/employee/${id}`)
-  );
+  useQuery({
+    queryKey: ["employee", id],
+    queryFn: () => http.get<Payload>(`/employee/${id}`),
+  });
 
 const updateEmployee = async (payload: Payload) => {
   const { id, ...body } = payload;

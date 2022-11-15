@@ -4,7 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Employee } from "@/types/employee";
 
 const useGetEmployeeListQuery = () =>
-  useQuery("userList", async () => await http.get<Employee[]>("/employee"));
+  useQuery({
+    queryKey: ["userList"],
+    queryFn: () => http.get<Employee[]>("/employee"),
+  });
 
 const EmployeeList = () => {
   const { isLoading, data, isFetched, isError } = useGetEmployeeListQuery();
