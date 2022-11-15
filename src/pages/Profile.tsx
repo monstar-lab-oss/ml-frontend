@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { http } from "@/utils/http";
 import { User } from "@/types/user";

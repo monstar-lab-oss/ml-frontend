@@ -1,7 +1,7 @@
 import { EmployeeForm } from "@/components/organisms/EmployeeForm";
 import { http } from "@/utils/http";
 import { Employee } from "@/types/employee";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 
 type Payload = Omit<Employee, "id">;

@@ -1,7 +1,7 @@
 import { EmployeeForm } from "@/components/organisms/EmployeeForm";
 import { http } from "@/utils/http";
 import { Employee as Payload } from "@/types/employee";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 
 type Props = { id: string };
@@ -33,7 +33,11 @@ const RemoveButton = ({ id }: { id: string }) => {
     onError: (error) => alert(error),
   });
 
-  return <button onClick={() => mutate(id)} data-testid="button-remove">Remove</button>;
+  return (
+    <button onClick={() => mutate(id)} data-testid="button-remove">
+      Remove
+    </button>
+  );
 };
 
 const EmployeeUpdate = ({ id }: Props) => {
@@ -49,7 +53,10 @@ const EmployeeUpdate = ({ id }: Props) => {
 
   return data ? (
     <>
-      <h3 style={{ display: "flex", justifyContent: "space-between" }} data-testid="employee-update-title">
+      <h3
+        style={{ display: "flex", justifyContent: "space-between" }}
+        data-testid="employee-update-title"
+      >
         {data.name} <RemoveButton id={id} />
       </h3>
       <EmployeeForm values={data} onUpdate={mutateAsync} />

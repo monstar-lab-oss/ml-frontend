@@ -1,6 +1,6 @@
 import { http } from "@/utils/http";
 import { Link } from "wouter";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Employee } from "@/types/employee";
 
 const useGetEmployeeListQuery = () =>

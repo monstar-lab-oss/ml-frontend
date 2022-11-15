@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from "react";
 import {
   QueryClient,
   QueryClientProvider as ReactQueryClientProvider,
-} from "react-query";
+} from "@tanstack/react-query";
 import { RenderOptions } from "@testing-library/react";
 import { render } from "@/tests/utils";
 import "@/__mocks__/nodeServer";
