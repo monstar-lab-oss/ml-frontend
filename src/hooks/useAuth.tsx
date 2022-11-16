@@ -7,7 +7,7 @@ import {
 } from "react";
 import { useLocation } from "wouter";
 import { AuthRequest, AuthResponse } from "@/types/auth";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import { LOCAL_STORAGE_TOKEN_KEY } from "@/constants/localStorage";
 
