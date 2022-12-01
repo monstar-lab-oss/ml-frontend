@@ -48,7 +48,7 @@ test.describe("Home page", () => {
     const countLocator = await page.locator("a", {
       hasText: "Count",
     });
-    // move to profile
+    // move to count
     await countLocator.click();
     await expect(page).toHaveURL(/.*count/);
   });
@@ -57,7 +57,7 @@ test.describe("Home page", () => {
     const countWithHistoryLocator = await page.locator("a", {
       hasText: "Undo/Redo",
     });
-    // move to profile
+    // move to count with history
     await countWithHistoryLocator.click();
     await expect(page).toHaveURL(/.*count_with_history/);
   });
