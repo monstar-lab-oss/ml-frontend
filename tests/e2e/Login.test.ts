@@ -37,7 +37,7 @@ test.describe("playwright e2e test for login page", () => {
     await email.clear();
     await email.type("test@123123abcabc");
     await submitButton.click();
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(3000);
 
     await expect(page.locator("#erroremail")).toBeVisible();
     await expect(page.locator("#errorpassword")).toBeVisible();
