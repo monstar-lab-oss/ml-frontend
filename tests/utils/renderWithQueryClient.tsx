@@ -1,8 +1,11 @@
-import React, { FC, ReactElement } from 'react'
-import { QueryClient, QueryClientProvider as ReactQueryClientProvider } from "react-query";
-import { RenderOptions } from '@testing-library/react'
-import { render } from '@/tests/utils'
-import '@/__mocks__/nodeServer'
+import React, { FC, ReactElement } from "react";
+import {
+  QueryClient,
+  QueryClientProvider as ReactQueryClientProvider,
+} from "@tanstack/react-query";
+import { RenderOptions } from "@testing-library/react";
+import { render } from "@/tests/utils";
+import "@/__mocks__/nodeServer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -12,17 +15,19 @@ const queryClient = new QueryClient({
       retry: false,
     },
   },
- })
+});
 
-const Provider: FC<{children: React.ReactNode}> = ({children}) => {
+const Provider: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <ReactQueryClientProvider client={queryClient}>{ children }</ReactQueryClientProvider>
-  )
-}
+    <ReactQueryClientProvider client={queryClient}>
+      {children}
+    </ReactQueryClientProvider>
+  );
+};
 
 export default function renderWithQueryClient(
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
+  options?: Omit<RenderOptions, "wrapper">
 ) {
-  return render(ui, { wrapper: Provider, ...options })
+  return render(ui, { wrapper: Provider, ...options });
 }
