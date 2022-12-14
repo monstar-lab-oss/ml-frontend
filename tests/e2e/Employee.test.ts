@@ -18,6 +18,20 @@ test.afterAll(async () => {
 });
 
 test.describe("Employee page", () => {
+  test("Reading employee", async () => {
+    const employeeTable = await expect(
+      await page.locator('[data-testid="employee-table"] tr').allTextContents()
+    ).toStrictEqual([
+      // table header
+      "IDName",
+      // table contents
+      "1foo",
+      "2bar",
+      "3baz",
+      "4error employee",
+    ]);
+  });
+
   test("Creating employee", async () => {
     await page.locator("text=/Create new employee/i").click();
     await expect(page).toHaveURL(/.*new/);
@@ -34,7 +48,6 @@ test.describe("Employee page", () => {
     await expect(page.locator('text="foobar"')).toBeVisible();
   });
 
-  //test.fixme("Reading employee", async () => {});
   //test.fixme("Updating employee", async () => {});
   //test.fixme("Deleting employee", async () => {});
 });
