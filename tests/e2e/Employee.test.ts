@@ -48,6 +48,32 @@ test.describe("Employee page", () => {
     await expect(page.locator('text="foobar"')).toBeVisible();
   });
 
-  //test.fixme("Updating employee", async () => {});
+  test("Updating employee", async () => {
+    const nameInput = page.locator("data-testid=input-name");
+    const oldName = await page.getByRole("cell").last().textContent();
+
+    const targetEmployeeIdLink = page
+      .getByRole("row", { name: oldName! })
+      .getByRole("cell")
+      .first()
+      .getByRole("link");
+
+    // Render Input Element with employee name
+    await targetEmployeeIdLink.click();
+    await expect(nameInput).toBeVisible();
+    await expect(await nameInput.inputValue()).toBe(oldName);
+
+    // Fill new name and submit
+    await nameInput.fill("bazfoobar");
+
+    await Promise.all([
+      page.waitForResponse((res) => res.url().includes("/employee")),
+      page.locator("input[type=submit]").click(),
+    ]);
+
+    // Make sure the updated values are reflected after the page is reloaded
+    await page.reload();
+    await expect(page.getByRole("cell", { name: "bazfoobar" })).toBeVisible();
+  });
   //test.fixme("Deleting employee", async () => {});
 });
