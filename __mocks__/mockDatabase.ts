@@ -5,8 +5,10 @@ export const setItem = (
   localStorage.setItem(itemName, JSON.stringify(data));
 };
 
-export const getItem = (itemName: string) =>
-  JSON.parse(localStorage.getItem(itemName));
+export const getItem = (itemName: string) => {
+  const item = localStorage.getItem(itemName);
+  return item ? JSON.parse(item) : null;
+};
 
 export const setInitalItem = (o: Record<string, unknown>) =>
   Object.keys(o).map((k) => {
