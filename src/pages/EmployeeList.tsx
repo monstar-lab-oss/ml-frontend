@@ -21,7 +21,7 @@ const EmployeeList = () => {
       <Link to="/new">Create new employee</Link>
 
       {isFetched && data?.length ? (
-        <table>
+        <table data-testid="employee-table">
           <thead>
             <tr>
               <th>ID</th>
