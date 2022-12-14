@@ -10,7 +10,7 @@ test.beforeAll(async ({ browser }) => {
   page.on("dialog", (dialog) => dialog.accept());
 
   await page.goto("/employees");
-  await page.waitForSelector('[data-testid="employee-table"]');
+  await page.waitForLoadState("networkidle");
 });
 
 test.afterAll(async () => {
@@ -19,8 +19,8 @@ test.afterAll(async () => {
 
 test.describe("Employee page", () => {
   test("Reading employee", async () => {
-    const employeeTable = await expect(
-      await page.locator('[data-testid="employee-table"] tr').allTextContents()
+    expect(
+      await page.getByRole("table").getByRole("row").allTextContents()
     ).toStrictEqual([
       // table header
       "IDName",
