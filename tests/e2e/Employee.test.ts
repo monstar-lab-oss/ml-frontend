@@ -75,5 +75,28 @@ test.describe("Employee page", () => {
     await page.reload();
     await expect(page.getByRole("cell", { name: "bazfoobar" })).toBeVisible();
   });
-  //test.fixme("Deleting employee", async () => {});
+
+  test("Deleting employee", async () => {
+    // Employee name is exist is fail
+    const name = (await page.getByRole("cell").last().textContent())!;
+    const nameInput = page.locator("data-testid=input-name");
+
+    const employeeIdLink = page
+      .getByRole("row", { name })
+      .getByRole("cell")
+      .first()
+      .getByRole("link");
+
+    // Render Input Element with employee name
+    await employeeIdLink.click();
+
+    await Promise.all([
+      page.waitForResponse((res) => res.url().includes("/employee")),
+      page.getByRole("button", { name: "Remove" }).click(),
+    ]);
+
+    // Make sure the updated values are reflected after the page is reloaded
+    await page.reload();
+    await expect(page.getByRole("cell", { name })).toHaveCount(0);
+  });
 });
