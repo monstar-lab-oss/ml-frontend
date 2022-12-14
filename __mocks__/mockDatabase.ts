@@ -6,7 +6,7 @@ export const setItem = (
 };
 
 export const getItem = (itemName: string) =>
-  JSON.parse(localStorage.getItem(itemName) || "null");
+  JSON.parse(localStorage.getItem(itemName));
 
 export const setInitalItem = (o: Record<string, unknown>) =>
   Object.keys(o).map((k) => {
