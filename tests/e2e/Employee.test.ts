@@ -3,7 +3,6 @@ import { test, Page, expect } from "@playwright/test";
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   page = await browser.newPage();
 
   // Click the Confirm button in the dialog that appears when the request is successful.
@@ -79,7 +78,6 @@ test.describe("Employee page", () => {
   test("Deleting employee", async () => {
     // Employee name is exist is fail
     const name = (await page.getByRole("cell", { name: "baz" }).textContent())!;
-    const nameInput = page.locator("data-testid=input-name");
 
     const employeeIdLink = page
       .getByRole("row", { name })
