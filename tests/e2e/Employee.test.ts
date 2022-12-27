@@ -50,7 +50,7 @@ test.describe("Employee page", () => {
 
   test("Updating employee", async () => {
     const nameInput = page.locator("data-testid=input-name");
-    const oldName = await page.getByRole("cell").last().textContent();
+    const oldName = await page.getByRole("cell", { name: "baz" }).textContent();
 
     const targetEmployeeIdLink = page
       .getByRole("row", { name: oldName! })
@@ -78,7 +78,7 @@ test.describe("Employee page", () => {
 
   test("Deleting employee", async () => {
     // Employee name is exist is fail
-    const name = (await page.getByRole("cell").last().textContent())!;
+    const name = (await page.getByRole("cell", { name: "baz" }).textContent())!;
     const nameInput = page.locator("data-testid=input-name");
 
     const employeeIdLink = page
