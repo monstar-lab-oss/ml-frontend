@@ -7,6 +7,10 @@ test.beforeAll(async ({ browser }) => {
   await page.goto("count_with_history");
 });
 
+test.beforeEach(async () => {
+  await page.locator("data-testid=button-clear-history").click();
+});
+
 test.describe("Count history page", () => {
   test("increase count when click `+`", async () => {
     await page.locator("data-testid=button-increase").click();
@@ -15,27 +19,41 @@ test.describe("Count history page", () => {
   });
 
   test("decrease count when click `-`", async () => {
+    const currentCount = await page.locator("data-testid=count").textContent();
     await page.locator("data-testid=button-decrease").click();
-    const counter = await page.locator("data-testid=count");
-    await expect(counter).toContainText("0");
+    const counter = await page.locator("data-testid=count").textContent();
+    await expect(Number(counter)).toEqual(Number(currentCount) - 1);
   });
 
   test("history focus 2nd row when click Undo", async () => {
-    await page.locator("data-testid=button-undo").click();
     const decreaseButton = await page.locator("data-testid=button-decrease");
     const increaseButton = await page.locator("data-testid=button-increase");
+    const currentCount = await page.locator("data-testid=count").textContent();
+
+    await decreaseButton.click();
+    await page.locator("data-testid=button-undo").click();
+
     const targetRow = await page.locator("tr >> nth=1 >> td");
-    await expect(targetRow).toContainText("1");
+    const targetRowValue = await targetRow.textContent();
+
+    await expect(targetRowValue).toEqual(currentCount);
     await expect(targetRow).toHaveAttribute("style", "color: blue;");
     await expect(decreaseButton).toBeDisabled();
     await expect(increaseButton).toBeDisabled();
   });
 
   test("history focus 1st row when click Redo", async () => {
+    const currentCount = await page.locator("data-testid=count").textContent();
     const redoButton = await page.locator("data-testid=button-redo");
+
+    await page.locator("data-testid=button-decrease").click();
+    await page.locator("data-testid=button-undo").click();
     await redoButton.click();
+
     const targetRow = await page.locator("tr >> nth=0 >> td");
-    await expect(targetRow).toContainText("0");
+    const targetRowValue = await targetRow.textContent();
+
+    await expect(Number(targetRowValue)).toEqual(Number(currentCount) - 1);
     await expect(targetRow).toHaveAttribute("style", "color: blue;");
     await expect(redoButton).toBeDisabled();
   });
