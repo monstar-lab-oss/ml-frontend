@@ -15,6 +15,7 @@ const config: PlaywrightTestConfig = {
     // Tell all tests to load signed-in state from 'storageState.json'.
     storageState: "./tests/e2e/utils/storageState.json",
     trace: "on-first-retry",
+    testIdAttribute: "data-testid",
   },
   projects: [
     {

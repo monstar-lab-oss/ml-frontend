@@ -2,7 +2,7 @@ import { useCountStore } from "@/stores/countStore";
 
 const Count = () => {
   const count = useCountStore((state) => state.curr);
-  return <h3 data-test-id="count">{count}</h3>;
+  return <h3 data-testid="count">{count}</h3>;
 };
 
 const UndoCountButton: React.FC = () => {
@@ -10,7 +10,7 @@ const UndoCountButton: React.FC = () => {
   const hasPrev = useCountStore((state) => state.hasPrev());
 
   return (
-    <button data-test-id="button-undo" onClick={undo} disabled={!hasPrev}>
+    <button data-testid="button-undo" onClick={undo} disabled={!hasPrev}>
       Undo
     </button>
   );
@@ -21,7 +21,7 @@ const RedoCountButton: React.FC = () => {
   const hasNext = useCountStore((state) => state.hasNext());
 
   return (
-    <button data-test-id="button-redo" onClick={redo} disabled={!hasNext}>
+    <button data-testid="button-redo" onClick={redo} disabled={!hasNext}>
       Redo
     </button>
   );
@@ -37,14 +37,14 @@ const SetCountButton: React.FC = () => {
       <button
         disabled={hasNext}
         onClick={() => set(getCount() - 1)}
-        data-test-id="button-decrease"
+        data-testid="button-decrease"
       >
         -
       </button>
       <button
         disabled={hasNext}
         onClick={() => set(getCount() + 1)}
-        data-test-id="button-increase"
+        data-testid="button-increase"
       >
         +
       </button>
@@ -59,7 +59,7 @@ const ResetCountButton: React.FC = () => {
     <button
       onClick={() => reset(0)}
       style={{ width: "100%" }}
-      data-test-id="button-clear-history"
+      data-testid="button-clear-history"
     >
       Clear history stack
     </button>
@@ -70,7 +70,7 @@ const HistoryStack = () => {
   const { prev, curr, next } = useCountStore((state) => state);
 
   return (
-    <div data-test-id="history">
+    <div data-testid="history">
       <h3>History stack</h3>
       <table>
         <tbody>
