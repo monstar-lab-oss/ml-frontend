@@ -13,7 +13,7 @@ const setInitialEmployees = () => {
   ]);
 }
 
-setInitialEmployees()
+getItem("employee") ?? setInitialEmployees();
 
 const getEmployeeById = (id: Employee["id"]) =>
   (getItem("employee") as Employee[]).find((x) => x.id === id);
