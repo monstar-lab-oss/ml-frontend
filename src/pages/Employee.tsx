@@ -11,7 +11,9 @@ const Employee = () => {
         <Route path="/new">
           <EmployeeCreate />
         </Route>
-        <Route path="/:id">{({ id }) => <EmployeeUpdate id={id} />}</Route>
+        <Route path="/:id">
+          {({ id }) => (id ? <EmployeeUpdate id={id} /> : null)}
+        </Route>
       </Switch>
     </Router>
   );
