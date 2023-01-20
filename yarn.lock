@@ -5750,10 +5750,10 @@ word-wrap@^1.2.3, word-wrap@~1.2.3:
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
   integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
 
-wouter@2.9.1:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/wouter/-/wouter-2.9.1.tgz#2bca22f41b4d5d75ab35acfaafe5994e5b7fe728"
-  integrity sha512-U/lswPBP4kV62QIexZjGToDhB0ptl1vm8keYzvXEBoJguNoY/e821i/7lfe362f2ABpqdjlvXyi33DfeN77xdQ==
+wouter@2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/wouter/-/wouter-2.9.2.tgz#30cc995a99d9cbdd08a965b5a3ebc0a65811b3be"
+  integrity sha512-OOqhotZYHt/urnKyv8TIxs8D/9h/2dsPdHhM4kKJ2KMbcEIessKUPOTTJ2aSgV+LDoJYlCYV3tT7h+67GYXE3w==
 
 wrap-ansi@^7.0.0:
   version "7.0.0"
