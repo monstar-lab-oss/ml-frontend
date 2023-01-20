@@ -5,6 +5,7 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
-    "turbo": "1.7.0"
+    "turbo": "1.7.0",
+    "eslint-config-custom": "workspace:*"
   }
 }
