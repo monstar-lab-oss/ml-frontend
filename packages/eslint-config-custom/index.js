@@ -1,4 +1,8 @@
 module.exports = {
-  extends: ["eslint:recommended"],
-  rules: {},
+  extends: ["turbo"],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
 };
