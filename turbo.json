@@ -3,6 +3,7 @@
   "pipeline": {
     "type": {},
     "lint": {},
+    "test": {},
     "dev": {
       "cache": false
     }

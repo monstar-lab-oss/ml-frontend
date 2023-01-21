@@ -5,6 +5,7 @@ import meow from "meow";
 const help = `
   Usage:
     $ npx create-codes [<dir>] [<lib>] [flags...]
+
   Flags:
     --help, -h          Show this help message
     --version, -v       Show the version of this script
