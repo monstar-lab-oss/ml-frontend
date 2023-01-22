@@ -25,11 +25,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install Playwright
-        run: npx playwright install
-
       - name: Lint
         run: pnpm lint
 
       - name: Type check
         run: pnpm type
+
+      - name: Test
+        run: pnpm test
