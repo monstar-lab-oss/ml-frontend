@@ -4,6 +4,10 @@
   "bin": {
     "create-codes": "dist/index.js"
   },
+  "files": [
+    "dist",
+    "templates"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "vitest run"

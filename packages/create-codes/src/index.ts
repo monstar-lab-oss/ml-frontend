@@ -18,8 +18,8 @@ Please specify the directory:
   npx create-codes <directory>
 `;
 
-// TODO: Must be directly under create-codes pacakge
-const TEMPLATE_DIR = path.resolve(__dirname, "../../../examples/react");
+const TEMPLATE_DIR = path.resolve(__dirname, "../templates/react");
+const TEMPLATE_SHARE_DIR = path.resolve(__dirname, "../templates/__shared");
 
 function run() {
   const { input } = meow(help, {
@@ -38,5 +38,12 @@ function run() {
     filter: (src) =>
       !["node_modules", "dist", "turbo"].includes(path.basename(src)),
   });
+  fse.copySync(TEMPLATE_SHARE_DIR, appDir);
+
+  // Rename dot files
+  fse.renameSync(
+    path.join(appDir, "gitignore"),
+    path.join(appDir, ".gitignore")
+  );
 }
 run();
