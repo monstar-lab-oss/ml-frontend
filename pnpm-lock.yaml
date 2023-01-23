@@ -12,10 +12,12 @@ importers:
 
   packages/create-codes:
     specifiers:
+      '@types/concat-stream': 2.0.0
       '@types/fs-extra': 11.0.1
       '@types/inquirer': 9.0.3
       '@types/node': 18.11.18
       chalk: 4.1.2
+      concat-stream: 2.0.0
       fs-extra: 11.1.0
       inquirer: 8.2.3
       meow: 7.1.1
@@ -29,9 +31,11 @@ importers:
       inquirer: 8.2.3
       meow: 7.1.1
     devDependencies:
+      '@types/concat-stream': 2.0.0
       '@types/fs-extra': 11.0.1
       '@types/inquirer': 9.0.3
       '@types/node': 18.11.18
+      concat-stream: 2.0.0
       tsconfig: link:../tsconfig
       tsup: 6.5.0_typescript@4.9.4
       typescript: 4.9.4
@@ -2144,6 +2148,12 @@ packages:
     resolution: {integrity: sha512-KnRanxnpfpjUTqTCXslZSEdLfXExwgNxYPdiO2WGUj8+HDjFi8R3k5RVKPeSCzLjCcshCAtVO2QBbVuAV4kTnw==}
     dev: true
 
+  /@types/concat-stream/2.0.0:
+    resolution: {integrity: sha512-t3YCerNM7NTVjLuICZo5gYAXYoDvpuuTceCcFQWcDQz26kxUR5uIWolxbIR5jRNIXpMqhOpW/b8imCR1LEmuJw==}
+    dependencies:
+      '@types/node': 18.11.18
+    dev: true
+
   /@types/cookie/0.4.1:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
     dev: true
@@ -3171,6 +3181,16 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+
+  /concat-stream/2.0.0:
+    resolution: {integrity: sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==}
+    engines: {'0': node >= 6.0}
+    dependencies:
+      buffer-from: 1.1.2
+      inherits: 2.0.4
+      readable-stream: 3.6.0
+      typedarray: 0.0.6
+    dev: true
 
   /constate/3.3.2_react@18.2.0:
     resolution: {integrity: sha512-ZnEWiwU6QUTil41D5EGpA7pbqAPGvnR9kBjko8DzVIxpC60mdNKrP568tT5WLJPAxAOtJqJw60+h79ot/Uz1+Q==}
@@ -6837,6 +6857,10 @@ packages:
       call-bind: 1.0.2
       for-each: 0.3.3
       is-typed-array: 1.1.10
+    dev: true
+
+  /typedarray/0.0.6:
+    resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
   /typescript/4.9.4:
