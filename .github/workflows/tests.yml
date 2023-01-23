@@ -36,7 +36,7 @@ jobs:
         # Install Playwright if pnpm.lock.yaml changed
       - name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: ./node_modules/.bin/playwright install
+        run: npx playwright install-deps chromium
 
       - name: Lint
         run: pnpm lint
