@@ -2,7 +2,8 @@
   "name": "e2e-testing",
   "private": true,
   "scripts": {
-    "e2e:dev": "playwright test"
+    "e2e:dev": "playwright test",
+    "e2e": "start-server-and-test \"(cd ../.. && ./node_modules/.bin/turbo run preview --filter=reactjs-boilerplate)\" \"3000\" \"playwright test\""
   },
   "dependencies": {
     "@playwright/test": "1.29.2"
