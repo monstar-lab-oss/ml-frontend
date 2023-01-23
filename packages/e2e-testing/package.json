@@ -1,0 +1,17 @@
+{
+  "name": "e2e-testing",
+  "private": true,
+  "scripts": {
+    "e2e:dev": "playwright test"
+  },
+  "dependencies": {
+    "@playwright/test": "1.29.2"
+  },
+  "devDependencies": {
+    "start-server-and-test": "1.15.2",
+    "reactjs-boilerplate": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "4.9.4",
+    "@types/node": "18.11.18"
+  }
+}
