@@ -51,9 +51,11 @@ importers:
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 13.4.0
       '@testing-library/user-event': 14.4.3
+      '@types/jest': 29.2.6
       '@types/node': 18.11.18
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
+      '@types/testing-library__jest-dom': 5.14.5
       '@typescript-eslint/eslint-plugin': 5.48.2
       '@typescript-eslint/parser': 5.48.2
       '@vitejs/plugin-react': 3.0.1
@@ -97,9 +99,11 @@ importers:
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       '@testing-library/user-event': 14.4.3_yxlyej73nftwmh2fiao7paxmlm
+      '@types/jest': 29.2.6
       '@types/node': 18.11.18
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
+      '@types/testing-library__jest-dom': 5.14.5
       '@typescript-eslint/eslint-plugin': 5.48.2_z274t7mj3d3d3lkbtjv4yganzm
       '@typescript-eslint/parser': 5.48.2_iukboom6ndih5an6iafl45j2fe
       '@vitejs/plugin-react': 3.0.1_vite@4.0.4
