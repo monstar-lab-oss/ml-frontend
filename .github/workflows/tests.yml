@@ -25,11 +25,27 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # Create cache for Playwright installation
+      - name: Restore Playwright Installation Cache
+        id: playwright-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm.lock.yaml') }}
+
+        # Install Playwright if pnpm.lock.yaml changed
+      - name: Install Playwright
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install-deps chromium
+
       - name: Lint
         run: pnpm lint
 
       - name: Type check
         run: pnpm type
 
-      - name: Test
+      - name: Unit Test
         run: pnpm test
+
+      - name: Run E2E test
+        run: pnpm e2e

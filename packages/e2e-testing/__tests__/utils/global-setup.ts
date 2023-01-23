@@ -15,7 +15,7 @@ const globalSetup = async (_config: FullConfig) => {
   // Save signed-in state to 'storageState.json'.
   await page
     .context()
-    .storageState({ path: "./tests/e2e/utils/storageState.json" });
+    .storageState({ path: "./__tests__/utils/storageState.json" });
   await browser.close();
 };
 

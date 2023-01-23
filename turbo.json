@@ -1,9 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["CI"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"]
     },
+    "build:e2e": {},
+    "preview": {
+      "dependsOn": ["build:e2e"]
+    },
+    "e2e": {},
     "type": {},
     "lint": {},
     "test": {},

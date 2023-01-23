@@ -50,7 +50,7 @@ async function run() {
 
   fse.copySync(TEMPLATE_DIR, appDir, {
     filter: (src) =>
-      !["node_modules", "dist", "turbo"].includes(path.basename(src)),
+      !["node_modules", "dist", ".turbo"].includes(path.basename(src)),
   });
   fse.copySync(TEMPLATE_SHARE_DIR, appDir);
 

@@ -58,7 +58,6 @@ describe("create-codes cli", () => {
         "index.html",
         "jest-setup.ts",
         "package.json",
-        "playwright.config.ts",
         "public",
         "src",
         "tests",

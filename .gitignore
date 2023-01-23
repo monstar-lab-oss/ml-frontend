@@ -11,3 +11,6 @@ build
 # misc
 .DS_Store
 *.pem
+
+# e2e storage state
+packages/e2e-testing/__tests__/utils/storageState.json
