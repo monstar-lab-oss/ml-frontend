@@ -46,7 +46,7 @@ describe("create-codes cli", () => {
 
   describe("install react boilerplate to specify dir", () => {
     test("install", async () => {
-      await exe("node", [createCodes, testDir]);
+      await exe("node", [createCodes, testDir], { cwd });
 
       const expectDirs = [
         ".env.template",
@@ -67,7 +67,9 @@ describe("create-codes cli", () => {
         "yarn.lock",
       ];
 
-      expect(fse.readdirSync(testDir)).toStrictEqual(expectDirs);
+      expect(fse.readdirSync(path.resolve(cwd, testDir))).toStrictEqual(
+        expectDirs
+      );
     });
   });
 
