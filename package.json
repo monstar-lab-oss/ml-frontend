@@ -2,7 +2,7 @@
   "name": "create-codes",
   "version": "0.0.0",
   "scripts": {
-    "test": "turbo run build test --filter=!reactjs-boilerplate",
+    "test": "turbo run build --filter=create-codes test --filter=create-codes",
     "type": "turbo run type --filter=!reactjs-boilerplate",
     "lint": "turbo run lint --filter=!reactjs-boilerplate"
   },
