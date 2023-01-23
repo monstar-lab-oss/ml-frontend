@@ -52,7 +52,6 @@ describe("create-codes cli", () => {
         ".env.template",
         ".eslintrc.js",
         ".gitignore",
-        ".npmrc",
         "README.md",
         "__mocks__",
         "babel.config.js",
