@@ -1,37 +1,12 @@
 import { EmployeeForm } from "./EmployeeForm";
-import { http } from "@/utils/http";
-import { Employee as Payload } from "../types/employee";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useLocation } from "wouter";
+import { useGetEmployeeQuery } from "../hooks/useGetEmployeeQuery";
+import { useRemoveEmployeeMutation } from "../hooks/useRemoveEmployeeMutation";
+import { useUpdateEmployeeMutation } from "../hooks/useUpdateEmployeeMutation";
 
 type Props = { id: string };
 
-const useGetEmployeeQuery = (id: string) =>
-  useQuery({
-    queryKey: ["employee", id],
-    queryFn: () => http.get<Payload>(`/employee/${id}`),
-  });
-
-const updateEmployee = async (payload: Payload) => {
-  const { id, ...body } = payload;
-  const response = await http.put<{ message: string }>(`/employee/${id}`, body);
-  return response;
-};
-
-const removeEmployee = async (id: Payload["id"]) => {
-  const response = await http.delete<{ message: string }>(`/employee/${id}`);
-  return response;
-};
-
 const RemoveButton = ({ id }: { id: string }) => {
-  const [, setLocation] = useLocation();
-  const { mutate } = useMutation(removeEmployee, {
-    onSuccess: ({ message }) => {
-      alert(message);
-      setLocation("/");
-    },
-    onError: (error) => alert(error),
-  });
+  const mutate = useRemoveEmployeeMutation();
 
   return (
     <button onClick={() => mutate(id)} data-testid="button-remove">
@@ -42,11 +17,7 @@ const RemoveButton = ({ id }: { id: string }) => {
 
 export const EmployeeUpdate = ({ id }: Props) => {
   const { isLoading, data, isError } = useGetEmployeeQuery(id);
-
-  const { mutateAsync } = useMutation(updateEmployee, {
-    onSuccess: ({ message }) => alert(message),
-    onError: (error) => alert(error),
-  });
+  const mutateAsync = useUpdateEmployeeMutation();
 
   if (isLoading) return <>Loading...</>;
   if (isError) return <>Failed to fetch</>;
