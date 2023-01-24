@@ -1,4 +1,4 @@
-import { SharedStateCount } from "@/modules/count";
+import { SharedStateCount } from "@/modules/local-context-count";
 
 export default function SharedStateCountPage() {
   return (
