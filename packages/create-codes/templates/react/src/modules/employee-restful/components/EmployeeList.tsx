@@ -9,7 +9,7 @@ const useGetEmployeeListQuery = () =>
     queryFn: () => http.get<Employee[]>("/employee"),
   });
 
-const EmployeeList = () => {
+export const EmployeeList = () => {
   const { isLoading, data, isFetched, isError } = useGetEmployeeListQuery();
 
   return (
@@ -45,4 +45,3 @@ const EmployeeList = () => {
     </>
   );
 };
-export default EmployeeList;

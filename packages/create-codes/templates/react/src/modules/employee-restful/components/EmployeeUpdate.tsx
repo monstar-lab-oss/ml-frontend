@@ -1,4 +1,4 @@
-import { EmployeeForm } from "@/components/organisms/EmployeeForm";
+import { EmployeeForm } from "./EmployeeForm";
 import { http } from "@/utils/http";
 import { Employee as Payload } from "@/types/employee";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -40,7 +40,7 @@ const RemoveButton = ({ id }: { id: string }) => {
   );
 };
 
-const EmployeeUpdate = ({ id }: Props) => {
+export const EmployeeUpdate = ({ id }: Props) => {
   const { isLoading, data, isError } = useGetEmployeeQuery(id);
 
   const { mutateAsync } = useMutation(updateEmployee, {
@@ -65,4 +65,3 @@ const EmployeeUpdate = ({ id }: Props) => {
     <>No Employee Found</>
   );
 };
-export default EmployeeUpdate;

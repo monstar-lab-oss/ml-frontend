@@ -1,4 +1,4 @@
-import { EmployeeForm } from "@/components/organisms/EmployeeForm";
+import { EmployeeForm } from "./EmployeeForm";
 import { http } from "@/utils/http";
 import { Employee } from "@/types/employee";
 import { useMutation } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ const createEmployee = async (payload: Payload) => {
   return response;
 };
 
-const EmployeeCreate = () => {
+export const EmployeeCreate = () => {
   const [, setLocation] = useLocation();
   const { mutateAsync, isSuccess } = useMutation(createEmployee, {
     onSuccess: ({ message }) => {
@@ -28,4 +28,3 @@ const EmployeeCreate = () => {
     </>
   );
 };
-export default EmployeeCreate;
