@@ -1,6 +1,6 @@
 import { EmployeeForm } from "./EmployeeForm";
 import { http } from "@/utils/http";
-import { Employee } from "@/types/employee";
+import { Employee } from "../types/employee";
 import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 
