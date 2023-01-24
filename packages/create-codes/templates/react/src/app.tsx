@@ -1,8 +1,11 @@
-import { Routes } from "@/routes";
+import { Suspense } from "react";
 import { AppProviders } from "@/context";
+import Routes from "@/routes";
 
 export const App = () => (
-  <AppProviders>
-    <Routes />
-  </AppProviders>
+  <Suspense fallback={<div>Loading...</div>}>
+    <AppProviders>
+      <Routes />
+    </AppProviders>
+  </Suspense>
 );
