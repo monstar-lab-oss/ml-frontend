@@ -18,6 +18,7 @@ test.afterAll(async () => {
 
 test.describe("Employee page", () => {
   test("Reading employee", async () => {
+    await expect(page.getByTestId("employee-list-title")).toBeVisible();
     expect(
       await page.getByRole("table").getByRole("row").allTextContents()
     ).toStrictEqual([
@@ -34,7 +35,7 @@ test.describe("Employee page", () => {
   test("Creating employee", async () => {
     await page.locator("text=/Create new employee/i").click();
     await expect(page).toHaveURL(/.*new/);
-
+    await expect(page.getByTestId("employee-create-title")).toBeVisible();
     await page.locator("data-testid=input-name").fill("foobar");
 
     await Promise.all([
@@ -59,6 +60,7 @@ test.describe("Employee page", () => {
 
     // Render Input Element with employee name
     await targetEmployeeIdLink.click();
+    await expect(page.getByTestId("employee-update-title")).toBeVisible();
     await expect(nameInput).toBeVisible();
     await expect(await nameInput.inputValue()).toBe(oldName);
 
