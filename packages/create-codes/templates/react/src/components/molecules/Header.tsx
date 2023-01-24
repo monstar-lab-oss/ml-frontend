@@ -1,4 +1,4 @@
-import { useAuth as _useAuth } from "@/hooks/useAuth";
+import { useAuth as _useAuth } from "@/modules/authentication";
 import { Link } from "wouter";
 
 type Props = {
