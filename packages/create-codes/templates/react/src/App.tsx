@@ -1,15 +1,8 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes } from "@/routes";
-import { AuthProvider } from "@/hooks/useAuth";
-import { CounterProvider } from "@/hooks/useCounter";
+import { AppProviders } from "@/context";
 
-const queryClient = new QueryClient();
 export const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <CounterProvider initialCount={10}>
-        <Routes />
-      </CounterProvider>
-    </AuthProvider>
-  </QueryClientProvider>
+  <AppProviders>
+    <Routes />
+  </AppProviders>
 );
