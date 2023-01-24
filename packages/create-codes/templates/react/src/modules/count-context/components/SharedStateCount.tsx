@@ -1,5 +1,5 @@
 import { Button } from "@/components/atoms/Button";
-import { useCount, useIncrement } from "../hooks/useCounter";
+import { useCount, useIncrement } from "../context/useCounter";
 
 const Count = () => {
   // Use the state context in other components

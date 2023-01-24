@@ -1,2 +1,2 @@
-export * from "./hooks/useCounter";
+export * from "./context/useCounter";
 export * from "./components/SharedStateCount";

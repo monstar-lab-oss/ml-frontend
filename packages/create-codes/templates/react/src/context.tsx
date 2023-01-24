@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/modules/authentication";
-import { CounterProvider } from "@/modules/local-context-count";
+import { CounterProvider } from "@/modules/count-context";
 
 export const AppProviders = ({ children }: PropsWithChildren) => (
   <>
