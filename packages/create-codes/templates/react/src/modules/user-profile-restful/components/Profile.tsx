@@ -1,24 +1,11 @@
 import { useEffect, useMemo } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { http } from "@/utils/http";
-import { User } from "@/types/user";
+import { User } from "../types/user";
+import { useGetUserQuery } from "../hooks/useGetUserQuery";
+import { useUpdateUserMutation } from "../hooks/useUpdateUserMutation";
 
-const useGetUserQuery = ({ id }: { id: string }) =>
-  useQuery({
-    queryKey: ["user"],
-    queryFn: () => http.get<User>(`/user/${id}`),
-  });
-
-const updateUser = async (payload: User) => {
-  const response = await http.post<{ message: string }>(`/user/1`, payload);
-  return response;
-};
-
-const Profile = () => {
-  const { isLoading, data, isFetched, isError } = useGetUserQuery({
-    id: "1",
-  });
+export const Profile = () => {
+  const { isLoading, data, isFetched, isError } = useGetUserQuery({ id: "1" });
 
   useEffect(() => {
     if (isFetched) reset(data);
@@ -34,10 +21,7 @@ const Profile = () => {
     defaultValues: useMemo(() => data || {}, [data]),
   });
 
-  const { mutateAsync } = useMutation(updateUser, {
-    onSuccess: ({ message }) => alert(message),
-    onError: (error) => alert(error),
-  });
+  const mutateAsync = useUpdateUserMutation();
 
   const onSubmit = (data: User) => mutateAsync(data);
 
@@ -102,4 +86,3 @@ const Profile = () => {
     </>
   );
 };
-export default Profile;
