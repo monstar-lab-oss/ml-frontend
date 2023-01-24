@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { useI18next } from "@/i18next";
-import { App } from "@/App";
+import { App } from "@/app";
 import "./main.scss";
 
 const prepare = async (): Promise<void> => {
