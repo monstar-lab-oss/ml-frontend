@@ -5,7 +5,7 @@ import { useUpdateEmployeeMutation } from "../hooks/useUpdateEmployeeMutation";
 
 type Props = { id: string };
 
-const RemoveButton = ({ id }: { id: string }) => {
+const EmployeeRemoveButton = ({ id }: { id: string }) => {
   const mutate = useRemoveEmployeeMutation();
 
   return (
@@ -28,7 +28,7 @@ export const EmployeeUpdate = ({ id }: Props) => {
         style={{ display: "flex", justifyContent: "space-between" }}
         data-testid="employee-update-title"
       >
-        {data.name} <RemoveButton id={id} />
+        {data.name} <EmployeeRemoveButton id={id} />
       </h3>
       <EmployeeForm values={data} onUpdate={mutateAsync} />
     </>
