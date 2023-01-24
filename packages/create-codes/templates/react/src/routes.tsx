@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { Route, Redirect, Switch } from "wouter";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/modules/authentication";
 import { HeaderLayout } from "@/components/layouts/HeaderLayout";
 import { BlankLayout } from "@/components/layouts/BlankLayout";
 

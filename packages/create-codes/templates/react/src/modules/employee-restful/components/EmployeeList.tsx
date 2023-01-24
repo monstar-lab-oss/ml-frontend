@@ -1,15 +1,7 @@
-import { http } from "@/utils/http";
 import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
-import { Employee } from "@/types/employee";
+import { useGetEmployeeListQuery } from "../hooks/useGetEmployeeListQuery";
 
-const useGetEmployeeListQuery = () =>
-  useQuery({
-    queryKey: ["userList"],
-    queryFn: () => http.get<Employee[]>("/employee"),
-  });
-
-const EmployeeList = () => {
+export const EmployeeList = () => {
   const { isLoading, data, isFetched, isError } = useGetEmployeeListQuery();
 
   return (
@@ -45,4 +37,3 @@ const EmployeeList = () => {
     </>
   );
 };
-export default EmployeeList;

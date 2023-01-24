@@ -1,4 +1,4 @@
-import { Employee } from "@/types/employee";
+import { Employee } from "../types/employee";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -34,9 +34,11 @@ export const EmployeeForm = ({
 
   const onSubmit = async (data: Omit<Employee, "id">) => {
     try {
-      values ? await onUpdate({ id: values.id, ...data }) : await onCreate(data);
+      values
+        ? await onUpdate({ id: values.id, ...data })
+        : await onCreate(data);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   };
 
@@ -51,7 +53,10 @@ export const EmployeeForm = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name", { required: true })} data-testid="input-name" />
+        <input
+          {...register("name", { required: true })}
+          data-testid="input-name"
+        />
 
         {errors.name && <span>This field is required</span>}
 

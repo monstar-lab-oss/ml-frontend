@@ -1,17 +1,20 @@
 import { rest } from "../rest";
-import type { Employee } from "../../src/types/employee";
 import { getItem, setItem } from "../mockDatabase";
+
+type EmployeeId = string;
+
+type Employee = { id: EmployeeId; name: string };
 
 const createId = () => String(Math.floor(Date.now() * Math.random()));
 
 const setInitialEmployees = () => {
-  setItem('employee', [
-    { id: '1', name: "foo" },
-    { id: '2', name: "bar" },
-    { id: '3', name: "baz" },
-    { id: '4', name: "error employee" }, // Can not update or delete this user
+  setItem("employee", [
+    { id: "1", name: "foo" },
+    { id: "2", name: "bar" },
+    { id: "3", name: "baz" },
+    { id: "4", name: "error employee" }, // Can not update or delete this user
   ]);
-}
+};
 
 getItem("employee") ?? setInitialEmployees();
 
@@ -40,8 +43,8 @@ export const employee = [
     const employee = getEmployeeById(req.params.id as string);
     if (!employee) return res(ctx.status(400));
 
-    if (employee.id === '4') {
-      return res(ctx.status(500))
+    if (employee.id === "4") {
+      return res(ctx.status(500));
     }
 
     setItem("employee", [
@@ -56,8 +59,8 @@ export const employee = [
     const employee = getEmployeeById(req.params.id as string);
     if (!employee) return res(ctx.status(400));
 
-    if (employee.id === '4') {
-      return res(ctx.status(500))
+    if (employee.id === "4") {
+      return res(ctx.status(500));
     }
 
     setItem("employee", [
@@ -69,4 +72,4 @@ export const employee = [
   }),
 ];
 
-export const resetEmployeeDatabase = setInitialEmployees
+export const resetEmployeeDatabase = setInitialEmployees;

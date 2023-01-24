@@ -1,8 +1,7 @@
-import { EmployeeForm } from "@/components/organisms/EmployeeForm";
-import { http } from "@/utils/http";
-import { Employee } from "@/types/employee";
 import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
+import { http } from "@/utils/http";
+import { Employee } from "../types/employee";
 
 type Payload = Omit<Employee, "id">;
 
@@ -11,7 +10,7 @@ const createEmployee = async (payload: Payload) => {
   return response;
 };
 
-const EmployeeCreate = () => {
+export function useCreateEmployeeMutation() {
   const [, setLocation] = useLocation();
   const { mutateAsync, isSuccess } = useMutation(createEmployee, {
     onSuccess: ({ message }) => {
@@ -21,11 +20,5 @@ const EmployeeCreate = () => {
     onError: (error) => alert(error),
   });
 
-  return (
-    <>
-      <h3 data-testid="employee-create-title">Create Employee</h3>
-      <EmployeeForm onCreate={mutateAsync} isSuccess={isSuccess} />
-    </>
-  );
-};
-export default EmployeeCreate;
+  return { mutateAsync, isSuccess } as const;
+}

@@ -1,7 +1,9 @@
 import { Route, Router, Switch } from "wouter";
-import EmployeeList from "@/pages/EmployeeList";
-import EmployeeUpdate from "@/pages/EmployeeUpdate";
-import EmployeeCreate from "@/pages/EmployeeCreate";
+import {
+  EmployeeList,
+  EmployeeUpdate,
+  EmployeeCreate,
+} from "@/modules/employee-restful";
 
 const Employee = () => {
   return (
