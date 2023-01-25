@@ -54,7 +54,7 @@ async function run() {
   const TEMPLATE_DIR = path.resolve(__dirname, "_temp");
 
   const spinner = ora({
-    text: "Instal2l...",
+    text: "Instal3l...",
     spinner: {
       frames: ["   ", ">  ", ">> ", ">>>"],
     },
