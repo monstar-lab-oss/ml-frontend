@@ -33,7 +33,7 @@ describe("create-codes cli", () => {
   afterAll(() => cleanupTestDir());
 
   describe("install react boilerplate with cli", () => {
-    test.skip(
+    test(
       "interactively configure",
       async () => {
         const cli = spawn("node", [createCodes], { cwd });
@@ -44,7 +44,7 @@ describe("create-codes cli", () => {
         expect(results).toContain(`? Where would you like to create your app?`);
         expect(results).toContain(`Success! Created a new app at "my-test".`);
       },
-      1000 * 60 * 5
+      1000 * 60 * 10
     );
   });
 
