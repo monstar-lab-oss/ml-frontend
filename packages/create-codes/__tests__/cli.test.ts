@@ -33,15 +33,19 @@ describe("create-codes cli", () => {
   afterAll(() => cleanupTestDir());
 
   describe("install react boilerplate with cli", () => {
-    test("interactively configure", async () => {
-      const cli = spawn("node", [createCodes], { cwd });
-      const results = await exeInteractive(cli, [testDir, keys.ENTER]);
-
-      expect(results).toContain(`Create Codes`);
-      expect(results).toContain(`Welcome!`);
-      expect(results).toContain(`? Where would you like to create your app?`);
-      expect(results).toContain(`Success! Created a new app at "my-test".`);
-    });
+    test.only(
+      "interactively configure",
+      async () => {
+        const cli = spawn("node", [createCodes], { cwd });
+        const results = await exeInteractive(cli, [testDir, keys.ENTER]);
+        console.log("r", results);
+        expect(results).toContain(`Create Codes`);
+        expect(results).toContain(`Welcome!`);
+        expect(results).toContain(`? Where would you like to create your app?`);
+        expect(results).toContain(`Success! Created a new app at "my-test".`);
+      },
+      1000 * 30
+    );
   });
 
   describe("install react boilerplate to specify dir", () => {
@@ -49,21 +53,12 @@ describe("create-codes cli", () => {
       await exe("node", [createCodes, testDir], { cwd });
 
       const expectDirs = [
-        ".env.template",
-        ".eslintrc.js",
         ".gitignore",
-        "README.md",
-        "__mocks__",
-        "babel.config.js",
         "index.html",
-        "jest-setup.ts",
         "package.json",
-        "public",
         "src",
-        "tests",
         "tsconfig.json",
         "vite.config.ts",
-        "yarn.lock",
       ];
 
       expect(fse.readdirSync(path.resolve(cwd, testDir))).toStrictEqual(

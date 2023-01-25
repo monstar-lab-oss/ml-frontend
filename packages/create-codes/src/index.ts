@@ -4,6 +4,8 @@ import path from "node:path";
 import fse from "fs-extra";
 import meow from "meow";
 import inquirer from "inquirer";
+import degit from "degit";
+import ora from "ora";
 
 const help = `
 Create a new codes for front-end app
@@ -16,7 +18,6 @@ Create a new codes for front-end app
     --version, -v       Show the version of this script
 `;
 
-const TEMPLATE_DIR = path.resolve(__dirname, "../templates/react");
 const TEMPLATE_SHARE_DIR = path.resolve(__dirname, "../templates/__shared");
 
 async function run() {
@@ -48,10 +49,43 @@ async function run() {
         ).dir
   );
 
-  fse.copySync(TEMPLATE_DIR, appDir, {
-    filter: (src) =>
-      !["node_modules", "dist", ".turbo"].includes(path.basename(src)),
+  const libName = "solid-mini";
+
+  const TEMPLATE_DIR = path.resolve(__dirname, "_temp");
+
+  const spinner = ora({
+    text: "Instal2l...",
+    spinner: {
+      frames: ["   ", ">  ", ">> ", ">>>"],
+    },
+  }).start();
+
+  await new Promise((resolve, reject) => {
+    const config = {
+      user: "monstar-lab-oss",
+      repo: "reactjs-boilerplate",
+      dir: `examples/${libName}`,
+      ref: "sandbox/templates-to-root",
+    };
+
+    const emitter = degit(
+      `${config.user}/${config.repo}/${config.dir}#${config.ref}`,
+      {
+        cache: false,
+        force: true,
+        verbose: true,
+      }
+    );
+    emitter.on("warn", (err) => {
+      console.log("here");
+      reject(err);
+    });
+    emitter.clone(TEMPLATE_DIR).then(() => resolve({}));
   });
+
+  spinner.stop();
+
+  fse.copySync(TEMPLATE_DIR, appDir);
   fse.copySync(TEMPLATE_SHARE_DIR, appDir);
 
   // Rename dot files
