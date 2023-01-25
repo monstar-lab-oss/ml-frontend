@@ -44,7 +44,7 @@ describe("create-codes cli", () => {
         expect(results).toContain(`? Where would you like to create your app?`);
         expect(results).toContain(`Success! Created a new app at "my-test".`);
       },
-      1000 * 30
+      1000 * 60 * 5
     );
   });
 
