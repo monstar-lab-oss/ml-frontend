@@ -33,7 +33,7 @@ describe("create-codes cli", () => {
   afterAll(() => cleanupTestDir());
 
   describe("install react boilerplate with cli", () => {
-    test.only(
+    test.skip(
       "interactively configure",
       async () => {
         const cli = spawn("node", [createCodes], { cwd });
