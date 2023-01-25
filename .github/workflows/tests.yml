@@ -36,7 +36,7 @@ jobs:
         # Install Playwright if pnpm.lock.yaml changed
       - name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install
+        run: cd packages/e2e-testing && npx playwright install
 
       - name: Lint
         run: pnpm lint
