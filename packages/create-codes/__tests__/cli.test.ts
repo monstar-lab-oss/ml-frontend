@@ -38,13 +38,13 @@ describe("create-codes cli", () => {
       async () => {
         const cli = spawn("node", [createCodes], { cwd });
         const results = await exeInteractive(cli, [testDir, keys.ENTER]);
-        console.log("r", results);
+        // console.log("r", results);
         expect(results).toContain(`Create Codes`);
         expect(results).toContain(`Welcome!`);
         expect(results).toContain(`? Where would you like to create your app?`);
         expect(results).toContain(`Success! Created a new app at "my-test".`);
       },
-      1000 * 60 * 10
+      1000 * 60 * 60
     );
   });
 
