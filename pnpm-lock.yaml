@@ -92,11 +92,13 @@ importers:
   packages/create-codes:
     specifiers:
       '@types/concat-stream': 2.0.0
+      '@types/degit': 2.8.3
       '@types/fs-extra': 11.0.1
       '@types/inquirer': 9.0.3
       '@types/node': 18.11.18
       chalk: 4.1.2
       concat-stream: 2.0.0
+      degit: 2.8.4
       fs-extra: 11.1.0
       inquirer: 8.2.3
       meow: 7.1.1
@@ -106,11 +108,13 @@ importers:
       vitest: 0.27.2
     dependencies:
       chalk: 4.1.2
+      degit: 2.8.4
       fs-extra: 11.1.0
       inquirer: 8.2.3
       meow: 7.1.1
     devDependencies:
       '@types/concat-stream': 2.0.0
+      '@types/degit': 2.8.3
       '@types/fs-extra': 11.0.1
       '@types/inquirer': 9.0.3
       '@types/node': 18.11.18
@@ -2207,6 +2211,10 @@ packages:
       '@types/ms': 0.7.31
     dev: true
 
+  /@types/degit/2.8.3:
+    resolution: {integrity: sha512-CL7y71j2zaDmtPLD5Xq5S1Gv2dFoHl0/GBZm6s39Mj/ls28L3NzAOqf7H4H0/2TNVMgMjMVf9CAFYSjmXhi3bw==}
+    dev: true
+
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
@@ -3403,6 +3411,12 @@ packages:
       has-property-descriptors: 1.0.0
       object-keys: 1.1.1
     dev: true
+
+  /degit/2.8.4:
+    resolution: {integrity: sha512-vqYuzmSA5I50J882jd+AbAhQtgK6bdKUJIex1JNfEUPENCgYsxugzKVZlFyMwV4i06MmnV47/Iqi5Io86zf3Ng==}
+    engines: {node: '>=8.0.0'}
+    hasBin: true
+    dev: false
 
   /delayed-stream/1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}

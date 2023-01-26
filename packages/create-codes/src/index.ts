@@ -4,6 +4,8 @@ import path from "node:path";
 import fse from "fs-extra";
 import meow from "meow";
 import inquirer from "inquirer";
+import degit from "degit";
+import { degitConfig } from "./constants";
 
 const help = `
 Create a new codes for front-end app
@@ -16,7 +18,6 @@ Create a new codes for front-end app
     --version, -v       Show the version of this script
 `;
 
-const TEMPLATE_DIR = path.resolve(__dirname, "../templates/react");
 const TEMPLATE_SHARE_DIR = path.resolve(__dirname, "../templates/__shared");
 
 async function run() {
@@ -48,10 +49,26 @@ async function run() {
         ).dir
   );
 
-  fse.copySync(TEMPLATE_DIR, appDir, {
-    filter: (src) =>
-      !["node_modules", "dist", ".turbo"].includes(path.basename(src)),
+  // Currently only the React is supported, but will be extended in the future.
+  const templateName = "react-standard";
+  const TEMPLATE_DIR = path.resolve(__dirname, "temp");
+
+  await new Promise((resolve, reject) => {
+    const { user, repo, examplesDir, ref } = degitConfig;
+
+    const emitter = degit(
+      `${user}/${repo}/${examplesDir}/${templateName}#${ref}`,
+      {
+        cache: false,
+        force: true,
+        verbose: true,
+      }
+    );
+    emitter.on("warn", (err) => reject(err));
+    emitter.clone(TEMPLATE_DIR).then(() => resolve({}));
   });
+
+  fse.copySync(TEMPLATE_DIR, appDir);
   fse.copySync(TEMPLATE_SHARE_DIR, appDir);
 
   // Rename dot files
