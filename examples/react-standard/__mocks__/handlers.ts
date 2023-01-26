@@ -4,4 +4,4 @@ import { login } from "./api/login";
 
 const handlers = [...login, ...user, ...employee];
 
-export default handlers
+export default handlers;

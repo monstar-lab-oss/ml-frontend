@@ -1,13 +1,13 @@
 import { setupServer } from "msw/node";
 import { resetEmployeeDatabase } from "./api/employee";
-import handlers from './handlers'
+import handlers from "./handlers";
 
-beforeAll(() => mockNodeServer.listen())
+beforeAll(() => mockNodeServer.listen());
 afterEach(() => {
-  mockNodeServer.resetHandlers()
+  mockNodeServer.resetHandlers();
 
-  resetEmployeeDatabase()
-})
-afterAll(() => mockNodeServer.close())
+  resetEmployeeDatabase();
+});
+afterAll(() => mockNodeServer.close());
 
-export const mockNodeServer = setupServer(...handlers)
+export const mockNodeServer = setupServer(...handlers);
