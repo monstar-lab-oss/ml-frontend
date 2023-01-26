@@ -3,5 +3,5 @@ export const degitConfig = {
   repo: "reactjs-boilerplate",
   examplesDir: "examples",
   // TODO: After v1.0.0 is published, it should be download from the `main` branch.
-  ref: "refactor/to-examples",
+  ref: "next-v1",
 };
