@@ -105,7 +105,7 @@ function cleanupTestDir() {
   fse.existsSync(installedTestDir) &&
     fse.rmSync(installedTestDir, { recursive: true });
 }
-
+// FIXME: Displaying loading in the process of cli execution cause test errors.
 function exeInteractive(
   cli: ChildProcessWithoutNullStreams,
   inputs: string[] = [],
