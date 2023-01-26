@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_TOKEN_KEY } from "@/constants/localStorage";
-import { getApiHost } from '@/utils/env'
+import { getApiHost } from "@/utils/env";
 
 const ENDPOINT = getApiHost() || "/api/v1";
 
@@ -23,7 +23,7 @@ const request = async <T>(url: string, opts?: RequestInit): Promise<T> => {
     const data: T = await response.json();
     return data;
   } catch (e) {
-    throw new HttpError('Server error') 
+    throw new HttpError("Server error");
   }
 };
 // FIXME: parameter used in hooks/useAuth.tsx may be wrong.
