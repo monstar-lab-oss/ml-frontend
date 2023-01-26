@@ -16,6 +16,6 @@
     "eslint-config-custom": "workspace:*"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,json,yaml,md}": "prettier --write"
+    "*": "prettier --ignore-unknown --write"
   }
 }
