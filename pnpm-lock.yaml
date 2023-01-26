@@ -10,38 +10,7 @@ importers:
       eslint-config-custom: link:packages/eslint-config-custom
       turbo: 1.7.0
 
-  packages/create-codes:
-    specifiers:
-      '@types/concat-stream': 2.0.0
-      '@types/fs-extra': 11.0.1
-      '@types/inquirer': 9.0.3
-      '@types/node': 18.11.18
-      chalk: 4.1.2
-      concat-stream: 2.0.0
-      fs-extra: 11.1.0
-      inquirer: 8.2.3
-      meow: 7.1.1
-      tsconfig: workspace:*
-      tsup: 6.5.0
-      typescript: 4.9.4
-      vitest: 0.27.2
-    dependencies:
-      chalk: 4.1.2
-      fs-extra: 11.1.0
-      inquirer: 8.2.3
-      meow: 7.1.1
-    devDependencies:
-      '@types/concat-stream': 2.0.0
-      '@types/fs-extra': 11.0.1
-      '@types/inquirer': 9.0.3
-      '@types/node': 18.11.18
-      concat-stream: 2.0.0
-      tsconfig: link:../tsconfig
-      tsup: 6.5.0_typescript@4.9.4
-      typescript: 4.9.4
-      vitest: 0.27.2
-
-  packages/create-codes/templates/react:
+  examples/react-standard:
     specifiers:
       '@babel/core': 7.20.12
       '@babel/preset-env': 7.20.2
@@ -120,6 +89,37 @@ importers:
       vite: 4.0.4_ovmyjmuuyckt3r3gpaexj2onji
       whatwg-fetch: 3.6.2
 
+  packages/create-codes:
+    specifiers:
+      '@types/concat-stream': 2.0.0
+      '@types/fs-extra': 11.0.1
+      '@types/inquirer': 9.0.3
+      '@types/node': 18.11.18
+      chalk: 4.1.2
+      concat-stream: 2.0.0
+      fs-extra: 11.1.0
+      inquirer: 8.2.3
+      meow: 7.1.1
+      tsconfig: workspace:*
+      tsup: 6.5.0
+      typescript: 4.9.4
+      vitest: 0.27.2
+    dependencies:
+      chalk: 4.1.2
+      fs-extra: 11.1.0
+      inquirer: 8.2.3
+      meow: 7.1.1
+    devDependencies:
+      '@types/concat-stream': 2.0.0
+      '@types/fs-extra': 11.0.1
+      '@types/inquirer': 9.0.3
+      '@types/node': 18.11.18
+      concat-stream: 2.0.0
+      tsconfig: link:../tsconfig
+      tsup: 6.5.0_typescript@4.9.4
+      typescript: 4.9.4
+      vitest: 0.27.2
+
   packages/e2e-testing:
     specifiers:
       '@playwright/test': 1.29.2
@@ -132,7 +132,7 @@ importers:
       '@playwright/test': 1.29.2
     devDependencies:
       '@types/node': 18.11.18
-      reactjs-boilerplate: link:../create-codes/templates/react
+      reactjs-boilerplate: link:../../examples/react-standard
       start-server-and-test: 1.15.2
       tsconfig: link:../tsconfig
       typescript: 4.9.4
