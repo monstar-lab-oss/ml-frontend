@@ -19,6 +19,13 @@ const config: PlaywrightTestConfig = {
         baseURL: "http://localhost:7100",
       },
     },
+    {
+      name: "solid-mini",
+      testDir: "__tests__/solid-mini",
+      use: {
+        baseURL: "http://localhost:7300",
+      },
+    },
   ],
 };
 
