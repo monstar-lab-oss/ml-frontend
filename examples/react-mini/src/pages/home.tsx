@@ -1,9 +1,9 @@
-import { ThemeToggleLogo } from "@/components/theme-toggle-logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
     <>
-      <ThemeToggleLogo name="React" />
+      <ThemeToggle name="React" />
     </>
   );
 }

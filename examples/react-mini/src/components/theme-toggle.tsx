@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import classes from "./theme-toggle-logo.module.css";
+import classes from "./theme-toggle.module.css";
 
 type Props = {
   name: string;
 };
-export function ThemeToggleLogo(props: Props) {
+export function ThemeToggle(props: Props) {
   const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
 
   const [isDarkMode, setIsDarkMode] = useState(matchMedia.matches);
@@ -26,11 +26,10 @@ export function ThemeToggleLogo(props: Props) {
 
   return (
     <div className={classes.wrapper}>
-      <h1 aria-label={props.name}>
-        <img src="logo.svg" role="button" onClick={toggle} alt={props.name} />
-        <span>{props.name}</span>
-      </h1>
-      <p>Click the icon to switch between light and dark mode</p>
+      <h1 aria-label={props.name}>Getting started with {props.name}</h1>
+      <button className={classes.button} role="button" onClick={toggle}>
+        Click to switch {isDarkMode ? "light" : "dark"} mode
+      </button>
     </div>
   );
 }
