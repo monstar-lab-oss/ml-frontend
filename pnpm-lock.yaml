@@ -20,6 +20,7 @@ importers:
     specifiers:
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
+      '@vitejs/plugin-react': 3.0.1
       react: 18.2.0
       react-dom: 18.2.0
       typescript: 4.9.4
@@ -33,6 +34,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
+      '@vitejs/plugin-react': 3.0.1_vite@4.0.4
       typescript: 4.9.4
       typescript-plugin-css-modules: 4.1.1_typescript@4.9.4
       vite: 4.0.4
@@ -2541,7 +2543,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.20.12
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.0.4_ovmyjmuuyckt3r3gpaexj2onji
+      vite: 4.0.4
     transitivePeerDependencies:
       - supports-color
     dev: true

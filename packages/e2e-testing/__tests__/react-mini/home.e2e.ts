@@ -1,14 +1,23 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("pages/home.tsx", () => {
-  test("Loads home page with text", async ({ page }) => {
-    await page.goto("/");
+test.beforeEach(async ({ page }) => {
+  await page.goto("/");
+});
 
-    expect(await page.waitForSelector("text=/\\React/")).toBeTruthy();
+test.describe("pages/home.tsx", () => {
+  test("Loads homepage", async ({ page }) => {
     expect(
-      await page.waitForSelector(
-        "text=/\\Click the icon to switch between light and dark mode/"
-      )
+      await page.waitForSelector("text=/\\Getting started with React/")
     ).toBeTruthy();
+  });
+
+  test("Toggle theme button works", async ({ page }) => {
+    const button = page.getByRole("button", {
+      name: /Click to switch (light|dark) mode/i,
+    });
+
+    expect(await button.textContent()).toBe("Click to switch dark mode");
+    await button.click();
+    expect(await button.textContent()).toBe("Click to switch light mode");
   });
 });
