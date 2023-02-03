@@ -1,0 +1,22 @@
+{
+  "name": "@examples/react-mini",
+  "private": true,
+  "scripts": {
+    "dev": "vite --port 7100",
+    "build": "tsc && vite build",
+    "start": "vite preview --port 7100"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "wouter": "2.9.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "@vitejs/plugin-react": "3.0.1",
+    "typescript": "4.9.4",
+    "typescript-plugin-css-modules": "4.1.1",
+    "vite": "4.0.4"
+  }
+}
