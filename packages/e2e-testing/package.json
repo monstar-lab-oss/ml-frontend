@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "e2e:dev": "playwright test",
-    "e2e": "start-server-and-test \"(cd ../.. && ./node_modules/.bin/turbo run preview --filter=reactjs-boilerplate)\" \"3000\" \"playwright test\""
+    "e2e": "start-server-and-test \"(cd ../.. && ./node_modules/.bin/turbo run preview --filter=reactjs-boilerplate)\" \"3000\" \"playwright test\"",
+    "e2e:mini": "start-server-and-test \"(cd ../.. && ./node_modules/.bin/turbo run start --filter=@examples/*)\" \"7100\" \"playwright test --config ./playwright.mini.config.ts\""
   },
   "dependencies": {
     "@playwright/test": "1.29.2"

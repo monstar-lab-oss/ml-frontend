@@ -3,5 +3,5 @@
   "compilerOptions": {
     "rootDir": "."
   },
-  "include": ["playwright.config.ts", "__tests__"]
+  "include": ["playwright.config.ts", "playwright.mini.config.ts", "__tests__"]
 }
