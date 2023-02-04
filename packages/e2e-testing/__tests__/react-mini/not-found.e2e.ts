@@ -1,5 +1,8 @@
 import { test, expect } from "@playwright/test";
 
+test.beforeEach(async ({ page }) => {
+  await page.goto("/");
+});
 test.describe("pages/not-found.tsx", () => {
   test("Loads 404 page with text", async ({ page }) => {
     await page.goto("/not-found");

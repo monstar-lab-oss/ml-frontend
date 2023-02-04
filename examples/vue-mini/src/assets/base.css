@@ -45,8 +45,3 @@ h6 {
 #__next {
   isolation: isolate;
 }
-
-/* Fonts used in the app */
-:root {
-  font-family: system-ui, Helvetica, Arial, sans-serif;
-}
