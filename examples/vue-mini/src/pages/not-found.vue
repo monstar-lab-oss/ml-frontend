@@ -1,6 +1,4 @@
-<script lang="ts" setup>
-import { reactive } from "vue";
-
+<script setup lang="ts">
 const style = {
   display: "grid",
   placeContent: "center",

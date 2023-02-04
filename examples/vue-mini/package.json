@@ -2,9 +2,9 @@
   "name": "@examples/vue-mini",
   "private": true,
   "scripts": {
-    "dev": "vite --port 7110",
-    "build": "tsc && vite build",
-    "start": "vite preview --port 7110"
+    "dev": "vite --port 7200",
+    "build": "vue-tsc && vite build",
+    "start": "vite preview --port 7200"
   },
   "dependencies": {
     "vue": "3.2.45",

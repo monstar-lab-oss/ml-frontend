@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ThemeToggleLogo from "@/components/theme-toggle-logo.vue";
+import ThemeToggle from "@/components/theme-toggle.vue";
 </script>
 
 <template>
-  <ThemeToggleLogo name="Vue" />
+  <ThemeToggle name="Vue" />
 </template>
