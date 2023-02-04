@@ -1,0 +1,22 @@
+{
+  "name": "@examples/nextjs-mini",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 7400",
+    "build": "next build",
+    "start": "next start --port 7400",
+    "test:type": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "13.1.6",
+    "@next/font": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10"
+  }
+}

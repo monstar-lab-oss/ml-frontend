@@ -33,6 +33,13 @@ const config: PlaywrightTestConfig = {
         baseURL: "http://localhost:7300",
       },
     },
+    {
+      name: "nextjs-mini",
+      testDir: "__tests__/nextjs-mini",
+      use: {
+        baseURL: "http://localhost:7400",
+      },
+    },
   ],
 };
 
