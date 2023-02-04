@@ -20,6 +20,13 @@ const config: PlaywrightTestConfig = {
       },
     },
     {
+      name: "vue-mini",
+      testDir: "__tests__/vue-mini",
+      use: {
+        baseURL: "http://localhost:7200",
+      },
+    },
+    {
       name: "solid-mini",
       testDir: "__tests__/solid-mini",
       use: {
