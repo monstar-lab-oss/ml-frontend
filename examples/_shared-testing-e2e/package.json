@@ -1,0 +1,15 @@
+{
+  "name": "@shared-testing/e2e",
+  "scripts": {
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@playwright/test": "1.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.19",
+    "tsconfig": "workspace:*",
+    "typescript": "4.9.5",
+    "vite": "4.1.1"
+  }
+}
