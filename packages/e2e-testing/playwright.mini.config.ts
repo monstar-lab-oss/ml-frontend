@@ -27,13 +27,6 @@ const config: PlaywrightTestConfig = {
       },
     },
     {
-      name: "solid-mini",
-      testDir: "__tests__/solid-mini",
-      use: {
-        baseURL: "http://localhost:7300",
-      },
-    },
-    {
       name: "nextjs-mini",
       testDir: "__tests__/nextjs-mini",
       use: {

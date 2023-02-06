@@ -45,11 +45,3 @@ h6 {
 #__next {
   isolation: isolate;
 }
-
-/*
-  Create Codes Custom CSS
-  
-*/
-:root {
-  font-family: system-ui, Helvetica, Arial, sans-serif;
-}
