@@ -15,3 +15,6 @@ build
 
 # e2e storage state
 packages/e2e-testing/__tests__/utils/storageState.json
+
+# storybook
+storybook-static
