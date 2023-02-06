@@ -1,0 +1,8 @@
+{
+  "name": "mock-server",
+  "main": "./server.ts",
+  "types": "./server.ts",
+  "dependencies": {
+    "msw": "1.0.0"
+  }
+}
