@@ -54,7 +54,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.43.0",
     "react-i18next": "12.1.5",
-    "wouter": "2.9.2",
+    "wouter": "2.10.0",
     "zustand": "4.3.2"
   },
   "msw": {
