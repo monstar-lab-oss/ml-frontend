@@ -45,7 +45,7 @@ jobs:
         run: pnpm type
 
       - name: Unit Test
-        run: pnpm test:module
+        run: pnpm test:modules
 
       - name: CLI Test
         run: pnpm test:cli
