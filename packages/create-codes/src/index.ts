@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
+import os from "node:os";
 import path from "node:path";
 import fse from "fs-extra";
 import meow from "meow";
 import inquirer from "inquirer";
 import degit from "degit";
-import { degitConfig } from "./constants";
+import { degitConfig, eslintPackages } from "./constants";
 
 const help = `
 Create a new codes for front-end app
@@ -177,7 +178,6 @@ async function run() {
     ])
   ).hasE2ETesting;
 
-  // TODO:
   const HasLint = (
     await inquirer.prompt<{ hasLint?: boolean }>([
       {
@@ -269,6 +269,19 @@ async function run() {
         return !exclude.includes(path.basename(src));
       },
     });
+  }
+
+  if (!HasLint) {
+    fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
+
+    const packageJson = path.resolve(appDir, "package.json");
+    const packageObj = fse.readJsonSync(packageJson);
+
+    Object.keys(packageObj.devDependencies).forEach((key) => {
+      eslintPackages.includes(key) && delete packageObj.devDependencies[key];
+    });
+
+    fse.writeJsonSync(packageJson, packageObj, { spaces: 2, EOL: os.EOL });
   }
 
   // Copy commons
