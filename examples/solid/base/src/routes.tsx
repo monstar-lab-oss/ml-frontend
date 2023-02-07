@@ -1,5 +1,5 @@
 import { Routes, Route } from "@solidjs/router";
-import { lazy, JSXElement } from "solid-js";
+import { lazy, JSXElement, children } from "solid-js";
 import { Layout } from "@/ui/pages/layout";
 
 const Home = lazy(() => import("@/ui/pages/index"));
@@ -9,8 +9,8 @@ const NotFound = lazy(() => import("@/ui/pages/not-found"));
 type Props = {
   children: JSXElement;
 };
-function WithLayout({ children }: Props) {
-  return <Layout>{children}</Layout>;
+function WithLayout(props: Props) {
+  return <Layout>{children(() => props.children)}</Layout>;
 }
 
 const routes = () => {

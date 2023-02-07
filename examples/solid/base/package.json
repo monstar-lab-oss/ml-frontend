@@ -5,7 +5,8 @@
     "dev": "vite --port 3000",
     "build": "vite build",
     "start": "vite preview --port 3000",
-    "type": "tsc --noEmit"
+    "type": "tsc --noEmit",
+    "lint": "eslint . --ext .js,jsx,.ts,.tsx"
   },
   "dependencies": {
     "@solidjs/router": "0.7.0",
@@ -13,6 +14,10 @@
     "solid-js": "1.6.10"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.48.2",
+    "@typescript-eslint/parser": "5.48.2",
+    "eslint": "8.31.0",
+    "eslint-plugin-solid": "0.9.4",
     "msw": "0.49.2",
     "typescript": "4.9.5",
     "vite": "4.1.1",
