@@ -235,6 +235,42 @@ async function run() {
   // Copy base
   fse.copySync(path.resolve(TEMPLATE_DIR, "base"), appDir);
 
+  const exclude = [
+    "node_modules",
+    "vite.config.ts",
+    "package.json",
+    "tsconfig.json",
+    "README.md",
+  ];
+
+  // Copy modules
+  fse.copySync(
+    path.resolve(TEMPLATE_DIR, `module-api-${apiSolution}`),
+    path.resolve(appDir, "src/modules"),
+    {
+      filter: (src) => {
+        return !exclude.includes(path.basename(src));
+      },
+    }
+  );
+
+  // Copy testing libraries
+  if (hasUnitTesting) {
+    fse.copySync(path.resolve(TEMPLATE_DIR, `testing-vitest`), appDir, {
+      filter: (src) => {
+        return !exclude.includes(path.basename(src));
+      },
+    });
+  }
+
+  if (hasVisualTesting) {
+    fse.copySync(path.resolve(TEMPLATE_DIR, `testing-storybook`), appDir, {
+      filter: (src) => {
+        return !exclude.includes(path.basename(src));
+      },
+    });
+  }
+
   // Copy commons
   fse.copySync(TEMPLATE_SHARE_DIR, appDir);
 
