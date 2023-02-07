@@ -50,7 +50,6 @@ async function run() {
         ).dir
   );
 
-  // TODO:
   const jsLibrary = (
     await inquirer.prompt<{ jsLibrary: string }>([
       {
@@ -162,7 +161,6 @@ async function run() {
     ])
   ).needsStorybook;
 
-  // TODO:
   const needsE2eTesting = (
     await inquirer.prompt<{ needsE2eTesting?: boolean }>([
       {
@@ -276,6 +274,29 @@ async function run() {
     };
   }
 
+  if (needsE2eTesting) {
+    const playwrightDir = path.resolve(TEMPLATE_SHARE_DIR, "playwright");
+    fse.copySync(playwrightDir, appDir, {
+      filter: (src) => path.basename(src) !== "package.json",
+    });
+
+    const { devDependencies, scripts } = fse.readJsonSync(
+      path.resolve(playwrightDir, "package.json")
+    );
+
+    packageObj.scripts = {
+      ...packageObj.scripts,
+      ...scripts,
+    };
+
+    packageObj.devDependencies = {
+      ...packageObj.devDependencies,
+      ...devDependencies,
+    };
+
+    // TODO: add some test codes
+  }
+
   if (!needsEslint) {
     fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
 
@@ -304,9 +325,7 @@ async function run() {
   }
 
   // Copy commons
-  fse.copySync(TEMPLATE_SHARE_DIR, appDir, {
-    filter: (src: string) => path.basename(src) !== "prettier",
-  });
+  fse.copySync(`${TEMPLATE_SHARE_DIR}/gitignore`, `${appDir}/gitignore`);
 
   // Rename dot files
   fse.renameSync(
