@@ -5,7 +5,8 @@
     "dev": "vite --port 3000",
     "build": "vite build",
     "start": "vite preview --port 3000",
-    "type": "tsc --noEmit"
+    "type": "tsc --noEmit",
+    "lint": "eslint . --ext .js,jsx,.ts,.tsx"
   },
   "dependencies": {
     "@solidjs/router": "0.7.0",
