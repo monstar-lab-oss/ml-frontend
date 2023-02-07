@@ -126,91 +126,79 @@ async function run() {
   //   ])
   // ).hasRouter;
 
-  // TODO:
-  const hasTesting = (
-    await inquirer.prompt<{ hasTesting: boolean }>([
+  const needsTesting = (
+    await inquirer.prompt<{ needsTesting: boolean }>([
       {
         type: "confirm",
-        name: "hasTesting",
-        message: "Add Testing codes for Code Quality?",
-        // TODO:
-        default: false,
+        name: "needsTesting",
+        message: "Add Testing codes for Catching bugs early?",
+        default: true,
       },
     ])
-  ).hasTesting;
+  ).needsTesting;
 
   // TODO:
-  const hasUnitTesting = (
-    await inquirer.prompt<{ hasUnitTesting?: boolean }>([
+  const needsVitest = (
+    await inquirer.prompt<{ needsVitest?: boolean }>([
       {
         type: "confirm",
-        name: "hasUnitTesting",
+        name: "needsVitest",
         message: "Add Vitest for Unit Testing?",
         default: true,
-        when: () => hasTesting,
+        when: () => needsTesting,
       },
     ])
-  ).hasUnitTesting;
+  ).needsVitest;
 
   // TODO:
-  const hasVisualTesting = (
-    await inquirer.prompt<{ hasVisualTesting?: boolean }>([
+  const needsStorybook = (
+    await inquirer.prompt<{ needsStorybook?: boolean }>([
       {
         type: "confirm",
-        name: "hasVisualTesting",
+        name: "needsStorybook",
         message: "Add Storybook for Visual Testing?",
         default: true,
-        when: () => !!hasTesting,
+        when: () => !!needsTesting,
       },
     ])
-  ).hasVisualTesting;
+  ).needsStorybook;
 
   // TODO:
-  const hasE2ETesting = (
-    await inquirer.prompt<{ hasE2ETesting?: boolean }>([
+  const needsE2eTesting = (
+    await inquirer.prompt<{ needsE2eTesting?: boolean }>([
       {
         type: "confirm",
-        name: "hasE2ETesting",
+        name: "needsE2eTesting",
         message: "Add Playwright for End-To-End Testing?",
         default: true,
-        when: () => hasTesting,
+        when: () => needsTesting,
       },
     ])
-  ).hasE2ETesting;
+  ).needsE2eTesting;
 
-  const HasLint = (
-    await inquirer.prompt<{ hasLint?: boolean }>([
+  const needsEslint = (
+    await inquirer.prompt<{ needsEslint?: boolean }>([
       {
         type: "confirm",
-        name: "hasLint",
+        name: "needsEslint",
         message: "Add ESLint for Code Linting?",
         default: true,
-        when: () => hasTesting,
+        when: () => needsTesting,
       },
     ])
-  ).hasLint;
+  ).needsEslint;
 
-  const hasPrettier = (
-    await inquirer.prompt<{ hasPrettier?: boolean }>([
+  const needsPrettier = (
+    await inquirer.prompt<{ needsPrettier?: boolean }>([
       {
         type: "confirm",
-        name: "hasPrettier",
+        name: "needsPrettier",
         message: "Add Prettier for Code Formatting?",
         default: true,
-        when: () => hasTesting,
+        when: () => needsTesting,
       },
     ])
-  ).hasPrettier;
-
-  console.debug({
-    jsLibrary,
-    apiSolution,
-    hasTesting,
-    hasUnitTesting,
-    hasVisualTesting,
-    hasE2ETesting,
-    HasLint,
-  });
+  ).needsPrettier;
 
   const templateName = jsLibrary;
   const TEMPLATE_DIR = path.resolve(__dirname, "temp");
@@ -257,7 +245,7 @@ async function run() {
   );
 
   // Copy testing libraries
-  if (hasUnitTesting) {
+  if (needsVitest) {
     fse.copySync(path.resolve(TEMPLATE_DIR, `testing-vitest`), appDir, {
       filter: (src) => {
         return !exclude.includes(path.basename(src));
@@ -265,7 +253,7 @@ async function run() {
     });
   }
 
-  if (hasVisualTesting) {
+  if (needsStorybook) {
     fse.copySync(path.resolve(TEMPLATE_DIR, `testing-storybook`), appDir, {
       filter: (src) => {
         return !exclude.includes(path.basename(src));
@@ -273,7 +261,7 @@ async function run() {
     });
   }
 
-  if (!HasLint) {
+  if (!needsEslint) {
     fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
 
     Object.keys(packageObj.devDependencies).forEach((key) => {
@@ -281,7 +269,7 @@ async function run() {
     });
   }
 
-  if (hasPrettier) {
+  if (needsPrettier) {
     const prettierDir = path.resolve(TEMPLATE_SHARE_DIR, "prettier");
 
     fse.copySync(prettierDir, appDir, {
