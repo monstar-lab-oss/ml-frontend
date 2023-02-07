@@ -48,16 +48,169 @@ async function run() {
           ])
         ).dir
   );
-  // TODO: [list] Select a UI library
-  // TODO: [list] Add an API Solution?
-  // TODO: [checkbox] Select module do you want to use
-  // TODO: [confirm] Add Zustand for State Management?
-  // TODO: [confirm] Add Router for Single Page Application Development?
-  // TODO: [confirm] Add Vitest for Unit Testing?
-  // TODO: [confirm] Add Storybook for Visual Testing?
-  // TODO: [confirm] Add Playwright for End-To-End Testing?
-  // TODO: [confirm] Add Eslint for Code Linting?
-  // TODO: [confirm] Add Prettier for Code Formatting?
+
+  // TODO:
+  const jsLibrary = (
+    await inquirer.prompt<{ jsLibrary: string }>([
+      {
+        type: "list",
+        name: "jsLibrary",
+        message: "Select a JavsScript library for UI",
+        choices: [
+          { name: "React" },
+          { name: "Vue" },
+          { name: "Next.js" },
+          { name: "Solid" },
+        ],
+        default: 0,
+        filter: (val: string) => val.toLowerCase().replace(/\./g, ""),
+      },
+    ])
+  ).jsLibrary;
+
+  // TODO:
+  const apiSolution = (
+    await inquirer.prompt<{ apiSolution: string }>([
+      {
+        type: "list",
+        name: "apiSolution",
+        message: "Select an API Solution",
+        choices: [
+          { name: "RESTful", value: "restful" },
+          { name: "GraphQL", value: "graphql" },
+        ],
+        default: "restful",
+      },
+    ])
+  ).apiSolution;
+
+  // TODO: MAYBE
+  // const useModules = (
+  //   await inquirer.prompt<{ useModules: string[] }>([
+  //     {
+  //       type: "checkbox",
+  //       name: "useModules",
+  //       message: "Select module do you want to use",
+  //       choices: [
+  //         { name: "module name1", value: "module1" },
+  //         { name: "module name2", value: "module2" },
+  //         { name: "module name3", value: "module3" },
+  //       ],
+  //     },
+  //   ])
+  // ).useModules;
+
+  // TODO: MAYBE
+  // const hasStore = (
+  //   await inquirer.prompt<{ hasStore: boolean }>([
+  //     {
+  //       type: "confirm",
+  //       name: "hasStore",
+  //       message: "Add Zustand for State Management?",
+  //       default: true,
+  //     },
+  //   ])
+  // ).hasStore;
+
+  // TODO: MAYBE
+  // const hasRouter = (
+  //   await inquirer.prompt<{ hasRouter: boolean }>([
+  //     {
+  //       type: "confirm",
+  //       name: "hasRouter",
+  //       message: "Add Router for Single Page Application Development?",
+  //       default: true,
+  //     },
+  //   ])
+  // ).hasRouter;
+
+  // TODO:
+  const hasTesting = (
+    await inquirer.prompt<{ hasTesting: boolean }>([
+      {
+        type: "confirm",
+        name: "hasTesting",
+        message: "Add Testing codes for Code Quality?",
+        default: true,
+      },
+    ])
+  ).hasTesting;
+
+  // TODO:
+  const hasUnitTesting = (
+    await inquirer.prompt<{ hasUnitTesting?: boolean }>([
+      {
+        type: "confirm",
+        name: "hasUnitTesting",
+        message: "Add Vitest for Unit Testing?",
+        default: true,
+        when: () => hasTesting,
+      },
+    ])
+  ).hasUnitTesting;
+
+  // TODO:
+  const hasVisualTesting = (
+    await inquirer.prompt<{ hasVisualTesting?: boolean }>([
+      {
+        type: "confirm",
+        name: "hasVisualTesting",
+        message: "Add Storybook for Visual Testing?",
+        default: true,
+        when: () => !!hasTesting,
+      },
+    ])
+  ).hasVisualTesting;
+
+  // TODO:
+  const hasE2ETesting = (
+    await inquirer.prompt<{ hasE2ETesting?: boolean }>([
+      {
+        type: "confirm",
+        name: "hasE2ETesting",
+        message: "Add Playwright for End-To-End Testing?",
+        default: true,
+        when: () => hasTesting,
+      },
+    ])
+  ).hasE2ETesting;
+
+  // TODO:
+  const HasLint = (
+    await inquirer.prompt<{ hasLint?: boolean }>([
+      {
+        type: "confirm",
+        name: "hasLint",
+        message: "Add ESLint for Code Linting?",
+        default: true,
+        when: () => hasTesting,
+      },
+    ])
+  ).hasLint;
+
+  // TODO:
+  const hasPrettier = (
+    await inquirer.prompt<{ hasPrettier?: boolean }>([
+      {
+        type: "confirm",
+        name: "hasPrettier",
+        message: "Add Prettier for Code Formatting?",
+        default: true,
+        when: () => hasTesting,
+      },
+    ])
+  ).hasPrettier;
+
+  console.debug({
+    jsLibrary,
+    apiSolution,
+    hasTesting,
+    hasUnitTesting,
+    hasVisualTesting,
+    hasE2ETesting,
+    HasLint,
+    hasPrettier,
+  });
 
   // Currently only the React is supported, but will be extended in the future.
   const templateName = "react-standard";
