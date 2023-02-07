@@ -190,7 +190,6 @@ async function run() {
     ])
   ).hasLint;
 
-  // TODO:
   const hasPrettier = (
     await inquirer.prompt<{ hasPrettier?: boolean }>([
       {
@@ -211,7 +210,6 @@ async function run() {
     hasVisualTesting,
     hasE2ETesting,
     HasLint,
-    hasPrettier,
   });
 
   const templateName = jsLibrary;
@@ -234,6 +232,10 @@ async function run() {
 
   // Copy base
   fse.copySync(path.resolve(TEMPLATE_DIR, "base"), appDir);
+
+  // package.json
+  const packageJson = path.resolve(appDir, "package.json");
+  const packageObj = fse.readJsonSync(packageJson);
 
   const exclude = [
     "node_modules",
@@ -274,24 +276,41 @@ async function run() {
   if (!HasLint) {
     fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
 
-    const packageJson = path.resolve(appDir, "package.json");
-    const packageObj = fse.readJsonSync(packageJson);
-
     Object.keys(packageObj.devDependencies).forEach((key) => {
       eslintPackages.includes(key) && delete packageObj.devDependencies[key];
     });
+  }
 
-    fse.writeJsonSync(packageJson, packageObj, { spaces: 2, EOL: os.EOL });
+  if (hasPrettier) {
+    const prettierDir = path.resolve(TEMPLATE_SHARE_DIR, "prettier");
+
+    fse.copySync(prettierDir, appDir, {
+      filter: (src) => path.basename(src) !== "package.json",
+    });
+
+    const { devDependencies } = fse.readJsonSync(
+      path.resolve(prettierDir, "package.json")
+    );
+
+    packageObj.devDependencies = {
+      ...packageObj.devDependencies,
+      ...devDependencies,
+    };
   }
 
   // Copy commons
-  fse.copySync(TEMPLATE_SHARE_DIR, appDir);
+  fse.copySync(TEMPLATE_SHARE_DIR, appDir, {
+    filter: (src: string) => path.basename(src) !== "prettier",
+  });
 
   // Rename dot files
   fse.renameSync(
     path.join(appDir, "gitignore"),
     path.join(appDir, ".gitignore")
   );
+
+  // Rewrite package.json
+  fse.writeJsonSync(packageJson, packageObj, { spaces: 2, EOL: os.EOL });
 
   console.log();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);
