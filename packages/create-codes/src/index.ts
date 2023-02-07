@@ -42,12 +42,22 @@ async function run() {
             {
               type: "input",
               name: "dir",
-              message: "Where would you like to create your app?",
+              message: "Where Would You like to Create Your Application?",
               default: "./my-app",
             },
           ])
         ).dir
   );
+  // TODO: [list] Select a UI library
+  // TODO: [list] Add an API Solution?
+  // TODO: [checkbox] Select module do you want to use
+  // TODO: [confirm] Add Zustand for State Management?
+  // TODO: [confirm] Add Router for Single Page Application Development?
+  // TODO: [confirm] Add Vitest for Unit Testing?
+  // TODO: [confirm] Add Storybook for Visual Testing?
+  // TODO: [confirm] Add Playwright for End-To-End Testing?
+  // TODO: [confirm] Add Eslint for Code Linting?
+  // TODO: [confirm] Add Prettier for Code Formatting?
 
   // Currently only the React is supported, but will be extended in the future.
   const templateName = "react-standard";
