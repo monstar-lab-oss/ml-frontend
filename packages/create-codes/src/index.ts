@@ -57,9 +57,10 @@ async function run() {
         name: "jsLibrary",
         message: "Select a JavsScript library for UI",
         choices: [
-          { name: "React" },
-          { name: "Vue" },
-          { name: "Next.js" },
+          // TODO: Comment out the modules when it is ready to copy.
+          // { name: "React" },
+          // { name: "Vue" },
+          // { name: "Next.js" },
           { name: "Solid" },
         ],
         default: 0,
@@ -131,7 +132,8 @@ async function run() {
         type: "confirm",
         name: "hasTesting",
         message: "Add Testing codes for Code Quality?",
-        default: true,
+        // TODO:
+        default: false,
       },
     ])
   ).hasTesting;
@@ -212,8 +214,7 @@ async function run() {
     hasPrettier,
   });
 
-  // Currently only the React is supported, but will be extended in the future.
-  const templateName = "react-standard";
+  const templateName = jsLibrary;
   const TEMPLATE_DIR = path.resolve(__dirname, "temp");
 
   await new Promise((resolve, reject) => {
@@ -231,7 +232,10 @@ async function run() {
     emitter.clone(TEMPLATE_DIR).then(() => resolve({}));
   });
 
-  fse.copySync(TEMPLATE_DIR, appDir);
+  // Copy base
+  fse.copySync(path.resolve(TEMPLATE_DIR, "base"), appDir);
+
+  // Copy commons
   fse.copySync(TEMPLATE_SHARE_DIR, appDir);
 
   // Rename dot files
