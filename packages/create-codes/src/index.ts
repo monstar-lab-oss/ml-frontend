@@ -18,7 +18,7 @@ Create a new codes for front-end app
     --help, -h          Show this help message
     --version, -v       Show the version of this script
 `;
-
+const TEMPLATE_DIR = path.resolve(__dirname, "../templates");
 const TEMPLATE_SHARE_DIR = path.resolve(__dirname, "../templates/__shared");
 
 async function run() {
@@ -150,7 +150,6 @@ async function run() {
     ])
   ).needsVitest;
 
-  // TODO:
   const needsStorybook = (
     await inquirer.prompt<{ needsStorybook?: boolean }>([
       {
@@ -201,7 +200,7 @@ async function run() {
   ).needsPrettier;
 
   const templateName = jsLibrary;
-  const TEMPLATE_DIR = path.resolve(__dirname, "temp");
+  const TEMP_DIR = path.resolve(__dirname, "temp");
 
   await new Promise((resolve, reject) => {
     const { user, repo, examplesDir, ref } = degitConfig;
@@ -215,11 +214,11 @@ async function run() {
       }
     );
     emitter.on("warn", (err) => reject(err));
-    emitter.clone(TEMPLATE_DIR).then(() => resolve({}));
+    emitter.clone(TEMP_DIR).then(() => resolve({}));
   });
 
   // Copy base
-  fse.copySync(path.resolve(TEMPLATE_DIR, "base"), appDir);
+  fse.copySync(path.resolve(TEMP_DIR, "base"), appDir);
 
   // package.json
   const packageJson = path.resolve(appDir, "package.json");
@@ -235,7 +234,7 @@ async function run() {
 
   // Copy modules
   fse.copySync(
-    path.resolve(TEMPLATE_DIR, `module-api-${apiSolution}`),
+    path.resolve(TEMP_DIR, `module-api-${apiSolution}`),
     path.resolve(appDir, "src/modules"),
     {
       filter: (src) => {
@@ -246,7 +245,7 @@ async function run() {
 
   // Copy testing libraries
   if (needsVitest) {
-    fse.copySync(path.resolve(TEMPLATE_DIR, `testing-vitest`), appDir, {
+    fse.copySync(path.resolve(TEMP_DIR, `testing-vitest`), appDir, {
       filter: (src) => {
         return !exclude.includes(path.basename(src));
       },
@@ -254,11 +253,27 @@ async function run() {
   }
 
   if (needsStorybook) {
-    fse.copySync(path.resolve(TEMPLATE_DIR, `testing-storybook`), appDir, {
+    fse.copySync(path.resolve(TEMP_DIR, `testing-storybook`), appDir, {
       filter: (src) => {
         return !exclude.includes(path.basename(src));
       },
     });
+
+    const storybookDir = path.resolve(TEMPLATE_DIR, `storybook-${jsLibrary}`);
+
+    const { devDependencies, scripts } = fse.readJsonSync(
+      path.resolve(storybookDir, "package.json")
+    );
+
+    packageObj.scripts = {
+      ...packageObj.scripts,
+      ...scripts,
+    };
+
+    packageObj.devDependencies = {
+      ...packageObj.devDependencies,
+      ...devDependencies,
+    };
   }
 
   if (!needsEslint) {
