@@ -279,6 +279,8 @@ async function run() {
   if (!needsEslint) {
     fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
 
+    delete packageObj.scripts.lint;
+
     Object.keys(packageObj.devDependencies).forEach((key) => {
       eslintPackages.includes(key) && delete packageObj.devDependencies[key];
     });
