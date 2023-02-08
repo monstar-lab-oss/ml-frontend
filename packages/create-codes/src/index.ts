@@ -327,7 +327,10 @@ async function run() {
 
   // Copy commons
   fse.copySync(`${TEMPLATE_SHARE_DIR}/gitignore`, `${appDir}/gitignore`);
-
+  // FIXME: reuse codes with internal package
+  fse.copySync(`${TEMPLATE_SHARE_DIR}/__mocks__`, `${appDir}/__mocks__`, {
+    overwrite: true,
+  });
   // Rename dot files
   fse.renameSync(
     path.join(appDir, "gitignore"),
