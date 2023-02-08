@@ -322,6 +322,7 @@ async function run() {
   }
 
   if (!needsEslint) {
+    // TODO: copy .eslintignore from base
     fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
 
     delete packageObj.scripts.lint;
