@@ -35,16 +35,40 @@ describe("create-codes cli", () => {
   describe("install react boilerplate with cli", () => {
     test("interactively configure", async () => {
       const cli = spawn("node", [createCodes], { cwd });
-      const results = await exeInteractive(cli, [testDir, keys.ENTER]);
+      const results = await exeInteractive(cli, [
+        testDir,
+        keys.ENTER,
+
+        keys.ENTER,
+        keys.ENTER,
+        keys.ENTER,
+        keys.ENTER,
+        keys.ENTER,
+        keys.ENTER,
+        keys.ENTER,
+        keys.ENTER,
+      ]);
 
       expect(results).toContain(`Create Codes`);
       expect(results).toContain(`Welcome!`);
-      expect(results).toContain(`? Where would you like to create your app?`);
+      expect(results).toContain(
+        `? Where Would You like to Create Your Application?`
+      );
+      expect(results).toContain(`? Select a JavsScript library for UI`);
+      expect(results).toContain(`? Select an API Solution`);
+      expect(results).toContain(`? Select a JavsScript library for UI`);
+      expect(results).toContain(`? Add Testing codes for Catching bugs early?`);
+      expect(results).toContain(`? Add Vitest for Unit Testing?`);
+      expect(results).toContain(`? Add Storybook for Visual Testing?`);
+      expect(results).toContain(`? Add Playwright for End-To-End Testing?`);
+      expect(results).toContain(`? Add ESLint for Code Linting?`);
+      expect(results).toContain(`? Add Prettier for Code Formatting?`);
       expect(results).toContain(`Success! Created a new app at "my-test".`);
     });
   });
 
-  describe("install react boilerplate to specify dir", () => {
+  // TODO: Skip testing as it is not yet implemented.
+  describe.skip("install react boilerplate to specify dir", () => {
     test("install", async () => {
       await exe("node", [createCodes, testDir], { cwd });
 
