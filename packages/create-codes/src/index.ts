@@ -236,6 +236,7 @@ async function run() {
     path.resolve(appDir, "src/modules"),
     {
       filter: (src) => {
+        if (!needsTesting && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
         return !exclude.includes(path.basename(src));
       },
     }
