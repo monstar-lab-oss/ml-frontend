@@ -69,7 +69,6 @@ async function run() {
     ])
   ).jsLibrary;
 
-  // TODO:
   const apiSolution = (
     await inquirer.prompt<{ apiSolution: string }>([
       {
@@ -78,7 +77,8 @@ async function run() {
         message: "Select an API Solution",
         choices: [
           { name: "RESTful", value: "restful" },
-          { name: "GraphQL", value: "graphql" },
+          // TODO: Need to discuss module selection
+          // { name: "GraphQL", value: "graphql" },
         ],
         default: "restful",
       },
