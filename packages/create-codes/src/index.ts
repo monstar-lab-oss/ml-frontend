@@ -136,7 +136,6 @@ async function run() {
     ])
   ).needsTesting;
 
-  // TODO:
   const needsVitest = (
     await inquirer.prompt<{ needsVitest?: boolean }>([
       {
@@ -249,6 +248,30 @@ async function run() {
         return !exclude.includes(path.basename(src));
       },
     });
+
+    const vitestDir = path.resolve(TEMPLATE_DIR, `vitest-${jsLibrary}`);
+
+    fse.copySync(
+      path.resolve(vitestDir, "vitest.setup.ts"),
+      path.resolve(appDir, "vitest.setup.ts"),
+      {
+        overwrite: true,
+      }
+    );
+
+    const { devDependencies, scripts } = fse.readJsonSync(
+      path.resolve(vitestDir, "package.json")
+    );
+
+    packageObj.scripts = {
+      ...packageObj.scripts,
+      ...scripts,
+    };
+
+    packageObj.devDependencies = {
+      ...packageObj.devDependencies,
+      ...devDependencies,
+    };
   }
 
   if (needsStorybook) {
