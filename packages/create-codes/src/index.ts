@@ -6,7 +6,12 @@ import fse from "fs-extra";
 import meow from "meow";
 import inquirer from "inquirer";
 import degit from "degit";
-import { degitConfig, eslintPackages } from "./constants";
+import {
+  degitConfig,
+  eslintPackages,
+  JSLibrary,
+  CLIOptions,
+} from "./constants";
 
 const help = `
 Create a new codes for front-end app
@@ -51,18 +56,14 @@ async function run() {
   );
 
   const jsLibrary = (
-    await inquirer.prompt<{ jsLibrary: string }>([
+    await inquirer.prompt<{ jsLibrary: JSLibrary }>([
       {
         type: "list",
         name: "jsLibrary",
         message: "Select a JavsScript library for UI",
-        choices: [
-          // TODO: Comment out the modules when it is ready to copy.
-          // { name: "React" },
-          // { name: "Vue" },
-          // { name: "Next.js" },
-          { name: "Solid" },
-        ],
+        choices: (Object.keys(CLIOptions) as JSLibrary[]).map(
+          (key) => CLIOptions[key].name
+        ),
         default: 0,
         filter: (val: string) => val.toLowerCase().replace(/\./g, ""),
       },
@@ -75,55 +76,24 @@ async function run() {
         type: "list",
         name: "apiSolution",
         message: "Select an API Solution",
-        choices: [
-          { name: "RESTful", value: "restful" },
-          // TODO: Need to discuss module selection
-          // { name: "GraphQL", value: "graphql" },
-        ],
+        choices: CLIOptions[jsLibrary].apiSolution,
         default: "restful",
       },
     ])
   ).apiSolution;
 
-  // TODO: MAYBE
-  // const useModules = (
-  //   await inquirer.prompt<{ useModules: string[] }>([
-  //     {
-  //       type: "checkbox",
-  //       name: "useModules",
-  //       message: "Select module do you want to use",
-  //       choices: [
-  //         { name: "module name1", value: "module1" },
-  //         { name: "module name2", value: "module2" },
-  //         { name: "module name3", value: "module3" },
-  //       ],
-  //     },
-  //   ])
-  // ).useModules;
-
-  // TODO: MAYBE
-  // const hasStore = (
-  //   await inquirer.prompt<{ hasStore: boolean }>([
-  //     {
-  //       type: "confirm",
-  //       name: "hasStore",
-  //       message: "Add Zustand for State Management?",
-  //       default: true,
-  //     },
-  //   ])
-  // ).hasStore;
-
-  // TODO: MAYBE
-  // const hasRouter = (
-  //   await inquirer.prompt<{ hasRouter: boolean }>([
-  //     {
-  //       type: "confirm",
-  //       name: "hasRouter",
-  //       message: "Add Router for Single Page Application Development?",
-  //       default: true,
-  //     },
-  //   ])
-  // ).hasRouter;
+  // TODO: Use modules
+  // eslint-disable-next-line no-unused-vars
+  const useModules = (
+    await inquirer.prompt<{ useModules: string[] }>([
+      {
+        type: "checkbox",
+        name: "useModules",
+        message: "Select module do you want to use",
+        choices: CLIOptions[jsLibrary].useModules,
+      },
+    ])
+  ).useModules;
 
   const needsTesting = (
     await inquirer.prompt<{ needsTesting: boolean }>([
@@ -229,7 +199,7 @@ async function run() {
     "README.md",
   ];
 
-  // Copy modules
+  // TODO: Copy modules
   fse.copySync(
     path.resolve(TEMP_DIR, `module-api-${apiSolution}`),
     path.resolve(appDir, "src/modules"),
