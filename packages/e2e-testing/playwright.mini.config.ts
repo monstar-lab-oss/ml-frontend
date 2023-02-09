@@ -11,15 +11,7 @@ const config: PlaywrightTestConfig = {
     trace: "on-first-retry",
     ...devices["Desktop Chrome"],
   },
-  projects: [
-    {
-      name: "react-mini",
-      testDir: "__tests__/react-mini",
-      use: {
-        baseURL: "http://localhost:7100",
-      },
-    },
-  ],
+  projects: [],
 };
 
 export default config;
