@@ -47,6 +47,7 @@ describe("create-codes cli", () => {
         keys.ENTER,
         keys.ENTER,
         keys.ENTER,
+        keys.ENTER,
       ]);
 
       expect(results).toContain(`Create Codes`);
@@ -56,7 +57,7 @@ describe("create-codes cli", () => {
       );
       expect(results).toContain(`? Select a JavsScript library for UI`);
       expect(results).toContain(`? Select an API Solution`);
-      expect(results).toContain(`? Select a JavsScript library for UI`);
+      expect(results).toContain(`? Select module do you want to use`);
       expect(results).toContain(`? Add Testing codes for Catching bugs early?`);
       expect(results).toContain(`? Add Vitest for Unit Testing?`);
       expect(results).toContain(`? Add Storybook for Visual Testing?`);
