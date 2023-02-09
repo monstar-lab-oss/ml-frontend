@@ -13,7 +13,6 @@
       "dependsOn": ["build"]
     },
     "e2e": {},
-    "e2e:mini": {},
     "type": {},
     "lint": {},
     "test": {},
