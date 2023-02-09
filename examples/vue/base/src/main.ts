@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import "../__mocks__";
 
 import App from "./App.vue";
 import router from "./router";
