@@ -1,4 +1,4 @@
-import { rest, graphql } from "msw";
+import { graphql } from "msw";
 
 const graph = graphql.link("https://api.example.com/graphql");
 
@@ -8,9 +8,6 @@ const user = {
 };
 
 export const requestHandlers = [
-  rest.get("https://api.example.com/users", (req, res, ctx) => {
-    return res(ctx.json(user));
-  }),
   graph.query("GetUser", (req, res, ctx) => {
     return res(ctx.data({ user }));
   }),
