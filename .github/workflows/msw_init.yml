@@ -20,4 +20,4 @@ jobs:
           npx msw init ./public
           git add .
           git commit -m "create service worker file"
-          git push
+          git push origin HEAD:${{ github.head_ref }}
