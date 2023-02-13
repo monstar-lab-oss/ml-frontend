@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("src", import.meta.url)),
+      __mocks__: fileURLToPath(new URL("__mocks__", import.meta.url)),
     },
   },
 });
