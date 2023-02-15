@@ -5,6 +5,8 @@ import path from "node:path";
 import fse from "fs-extra";
 import meow from "meow";
 import inquirer from "inquirer";
+import gradient from "gradient-string";
+import tinycolor from "tinycolor2";
 import degit from "degit";
 import {
   degitConfig,
@@ -13,6 +15,10 @@ import {
   CLIOptions,
 } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
+
+const TITLE = gradient(tinycolor("#E3F2FD").splitcomplement())(
+  "\n≛ Create Codes\n"
+);
 
 const help = `
 Create a new codes for front-end app
@@ -36,8 +42,8 @@ async function run() {
 
   const [dir] = input;
 
-  console.log("\nCreate Codes\n");
-  console.log("Welcome!\n");
+  console.log(TITLE);
+  console.log("Write less boilerplate and focus on the front-end magic.\n");
 
   const appDir = path.resolve(
     process.cwd(),
