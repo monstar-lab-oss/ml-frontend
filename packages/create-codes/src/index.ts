@@ -4,10 +4,21 @@ import os from "node:os";
 import path from "node:path";
 import fse from "fs-extra";
 import meow from "meow";
-import inquirer from "inquirer";
 import gradient from "gradient-string";
+import chalk from "chalk";
 import tinycolor from "tinycolor2";
 import degit from "degit";
+import {
+  intro,
+  outro,
+  select,
+  spinner,
+  isCancel,
+  cancel,
+  text,
+  multiselect,
+  note,
+} from "@clack/prompts";
 import {
   degitConfig,
   eslintPackages,
@@ -16,9 +27,9 @@ import {
 } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
 
-const TITLE = gradient(tinycolor("#E3F2FD").splitcomplement())(
-  "\n≛ Create Codes\n"
-);
+const introTitle = `${chalk.bold(
+  gradient(tinycolor("#E3F2FD").triad())("≛ Create Codes")
+)} :: Write less boilerplate, focus on the your front-end magic.`;
 
 const help = `
 Create a new codes for front-end app
@@ -42,140 +53,80 @@ async function run() {
 
   const [dir] = input;
 
-  console.log(TITLE);
-  console.log("Write less boilerplate and focus on the front-end magic.\n");
+  console.log();
+  intro(introTitle);
 
-  const appDir = path.resolve(
-    process.cwd(),
-    dir
-      ? dir
-      : (
-          await inquirer.prompt<{ dir: string }>([
-            {
-              type: "input",
-              name: "dir",
-              message: "Where Would You like to Create Your Application?",
-              default: "./my-app",
-            },
-          ])
-        ).dir
-  );
+  // App directory
+  const whereDir = await text({
+    message: "Where would you like to create your app?",
+    placeholder: "./my-app",
+  });
+  if (isCancel(whereDir)) return exit();
 
-  const jsLibrary = (
-    await inquirer.prompt<{ jsLibrary: JSLibrary }>([
-      {
-        type: "list",
-        name: "jsLibrary",
-        message: "Select a JavsScript library for UI",
-        choices: (Object.keys(CLIOptions) as JSLibrary[]).map(
-          (key) => CLIOptions[key].name
-        ),
-        default: 0,
-        filter: (val: string) => val.toLowerCase().replace(/\./g, ""),
-      },
-    ])
-  ).jsLibrary;
+  const appDir = path.resolve(process.cwd(), dir ? dir : whereDir);
 
-  const apiSolution = (
-    await inquirer.prompt<{ apiSolution: string }>([
-      {
-        type: "list",
-        name: "apiSolution",
-        message: "Select an API Solution",
-        choices: CLIOptions[jsLibrary].apiSolution,
-        default: "restful",
-      },
-    ])
-  ).apiSolution;
+  // JavaScript library
+  const jsLibrary = (await select({
+    message: "Select a JavsScript library for UI",
+    options: (Object.keys(CLIOptions) as JSLibrary[]).map((key) => ({
+      value: key,
+      label: CLIOptions[key].name,
+    })),
+    initialValue: "solid",
+  })) as JSLibrary;
+  if (isCancel(jsLibrary)) return exit();
 
-  // TODO: Use modules
-  // eslint-disable-next-line no-unused-vars
-  const useModules = (
-    await inquirer.prompt<{ useModules: string[] }>([
-      {
-        type: "checkbox",
-        name: "useModules",
-        message: "Select module do you want to use",
-        choices: CLIOptions[jsLibrary].useModules,
-      },
-    ])
-  ).useModules;
+  // API
+  const apiSolution = await select({
+    message: "Select an API solution",
+    options: CLIOptions[jsLibrary].apiSolution,
+    initialValue: "restful",
+  });
+  if (isCancel(apiSolution)) return exit();
 
-  const needsTesting = (
-    await inquirer.prompt<{ needsTesting: boolean }>([
-      {
-        type: "confirm",
-        name: "needsTesting",
-        message: "Add Testing codes for Catching bugs early?",
-        default: true,
-      },
-    ])
-  ).needsTesting;
+  // App modules
+  const useModules = await multiselect({
+    message: "Select the app features you want to use",
+    options: CLIOptions[jsLibrary].useModules,
+    initialValue: "crud",
+  });
+  if (isCancel(useModules)) return exit();
 
-  const needsVitest = (
-    await inquirer.prompt<{ needsVitest?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsVitest",
-        message: "Add Vitest for Unit Testing?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsVitest;
+  // Testing tools
+  const useCodeTesting = await multiselect({
+    message: "Select the testing type that you want to use",
+    options: [
+      { label: "Vitest for Unit testing", value: "needsVitest" },
+      { label: "Storybook for visual testing", value: "needsStorybook" },
+      { label: "Playwright for end-to-end testing", value: "needsPlaywright" },
+    ],
+  });
+  if (isCancel(useCodeTesting)) return exit();
 
-  const needsStorybook = (
-    await inquirer.prompt<{ needsStorybook?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsStorybook",
-        message: "Add Storybook for Visual Testing?",
-        default: true,
-        when: () => !!needsTesting,
-      },
-    ])
-  ).needsStorybook;
+  // Additional tools
+  const useCodeQuality = await multiselect({
+    message: "Select tools that help with code quality",
+    options: [
+      { label: "ESLint for code linting", value: "needsESLint" },
+      { label: "Prettier for code formatting", value: "needsPrettier" },
+    ],
+  });
+  if (isCancel(useCodeQuality)) return exit();
 
-  const needsE2eTesting = (
-    await inquirer.prompt<{ needsE2eTesting?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsE2eTesting",
-        message: "Add Playwright for End-To-End Testing?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsE2eTesting;
-
-  const needsEslint = (
-    await inquirer.prompt<{ needsEslint?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsEslint",
-        message: "Add ESLint for Code Linting?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsEslint;
-
-  const needsPrettier = (
-    await inquirer.prompt<{ needsPrettier?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsPrettier",
-        message: "Add Prettier for Code Formatting?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsPrettier;
+  // options
+  const needsVitest = useCodeTesting.includes("needsVitest");
+  const needsStorybook = useCodeTesting.includes("needsStorybook");
+  const needsPlaywright = useCodeTesting.includes("needsPlaywright");
+  const needsESLint = useCodeQuality.includes("needsESLint");
+  const needsPrettier = useCodeQuality.includes("needsPrettier");
 
   const templateName = jsLibrary;
   const TEMP_DIR = path.resolve(__dirname, "temp");
 
   let packageObjs: Record<string, unknown> = {};
+
+  const s = spinner();
+  s.start("Downloading Templates files");
 
   await new Promise((resolve, reject) => {
     const { user, repo, examplesDir, ref } = degitConfig;
@@ -192,6 +143,8 @@ async function run() {
     emitter.clone(TEMP_DIR).then(() => resolve({}));
   });
 
+  s.stop("Downloaded Templates files");
+
   const exclude = [
     "node_modules",
     "vite.config.ts",
@@ -202,8 +155,9 @@ async function run() {
 
   // Copy base codes
   const baseSourceDir = path.resolve(TEMP_DIR, "base");
+
   // FIXME: temporary processing, It would be good to refer to it from config files in the cli templates as well as others.
-  const baseExclude = needsEslint
+  const baseExclude = useCodeQuality.includes("needsESLint")
     ? exclude
     : [...exclude, ".eslintrc.js", ".eslintignore"];
 
@@ -225,7 +179,7 @@ async function run() {
     path.resolve(appDir, "src/modules"),
     {
       filter: (src) => {
-        if (!needsTesting && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
+        if (!needsVitest && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
         return !exclude.includes(path.basename(src));
       },
     }
@@ -255,7 +209,7 @@ async function run() {
   }
 
   // TODO: add some example codes
-  if (needsE2eTesting) {
+  if (needsPlaywright) {
     const sourceDir = path.resolve(sharedConfigDir, "playwright");
     const packages = path.join(sourceDir, "package.json");
 
@@ -267,7 +221,7 @@ async function run() {
   }
 
   // FIXME: temporary processing, It would be good to refer to it from package.json under cli templates as well as others.
-  if (!needsEslint) {
+  if (!needsESLint) {
     // TODO: copy .eslintignore from base
     // fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
     //@ts-expect-error
@@ -292,10 +246,12 @@ async function run() {
 
   // Copy commons
   fse.copySync(`${sharedConfigDir}/gitignore`, `${appDir}/gitignore`);
+
   // FIXME: reuse codes with internal package
   fse.copySync(`${sharedConfigDir}/__mocks__`, `${appDir}/__mocks__`, {
     overwrite: true,
   });
+
   // Rename dot files
   fse.renameSync(
     path.join(appDir, "gitignore"),
@@ -308,15 +264,20 @@ async function run() {
     EOL: os.EOL,
   });
 
-  console.log();
-  console.log(`Success! Created a new app at "${path.basename(appDir)}".`);
-  console.log("Inside this directory, you can run:");
-  console.log();
-  console.log(`  pnpm run build`);
-  console.log(`     Build directory with a production build of your app`);
-  console.log();
-  console.log(`  pnpm run dev`);
-  console.log(`     Develop your app with development server`);
-  console.log();
+  let nextSteps = `Inside this directory, you can run:
+
+  pnpm dev
+    Develop your app with development server
+  
+  pnpm build
+    Build directory with a production build of your app`;
+
+  note(nextSteps, `Success! Created a new app at "${path.basename(appDir)}"`);
+  outro(chalk.underline(chalk.cyan("Happy hacking!")));
 }
 run();
+
+function exit() {
+  cancel("Cancelled");
+  return process.exit(0);
+}
