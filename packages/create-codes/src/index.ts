@@ -12,6 +12,19 @@ import {
   JSLibrary,
   CLIOptions,
 } from "./constants";
+import { deepMergeObjects } from "./helpers";
+
+const exclude = [
+  ".turbo",
+  "node_modules",
+  "vite.config.ts",
+  "package.json",
+  "tsconfig.json",
+  "README.md",
+];
+
+// TODO: move to safer area
+let pkg = {};
 
 const help = `
 Create a new codes for front-end app
@@ -23,7 +36,6 @@ Create a new codes for front-end app
     --help, -h          Show this help message
     --version, -v       Show the version of this script
 `;
-const TEMPLATE_DIR = path.resolve(__dirname, "../templates");
 const TEMPLATE_SHARE_DIR = path.resolve(__dirname, "../templates/__shared");
 
 async function run() {
@@ -185,19 +197,26 @@ async function run() {
   });
 
   // Copy base
-  fse.copySync(path.resolve(TEMP_DIR, "base"), appDir);
+  const baseDir = path.resolve(TEMP_DIR, "base");
 
-  // package.json
-  const packageJson = path.resolve(appDir, "package.json");
-  const packageObj = fse.readJsonSync(packageJson);
+  const ext = !needsEslint
+    ? [...exclude, ".eslintrc.js", ".eslintignore"]
+    : exclude;
 
-  const exclude = [
-    "node_modules",
-    "vite.config.ts",
-    "package.json",
-    "tsconfig.json",
-    "README.md",
-  ];
+  fse.copySync(baseDir, appDir, {
+    filter: (src) => !ext.includes(path.basename(src)),
+  });
+
+  let basePackages = fse.readJsonSync(path.join(baseDir, "package.json"));
+
+  if (!needsEslint) {
+    delete basePackages.scripts.lint;
+
+    Object.keys(basePackages.devDependencies).forEach((key) => {
+      eslintPackages.includes(key) && delete basePackages.devDependencies[key];
+    });
+  }
+  pkg = deepMergeObjects(pkg, basePackages);
 
   // TODO: Copy modules
   fse.copySync(
@@ -213,118 +232,78 @@ async function run() {
 
   // Copy testing libraries
   if (needsVitest) {
-    fse.copySync(path.resolve(TEMP_DIR, `testing-vitest`), appDir, {
-      filter: (src) => {
-        return !exclude.includes(path.basename(src));
-      },
+    const vitestDir = path.resolve(TEMP_DIR, `testing-vitest`);
+
+    fse.copySync(vitestDir, appDir, {
+      filter: (src) => !exclude.includes(path.basename(src)),
     });
 
-    const vitestDir = path.resolve(TEMPLATE_DIR, `vitest-${jsLibrary}`);
-
-    fse.copySync(
-      path.resolve(vitestDir, "vitest.setup.ts"),
-      path.resolve(appDir, "vitest.setup.ts"),
-      {
-        overwrite: true,
-      }
+    pkg = deepMergeObjects(
+      pkg,
+      fse.readJsonSync(path.join(vitestDir, "package.json"))
     );
 
-    const { devDependencies, scripts } = fse.readJsonSync(
-      path.resolve(vitestDir, "package.json")
+    // TODO: why is here?
+    let code = fse
+      .readFileSync(path.resolve(appDir, "vitest.setup.ts"))
+      .toString();
+
+    code = code.replace(
+      `import { server } from "mock-server";`,
+      `import { server } from "./__mocks__/server";`
     );
-
-    packageObj.scripts = {
-      ...packageObj.scripts,
-      ...scripts,
-    };
-
-    packageObj.devDependencies = {
-      ...packageObj.devDependencies,
-      ...devDependencies,
-    };
+    fse.writeFileSync(path.resolve(appDir, "vitest.setup.ts"), code);
   }
 
   if (needsStorybook) {
-    fse.copySync(path.resolve(TEMP_DIR, `testing-storybook`), appDir, {
-      filter: (src) => {
-        return !exclude.includes(path.basename(src));
-      },
+    const storybookDir = path.resolve(TEMP_DIR, `testing-storybook`);
+
+    fse.copySync(storybookDir, appDir, {
+      filter: (src) => !exclude.includes(path.basename(src)),
     });
 
-    const storybookDir = path.resolve(TEMPLATE_DIR, `storybook-${jsLibrary}`);
-
-    const { devDependencies, scripts } = fse.readJsonSync(
-      path.resolve(storybookDir, "package.json")
+    pkg = deepMergeObjects(
+      pkg,
+      fse.readJsonSync(path.join(storybookDir, "package.json"))
     );
-
-    packageObj.scripts = {
-      ...packageObj.scripts,
-      ...scripts,
-    };
-
-    packageObj.devDependencies = {
-      ...packageObj.devDependencies,
-      ...devDependencies,
-    };
   }
 
   if (needsE2eTesting) {
     const playwrightDir = path.resolve(TEMPLATE_SHARE_DIR, "playwright");
+
     fse.copySync(playwrightDir, appDir, {
-      filter: (src) => path.basename(src) !== "package.json",
+      filter: (src) => !exclude.includes(path.basename(src)),
     });
 
-    const { devDependencies, scripts } = fse.readJsonSync(
-      path.resolve(playwrightDir, "package.json")
+    pkg = deepMergeObjects(
+      pkg,
+      fse.readJsonSync(path.join(playwrightDir, "package.json"))
     );
 
-    packageObj.scripts = {
-      ...packageObj.scripts,
-      ...scripts,
-    };
-
-    packageObj.devDependencies = {
-      ...packageObj.devDependencies,
-      ...devDependencies,
-    };
-
     // TODO: add some test codes
-  }
-
-  if (!needsEslint) {
-    // TODO: copy .eslintignore from base
-    fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
-
-    delete packageObj.scripts.lint;
-
-    Object.keys(packageObj.devDependencies).forEach((key) => {
-      eslintPackages.includes(key) && delete packageObj.devDependencies[key];
-    });
   }
 
   if (needsPrettier) {
     const prettierDir = path.resolve(TEMPLATE_SHARE_DIR, "prettier");
 
     fse.copySync(prettierDir, appDir, {
-      filter: (src) => path.basename(src) !== "package.json",
+      filter: (src) => !exclude.includes(path.basename(src)),
     });
 
-    const { devDependencies } = fse.readJsonSync(
-      path.resolve(prettierDir, "package.json")
+    pkg = deepMergeObjects(
+      pkg,
+      fse.readJsonSync(path.join(prettierDir, "package.json"))
     );
-
-    packageObj.devDependencies = {
-      ...packageObj.devDependencies,
-      ...devDependencies,
-    };
   }
 
   // Copy commons
   fse.copySync(`${TEMPLATE_SHARE_DIR}/gitignore`, `${appDir}/gitignore`);
+
   // FIXME: reuse codes with internal package
   fse.copySync(`${TEMPLATE_SHARE_DIR}/__mocks__`, `${appDir}/__mocks__`, {
     overwrite: true,
   });
+
   // Rename dot files
   fse.renameSync(
     path.join(appDir, "gitignore"),
@@ -332,7 +311,10 @@ async function run() {
   );
 
   // Rewrite package.json
-  fse.writeJsonSync(packageJson, packageObj, { spaces: 2, EOL: os.EOL });
+  fse.writeJsonSync(path.resolve(appDir, "package.json"), pkg, {
+    spaces: 2,
+    EOL: os.EOL,
+  });
 
   console.log();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);

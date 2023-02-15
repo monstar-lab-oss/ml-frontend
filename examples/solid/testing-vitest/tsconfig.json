@@ -1,3 +1,6 @@
 {
-  "extends": "tsconfig/library.json"
+  "extends": "tsconfig/library.json",
+  "compilerOptions": {
+    "module": "es2020"
+  }
 }

@@ -1,6 +1,6 @@
+import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vitest/config";
 import solid from "vite-plugin-solid";
-import path from "node:path";
 
 export default defineConfig({
   plugins: [solid()],
@@ -9,6 +9,6 @@ export default defineConfig({
     // refs https://github.com/solidjs/solid-testing-library/issues/10
     deps: { inline: [/solid-js/] },
     environment: "jsdom",
-    setupFiles: path.resolve(__dirname, "vitest.setup.ts"),
+    setupFiles: fileURLToPath(new URL("vitest.setup.ts", import.meta.url)),
   },
 });
