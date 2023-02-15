@@ -10,3 +10,4 @@ This is monorepo for creating new front-end codes with a standard structure.
 ## Examples
 
 - `react-standard`: React app with a standard structure
+- `vue/base`: Vue app with a standard structure
