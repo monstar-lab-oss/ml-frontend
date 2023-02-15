@@ -194,11 +194,15 @@ async function run() {
     "README.md",
   ];
 
-  // Copy base
+  // Copy base codes
   const baseSourceDir = path.resolve(TEMP_DIR, "base");
+  // FIXME: temporary processing, It would be good to refer to it from config files in the cli templates as well as others.
+  const baseExclude = needsEslint
+    ? exclude
+    : [...exclude, ".eslintrc.js", ".eslintignore"];
 
   fse.copySync(baseSourceDir, appDir, {
-    filter: (src) => !exclude.includes(path.basename(src)),
+    filter: (src) => !baseExclude.includes(path.basename(src)),
   });
 
   packageObjs = deepMergeObjects(
@@ -256,14 +260,16 @@ async function run() {
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
+  // FIXME: temporary processing, It would be good to refer to it from package.json under cli templates as well as others.
   if (!needsEslint) {
     // TODO: copy .eslintignore from base
-    fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
-
-    delete packageObj.scripts.lint;
-
-    Object.keys(packageObj.devDependencies).forEach((key) => {
-      eslintPackages.includes(key) && delete packageObj.devDependencies[key];
+    // fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
+    //@ts-expect-error
+    delete packageObjs.scripts.lint;
+    //@ts-expect-error
+    Object.keys(packageObjs.devDependencies).forEach((key) => {
+      //@ts-expect-error
+      eslintPackages.includes(key) && delete packageObjs.devDependencies[key];
     });
   }
 
