@@ -20,18 +20,18 @@ export const CLIOptions = {
   // react: {
   //   name: "React",
   //   apiSolution: [
-  //     { name: "RESTful", value: "restful" },
-  //     { name: "GraphQL", value: "graphql" },
+  //     { label: "RESTful", value: "restful" },
+  //     { label: "GraphQL", value: "graphql" },
   //   ],
   //   useModules: [
   //     {
-  //       name: "Add Router for SPA Development",
+  //       label: "Add Router for SPA Development",
   //       value: "router",
   //     },
-  //     { name: "Add CRUD Operations", value: "crud" },
-  //     { name: "Add Zustand for State Management", value: "store" },
+  //     { label: "Add CRUD Operations", value: "crud" },
+  //     { label: "Add Zustand for State Management", value: "store" },
   //     {
-  //       name: "Add Authentication Feature",
+  //       label: "Add Authentication Feature",
   //       value: "auth",
   //     },
   //   ],
@@ -39,18 +39,18 @@ export const CLIOptions = {
   // vue: {
   //   name: "Vue",
   //   apiSolution: [
-  //     { name: "RESTful", value: "restful" },
-  //     { name: "GraphQL", value: "graphql" },
+  //     { label: "RESTful", value: "restful" },
+  //     { label: "GraphQL", value: "graphql" },
   //   ],
   //   useModules: [
   //     {
   //       name: "Add Router for SPA Development",
   //       value: "router",
   //     },
-  //     { name: "Add CRUD Operations", value: "crud" },
-  //     { name: "Add Pinia for State Management", value: "store" },
+  //     { label: "Add CRUD Operations", value: "crud" },
+  //     { label: "Add Pinia for State Management", value: "store" },
   //     {
-  //       name: "Add Authentication Feature",
+  //       label: "Add Authentication Feature",
   //       value: "auth",
   //     },
   //   ],
@@ -74,18 +74,18 @@ export const CLIOptions = {
   solid: {
     name: "Solid",
     apiSolution: [
-      { name: "RESTful", value: "restful" },
-      { name: "GraphQL", value: "graphql" },
+      { label: "RESTful", value: "restful" },
+      { label: "GraphQL", value: "graphql" },
     ],
     useModules: [
       {
-        name: "Add Router for SPA Development",
+        label: "Add Router for SPA Development",
         value: "router",
       },
-      { name: "Add CRUD Operations", value: "crud" },
-      { name: "Add Zustand for State Management", value: "store" },
+      { label: "Add CRUD Operations", value: "crud" },
+      { label: "Add Zustand for State Management", value: "store" },
       {
-        name: "Add Authentication Feature",
+        label: "Add Authentication Feature",
         value: "auth",
       },
     ],
