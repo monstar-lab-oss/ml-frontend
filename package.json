@@ -9,6 +9,9 @@
     "lint": "turbo run lint --filter=!reactjs-boilerplate",
     "prepare": "husky install"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "devDependencies": {
     "turbo": "1.7.4",
     "prettier": "2.8.4",
