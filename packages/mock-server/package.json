@@ -2,7 +2,14 @@
   "name": "mock-server",
   "main": "./server.ts",
   "types": "./server.ts",
+  "scripts": {
+    "test": "vitest"
+  },
   "dependencies": {
     "msw": "1.0.1"
+  },
+  "devDependencies": {
+    "node-fetch": "3.3.0",
+    "vitest": "0.28.5"
   }
 }
