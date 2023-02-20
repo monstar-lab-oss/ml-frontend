@@ -3,12 +3,14 @@
   "main": "./server.ts",
   "types": "./server.ts",
   "scripts": {
-    "test": "vitest"
+    "test:dev": "vitest",
+    "test": "vitest run"
   },
   "dependencies": {
     "msw": "1.0.1"
   },
   "devDependencies": {
+    "graphql-request": "5.1.0",
     "node-fetch": "3.3.0",
     "vitest": "0.28.5"
   }
