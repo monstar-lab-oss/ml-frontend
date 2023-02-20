@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "test:cli": "turbo run build --filter=create-codes test --filter=create-codes",
+    "test:packages": "turbo run test --filter='./packages/*' --filter=!create-codes",
     "test:modules": "turbo run test --filter='./examples/*' && turbo run test --filter='./examples/*/*'",
     "e2e": "turbo run e2e",
     "type": "turbo run type --filter=!reactjs-boilerplate",
