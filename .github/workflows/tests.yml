@@ -49,6 +49,9 @@ jobs:
 
       - name: CLI Test
         run: pnpm test:cli
+      
+      - name: Testing packages
+        run: pnpm test:packages
 
       - name: Run E2E test
         run: pnpm e2e
