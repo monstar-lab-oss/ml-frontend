@@ -1,5 +1,5 @@
 {
-  "name": "@solid-modules/api-restful",
+  "name": "@solid-modules/bookshelf-restful",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
