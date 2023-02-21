@@ -24,7 +24,7 @@ describe('EmployeeUpdate', () => {
   })
 
   afterEach(() => {
-    jest.restoreAllMocks()
+    jest.clearAllMocks()
   })
 
   test('renders employee form', async () => {
@@ -77,8 +77,8 @@ describe('EmployeeUpdate', () => {
     await user.click(buttonUpdate);
 
     await waitFor(() => {
-      expect((window.alert as jest.Mock).mock.calls[0][0].toString()).toBe('Error: Server error')
-      expect((console.log as jest.Mock).mock.calls[0][0].toString()).toBe('Error: Server error')
+      expect((window.alert as jest.Mock).mock.calls[0].toString()).toBe('Error: Server error')
+      expect((console.log as jest.Mock).mock.calls[0].toString()).toBe('Error: Server error')
     })
   })
 
@@ -89,7 +89,7 @@ describe('EmployeeUpdate', () => {
     await user.click(buttonRemove);
 
     await waitFor(() => {
-      expect((window.alert as jest.Mock).mock.calls[0][0].toString()).toBe('Error: Server error')
+      expect((window.alert as jest.Mock).mock.calls[0].toString()).toBe('Error: Server error')
     })
   })
 })
