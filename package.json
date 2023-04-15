@@ -55,7 +55,7 @@
     "react-hook-form": "7.43.9",
     "react-i18next": "12.2.0",
     "wouter": "2.10.0",
-    "zustand": "4.3.5"
+    "zustand": "4.3.7"
   },
   "msw": {
     "workerDirectory": "public"
