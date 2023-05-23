@@ -306,11 +306,15 @@ async function run() {
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);
   console.log("Inside this directory, you can run:");
   console.log();
+  console.log(`  pnpm install`);
+  console.log(`     Install the required packages for the app`);
+  console.log(`     * Required before running 'build' or 'dev'`);
+  console.log();
   console.log(`  pnpm run build`);
-  console.log(`     Build directory with a production build of your app`);
+  console.log(`     Generate a production build of your app`);
   console.log();
   console.log(`  pnpm run dev`);
-  console.log(`     Develop your app with development server`);
+  console.log(`     Start a local development server`);
   console.log();
 }
 run();
