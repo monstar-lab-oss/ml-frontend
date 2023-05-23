@@ -311,10 +311,10 @@ async function run() {
   console.log(`     * Required before running 'build' or 'dev'`);
   console.log();
   console.log(`  pnpm run build`);
-  console.log(`     Build directory with a production build of your app`);
+  console.log(`     Generate a production build of your app`);
   console.log();
   console.log(`  pnpm run dev`);
-  console.log(`     Develop your app with development server`);
+  console.log(`     Start a local development server`);
   console.log();
 }
 run();
