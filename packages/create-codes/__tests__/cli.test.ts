@@ -8,6 +8,7 @@ import { spawn } from "node:child_process";
 
 const keys = {
   ENTER: "\x0D",
+  DOWN: "\u001B\u005B\u0042",
 };
 
 // outside monorepo
@@ -38,7 +39,7 @@ describe("create-codes cli", () => {
       const results = await exeInteractive(cli, [
         testDir,
         keys.ENTER,
-
+        keys.DOWN,
         keys.ENTER,
         keys.ENTER,
         keys.ENTER,
