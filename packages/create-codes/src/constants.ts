@@ -14,28 +14,28 @@ export const eslintPackages = [
   "eslint-plugin-solid",
 ];
 
-export type JSLibrary = "solid";
+export type JSLibrary = "react" | "solid";
 
 export const CLIOptions = {
-  // react: {
-  //   name: "React",
-  //   apiSolution: [
-  //     { name: "RESTful", value: "restful" },
-  //     { name: "GraphQL", value: "graphql" },
-  //   ],
-  //   useModules: [
-  //     {
-  //       name: "Add Router for SPA Development",
-  //       value: "router",
-  //     },
-  //     { name: "Add CRUD Operations", value: "crud" },
-  //     { name: "Add Zustand for State Management", value: "store" },
-  //     {
-  //       name: "Add Authentication Feature",
-  //       value: "auth",
-  //     },
-  //   ],
-  // },
+  react: {
+    name: "React",
+    apiSolution: [
+      { name: "RESTful", value: "restful" },
+      { name: "GraphQL", value: "graphql" },
+    ],
+    useModules: [
+      // {
+      //   name: "Add Router for SPA Development",
+      //   value: "router",
+      // },
+      // { name: "Add CRUD Operations", value: "crud" },
+      // { name: "Add Zustand for State Management", value: "store" },
+      // {
+      //   name: "Add Authentication Feature",
+      //   value: "auth",
+      // },
+    ],
+  },
   // vue: {
   //   name: "Vue",
   //   apiSolution: [
