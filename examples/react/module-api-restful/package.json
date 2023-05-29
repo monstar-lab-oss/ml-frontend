@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "4.24.5",
+    "@testing-library/react": "13.4.0",
     "tsconfig": "workspace:*",
     "typescript": "4.9.5"
   }
