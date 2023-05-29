@@ -1,0 +1,16 @@
+{
+  "name": "@react-testing/vitest",
+  "scripts": {
+    "test": "vitest run --dir .."
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "3.1.0",
+    "jsdom": "21.1.0",
+    "mock-server": "workspace:*",
+    "tsconfig": "workspace:*",
+    "vitest": "0.28.4"
+  },
+  "dependencies": {
+    "node-fetch": "3.3.0"
+  }
+}
