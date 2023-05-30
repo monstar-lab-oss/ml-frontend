@@ -1,13 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
-import { PropsWithChildren } from "react";
 import { useUser } from "./use-user";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
 });
 
-const wrapper = (props: PropsWithChildren) => (
+const wrapper = (props: { children: React.ReactNode }) => (
   <QueryClientProvider client={queryClient}>
     {props.children}
   </QueryClientProvider>

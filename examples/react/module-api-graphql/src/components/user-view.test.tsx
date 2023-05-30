@@ -5,13 +5,12 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import { UserView } from "./user-view";
-import { PropsWithChildren } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
 });
 
-const wrapper = (props: PropsWithChildren) => (
+const wrapper = (props: { children: React.ReactNode }) => (
   <QueryClientProvider client={queryClient}>
     {props.children}
   </QueryClientProvider>
