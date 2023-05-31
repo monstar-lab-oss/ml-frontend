@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../src/components/Button";
-import { ComponentProps } from "react";
 
 type Story = StoryObj<typeof Button>;
 
@@ -27,4 +26,4 @@ export default {
       },
     },
   },
-} as Meta<ComponentProps<typeof Button>>;
+} as Meta<React.ComponentProps<typeof Button>>;
