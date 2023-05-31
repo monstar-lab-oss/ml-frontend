@@ -24,3 +24,5 @@ test("Should fetch a single book and set loading and error state", async () => {
   expect(result.data).toStrictEqual({ id: "ad8ea0da", title: "book 1" });
   expect(result.isError).toBe(false);
 });
+
+// test
