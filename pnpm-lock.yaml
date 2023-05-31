@@ -269,25 +269,34 @@ importers:
 
   examples/react/testing-vitest:
     dependencies:
+      jsdom:
+        specifier: 21.1.0
+        version: 21.1.0
       node-fetch:
         specifier: 3.3.0
         version: 3.3.0
+      vitest:
+        specifier: 0.28.4
+        version: 0.28.4(jsdom@21.1.0)
     devDependencies:
       '@vitejs/plugin-react':
         specifier: 3.1.0
         version: 3.1.0(vite@4.1.1)
-      jsdom:
-        specifier: 21.1.0
-        version: 21.1.0
       mock-server:
         specifier: workspace:*
         version: link:../../../packages/mock-server
+      msw:
+        specifier: 1.0.0
+        version: 1.0.0(typescript@4.9.5)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
       tsconfig:
         specifier: workspace:*
         version: link:../../../packages/tsconfig
-      vitest:
-        specifier: 0.28.4
-        version: 0.28.4(jsdom@21.1.0)
+      typescript:
+        specifier: 4.9.5
+        version: 4.9.5
 
   examples/solid/base:
     dependencies:
@@ -7775,26 +7784,6 @@ packages:
       through: 2.3.8
       wrap-ansi: 7.0.0
 
-  /inquirer@8.2.5:
-    resolution: {integrity: sha512-QAgPDQMEgrDssk1XiwwHoOGYF9BAbUcc1+j+FhEvaOt8/cKRqyLn0U5qA6F74fGhTMGxf92pOvPBeh29jQJDTQ==}
-    engines: {node: '>=12.0.0'}
-    dependencies:
-      ansi-escapes: 4.3.2
-      chalk: 4.1.2
-      cli-cursor: 3.1.0
-      cli-width: 3.0.0
-      external-editor: 3.1.0
-      figures: 3.2.0
-      lodash: 4.17.21
-      mute-stream: 0.0.8
-      ora: 5.4.1
-      run-async: 2.4.1
-      rxjs: 7.8.0
-      string-width: 4.2.3
-      strip-ansi: 6.0.1
-      through: 2.3.8
-      wrap-ansi: 7.0.0
-
   /internal-slot@1.0.4:
     resolution: {integrity: sha512-tA8URYccNzMo94s5MQZgH8NB/XTa6HsOo0MLfXTKKEnHVVdegzaQoFZ7Jp44bdvLvY2waT5dc+j5ICEswhi7UQ==}
     engines: {node: '>= 0.4'}
@@ -9290,7 +9279,7 @@ packages:
       cookie: 0.4.2
       graphql: 16.6.0
       headers-polyfill: 3.1.2
-      inquirer: 8.2.5
+      inquirer: 8.2.3
       is-node-process: 1.0.1
       js-levenshtein: 1.1.6
       node-fetch: 2.6.8
