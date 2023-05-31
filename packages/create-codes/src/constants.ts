@@ -28,7 +28,7 @@ export const CLIOptions = {
       //   name: "Add Router for SPA Development",
       //   value: "router",
       // },
-      // { name: "Add CRUD Operations", value: "crud" },
+      { name: "Add CRUD Operations", value: "crud" },
       // { name: "Add Zustand for State Management", value: "store" },
       // {
       //   name: "Add Authentication Feature",
