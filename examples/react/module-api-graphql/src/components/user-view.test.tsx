@@ -4,6 +4,7 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
+import { expect, test } from "vitest";
 import { UserView } from "./user-view";
 
 const queryClient = new QueryClient({
