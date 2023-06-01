@@ -9,6 +9,7 @@
     "templates"
   ],
   "scripts": {
+    "dev": "tsup --watch",
     "build": "tsup",
     "test": "vitest run --dir __tests__"
   },
