@@ -22,7 +22,7 @@ test("Should fetch user and set loading and error state", async () => {
     expect(result.current.isLoading).toBe(false);
   });
 
-  expect(result.current.data).toEqual({
+  expect(result.current.data).toStrictEqual({
     id: "f79e82e8-c34a-4dc7-a49e-9fadc0979fda",
     name: "John",
   });
