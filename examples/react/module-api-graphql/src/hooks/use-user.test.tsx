@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
-import { expect, test } from "vitest";
 import { useUser } from "./use-user";
 
 const queryClient = new QueryClient({
