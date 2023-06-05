@@ -27,4 +27,5 @@ test("Should fetch user and set loading and error state", async () => {
       name: "John",
     },
   });
+  expect(result.current.isError).toBe(false);
 });
