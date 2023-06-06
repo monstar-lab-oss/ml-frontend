@@ -39,7 +39,7 @@ describe("create-codes cli", () => {
       const results = await exeInteractive(cli, [
         testDir,
         keys.ENTER,
-        keys.DOWN,
+
         keys.ENTER,
         keys.ENTER,
         keys.ENTER,
