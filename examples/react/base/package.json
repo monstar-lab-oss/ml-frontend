@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
+    "build:e2e": "tsc && vite build --mode development",
+    "preview": "vite preview --port 3000",
     "start": "vite preview --port 3000",
     "type": "tsc --noEmit",
     "lint": "eslint . --ext .js,jsx,.ts,.tsx"
