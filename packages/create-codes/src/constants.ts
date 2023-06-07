@@ -4,7 +4,7 @@ export const degitConfig = {
   examplesDir: "examples",
   e2eDir: "packages/e2e-testing",
   // TODO: After v1.0.0 is published, it should be download from the `main` branch.
-  ref: "next-v1",
+  ref: "add-e2e-test-samples",
 };
 
 // TODO: Maybe we can detect if they are actually using it?
