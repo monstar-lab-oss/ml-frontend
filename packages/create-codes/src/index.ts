@@ -26,9 +26,10 @@ Create a new codes for front-end app
     --version, -v       Show the version of this script
 `;
 const CONFIG_TEMPLATES = path.resolve(__dirname, "../templates");
-const ref = getCurrentBranchName();
 
 async function run() {
+  const ref = await getCurrentBranchName();
+
   const { input } = meow(help, {
     flags: {
       help: { type: "boolean", default: false, alias: "h" },

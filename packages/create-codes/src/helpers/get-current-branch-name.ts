@@ -8,7 +8,7 @@ function executeGitCommand(command: string[]) {
   });
 }
 
-export function getCurrentBranchName() {
+export async function getCurrentBranchName() {
   const currentBranch = executeGitCommand(["branch", "--show-current"]).trim();
   const isRemote = executeGitCommand(["ls-remote", "origin", currentBranch]);
 
