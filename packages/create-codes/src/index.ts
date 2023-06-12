@@ -276,7 +276,7 @@ async function run() {
 
     // Copy util for e2e testing
     const utilSourceDir = path.resolve(e2eTestingDir, "utils");
-    const utilDestDir = path.resolve(appDir, "utils");
+    const utilDestDir = path.resolve(appDir, "__tests__/utils");
     fse.copySync(utilSourceDir, utilDestDir);
 
     // Copy E2E config
