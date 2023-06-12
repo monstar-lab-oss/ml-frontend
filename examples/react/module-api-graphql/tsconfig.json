@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  },
   "extends": "tsconfig/react-library",
   "include": ["./src"]
 }
