@@ -10,7 +10,9 @@ function executeGitCommand(command: string[]) {
 
 export async function getCurrentBranchName() {
   const currentBranch = executeGitCommand(["branch", "--show-current"]).trim();
-  const isRemote = executeGitCommand(["ls-remote", "origin", currentBranch]);
+  // If it's a CI environment, we can simply use the current branch name.
+  if (process.env.CI) return currentBranch;
 
+  const isRemote = executeGitCommand(["ls-remote", "origin", currentBranch]);
   return isRemote ? currentBranch : "main";
 }
