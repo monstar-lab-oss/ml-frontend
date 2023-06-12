@@ -13,6 +13,7 @@ import {
   CLIOptions,
 } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
+import { getCurrentBranchName } from "./helpers/get-current-branch-name";
 
 const help = `
 Create a new codes for front-end app
@@ -25,6 +26,7 @@ Create a new codes for front-end app
     --version, -v       Show the version of this script
 `;
 const CONFIG_TEMPLATES = path.resolve(__dirname, "../templates");
+const ref = getCurrentBranchName();
 
 async function run() {
   const { input } = meow(help, {
@@ -172,7 +174,7 @@ async function run() {
   let packageObjs: Record<string, unknown> = {};
 
   await new Promise((resolve, reject) => {
-    const { user, repo, examplesDir, ref } = degitConfig;
+    const { user, repo, examplesDir } = degitConfig;
 
     const emitter = degit(
       `${user}/${repo}/${examplesDir}/${templateName}#${ref}`,
@@ -252,7 +254,7 @@ async function run() {
     // Copy example test cases
     const e2eTestingDir = path.resolve(TEMP_DIR, "__tests__");
     await new Promise((resolve, reject) => {
-      const { user, repo, e2eDir, ref } = degitConfig;
+      const { user, repo, e2eDir } = degitConfig;
 
       // Retrieve e2e test sample files
       const e2eTestingDirEmitter = degit(
