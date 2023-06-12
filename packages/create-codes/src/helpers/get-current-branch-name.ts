@@ -1,9 +1,16 @@
 import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 
-export function getCurrentBranchName() {
-  return execFileSync("git", ["branch", "--show-current"], {
+function executeGitCommand(command: string[]) {
+  return execFileSync("git", [...command], {
     encoding: "utf-8",
     cwd: resolve(__dirname, ".."),
-  }).trim();
+  });
+}
+
+export function getCurrentBranchName() {
+  const currentBranch = executeGitCommand(["branch", "--show-current"]).trim();
+  const isRemote = executeGitCommand(["ls-remote", "origin", currentBranch]);
+
+  return isRemote ? currentBranch : "main";
 }
