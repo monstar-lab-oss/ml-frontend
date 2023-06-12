@@ -11,6 +11,8 @@ const config: PlaywrightTestConfig = {
   use: {
     baseURL: "http://localhost:3000",
     headless: CI,
+    // Tell all tests to load signed-in state from 'storageState.json'.
+    storageState: "./__tests__/utils/storageState.json",
     trace: "on-first-retry",
     ...devices["Desktop Chrome"],
   },
