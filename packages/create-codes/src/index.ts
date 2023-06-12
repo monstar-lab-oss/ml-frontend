@@ -248,8 +248,38 @@ async function run() {
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
-  // TODO: add some example codes
   if (needsE2eTesting) {
+    // Copy example test cases
+    const e2eTestingDir = path.resolve(TEMP_DIR, "__tests__");
+    await new Promise((resolve, reject) => {
+      const { user, repo, e2eDir, ref } = degitConfig;
+
+      // Retrieve e2e test sample files
+      const e2eTestingDirEmitter = degit(
+        `${user}/${repo}/${e2eDir}/__tests__#${ref}`,
+        {
+          cache: false,
+          force: true,
+          verbose: true,
+        }
+      );
+      e2eTestingDirEmitter.on("warn", (err) => reject(err));
+      e2eTestingDirEmitter
+        .clone(path.resolve(TEMP_DIR, "__tests__"))
+        .then(() => resolve({}));
+    });
+
+    // Copy library-specific e2e test files
+    const e2eSourceDir = path.resolve(e2eTestingDir, jsLibrary);
+    const e2eDestDir = path.resolve(appDir, "__tests__");
+    fse.copySync(e2eSourceDir, e2eDestDir);
+
+    // Copy util for e2e testing
+    const utilSourceDir = path.resolve(e2eTestingDir, "utils");
+    const utilDestDir = path.resolve(appDir, "__tests__/utils");
+    fse.copySync(utilSourceDir, utilDestDir);
+
+    // Copy E2E config
     const sourceDir = path.resolve(sharedConfigDir, "playwright");
     const packages = path.join(sourceDir, "package.json");
 
@@ -257,6 +287,7 @@ async function run() {
       filter: (src) => !exclude.includes(path.basename(src)),
     });
 
+    // Merge package.json
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
