@@ -18,3 +18,6 @@ packages/e2e-testing/__tests__/utils/storageState.json
 
 # storybook
 storybook-static
+
+# env
+.env

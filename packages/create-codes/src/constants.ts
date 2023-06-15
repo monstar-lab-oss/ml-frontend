@@ -3,8 +3,7 @@ export const degitConfig = {
   repo: "reactjs-boilerplate",
   examplesDir: "examples",
   e2eDir: "packages/e2e-testing",
-  // TODO: After v1.0.0 is published, it should be download from the `main` branch.
-  ref: "add-e2e-test-samples",
+  ref: process.env.BRANCH_NAME,
 };
 
 // TODO: Maybe we can detect if they are actually using it?
