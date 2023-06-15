@@ -3,7 +3,7 @@ export const degitConfig = {
   repo: "reactjs-boilerplate",
   examplesDir: "examples",
   e2eDir: "packages/e2e-testing",
-  ref: process.env.REF_NAME,
+  ref: process.env.BRANCH_NAME,
 };
 
 // TODO: Maybe we can detect if they are actually using it?

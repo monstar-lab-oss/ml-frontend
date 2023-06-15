@@ -5,7 +5,7 @@ export default defineConfig((options: Options) => ({
   format: ["cjs"],
   clean: true,
   define: {
-    "process.env.REF_NAME": `"${process.env.REF_NAME}"`,
+    "process.env.BRANCH_NAME": `"${process.env.BRANCH_NAME}"`,
   },
   ...options,
 }));

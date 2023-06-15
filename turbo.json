@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["CI", "REF_NAME"],
+  "globalEnv": ["CI", "BRANCH_NAME"],
   "globalDependencies": [".env"],
   "pipeline": {
     "build": {
