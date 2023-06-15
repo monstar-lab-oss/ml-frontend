@@ -8,6 +8,6 @@ This will enable watch mode, which triggers a rebuild whenever changes are made.
 
 ### Adding the environment variables file
 
-Rename or copy `.env.template` to `.env` for your local environment configuration.
+Copy `.env.template` to `.env` for your local environment configuration.
 
 Note: The `.env` file should not be committed to Git and is meant for local usage only.
