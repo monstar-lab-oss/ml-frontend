@@ -4,15 +4,10 @@ import os from "node:os";
 import path from "node:path";
 import fse from "fs-extra";
 import meow from "meow";
-import inquirer from "inquirer";
 import degit from "degit";
-import {
-  degitConfig,
-  eslintPackages,
-  JSLibrary,
-  CLIOptions,
-} from "./constants";
+import { degitConfig, eslintPackages } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
+import { promptAppDir, promptUserInput } from "./helpers/prompt";
 
 const help = `
 Create a new codes for front-end app
@@ -39,132 +34,8 @@ async function run() {
   console.log("\nCreate Codes\n");
   console.log("Welcome!\n");
 
-  const appDir = path.resolve(
-    process.cwd(),
-    dir
-      ? dir
-      : (
-          await inquirer.prompt<{ dir: string }>([
-            {
-              type: "input",
-              name: "dir",
-              message: "Where Would You like to Create Your Application?",
-              default: "./my-app",
-            },
-          ])
-        ).dir
-  );
-
-  const jsLibrary = (
-    await inquirer.prompt<{ jsLibrary: JSLibrary }>([
-      {
-        type: "list",
-        name: "jsLibrary",
-        message: "Select a JavsScript library for UI",
-        choices: (Object.keys(CLIOptions) as JSLibrary[]).map(
-          (key) => CLIOptions[key].name
-        ),
-        default: 0,
-        filter: (val: string) => val.toLowerCase().replace(/\./g, ""),
-      },
-    ])
-  ).jsLibrary;
-
-  const apiSolution = (
-    await inquirer.prompt<{ apiSolution: string }>([
-      {
-        type: "list",
-        name: "apiSolution",
-        message: "Select an API Solution",
-        choices: CLIOptions[jsLibrary].apiSolution,
-        default: "restful",
-      },
-    ])
-  ).apiSolution;
-
-  // TODO: Use modules
-  // eslint-disable-next-line no-unused-vars
-  const useModules = (
-    await inquirer.prompt<{ useModules: string[] }>([
-      {
-        type: "checkbox",
-        name: "useModules",
-        message: "Select module do you want to use",
-        choices: CLIOptions[jsLibrary].useModules,
-      },
-    ])
-  ).useModules;
-
-  const needsTesting = (
-    await inquirer.prompt<{ needsTesting: boolean }>([
-      {
-        type: "confirm",
-        name: "needsTesting",
-        message: "Add Testing codes for Catching bugs early?",
-        default: true,
-      },
-    ])
-  ).needsTesting;
-
-  const needsVitest = (
-    await inquirer.prompt<{ needsVitest?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsVitest",
-        message: "Add Vitest for Unit Testing?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsVitest;
-
-  const needsStorybook = (
-    await inquirer.prompt<{ needsStorybook?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsStorybook",
-        message: "Add Storybook for Visual Testing?",
-        default: true,
-        when: () => !!needsTesting,
-      },
-    ])
-  ).needsStorybook;
-
-  const needsE2eTesting = (
-    await inquirer.prompt<{ needsE2eTesting?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsE2eTesting",
-        message: "Add Playwright for End-To-End Testing?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsE2eTesting;
-
-  const needsEslint = (
-    await inquirer.prompt<{ needsEslint?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsEslint",
-        message: "Add ESLint for Code Linting?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsEslint;
-
-  const needsPrettier = (
-    await inquirer.prompt<{ needsPrettier?: boolean }>([
-      {
-        type: "confirm",
-        name: "needsPrettier",
-        message: "Add Prettier for Code Formatting?",
-        default: true,
-        when: () => needsTesting,
-      },
-    ])
-  ).needsPrettier;
+  const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
+  const { jsLibrary, apiSolution, modules, tests } = await promptUserInput();
 
   const templateName = jsLibrary;
   const TEMP_DIR = path.resolve(__dirname, "temp");
@@ -197,7 +68,7 @@ async function run() {
   // Copy base codes
   const baseSourceDir = path.resolve(TEMP_DIR, "base");
   // FIXME: temporary processing, It would be good to refer to it from config files in the cli templates as well as others.
-  const baseExclude = needsEslint
+  const baseExclude = tests?.useEslint
     ? exclude
     : [...exclude, ".eslintrc.js", ".eslintignore"];
 
@@ -219,14 +90,14 @@ async function run() {
     path.resolve(appDir, "src/modules"),
     {
       filter: (src) => {
-        if (!needsTesting && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
+        if (tests === null && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
         return !exclude.includes(path.basename(src));
       },
     }
   );
 
   // Copy testing libraries
-  if (needsVitest) {
+  if (tests?.useVitest) {
     const sourceDir = path.resolve(TEMP_DIR, "testing-vitest");
     const packages = path.join(configDir, "vitest", "package.json");
 
@@ -237,7 +108,7 @@ async function run() {
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
-  if (needsStorybook) {
+  if (tests?.useStorybook) {
     const sourceDir = path.resolve(TEMP_DIR, "testing-storybook");
     const packages = path.join(configDir, "storybook", "package.json");
 
@@ -248,7 +119,7 @@ async function run() {
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
-  if (needsE2eTesting) {
+  if (tests?.useE2E) {
     // Copy example test cases
     const e2eTestingDir = path.resolve(TEMP_DIR, "__tests__");
     await new Promise((resolve, reject) => {
@@ -292,7 +163,7 @@ async function run() {
   }
 
   // FIXME: temporary processing, It would be good to refer to it from package.json under cli templates as well as others.
-  if (!needsEslint) {
+  if (!tests?.useEslint) {
     // TODO: copy .eslintignore from base
     // fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
     //@ts-expect-error
@@ -304,7 +175,7 @@ async function run() {
     });
   }
 
-  if (needsPrettier) {
+  if (tests?.usePrettier) {
     const sourceDir = path.resolve(sharedConfigDir, "prettier");
     const packages = path.join(sourceDir, "package.json");
 
