@@ -20,6 +20,61 @@ Create a new codes for front-end app
     --version, -v       Show the version of this script
 `;
 const CONFIG_TEMPLATES = path.resolve(__dirname, "../templates");
+const TEMP_DIR = path.resolve(__dirname, "temp");
+const EXCLUDE = [
+  "node_modules",
+  "vite.config.ts",
+  "package.json",
+  "tsconfig.json",
+  "README.md",
+];
+
+/**
+ * Clone selected project template from repository into a temporary directory.
+ */
+async function cloneTemplateToTempDir(templateName: string) {
+  await new Promise((resolve, reject) => {
+    const { user, repo, examplesDir, ref } = degitConfig;
+
+    const emitter = degit(
+      `${user}/${repo}/${examplesDir}/${templateName}#${ref}`,
+      {
+        cache: false,
+        force: true,
+        verbose: true,
+      }
+    );
+    emitter.on("warn", (err) => reject(err));
+    emitter.clone(TEMP_DIR).then(() => resolve({}));
+  });
+}
+
+/**
+ * Copy the project base into the target app directory.
+ */
+function copyBase(
+  appDir: string,
+  packageObjs: Record<string, unknown>,
+  useEslint: boolean
+) {
+  const baseSourceDir = path.resolve(TEMP_DIR, "base");
+
+  // FIXME: temporary processing, It would be good to refer to it from config files in the cli templates as well as others.
+  const baseExclude = useEslint
+    ? EXCLUDE
+    : [...EXCLUDE, ".eslintrc.js", ".eslintignore"];
+
+  fse.copySync(baseSourceDir, appDir, {
+    filter: (src) => !baseExclude.includes(path.basename(src)),
+  });
+
+  packageObjs = deepMergeObjects(
+    packageObjs,
+    fse.readJsonSync(path.join(baseSourceDir, "package.json"))
+  );
+
+  return packageObjs;
+}
 
 async function run() {
   const { input } = meow(help, {
@@ -38,48 +93,12 @@ async function run() {
   const { jsLibrary, apiSolution, modules, tests } = await promptUserInput();
 
   const templateName = jsLibrary;
-  const TEMP_DIR = path.resolve(__dirname, "temp");
+  await cloneTemplateToTempDir(templateName);
 
   let packageObjs: Record<string, unknown> = {};
 
-  await new Promise((resolve, reject) => {
-    const { user, repo, examplesDir, ref } = degitConfig;
-
-    const emitter = degit(
-      `${user}/${repo}/${examplesDir}/${templateName}#${ref}`,
-      {
-        cache: false,
-        force: true,
-        verbose: true,
-      }
-    );
-    emitter.on("warn", (err) => reject(err));
-    emitter.clone(TEMP_DIR).then(() => resolve({}));
-  });
-
-  const exclude = [
-    "node_modules",
-    "vite.config.ts",
-    "package.json",
-    "tsconfig.json",
-    "README.md",
-  ];
-
   // Copy base codes
-  const baseSourceDir = path.resolve(TEMP_DIR, "base");
-  // FIXME: temporary processing, It would be good to refer to it from config files in the cli templates as well as others.
-  const baseExclude = tests?.useEslint
-    ? exclude
-    : [...exclude, ".eslintrc.js", ".eslintignore"];
-
-  fse.copySync(baseSourceDir, appDir, {
-    filter: (src) => !baseExclude.includes(path.basename(src)),
-  });
-
-  packageObjs = deepMergeObjects(
-    packageObjs,
-    fse.readJsonSync(path.join(baseSourceDir, "package.json"))
-  );
+  packageObjs = copyBase(appDir, packageObjs, tests?.useEslint ?? false);
 
   const configDir = path.resolve(CONFIG_TEMPLATES, jsLibrary);
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
@@ -91,7 +110,7 @@ async function run() {
     {
       filter: (src) => {
         if (tests === null && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
-        return !exclude.includes(path.basename(src));
+        return !EXCLUDE.includes(path.basename(src));
       },
     }
   );
@@ -102,7 +121,7 @@ async function run() {
     const packages = path.join(configDir, "vitest", "package.json");
 
     fse.copySync(sourceDir, appDir, {
-      filter: (src) => !exclude.includes(path.basename(src)),
+      filter: (src) => !EXCLUDE.includes(path.basename(src)),
     });
 
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
@@ -113,7 +132,7 @@ async function run() {
     const packages = path.join(configDir, "storybook", "package.json");
 
     fse.copySync(sourceDir, appDir, {
-      filter: (src) => !exclude.includes(path.basename(src)),
+      filter: (src) => !EXCLUDE.includes(path.basename(src)),
     });
 
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
@@ -155,7 +174,7 @@ async function run() {
     const packages = path.join(sourceDir, "package.json");
 
     fse.copySync(sourceDir, appDir, {
-      filter: (src) => !exclude.includes(path.basename(src)),
+      filter: (src) => !EXCLUDE.includes(path.basename(src)),
     });
 
     // Merge package.json
@@ -180,7 +199,7 @@ async function run() {
     const packages = path.join(sourceDir, "package.json");
 
     fse.copySync(sourceDir, appDir, {
-      filter: (src) => !exclude.includes(path.basename(src)),
+      filter: (src) => !EXCLUDE.includes(path.basename(src)),
     });
 
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
