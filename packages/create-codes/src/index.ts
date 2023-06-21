@@ -76,6 +76,23 @@ function copyBase(
   return packageObjs;
 }
 
+/**
+ * Copy the selected modules into the target app directory.
+ */
+function copyModules(appDir: string, apiSolution: string, useTests: boolean) {
+  // TODO: Copy modules (currently only copying the API solution)
+  fse.copySync(
+    path.resolve(TEMP_DIR, `module-api-${apiSolution}`),
+    path.resolve(appDir, "src/modules"),
+    {
+      filter: (src) => {
+        if (!useTests && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
+        return !EXCLUDE.includes(path.basename(src));
+      },
+    }
+  );
+}
+
 async function run() {
   const { input } = meow(help, {
     flags: {
@@ -103,17 +120,8 @@ async function run() {
   const configDir = path.resolve(CONFIG_TEMPLATES, jsLibrary);
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
 
-  // TODO: Copy modules
-  fse.copySync(
-    path.resolve(TEMP_DIR, `module-api-${apiSolution}`),
-    path.resolve(appDir, "src/modules"),
-    {
-      filter: (src) => {
-        if (tests === null && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
-        return !EXCLUDE.includes(path.basename(src));
-      },
-    }
-  );
+  // Copy modules
+  copyModules(appDir, apiSolution, tests !== null);
 
   // Copy testing libraries
   if (tests?.useVitest) {
