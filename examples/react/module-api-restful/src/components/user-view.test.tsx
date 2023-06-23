@@ -16,9 +16,15 @@ const wrapper = (props: { children: React.ReactNode }) => (
   </QueryClientProvider>
 );
 
-test("Should return user when page loaded", async () => {
-  render(<UserView />, { wrapper });
+describe("UserView", () => {
+  test("Should render user when page loaded", async () => {
+    render(<UserView id={"f79e82e8-c34a-4dc7-a49e-9fadc0979fda"} />, {
+      wrapper,
+    });
 
-  await waitForElementToBeRemoved(() => screen.queryByLabelText("loading"));
-  expect(screen.getByRole("heading", { name: "John", level: 2 })).toBeDefined();
+    await waitForElementToBeRemoved(() => screen.queryByLabelText("loading"));
+    expect(
+      screen.getByRole("heading", { name: "John", level: 2 })
+    ).toBeDefined();
+  });
 });

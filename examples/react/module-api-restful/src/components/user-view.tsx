@@ -1,10 +1,11 @@
 import { useUser } from "../hooks/use-user";
 
-export function UserView() {
-  const query = useUser();
+export function UserView({ id }: { id: string }) {
+  const { isLoading, isError, data } = useUser(id);
 
-  if (query.isLoading) return <span aria-label="loading">Loading...</span>;
-  if (query.isError) return <span aria-label="error">Error</span>;
+  if (isLoading) return <span aria-label="loading">Loading...</span>;
+  if (isError) return <span aria-label="error">Error</span>;
+  if (!data) return <span>No data!</span>;
 
-  return <h2>{query.data?.name}</h2>;
+  return <h2>{data.name}</h2>;
 }
