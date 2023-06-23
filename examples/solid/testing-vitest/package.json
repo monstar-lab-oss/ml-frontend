@@ -1,8 +1,5 @@
 {
   "name": "@solid-testing/vitest",
-  "scripts": {
-    "test": "vitest run --dir .."
-  },
   "dependencies": {
     "jsdom": "21.1.0",
     "node-fetch": "3.3.0",
