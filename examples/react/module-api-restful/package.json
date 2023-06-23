@@ -12,6 +12,8 @@
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "4.24.5",
     "@testing-library/react": "13.4.0",
+    "@testing-library/user-event": "14.4.3",
+    "@types/react": "18.2.0",
     "tsconfig": "workspace:*",
     "typescript": "4.9.5",
     "vitest": "0.28.4"
