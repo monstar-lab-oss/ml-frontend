@@ -1,17 +1,19 @@
 import inquirer from "inquirer";
 import { JSLibrary, CLIOptions } from "../constants";
 
-type UserInput = {
+export type UserInputTests = {
+  useVitest: boolean | undefined;
+  useStorybook: boolean | undefined;
+  useE2E: boolean | undefined;
+  useEslint: boolean | undefined;
+  usePrettier: boolean | undefined;
+};
+
+export type UserInput = {
   jsLibrary: JSLibrary;
   apiSolution: string;
   modules: string[];
-  tests: {
-    useVitest: boolean | undefined;
-    useStorybook: boolean | undefined;
-    useE2E: boolean | undefined;
-    useEslint: boolean | undefined;
-    usePrettier: boolean | undefined;
-  } | null;
+  tests: UserInputTests | null;
 };
 
 /**

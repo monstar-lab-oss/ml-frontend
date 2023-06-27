@@ -7,7 +7,11 @@ import meow from "meow";
 import degit from "degit";
 import { degitConfig, eslintPackages } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
-import { promptAppDir, promptUserInput } from "./helpers/prompt";
+import {
+  type UserInputTests,
+  promptAppDir,
+  promptUserInput,
+} from "./helpers/prompt";
 
 const help = `
 Create a new codes for front-end app
@@ -93,38 +97,19 @@ function copyModules(appDir: string, apiSolution: string, useTests: boolean) {
   );
 }
 
-async function run() {
-  const { input } = meow(help, {
-    flags: {
-      help: { type: "boolean", default: false, alias: "h" },
-      version: { type: "boolean", default: false, alias: "v" },
-    },
-  });
-
-  const [dir] = input;
-
-  console.log("\nCreate Codes\n");
-  console.log("Welcome!\n");
-
-  const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
-  const { jsLibrary, apiSolution, modules, tests } = await promptUserInput();
-
-  const templateName = jsLibrary;
-  await cloneTemplateToTempDir(templateName);
-
-  let packageObjs: Record<string, unknown> = {};
-
-  // Copy base codes
-  packageObjs = copyBase(appDir, packageObjs, tests?.useEslint ?? false);
-
+/**
+ * Copy the selected test packages into the target app directory.
+ */
+async function copyTests(
+  tests: UserInputTests,
+  jsLibrary: string,
+  appDir: string,
+  sharedConfigDir: string,
+  packageObjs: Record<string, unknown>
+) {
   const configDir = path.resolve(CONFIG_TEMPLATES, jsLibrary);
-  const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
 
-  // Copy modules
-  copyModules(appDir, apiSolution, tests !== null);
-
-  // Copy testing libraries
-  if (tests?.useVitest) {
+  if (tests.useVitest) {
     const sourceDir = path.resolve(TEMP_DIR, "testing-vitest");
     const packages = path.join(configDir, "vitest", "package.json");
 
@@ -135,7 +120,7 @@ async function run() {
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
-  if (tests?.useStorybook) {
+  if (tests.useStorybook) {
     const sourceDir = path.resolve(TEMP_DIR, "testing-storybook");
     const packages = path.join(configDir, "storybook", "package.json");
 
@@ -146,7 +131,7 @@ async function run() {
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
-  if (tests?.useE2E) {
+  if (tests.useE2E) {
     // Copy example test cases
     const e2eTestingDir = path.resolve(TEMP_DIR, "__tests__");
     await new Promise((resolve, reject) => {
@@ -190,7 +175,7 @@ async function run() {
   }
 
   // FIXME: temporary processing, It would be good to refer to it from package.json under cli templates as well as others.
-  if (!tests?.useEslint) {
+  if (!tests.useEslint) {
     // TODO: copy .eslintignore from base
     // fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
     //@ts-expect-error
@@ -202,7 +187,7 @@ async function run() {
     });
   }
 
-  if (tests?.usePrettier) {
+  if (tests.usePrettier) {
     const sourceDir = path.resolve(sharedConfigDir, "prettier");
     const packages = path.join(sourceDir, "package.json");
 
@@ -211,6 +196,48 @@ async function run() {
     });
 
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
+  }
+
+  return packageObjs;
+}
+
+async function run() {
+  const { input } = meow(help, {
+    flags: {
+      help: { type: "boolean", default: false, alias: "h" },
+      version: { type: "boolean", default: false, alias: "v" },
+    },
+  });
+
+  const [dir] = input;
+
+  console.log("\nCreate Codes\n");
+  console.log("Welcome!\n");
+
+  const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
+  const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
+  const { jsLibrary, apiSolution, modules, tests } = await promptUserInput();
+
+  const templateName = jsLibrary;
+  await cloneTemplateToTempDir(templateName);
+
+  let packageObjs: Record<string, unknown> = {};
+
+  // Copy base codes
+  packageObjs = copyBase(appDir, packageObjs, tests?.useEslint ?? false);
+
+  // Copy modules
+  copyModules(appDir, apiSolution, tests !== null);
+
+  // Copy testing libraries
+  if (tests !== null) {
+    packageObjs = await copyTests(
+      tests,
+      jsLibrary,
+      appDir,
+      sharedConfigDir,
+      packageObjs
+    );
   }
 
   // Copy commons
