@@ -201,6 +201,32 @@ async function copyTests(
   return packageObjs;
 }
 
+/**
+ * Copy common files into the target app directory
+ */
+function copyCommon(
+  appDir: string,
+  sharedConfigDir: string,
+  packageObjs: Record<string, unknown>
+) {
+  fse.copySync(`${sharedConfigDir}/gitignore`, `${appDir}/gitignore`);
+  // FIXME: reuse codes with internal package
+  fse.copySync(`${sharedConfigDir}/__mocks__`, `${appDir}/__mocks__`, {
+    overwrite: true,
+  });
+  // Rename dot files
+  fse.renameSync(
+    path.join(appDir, "gitignore"),
+    path.join(appDir, ".gitignore")
+  );
+
+  // Rewrite package.json
+  fse.writeJsonSync(path.join(appDir, "package.json"), packageObjs, {
+    spaces: 2,
+    EOL: os.EOL,
+  });
+}
+
 async function run() {
   const { input } = meow(help, {
     flags: {
@@ -241,22 +267,7 @@ async function run() {
   }
 
   // Copy commons
-  fse.copySync(`${sharedConfigDir}/gitignore`, `${appDir}/gitignore`);
-  // FIXME: reuse codes with internal package
-  fse.copySync(`${sharedConfigDir}/__mocks__`, `${appDir}/__mocks__`, {
-    overwrite: true,
-  });
-  // Rename dot files
-  fse.renameSync(
-    path.join(appDir, "gitignore"),
-    path.join(appDir, ".gitignore")
-  );
-
-  // Rewrite package.json
-  fse.writeJsonSync(path.join(appDir, "package.json"), packageObjs, {
-    spaces: 2,
-    EOL: os.EOL,
-  });
+  copyCommon(appDir, sharedConfigDir, packageObjs);
 
   console.log();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);
