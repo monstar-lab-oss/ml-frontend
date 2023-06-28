@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-import os from "node:os";
-import path from "node:path";
 import fse from "fs-extra";
 import meow from "meow";
-import degit from "degit";
+import os from "node:os";
+import path from "node:path";
 import { degitConfig, eslintPackages } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
+import { cloneFromRepo } from "./helpers/degit";
 import {
-  type UserInputTests,
   promptAppDir,
   promptUserInput,
+  type UserInputTests,
 } from "./helpers/prompt";
 
 const help = `
@@ -39,20 +39,11 @@ let packageObjs: Record<string, unknown> = {};
  * Clone selected project template from repository into a temporary directory.
  */
 async function cloneTemplateToTempDir(templateName: string) {
-  await new Promise((resolve, reject) => {
-    const { user, repo, examplesDir, ref } = degitConfig;
-
-    const emitter = degit(
-      `${user}/${repo}/${examplesDir}/${templateName}#${ref}`,
-      {
-        cache: false,
-        force: true,
-        verbose: true,
-      }
-    );
-    emitter.on("warn", (err) => reject(err));
-    emitter.clone(TEMP_DIR).then(() => resolve({}));
-  });
+  const { user, repo, examplesDir, ref } = degitConfig;
+  await cloneFromRepo(
+    `${user}/${repo}/${examplesDir}/${templateName}#${ref}`,
+    TEMP_DIR
+  );
 }
 
 /**
@@ -131,23 +122,11 @@ async function copyTests(
   if (tests.useE2E) {
     // Copy example test cases
     const e2eTestingDir = path.resolve(TEMP_DIR, "__tests__");
-    await new Promise((resolve, reject) => {
-      const { user, repo, e2eDir, ref } = degitConfig;
-
-      // Retrieve e2e test sample files
-      const e2eTestingDirEmitter = degit(
-        `${user}/${repo}/${e2eDir}/__tests__#${ref}`,
-        {
-          cache: false,
-          force: true,
-          verbose: true,
-        }
-      );
-      e2eTestingDirEmitter.on("warn", (err) => reject(err));
-      e2eTestingDirEmitter
-        .clone(path.resolve(TEMP_DIR, "__tests__"))
-        .then(() => resolve({}));
-    });
+    const { user, repo, e2eDir, ref } = degitConfig;
+    await cloneFromRepo(
+      `${user}/${repo}/${e2eDir}/__tests__#${ref}`,
+      path.resolve(TEMP_DIR, "__tests__")
+    );
 
     // Copy library-specific e2e test files
     const e2eSourceDir = path.resolve(e2eTestingDir, jsLibrary);
