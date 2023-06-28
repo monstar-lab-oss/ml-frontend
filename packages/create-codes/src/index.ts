@@ -33,6 +33,8 @@ const EXCLUDE = [
   "README.md",
 ];
 
+let packageObjs: Record<string, unknown> = {};
+
 /**
  * Clone selected project template from repository into a temporary directory.
  */
@@ -56,11 +58,7 @@ async function cloneTemplateToTempDir(templateName: string) {
 /**
  * Copy the project base into the target app directory.
  */
-function copyBase(
-  appDir: string,
-  packageObjs: Record<string, unknown>,
-  useEslint: boolean
-) {
+function copyBase(appDir: string, useEslint: boolean) {
   const baseSourceDir = path.resolve(TEMP_DIR, "base");
 
   // FIXME: temporary processing, It would be good to refer to it from config files in the cli templates as well as others.
@@ -104,8 +102,7 @@ async function copyTests(
   tests: UserInputTests,
   jsLibrary: string,
   appDir: string,
-  sharedConfigDir: string,
-  packageObjs: Record<string, unknown>
+  sharedConfigDir: string
 ) {
   const configDir = path.resolve(CONFIG_TEMPLATES, jsLibrary);
 
@@ -191,11 +188,7 @@ async function copyTests(
 /**
  * Copy common files into the target app directory
  */
-function copyCommon(
-  appDir: string,
-  sharedConfigDir: string,
-  packageObjs: Record<string, unknown>
-) {
+function copyCommon(appDir: string, sharedConfigDir: string) {
   fse.copySync(`${sharedConfigDir}/gitignore`, `${appDir}/gitignore`);
   // FIXME: reuse codes with internal package
   fse.copySync(`${sharedConfigDir}/__mocks__`, `${appDir}/__mocks__`, {
@@ -249,23 +242,15 @@ async function run() {
   const templateName = jsLibrary;
   await cloneTemplateToTempDir(templateName);
 
-  let packageObjs: Record<string, unknown> = {};
-
   // Copy base codes
-  packageObjs = copyBase(appDir, packageObjs, tests?.useEslint ?? false);
+  copyBase(appDir, tests?.useEslint ?? false);
 
   // Copy modules
   copyModules(appDir, apiSolution, tests !== null);
 
   // Copy testing libraries
   if (tests !== null) {
-    packageObjs = await copyTests(
-      tests,
-      jsLibrary,
-      appDir,
-      sharedConfigDir,
-      packageObjs
-    );
+    await copyTests(tests, jsLibrary, appDir, sharedConfigDir);
   }
 
   // FIXME: temporary processing, It would be good to refer to it from package.json under cli templates as well as others.
@@ -274,7 +259,7 @@ async function run() {
   }
 
   // Copy commons
-  copyCommon(appDir, sharedConfigDir, packageObjs);
+  copyCommon(appDir, sharedConfigDir);
 
   console.log();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);
