@@ -174,19 +174,6 @@ async function copyTests(
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
   }
 
-  // FIXME: temporary processing, It would be good to refer to it from package.json under cli templates as well as others.
-  if (!tests.useEslint) {
-    // TODO: copy .eslintignore from base
-    // fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
-    //@ts-expect-error
-    delete packageObjs.scripts.lint;
-    //@ts-expect-error
-    Object.keys(packageObjs.devDependencies).forEach((key) => {
-      //@ts-expect-error
-      eslintPackages.includes(key) && delete packageObjs.devDependencies[key];
-    });
-  }
-
   if (tests.usePrettier) {
     const sourceDir = path.resolve(sharedConfigDir, "prettier");
     const packages = path.join(sourceDir, "package.json");
@@ -227,6 +214,21 @@ function copyCommon(
   });
 }
 
+/**
+ * Remove ESLint-related config from output project files.
+ */
+function removeEslintConfig() {
+  // TODO: copy .eslintignore from base
+  // fse.removeSync(path.resolve(appDir, ".eslintrc.js"));
+  //@ts-expect-error
+  delete packageObjs.scripts.lint;
+  //@ts-expect-error
+  Object.keys(packageObjs.devDependencies).forEach((key) => {
+    //@ts-expect-error
+    eslintPackages.includes(key) && delete packageObjs.devDependencies[key];
+  });
+}
+
 async function run() {
   const { input } = meow(help, {
     flags: {
@@ -264,6 +266,11 @@ async function run() {
       sharedConfigDir,
       packageObjs
     );
+  }
+
+  // FIXME: temporary processing, It would be good to refer to it from package.json under cli templates as well as others.
+  if (!tests?.useEslint) {
+    removeEslintConfig();
   }
 
   // Copy commons
