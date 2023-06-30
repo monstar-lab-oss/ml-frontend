@@ -1,6 +1,10 @@
 import { useUser } from "../hooks/use-user";
 
-export function UserView({ id }: { id: string }) {
+type Props = {
+  id: string;
+};
+
+export function UserView({ id }: Props) {
   const { isLoading, isError, data } = useUser(id);
 
   if (isLoading) return <span aria-label="loading">Loading...</span>;
