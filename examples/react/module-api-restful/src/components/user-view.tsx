@@ -1,10 +1,15 @@
 import { useUser } from "../hooks/use-user";
 
-export function UserView() {
-  const query = useUser();
+type Props = {
+  id: string;
+};
 
-  if (query.isLoading) return <span aria-label="loading">Loading...</span>;
-  if (query.isError) return <span aria-label="error">Error</span>;
+export function UserView({ id }: Props) {
+  const { isLoading, isError, data } = useUser(id);
 
-  return <h2>{query.data?.name}</h2>;
+  if (isLoading) return <span aria-label="loading">Loading...</span>;
+  if (isError) return <span aria-label="error">Error</span>;
+  if (!data) return <span>No data!</span>;
+
+  return <h2>{data.name}</h2>;
 }
