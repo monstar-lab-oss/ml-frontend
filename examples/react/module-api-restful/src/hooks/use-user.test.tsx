@@ -64,7 +64,7 @@ describe("useUsers", () => {
 });
 
 describe("useAddUser", () => {
-  test("Should post a user without any errors", async () => {
+  test("Should add a user without any errors", async () => {
     const { result } = renderHook(useAddUser, { wrapper });
 
     await act(async () => result.current.mutate({ name: "Ringo" }));
@@ -94,7 +94,7 @@ describe("useUpdateUser", () => {
 });
 
 describe("useRemoveUser", () => {
-  test("Should delete a user without any errors", async () => {
+  test("Should remove a user without any errors", async () => {
     const { result } = renderHook(useRemoveUser, { wrapper });
 
     await act(async () =>
