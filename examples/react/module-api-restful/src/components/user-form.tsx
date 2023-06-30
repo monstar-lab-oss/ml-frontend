@@ -18,16 +18,16 @@ export function UserForm({ id }: Props) {
   const { mutate: updateMutate } = useUpdateUser();
   const { mutate: removeMutate } = useRemoveUser();
 
-  const [value, setValue] = useState(data?.name || "");
+  const [user, setUser] = useState({ name: data?.name || "" });
 
   const onAddSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addMutate({ name: value });
+    addMutate({ name: user.name });
   };
 
   const onUpdateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    id && updateMutate({ id, name: value });
+    id && updateMutate({ id, name: user.name });
   };
 
   const onRemoveClick = async () => {
@@ -39,7 +39,10 @@ export function UserForm({ id }: Props) {
   return (
     <>
       <form onSubmit={isUpdate ? onUpdateSubmit : onAddSubmit}>
-        <input value={value} onChange={(e) => setValue(e.target.value)} />
+        <input
+          value={user.name}
+          onChange={(e) => setUser({ name: e.target.value })}
+        />
         <button type="submit">Submit</button>
       </form>
 
