@@ -75,7 +75,7 @@ describe("useAddUser", () => {
 });
 
 describe("useUpdateUser", () => {
-  test("Should patch a user without any errors", async () => {
+  test("Should update a user without any errors", async () => {
     const { result } = renderHook(useUpdateUser, { wrapper });
 
     await act(async () =>
