@@ -39,9 +39,9 @@ let packageObjs: Record<string, unknown> = {};
  * Clone selected project template from repository into a temporary directory.
  */
 async function cloneTemplateToTempDir(templateName: string) {
-  const { user, repo, examplesDir, ref } = degitConfig;
+  const { user, repo, codeDir, ref } = degitConfig;
   await cloneFromRepo(
-    `${user}/${repo}/${examplesDir}/${templateName}#${ref}`,
+    `${user}/${repo}/${codeDir}/${templateName}#${ref}`,
     TEMP_DIR
   );
 }
