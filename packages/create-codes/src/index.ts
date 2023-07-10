@@ -72,14 +72,18 @@ function copyBase(appDir: string, useEslint: boolean) {
 /**
  * Copy the selected modules into the target app directory.
  */
-function copyModules(appDir: string, apiSolution: string, useTests: boolean) {
+function copyModules(
+  appDir: string,
+  apiSolution: string,
+  useUnitTests: boolean
+) {
   // TODO: Copy modules (currently only copying the API solution)
   fse.copySync(
     path.resolve(TEMP_DIR, `module-api-${apiSolution}`),
     path.resolve(appDir, "src/modules"),
     {
       filter: (src) => {
-        if (!useTests && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
+        if (!useUnitTests && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
         return !EXCLUDE.includes(path.basename(src));
       },
     }
@@ -225,7 +229,7 @@ async function run() {
   copyBase(appDir, tests?.useEslint ?? false);
 
   // Copy modules
-  copyModules(appDir, apiSolution, tests !== null);
+  copyModules(appDir, apiSolution, tests?.useVitest ?? false);
 
   // Copy testing libraries
   if (tests !== null) {
