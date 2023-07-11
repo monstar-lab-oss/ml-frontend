@@ -7,7 +7,7 @@ This is monorepo for creating new front-end codes with a standard structure.
 - `create-codes`: a simple command line tool that makes it easy to create new projects by scaffolding out boilerplate code
 - `eslint-config-custom`: `eslint` configurations
 
-## Examples
+## Code
 
 - `react-standard`: React app with a standard structure
 - `vue/base`: Vue app with a standard structure
