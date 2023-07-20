@@ -26,7 +26,11 @@ export const user = [
       );
     }
 
-    return res(ctx.json(getItem("testUser")));
+    return res(
+      ctx.json({
+        data: getItem("testUser"),
+      })
+    );
   }),
   rest.post<{
     email: string;
