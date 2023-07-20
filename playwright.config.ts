@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   globalSetup: require.resolve("./tests/e2e/utils/global-setup"),
   use: {
     headless: !!process.env.CI,
-    baseURL: "http://localhost:3000/",
+    baseURL: "http://localhost:3000/ml-frontend/",
     // Tell all tests to load signed-in state from 'storageState.json'.
     storageState: "./tests/e2e/utils/storageState.json",
     trace: "on-first-retry",
