@@ -1,0 +1,62 @@
+
+name: github pages
+
+on:
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # Create cache for node_modules
+      - name: Restore Dependencies Cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      # Install Dependencies if yarn.lock changed
+      - name: Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Run UT
+        run: yarn test
+
+      - name: Run type checks
+        run: yarn type
+
+      # Create cache for Playwright installation
+      - name: Restore Playwright Installation Cache
+        id: playwright-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+
+      # Install Playwright if yarn.lock changed
+      - name: Install Playwright
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: ./node_modules/.bin/playwright install
+
+      - name: Run E2E
+        run: yarn e2e
+
+      - name: Build
+        run: yarn build
+
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./dist
