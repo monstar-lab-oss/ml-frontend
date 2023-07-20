@@ -55,8 +55,8 @@ const Profile = () => {
               <img
                 src={data.avatar}
                 alt={`${data.first_name} ${data.last_name}`}
-                width={data.avatar_size_width}
-                height={data.avatar_size_height}
+                width={128}
+                height={128}
                 style={{ backgroundColor: "#F6F8FA" }}
               />
             ) : null}

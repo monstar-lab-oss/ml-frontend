@@ -7,8 +7,6 @@ const testUser = {
   first_name: "George",
   last_name: "Bluth",
   avatar: "https://reqres.in/img/faces/1-image.jpg",
-  avatar_size_width: 128,
-  avatar_size_height: 128,
 };
 setInitalItem({ testUser });
 
