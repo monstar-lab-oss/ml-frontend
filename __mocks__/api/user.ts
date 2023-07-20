@@ -16,7 +16,7 @@ setInitalItem({ testUser });
 const isValidatedAccessToken = (token?: string) => !!token;
 
 export const user = [
-  rest.get("/user/1", (req, res, ctx) => {
+  rest.get("/users/1", (req, res, ctx) => {
     const token = req.headers.get("Authorization")?.split(" ").at(-1);
 
     if (!isValidatedAccessToken(token)) {
@@ -34,7 +34,7 @@ export const user = [
     email: string;
     first_name: string;
     last_name: string;
-  }>("/user/1", (req, res, ctx) => {
+  }>("/users/1", (req, res, ctx) => {
     const token = req.headers.get("Authorization")?.split(" ").at(-1);
 
     if (!isValidatedAccessToken(token)) {

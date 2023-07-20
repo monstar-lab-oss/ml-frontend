@@ -7,11 +7,11 @@ import { User } from "@/types/user";
 const useGetUserQuery = ({ id }: { id: string }) =>
   useQuery({
     queryKey: ["user"],
-    queryFn: () => http.get<User>(`/user/${id}`),
+    queryFn: () => http.get<User>(`/users/${id}`),
   });
 
 const updateUser = async (payload: User) => {
-  const response = await http.post<{ message: string }>(`/user/1`, payload);
+  const response = await http.post<{ message: string }>(`/users/1`, payload);
   return response;
 };
 
