@@ -1,5 +1,5 @@
 import { ComponentProps, lazy, Suspense } from "react";
-import { Route as _Route, Redirect, Switch, useLocation } from "wouter";
+import { Route as _Route,Router, Redirect, Switch, useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { HeaderLayout } from "@/components/layouts/HeaderLayout";
 import { BlankLayout } from "@/components/layouts/BlankLayout";
@@ -53,7 +53,7 @@ export const Routes = () => {
       <Layout>
         <Switch>
           <Route path="/">
-            <Redirect to={"home"} />
+            <Redirect to={"/home"} />
           </Route>
           <Route path="/login">
             <Login />

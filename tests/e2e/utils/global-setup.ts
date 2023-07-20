@@ -3,7 +3,7 @@ import { chromium, FullConfig } from "@playwright/test";
 const globalSetup = async (_config: FullConfig) => {
   const browser = await chromium.launch({ headless: !!process.env.CI });
   const page = await browser.newPage();
-  await page.goto("http://localhost:3000/login");
+  await page.goto("http://localhost:3000/ml-frontend/login");
 
   await Promise.all([
     page.waitForResponse(

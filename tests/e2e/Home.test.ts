@@ -5,7 +5,7 @@ let page: Page;
 test.beforeEach(async ({ browser }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   page = await browser.newPage();
-  await page.goto("/");
+  await page.goto("");
 });
 
 test.afterAll(async () => {
@@ -27,15 +27,16 @@ test.describe("Home page", () => {
     });
 
     // test each anchor
-    await expect(profileLocator).toHaveAttribute("href", "/profile");
-    await expect(countLocator).toHaveAttribute("href", "/count");
+    await expect(profileLocator).toHaveAttribute("href", "/ml-frontend/profile");
+    await expect(countLocator).toHaveAttribute("href", "/ml-frontend/count");
     await expect(countWithHistoryLocator).toHaveAttribute(
       "href",
-      "/count_with_history"
+      "/ml-frontend/count_with_history"
     );
   });
 
   test("Move to profile page", async () => {
+    
     const profileLocator = await page.locator("a", {
       hasText: "Profile",
     });

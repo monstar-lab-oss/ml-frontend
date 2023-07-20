@@ -5,7 +5,7 @@ let page: Page;
 test.beforeAll(async ({ browser }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   page = await browser.newPage();
-  await page.goto("/profile");
+  await page.goto("profile");
 });
 
 test.afterAll(async () => {

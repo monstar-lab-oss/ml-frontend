@@ -8,7 +8,7 @@ test.beforeAll(async ({ browser }) => {
   // Click the Confirm button in the dialog that appears when the request is successful.
   page.on("dialog", (dialog) => dialog.accept());
 
-  await page.goto("/employees");
+  await page.goto("employees");
   await page.waitForLoadState("networkidle");
 });
 

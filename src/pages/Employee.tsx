@@ -5,7 +5,7 @@ import EmployeeCreate from "@/pages/EmployeeCreate";
 
 const Employee = () => {
   return (
-    <Router base="/employees">
+    <Router base="/ml-frontend/employees">
       <EmployeeList />
       <Switch>
         <Route path="/new">

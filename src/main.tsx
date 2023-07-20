@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { useI18next } from "@/i18next";
+import { Router } from "wouter";
+
 import { App } from "@/App";
 import "./main.scss";
 
@@ -19,7 +21,9 @@ prepare().then(() => {
   const root = createRoot(document.getElementById("root")!);
   root.render(
     <StrictMode>
-      <App />
+      <Router base="/ml-frontend">
+        <App />
+      </Router>
     </StrictMode>
   );
 });
