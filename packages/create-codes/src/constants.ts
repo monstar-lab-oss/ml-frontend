@@ -1,6 +1,6 @@
 export const degitConfig = {
   user: "monstar-lab-oss",
-  repo: "reactjs-boilerplate",
+  repo: "ml-frontend",
   codeDir: "code",
   e2eDir: "packages/e2e-testing",
   ref: process.env.BRANCH_NAME,
