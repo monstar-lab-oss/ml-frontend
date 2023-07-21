@@ -6,10 +6,10 @@ const createId = () => String(Math.floor(Date.now() * Math.random()));
 
 const setInitialEmployees = () => {
   setItem('employee', [
-    { id: '1', name: "foo" },
-    { id: '2', name: "bar" },
-    { id: '3', name: "baz" },
-    { id: '4', name: "error employee" }, // Can not update or delete this user
+    { id: '2', name: "foo" },
+    { id: '3', name: "bar" },
+    { id: '4', name: "baz" },
+    { id: '5', name: "error employee" }, // Can not update or delete this user
   ]);
 }
 
@@ -19,16 +19,16 @@ const getEmployeeById = (id: Employee["id"]) =>
   (getItem("employee") as Employee[]).find((x) => x.id === id);
 
 export const employee = [
-  rest.get("/employee", (_, res, ctx) =>
-    res(ctx.json(getItem("employee") as Employee[]))
+  rest.get("/users", (_, res, ctx) =>
+    res(ctx.json({ data: getItem("employee") as Employee[] }))
   ),
 
-  rest.get("/employee/:id", (req, res, ctx) => {
+  rest.get("/users/:id", (req, res, ctx) => {
     const employee = getEmployeeById(req.params.id as string);
     return employee ? res(ctx.json(employee)) : res(ctx.status(400));
   }),
 
-  rest.post<Omit<Employee, "id">>("/employee", (req, res, ctx) => {
+  rest.post<Omit<Employee, "id">>("/users", (req, res, ctx) => {
     setItem("employee", [
       ...getItem("employee"),
       { id: createId(), ...req.body },
@@ -36,11 +36,11 @@ export const employee = [
     return res(ctx.json({ message: "create success" }));
   }),
 
-  rest.put<Omit<Employee, "id">>("/employee/:id", (req, res, ctx) => {
+  rest.put<Omit<Employee, "id">>("/users/:id", (req, res, ctx) => {
     const employee = getEmployeeById(req.params.id as string);
     if (!employee) return res(ctx.status(400));
 
-    if (employee.id === '4') {
+    if (employee.id === '5') {
       return res(ctx.status(500))
     }
 
@@ -52,11 +52,11 @@ export const employee = [
     return res(ctx.json({ message: "update success" }));
   }),
 
-  rest.delete<{ id: Employee["id"] }>("/employee/:id", (req, res, ctx) => {
+  rest.delete<{ id: Employee["id"] }>("/users/:id", (req, res, ctx) => {
     const employee = getEmployeeById(req.params.id as string);
     if (!employee) return res(ctx.status(400));
 
-    if (employee.id === '4') {
+    if (employee.id === '5') {
       return res(ctx.status(500))
     }
 

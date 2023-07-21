@@ -38,7 +38,7 @@ test.describe("Employee page", () => {
     await page.locator("data-testid=input-name").fill("foobar");
 
     await Promise.all([
-      page.waitForResponse((res) => res.url().includes("/employee")),
+      page.waitForResponse((res) => res.url().includes("/users")),
       page.locator("input[type=submit]").click(),
     ]);
 
@@ -66,7 +66,7 @@ test.describe("Employee page", () => {
     await nameInput.fill("bazfoobar");
 
     await Promise.all([
-      page.waitForResponse((res) => res.url().includes("/employee")),
+      page.waitForResponse((res) => res.url().includes("/users")),
       page.locator("input[type=submit]").click(),
     ]);
 
@@ -89,7 +89,7 @@ test.describe("Employee page", () => {
     await employeeIdLink.click();
 
     await Promise.all([
-      page.waitForResponse((res) => res.url().includes("/employee")),
+      page.waitForResponse((res) => res.url().includes("/users")),
       page.getByRole("button", { name: "Remove" }).click(),
     ]);
 

@@ -7,7 +7,7 @@ import { useLocation } from "wouter";
 type Payload = Omit<Employee, "id">;
 
 const createEmployee = async (payload: Payload) => {
-  const response = await http.post<{ message: string }>("/employee", payload);
+  const response = await http.post<{ message: string }>("/users", payload);
   return response;
 };
 

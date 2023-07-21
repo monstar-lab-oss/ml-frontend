@@ -6,7 +6,7 @@ import { Employee } from "@/types/employee";
 const useGetEmployeeListQuery = () =>
   useQuery({
     queryKey: ["userList"],
-    queryFn: () => http.get<Employee[]>("/employee"),
+    queryFn: () => http.get<Employee[]>("/users"),
   });
 
 const EmployeeList = () => {

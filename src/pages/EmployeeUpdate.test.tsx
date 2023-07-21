@@ -28,7 +28,7 @@ describe('EmployeeUpdate', () => {
   })
 
   test('renders employee form', async () => {
-    const { getByText } = renderWithQueryClient(<EmployeeUpdate id="1" />)
+    const { getByText } = renderWithQueryClient(<EmployeeUpdate id="2" />)
 
     await waitFor(() => {
       expect(getByText('foo')).toBeInTheDocument()
@@ -36,7 +36,7 @@ describe('EmployeeUpdate', () => {
   })
 
   test('updates employee after changing', async () => {
-    const { findByTestId, getByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="1" />)
+    const { findByTestId, getByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="2" />)
 
     const inputName = await findByTestId('input-name')
     await user.type(inputName, ' bar')
@@ -52,7 +52,7 @@ describe('EmployeeUpdate', () => {
     const mockSetLocation = jest.fn();
     (useLocation as jest.MockedFunction<typeof useLocation>).mockReturnValue(['', mockSetLocation])
 
-    const { findByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="1" />)
+    const { findByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="2" />)
 
     const buttonRemove = await findByTestId('button-remove')
     await user.click(buttonRemove)
@@ -71,7 +71,7 @@ describe('EmployeeUpdate', () => {
   })
 
   test('shows error when updating fails', async () => {
-    const { findByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="4" />)
+    const { findByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="5" />)
 
     const buttonUpdate = await findByTestId('button-update')
     await user.click(buttonUpdate);
@@ -83,7 +83,7 @@ describe('EmployeeUpdate', () => {
   })
 
   test('shows error when removing fails', async () => {
-    const { findByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="4" />)
+    const { findByTestId, user } = renderWithQueryClient(<EmployeeUpdate id="5" />)
 
     const buttonRemove = await findByTestId('button-remove')
     await user.click(buttonRemove);

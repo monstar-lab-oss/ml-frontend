@@ -9,17 +9,17 @@ type Props = { id: string };
 const useGetEmployeeQuery = (id: string) =>
   useQuery({
     queryKey: ["employee", id],
-    queryFn: () => http.get<Payload>(`/employee/${id}`),
+    queryFn: () => http.get<Payload>(`/users/${id}`),
   });
 
 const updateEmployee = async (payload: Payload) => {
   const { id, ...body } = payload;
-  const response = await http.put<{ message: string }>(`/employee/${id}`, body);
+  const response = await http.put<{ message: string }>(`/users/${id}`, body);
   return response;
 };
 
 const removeEmployee = async (id: Payload["id"]) => {
-  const response = await http.delete<{ message: string }>(`/employee/${id}`);
+  const response = await http.delete<{ message: string }>(`/users/${id}`);
   return response;
 };
 
