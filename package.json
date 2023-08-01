@@ -40,7 +40,7 @@
     "jest-environment-jsdom": "29.6.2",
     "jest-serializer-html": "7.1.0",
     "msw": "1.0.1",
-    "sass": "1.64.1",
+    "sass": "1.64.2",
     "typescript": "5.1.6",
     "vite": "4.4.7",
     "whatwg-fetch": "3.6.17"
