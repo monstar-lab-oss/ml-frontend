@@ -1,23 +1,23 @@
-# ML-frontend
+# ML-Frontend
 
-ML-frontend is a Monorepo created to provide a starter kit for Front-end projects at Monstar Lab, Inc.<br/>
-The aim is to offer a template that can be used as a foundation for modern Front-end development.
+ML-Frontend is a monorepo created to provide a starter kit for front-end projects at Monstar Lab, Inc.<br/>
+The aim is to offer a template that can be used as a foundation for modern front-end development.
 
 ## Purpose
 
-The purpose of this Monorepo is to create a CLI tool that provides a starter kit for modern Front-end development. It also aims to showcase best practices for modern Front-end architecture, providing developers with an efficient development process.
+The purpose of this monorepo is to create a CLI tool that provides a starter kit for modern front-end development. It also aims to showcase best practices for modern front-end architecture, providing developers with an efficient development process.
 
 ## Key Features
 
-1. **CLI Tool**: ML-frontend provides a CLI tool that allows Front-end developers to quickly set up new projects. With this tool, developers can easily bootstrap new projects and automatically install necessary tools and libraries.
+1. **CLI Tool**: ML-Frontend provides a CLI tool that allows front-end developers to quickly set up new projects. With this tool, developers can easily bootstrap new projects and automatically install necessary tools and libraries.
 
-2. **Starter Kit**: The ML-frontend Monorepo includes a starter kit that reflects best practices for modern Front-end development. This starter kit comes with commonly used components, routing configurations, state management patterns, and more, serving as a starting point for developers to begin their projects.
+2. **Starter Kit**: The ML-Frontend monorepo includes a starter kit that reflects best practices for modern front-end development. This starter kit comes with commonly used components, routing configurations, state management patterns, and more, serving as a starting point for developers to begin their projects.
 
-3. **Best Practices for Architecture**: ML-frontend offers the latest best practices for Front-end architecture. This includes component-based architecture, optimal state management approaches, performance optimizations, testing strategies, and more. Developers can refer to these best practices to build high-quality Front-end applications.
+3. **Best Practices for Architecture**: ML-Frontend offers the latest best practices for front-end architecture. This includes component-based architecture, optimal state management approaches, performance optimizations, testing strategies, and more. Developers can refer to these best practices to build high-quality front-end applications.
 
 ## Repository Structure
 
-This Monorepo has the following folder/file structure:
+This monorepo has the following folder/file structure:
 
 ```sh
 ml-frontend/
@@ -28,7 +28,7 @@ ml-frontend/
 
 ## Installation and Usage
 
-For installation instructions and details on how to use the ML-frontend CLI tool `create-codes`, please refer to the [documentation](./packages/create-codes/).
+For installation instructions and details on how to use the ML-Frontend CLI tool `create-codes`, please refer to the [documentation](./packages/create-codes/).
 
 ## License
 
