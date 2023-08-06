@@ -36,7 +36,7 @@ test.describe("Profile page", () => {
     // Submit updated values
     await Promise.all([
       // Waits for the next request with the specified url
-      page.waitForResponse((res) => res.url().includes("/user/1")),
+      page.waitForResponse((res) => res.url().includes("/users/1")),
 
       // Triggers the request
       expect(submitButton).toHaveValue("Submitting..."),
