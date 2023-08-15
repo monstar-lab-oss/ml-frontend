@@ -61,6 +61,16 @@ function copyBase(appDir: string, useEslint: boolean) {
     filter: (src) => !baseExclude.includes(path.basename(src)),
   });
 
+  fse.copySync(
+    path.resolve(baseSourceDir, "vite.config.ts"),
+    path.resolve(appDir, "vite.config.ts")
+  );
+
+  fse.copySync(
+    path.resolve(baseSourceDir, "tsconfig.json"),
+    path.resolve(appDir, "tsconfig.json")
+  );
+
   packageObjs = deepMergeObjects(
     packageObjs,
     fse.readJsonSync(path.join(baseSourceDir, "package.json"))
