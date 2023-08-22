@@ -2,6 +2,7 @@ export const degitConfig = {
   user: "monstar-lab-oss",
   repo: "ml-frontend",
   codeDir: "code",
+  mockDir: "packages/mock-server",
   e2eDir: "packages/e2e-testing",
   ref: process.env.BRANCH_NAME,
 };
