@@ -39,7 +39,7 @@
     "jest": "29.6.4",
     "jest-environment-jsdom": "29.6.4",
     "jest-serializer-html": "7.1.0",
-    "msw": "1.0.1",
+    "msw": "1.2.5",
     "sass": "1.66.1",
     "typescript": "5.2.2",
     "vite": "4.4.9",
