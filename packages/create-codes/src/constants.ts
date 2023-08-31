@@ -8,9 +8,11 @@ export const degitConfig = {
 
 // TODO: Maybe we can detect if they are actually using it?
 export const eslintPackages = [
+  "@tanstack/eslint-plugin-query",
   "@typescript-eslint/eslint-plugin",
   "@typescript-eslint/parser",
   "eslint",
+  "eslint-plugin-react",
   "eslint-plugin-solid",
 ];
 
