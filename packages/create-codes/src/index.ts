@@ -80,6 +80,32 @@ function copyBase(appDir: string, useEslint: boolean) {
 }
 
 /**
+ * Copy the selected mock handlers into the target app directory.
+ */
+async function copyApiMocks(
+  appDir: string,
+  apiSolution: "graphql" | "restful",
+  sharedConfigDir: string
+) {
+  const mockTempDir = path.resolve(TEMP_DIR, "__mocks__");
+  const { user, repo, mockDir, ref } = degitConfig;
+  await cloneFromRepo(
+    `${user}/${repo}/${mockDir}/handlers-${apiSolution}#${ref}`,
+    path.resolve(TEMP_DIR, "__mocks__")
+  );
+
+  // Copy mock files for the specific api solution.
+  const mockSourceDir = path.resolve(mockTempDir);
+  const mockDestDir = path.resolve(appDir, "__mocks__");
+
+  fse.copySync(mockSourceDir, mockDestDir);
+
+  fse.copySync(`${sharedConfigDir}/__mocks__`, `${appDir}/__mocks__`, {
+    overwrite: true,
+  });
+}
+
+/**
  * Copy the selected modules into the target app directory.
  */
 function copyModules(
@@ -183,10 +209,7 @@ async function copyTests(
  */
 function copyCommon(appDir: string, sharedConfigDir: string) {
   fse.copySync(`${sharedConfigDir}/gitignore`, `${appDir}/gitignore`);
-  // FIXME: reuse codes with internal package
-  fse.copySync(`${sharedConfigDir}/__mocks__`, `${appDir}/__mocks__`, {
-    overwrite: true,
-  });
+
   // Rename dot files
   fse.renameSync(
     path.join(appDir, "gitignore"),
@@ -237,6 +260,9 @@ async function run() {
 
   // Copy base codes
   copyBase(appDir, tests?.useEslint ?? false);
+
+  // Copy api mocks
+  copyApiMocks(appDir, apiSolution, sharedConfigDir);
 
   // Copy modules
   copyModules(appDir, apiSolution, tests?.useVitest ?? false);
