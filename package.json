@@ -43,7 +43,7 @@
     "sass": "1.66.1",
     "typescript": "5.2.2",
     "vite": "4.4.9",
-    "whatwg-fetch": "3.6.18"
+    "whatwg-fetch": "3.6.19"
   },
   "dependencies": {
     "@tanstack/react-query": "4.35.0",
