@@ -76,6 +76,21 @@ async function updateUser({ id, name }: User) {
   );
 }
 
+async function removeUser(id: Id) {
+  return request<{ user: User }>(
+    graphqlEndpoint,
+    gql`
+      mutation RemoveUser($id: Id!) {
+        removeUser(id: $id) {
+          id
+          name
+        }
+      }
+    `,
+    { id }
+  );
+}
+
 export function useUsers() {
   return useQuery({ queryKey: ["users"], queryFn: getAllUsers });
 }
@@ -93,5 +108,11 @@ export function useAddUser() {
 export function useUpdateUser() {
   return useMutation({
     mutationFn: (user: User) => updateUser(user),
+  });
+}
+
+export function useRemoveUser() {
+  return useMutation({
+    mutationFn: (id: Id) => removeUser(id),
   });
 }

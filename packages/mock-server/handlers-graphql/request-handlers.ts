@@ -58,6 +58,6 @@ export const requestHandlers = [
   graph.mutation("RemoveUser", ({ variables }, res, ctx) => {
     users = users.filter(({ id }) => id !== variables.id);
 
-    return res(ctx.status(204));
+    return res(ctx.data({}));
   }),
 ];
