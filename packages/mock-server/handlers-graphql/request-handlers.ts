@@ -29,7 +29,7 @@ let users = [
 
 export const requestHandlers = [
   graph.query("GetUserList", (_, res, ctx) => {
-    return res(ctx.data({ users }));
+    return res(ctx.data(users));
   }),
 
   graph.query("GetUser", ({ variables }, res, ctx) => {
