@@ -55,7 +55,7 @@ function copyBase(appDir: string, useEslint: boolean) {
   // FIXME: temporary processing, It would be good to refer to it from config files in the cli templates as well as others.
   const baseExclude = useEslint
     ? EXCLUDE
-    : [...EXCLUDE, ".eslintrc.js", ".eslintignore"];
+    : [...EXCLUDE, ".eslintrc.js", ".eslintrc.cjs", ".eslintignore"];
 
   fse.copySync(baseSourceDir, appDir, {
     filter: (src) => !baseExclude.includes(path.basename(src)),
