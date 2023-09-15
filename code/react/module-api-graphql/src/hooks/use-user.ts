@@ -47,7 +47,7 @@ async function getUser({ queryKey }: GetUserQueryContext) {
 }
 
 async function addUser({ name }: Omit<User, "id">) {
-  return request<{ user: { id: string; name: string } }>(
+  return request<{ user: User }>(
     graphqlEndpoint,
     gql`
       mutation AddUser($name: String!) {
@@ -100,19 +100,13 @@ export function useUser(id?: Id) {
 }
 
 export function useAddUser() {
-  return useMutation({
-    mutationFn: (user: Omit<User, "id">) => addUser(user),
-  });
+  return useMutation({ mutationFn: addUser });
 }
 
 export function useUpdateUser() {
-  return useMutation({
-    mutationFn: (user: User) => updateUser(user),
-  });
+  return useMutation({ mutationFn: updateUser });
 }
 
 export function useRemoveUser() {
-  return useMutation({
-    mutationFn: (id: Id) => removeUser(id),
-  });
+  return useMutation({ mutationFn: removeUser });
 }
