@@ -32,7 +32,7 @@ type GetUserQueryContext = QueryFunctionContext<["user", { id?: Id }]>;
 async function getUser({ queryKey }: GetUserQueryContext) {
   const [, { id }] = queryKey;
 
-  return request<{ user: User }>(
+  return request<User>(
     graphqlEndpoint,
     gql`
       query GetUser($id: Id) {
