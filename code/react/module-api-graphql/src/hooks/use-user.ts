@@ -15,7 +15,7 @@ type User = {
 const graphqlEndpoint = "https://api.example.com/graphql";
 
 async function getAllUsers() {
-  return request<{ user: User[] }>(
+  return request<User[]>(
     graphqlEndpoint,
     gql`
       query GetUserList {
