@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor, act } from "@testing-library/react";
-import { useUsers } from "./use-user";
+import { useUser, useUsers } from "./use-user";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
@@ -34,6 +34,26 @@ describe("useUsers", () => {
         name: "George",
       },
     ]);
+    expect(result.current.isError).toBe(false);
+  });
+});
+
+describe("useUser", () => {
+  test("Should fetch user and set loading and error state", async () => {
+    const { result } = renderHook(
+      () => useUser("l7rWHn41-f5G9-6iBf-DV2T-yhYhhtD1kFbz"),
+      { wrapper }
+    );
+
+    expect(result.current.isLoading).toBe(true);
+
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
+    expect(result.current.data).toStrictEqual({
+      id: "l7rWHn41-f5G9-6iBf-DV2T-yhYhhtD1kFbz",
+      name: "Paul",
+    });
+
     expect(result.current.isError).toBe(false);
   });
 });
