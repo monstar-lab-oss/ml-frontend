@@ -206,6 +206,12 @@ importers:
       '@testing-library/react':
         specifier: 13.4.0
         version: 13.4.0(react-dom@18.2.0)(react@18.2.0)
+      '@testing-library/user-event':
+        specifier: 14.4.3
+        version: 14.4.3(@testing-library/dom@9.3.0)
+      '@types/react':
+        specifier: 18.2.0
+        version: 18.2.0
       tsconfig:
         specifier: workspace:*
         version: link:../../../packages/tsconfig
@@ -3145,7 +3151,7 @@ packages:
       '@storybook/core-events': 7.0.0-beta.43
       '@storybook/csf': 0.1.1-next.0
       '@storybook/csf-tools': 7.0.0-beta.43
-      '@storybook/docs-mdx': 0.0.1-next.7
+      '@storybook/docs-mdx': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/node-logger': 7.0.0-beta.43
       '@storybook/preview-api': 7.0.0-beta.43
@@ -3211,8 +3217,8 @@ packages:
     dependencies:
       type-fest: 2.19.0
 
-  /@storybook/docs-mdx@0.0.1-next.7:
-    resolution: {integrity: sha512-JbgBf/EMBtx65iXtB3pOiX3818UeL9jZ+KAY241OAPqJVXjMQ5KaVOdg/57MSmd508HDIGx7CiImOMEmWwQ9/g==}
+  /@storybook/docs-mdx@0.1.1-next.0:
+    resolution: {integrity: sha512-t5gehdVj1GxicE2W3mslaqaLGKg6u1wZRySVrWNM4Ue7PmuI0LvJDLcOcaIzizc4Duh+JljMvShK8NTaxhE1PA==}
 
   /@storybook/docs-tools@7.0.0-beta.43:
     resolution: {integrity: sha512-v7hjvqP+dkxW9cTUZgBQMMoNOFBL40GULckIlBs0RqqXjYpj/AmBEZGFlICH1FiaIrm++oR7PvBJJ2tscK3VWQ==}
