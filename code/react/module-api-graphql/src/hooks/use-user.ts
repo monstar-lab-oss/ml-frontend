@@ -96,7 +96,11 @@ export function useUsers() {
 }
 
 export function useUser(id?: Id) {
-  return useQuery({ queryKey: ["user", { id }], queryFn: getUser });
+  return useQuery({
+    queryKey: ["user", { id }],
+    queryFn: getUser,
+    enabled: !!id,
+  });
 }
 
 export function useAddUser() {
