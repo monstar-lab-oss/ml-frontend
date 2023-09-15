@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor, act } from "@testing-library/react";
-import { useUser, useUsers } from "./use-user";
+import { useAddUser, useUser, useUsers } from "./use-user";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
@@ -54,6 +54,17 @@ describe("useUser", () => {
       name: "Paul",
     });
 
+    expect(result.current.isError).toBe(false);
+  });
+});
+
+describe("useAddUser", () => {
+  test("Should add a user without any errors", async () => {
+    const { result } = renderHook(useAddUser, { wrapper });
+
+    await act(async () => result.current.mutate({ name: "Ringo" }));
+
+    expect(result.current.data).toMatchObject({ name: "Ringo" });
     expect(result.current.isError).toBe(false);
   });
 });

@@ -1,4 +1,8 @@
-import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
+import {
+  QueryFunctionContext,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
 import { request, gql } from "graphql-request";
 
 type Id = string;
@@ -42,10 +46,31 @@ async function getUser({ queryKey }: GetUserQueryContext) {
   );
 }
 
+async function addUser({ name }: Omit<User, "id">) {
+  return request<{ user: { id: string; name: string } }>(
+    graphqlEndpoint,
+    gql`
+      mutation AddUser($name: String!) {
+        addUser(name: $name) {
+          id
+          name
+        }
+      }
+    `,
+    { name }
+  );
+}
+
 export function useUsers() {
   return useQuery({ queryKey: ["users"], queryFn: getAllUsers });
 }
 
 export function useUser(id?: Id) {
   return useQuery({ queryKey: ["user", { id }], queryFn: getUser });
+}
+
+export function useAddUser() {
+  return useMutation({
+    mutationFn: (user: Omit<User, "id">) => addUser(user),
+  });
 }
