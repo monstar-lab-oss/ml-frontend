@@ -2,7 +2,7 @@
 /*
 
 # Include specific folders
-!/examples
+!/code
 !/packages
 
 # But exclude folders anywhere
