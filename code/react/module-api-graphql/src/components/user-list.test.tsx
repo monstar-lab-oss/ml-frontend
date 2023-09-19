@@ -4,7 +4,7 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import { UserView } from "./user-view";
+import { UserList } from "./user-list";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
@@ -16,15 +16,14 @@ const wrapper = (props: { children: React.ReactNode }) => (
   </QueryClientProvider>
 );
 
-describe("UserView", () => {
-  test("Should render user when page loaded", async () => {
-    render(<UserView id={"f79e82e8-c34a-4dc7-a49e-9fadc0979fda"} />, {
-      wrapper,
-    });
+describe("UserList", () => {
+  test("Should render user list when page loaded", async () => {
+    render(<UserList />, { wrapper });
 
     await waitForElementToBeRemoved(() => screen.queryByLabelText("loading"));
+
     expect(
-      screen.getByRole("heading", { name: "John", level: 2 })
-    ).toBeDefined();
+      screen.getAllByRole("listitem").map((listitem) => listitem.textContent)
+    ).toStrictEqual(["John", "Paul", "George"]);
   });
 });
