@@ -11,7 +11,7 @@ export type UserInputTests = {
 
 export type UserInput = {
   jsLibrary: JSLibrary;
-  apiSolution: string;
+  apiSolution: "restful" | "graphql";
   modules: string[];
   tests: UserInputTests | null;
 };
@@ -54,7 +54,7 @@ export async function promptUserInput() {
 
   // Select API Solution
   const apiSolution = (
-    await inquirer.prompt<{ apiSolution: string }>([
+    await inquirer.prompt<{ apiSolution: "restful" | "graphql" }>([
       {
         type: "list",
         name: "apiSolution",
