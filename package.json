@@ -42,7 +42,7 @@
     "msw": "1.0.1",
     "sass": "1.68.0",
     "typescript": "5.2.2",
-    "vite": "4.4.9",
+    "vite": "4.4.10",
     "whatwg-fetch": "3.6.19"
   },
   "dependencies": {
