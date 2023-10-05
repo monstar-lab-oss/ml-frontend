@@ -7,8 +7,6 @@ const testUser = {
   first_name: "George",
   last_name: "Bluth",
   avatar: "https://reqres.in/img/faces/1-image.jpg",
-  avatar_size_width: 128,
-  avatar_size_height: 128,
 };
 setInitalItem({ testUser });
 
@@ -16,7 +14,7 @@ setInitalItem({ testUser });
 const isValidatedAccessToken = (token?: string) => !!token;
 
 export const user = [
-  rest.get("/user/1", (req, res, ctx) => {
+  rest.get("/users/1", (req, res, ctx) => {
     const token = req.headers.get("Authorization")?.split(" ").at(-1);
 
     if (!isValidatedAccessToken(token)) {
@@ -28,13 +26,17 @@ export const user = [
       );
     }
 
-    return res(ctx.json(getItem("testUser")));
+    return res(
+      ctx.json({
+        data: getItem("testUser"),
+      })
+    );
   }),
   rest.post<{
     email: string;
     first_name: string;
     last_name: string;
-  }>("/user/1", (req, res, ctx) => {
+  }>("/users/1", (req, res, ctx) => {
     const token = req.headers.get("Authorization")?.split(" ").at(-1);
 
     if (!isValidatedAccessToken(token)) {

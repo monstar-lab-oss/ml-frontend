@@ -10,6 +10,7 @@ const config: PlaywrightTestConfig = {
     // Tell all tests to load signed-in state from 'storageState.json'.
     storageState: "./__tests__/utils/storageState.json",
     trace: "on-first-retry",
+    testIdAttribute: "data-testid",
   },
   projects: [
     {

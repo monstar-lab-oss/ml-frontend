@@ -20,8 +20,9 @@ const request = async <T>(url: string, opts?: RequestInit): Promise<T> => {
   // - Use toast to show error of 5xx error
   // - Internationalize error message
   try {
-    const data: T = await response.json();
-    return data;
+    const data = await response.json();
+    // FIXME: It is not very judicious to check ?.data with a function that has an overall impact.
+    return (data?.data as T) ?? (data as T);
   } catch (e) {
     throw new HttpError("Server error");
   }
