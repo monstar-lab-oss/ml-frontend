@@ -1,79 +1,35 @@
-# ReactJS Boilerplate
+# ML-Frontend
 
-## Roadmap
+ML-Frontend is a monorepo created to provide a starter kit for front-end projects at Monstar Lab, Inc.<br/>
+The aim is to offer a template that can be used as a foundation for modern front-end development.
 
-Our roadmap for the ReactJS Boilerplate is where you can learn about what features we're working on.
+## Purpose
 
-### Development environment
+The purpose of this monorepo is to create a CLI tool that provides a starter kit for modern front-end development. It also aims to showcase best practices for modern front-end architecture, providing developers with an efficient development process.
 
-- Build tool
-  - [x] Vite
-    - Optimisation of Minify code in production mode
-- Coding Standards and Guidelines (Statically analyzes our codes)
-  - [ ] ESLint with our rules
-  - [x] Prettier
-- Mock API server
-  - [x] msw
+## Key Features
 
-### Testing
+1. **CLI Tool**: ML-Frontend provides a CLI tool that allows front-end developers to quickly set up new projects. With this tool, developers can easily bootstrap new projects and automatically install necessary tools and libraries.
 
-- Visual regression testing
-  - [ ] Storybook
-- Unit testing
-  - [x] Jest
-  - [x] React Testing Library
-  - [ ] React Hooks Testing Library
-- End-to-end testing
-  - [x] Playwright
+2. **Starter Kit**: The ML-Frontend monorepo includes a starter kit that reflects best practices for modern front-end development. This starter kit comes with commonly used components, routing configurations, state management patterns, and more, serving as a starting point for developers to begin their projects.
 
-### Application design
+3. **Best Practices for Architecture**: ML-Frontend offers the latest best practices for front-end architecture. This includes component-based architecture, optimal state management approaches, performance optimizations, testing strategies, and more. Developers can refer to these best practices to build high-quality front-end applications.
 
-- API Interface
-  - [REST and GraphQL](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/14)
-- State management
-  - Client state
-    - [x] useContext
-      - Need to have logic to prevent unnecessary rerender
-    - [x] Use state management libraries
-      - [x] zustand
-      - Continued consideration of other proposals
-  - Server state
-    - [x] React Query
-  - Typescript rules
-    - [ ] [Interface vs Types](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/20)
-- Routing for SPA
-  - [x] [wouter](https://github.com/molefrog/wouter)
-- Validate forms in React
-  - [x] [React Hook Form](https://react-hook-form.com)
-- CSS
-  - Preprocessors
-    - [x] Sass
-    - PostCSS
-  - Animations
-- Multi Language
-  - [x] i18n
+## Repository Structure
 
-### Application security
+This monorepo has the following folder/file structure:
 
-- [Authentication](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/15)
-- [Security](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/9)
+```sh
+ml-frontend/
+  ├── docs/                # Documentation and guidelines
+  ├── packages/            # CLI tool and Internal packages
+  └── code/                # Base code and modules provided per framework
+```
 
-### DX
+## Installation and Usage
 
-- CI / CD
-- [Deployment](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/5)
-  - Deploy to Amazon S3 + CloudFront
-- Update Dependencies Safely and Automatically
-  - [x] Renovate
+For installation instructions and details on how to use the ML-Frontend CLI tool `create-codes`, please refer to the [documentation](./packages/create-codes/).
 
-### UX
+## License
 
-- [ ] [Definition of browser support](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/2)
-- [x] Internationalization
-  - [x] [i18next](https://www.i18next.com/)
-- [SEO support](https://github.com/monstar-lab-oss/reactjs-boilerplate/discussions/1)
-
-### Performance
-
-- Optimization
-  - [ ] Get a 100 % Lighthouse Performance Score
+This project is licensed under the MIT License. For more details, see [LICENSE](./LICENSE).

@@ -1,0 +1,13 @@
+# Exclude everything by default
+/*
+
+# Include specific folders
+!/code
+!/packages
+
+# But exclude folders anywhere
+node_modules
+dist
+build
+public
+.turbo

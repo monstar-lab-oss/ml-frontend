@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+
+**/dist
+
+# https://github.com/prettier/prettier/issues/5246
+**/*.html

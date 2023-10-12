@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "storybook": "storybook dev -p 6006 --ci --disable-telemetry"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "7.0.0-beta.43",
+    "@storybook/html": "7.0.0-beta.43",
+    "@storybook/html-vite": "7.0.0-beta.43",
+    "storybook": "7.0.0-beta.43"
+  }
+}

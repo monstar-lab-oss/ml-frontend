@@ -1,0 +1,7 @@
+{
+  "extends": "tsconfig/library.json",
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": ["playwright.config.ts", "playwright.mini.config.ts", "__tests__"]
+}

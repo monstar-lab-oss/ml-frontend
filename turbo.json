@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["CI", "BRANCH_NAME"],
+  "globalDependencies": [".env"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "build:e2e": {},
+    "preview": {
+      "dependsOn": ["build:e2e"]
+    },
+    "start": {
+      "dependsOn": ["build"]
+    },
+    "e2e": {},
+    "type": {},
+    "lint": {},
+    "test": {},
+    "dev": {
+      "cache": false
+    }
+  }
+}
