@@ -2,7 +2,7 @@
   "name": "@solid-testing/vitest",
   "dependencies": {
     "jsdom": "21.1.0",
-    "node-fetch": "3.3.0",
+    "node-fetch": "3.3.2",
     "vitest": "0.28.4"
   },
   "devDependencies": {
