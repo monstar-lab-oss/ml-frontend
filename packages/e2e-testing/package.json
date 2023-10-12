@@ -9,7 +9,7 @@
     "@playwright/test": "1.29.2"
   },
   "devDependencies": {
-    "start-server-and-test": "1.15.2",
+    "start-server-and-test": "1.15.4",
     "reactjs-boilerplate": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "4.9.4",
