@@ -1,6 +1,7 @@
 {
-  "name": "create-codes",
-  "version": "0.0.0",
+  "name": "reactjs-boilerplate",
+  "repository": "git@github.com:monstar-lab-oss/reactjs-boilerplate.git",
+  "author": "山下 仁麻 <jinma.yamashita@monstar-lab.com>",
   "scripts": {
     "test:cli": "turbo run build --filter=create-codes test --filter=create-codes",
     "test:modules": "turbo run test --filter='./code/*' && turbo run test --filter='./code/*/*'",
