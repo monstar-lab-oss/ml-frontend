@@ -4,7 +4,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "13.4.0",
-    "jsdom": "21.1.0",
+    "jsdom": "21.1.2",
     "node-fetch": "3.3.0",
     "vitest": "0.28.4"
   }

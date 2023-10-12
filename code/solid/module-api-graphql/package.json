@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@solidjs/testing-library": "0.6.0",
-    "jsdom": "21.1.0",
+    "jsdom": "21.1.2",
     "tsconfig": "workspace:*",
     "typescript": "4.9.5",
     "vitest": "0.28.4"
