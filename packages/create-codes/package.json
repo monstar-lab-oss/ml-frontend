@@ -25,7 +25,7 @@
     "@types/degit": "2.8.3",
     "@types/fs-extra": "11.0.1",
     "@types/inquirer": "9.0.3",
-    "@types/node": "18.11.18",
+    "@types/node": "20.8.4",
     "concat-stream": "2.0.0",
     "dotenv-cli": "7.2.1",
     "tsconfig": "workspace:*",
