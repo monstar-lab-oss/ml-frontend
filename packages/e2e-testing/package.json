@@ -13,6 +13,6 @@
     "reactjs-boilerplate": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "4.9.4",
-    "@types/node": "18.11.18"
+    "@types/node": "20.8.6"
   }
 }
