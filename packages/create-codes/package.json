@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/concat-stream": "2.0.0",
-    "@types/degit": "2.8.3",
+    "@types/degit": "2.8.5",
     "@types/fs-extra": "11.0.1",
     "@types/inquirer": "9.0.3",
     "@types/node": "18.11.18",
