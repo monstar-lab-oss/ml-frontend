@@ -14,7 +14,7 @@
     "test": "vitest run --dir __tests__"
   },
   "dependencies": {
-    "chalk": "4.1.2",
+    "chalk": "5.3.0",
     "degit": "2.8.4",
     "fs-extra": "11.1.0",
     "inquirer": "8.2.3",
