@@ -8,7 +8,7 @@
   "dependencies": {
     "@tanstack/solid-query": "4.24.4",
     "graphql-request": "5.1.0",
-    "solid-js": "1.6.10"
+    "solid-js": "1.8.5"
   },
   "devDependencies": {
     "@solidjs/testing-library": "0.6.0",
