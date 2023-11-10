@@ -97,21 +97,14 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/monsta
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
-- You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux. <!-- this should only be included if the project has a GUI -->
+- You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) on Linux. 
 - **Explain why this enhancement would be useful** to most ML-Frontend users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
 ### Your First Code Contribution
-<!-- TODO
-include Setup of env, IDE and typical getting started instructions?
 
--->
 Refer to the repository [README](https://github.com/monstar-lab-oss/ml-frontend#installation-and-usage) for more information about installation.
 
 ### Improving The Documentation
-<!-- TODO
-Updating, improving and correcting the documentation
-
--->
 
 As it is very much incomplete, we welcome any suggestions for improving and correcting the documentation! If you would like to make modifications to the documentation, please create a [Documentation Change](https://github.com/monstar-lab-oss/ml-frontend/issues/new?assignees=&labels=documentation&projects=&template=documentation-change.md&title=%5BDOC%5D) issue.
 
