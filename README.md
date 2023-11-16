@@ -30,6 +30,10 @@ ml-frontend/
 
 For installation instructions and details on how to use the ML-Frontend CLI tool `create-codes`, please refer to the [documentation](./packages/create-codes/).
 
+## Contributing
+
+If you would like to contribute to improving ML-Frontend, please refer to our [CONTRIBUTING.md](./CONTRIBUTING.md) for more information. 
+
 ## License
 
 This project is licensed under the MIT License. For more details, see [LICENSE](./LICENSE).
