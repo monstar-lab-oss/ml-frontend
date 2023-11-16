@@ -77,6 +77,11 @@ function copyBase(appDir: string, useEslint: boolean) {
     fse.readJsonSync(path.join(baseSourceDir, "package.json"))
   );
 
+  tsconfigObjs = deepMergeObjects(
+    tsconfigObjs,
+    fse.readJsonSync(path.join(baseSourceDir, "tsconfig.json"))
+  );
+
   return packageObjs;
 }
 
