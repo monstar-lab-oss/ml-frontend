@@ -11,7 +11,7 @@
   "dependencies": {
     "@solidjs/router": "0.7.0",
     "@tanstack/solid-query": "4.24.4",
-    "solid-js": "1.6.10"
+    "solid-js": "1.8.6"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.48.2",
