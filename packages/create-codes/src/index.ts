@@ -115,8 +115,8 @@ function copyModules(
 ) {
   // TODO: Copy modules (currently only copying the API solution)
   fse.copySync(
-    path.resolve(TEMP_DIR, `module-api-${apiSolution}`),
-    path.resolve(appDir, "src/modules"),
+    path.resolve(TEMP_DIR, `module-api-${apiSolution}/src`),
+    path.resolve(appDir, `src/modules/${apiSolution}`),
     {
       filter: (src) => {
         if (!useUnitTests && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
