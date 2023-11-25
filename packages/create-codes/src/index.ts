@@ -217,6 +217,8 @@ function copyCommon(appDir: string, sharedConfigDir: string) {
   );
 
   // Rewrite package.json
+  packageObjs.name = appDir.replace(/.*\//, "");
+
   fse.writeJsonSync(path.join(appDir, "package.json"), packageObjs, {
     spaces: 2,
     EOL: os.EOL,
