@@ -131,7 +131,9 @@ function copyModules(
   );
 
   // Merge package.json
-  packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
+  packageObjs = deepMergeObjects(packageObjs, {
+    dependencies: fse.readJsonSync(packages).dependencies,
+  });
 }
 
 /**
