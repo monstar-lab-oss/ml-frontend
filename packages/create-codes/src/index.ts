@@ -113,9 +113,13 @@ function copyModules(
   apiSolution: string,
   useUnitTests: boolean
 ) {
-  // TODO: Copy modules (currently only copying the API solution)
+  // Currently, there is only an API module, so this is sufficient.
+  // However, I want to make it flexible enough to accommodate additional modules in the future.
+  const moduleDir = path.resolve(TEMP_DIR, `module-api-${apiSolution}`);
+  const packages = path.join(moduleDir, "package.json");
+
   fse.copySync(
-    path.resolve(TEMP_DIR, `module-api-${apiSolution}/src`),
+    path.resolve(moduleDir, "src"),
     path.resolve(appDir, `src/modules/${apiSolution}`),
     {
       filter: (src) => {
@@ -124,6 +128,9 @@ function copyModules(
       },
     }
   );
+
+  // Merge package.json
+  packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
 }
 
 /**
