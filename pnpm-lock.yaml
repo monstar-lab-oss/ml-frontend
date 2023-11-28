@@ -524,8 +524,8 @@ importers:
         specifier: 2.8.4
         version: 2.8.4
       fs-extra:
-        specifier: 11.1.0
-        version: 11.1.0
+        specifier: 11.2.0
+        version: 11.2.0
       inquirer:
         specifier: 8.2.3
         version: 8.2.3
@@ -540,8 +540,8 @@ importers:
         specifier: 2.8.3
         version: 2.8.3
       '@types/fs-extra':
-        specifier: 11.0.1
-        version: 11.0.1
+        specifier: 11.0.4
+        version: 11.0.4
       '@types/inquirer':
         specifier: 9.0.3
         version: 9.0.3
@@ -2734,7 +2734,7 @@ packages:
       '@storybook/preview-api': 7.0.0-beta.43
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.0-beta.43
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       remark-external-links: 8.0.0
@@ -2896,7 +2896,7 @@ packages:
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/components': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.1-next.0
+      '@storybook/csf': 0.1.2-next.0
       '@storybook/docs-tools': 7.0.0-beta.43
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
@@ -2934,7 +2934,7 @@ packages:
       esbuild-plugin-alias: 0.2.1
       express: 4.18.2
       find-cache-dir: 3.3.2
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       process: 0.11.10
       slash: 3.0.0
       util: 0.12.5
@@ -2969,7 +2969,7 @@ packages:
       browser-assert: 1.2.1
       es-module-lexer: 0.9.3
       express: 4.18.2
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       glob: 8.1.0
       glob-promise: 4.2.2(glob@8.1.0)
       magic-string: 0.27.0
@@ -3024,7 +3024,7 @@ packages:
       execa: 5.1.1
       express: 4.18.2
       find-up: 5.0.0
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       get-port: 5.1.1
       giget: 1.0.0
       globby: 11.1.0
@@ -3066,7 +3066,7 @@ packages:
       '@babel/core': 7.20.12
       '@babel/preset-env': 7.20.2(@babel/core@7.20.12)
       '@babel/types': 7.22.3
-      '@storybook/csf': 0.1.1-next.0
+      '@storybook/csf': 0.1.2-next.0
       '@storybook/csf-tools': 7.0.0-beta.43
       '@storybook/node-logger': 7.0.0-beta.43
       '@storybook/types': 7.0.0-beta.43
@@ -3087,7 +3087,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.0-beta.43
-      '@storybook/csf': 0.1.1-next.0
+      '@storybook/csf': 0.1.2-next.0
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.0-beta.43
@@ -3124,7 +3124,7 @@ packages:
       express: 4.18.2
       file-system-cache: 2.0.2
       find-up: 5.0.0
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       glob: 8.1.0
       glob-promise: 4.2.2(glob@8.1.0)
       handlebars: 4.7.7
@@ -3149,7 +3149,7 @@ packages:
       '@storybook/builder-manager': 7.0.0-beta.43
       '@storybook/core-common': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.1-next.0
+      '@storybook/csf': 0.1.2-next.0
       '@storybook/csf-tools': 7.0.0-beta.43
       '@storybook/docs-mdx': 0.1.1-next.0
       '@storybook/global': 5.0.0
@@ -3169,7 +3169,7 @@ packages:
       compression: 1.7.4
       detect-port: 1.5.1
       express: 4.18.2
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       globby: 11.1.0
       ip: 2.0.0
       lodash: 4.17.21
@@ -3204,16 +3204,16 @@ packages:
     resolution: {integrity: sha512-/KbLRdE36FwbpRB0HYE5BHbDbGKnkVhTqgHvVO9E+NgIGX811EOp1GVeyhrSl+oj7m73MQIqR1al0OcMd4IE8A==}
     dependencies:
       '@babel/types': 7.22.3
-      '@storybook/csf': 0.1.1-next.0
+      '@storybook/csf': 0.1.2-next.0
       '@storybook/types': 7.0.0-beta.43
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       recast: 0.23.1
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - supports-color
 
-  /@storybook/csf@0.1.1-next.0:
-    resolution: {integrity: sha512-2M8E4CZOVW77P9lrgZZc2rcwxhNKVVykpzbcAauc3bots7xvDJMG60EasMRB/Y+cfqnSu6aaSUEVmKHTKsVJ3A==}
+  /@storybook/csf@0.1.2-next.0:
+    resolution: {integrity: sha512-Kf9XPAnO9VBxxYWNiW3pc1t7lDZ178VFfTCVWOm9r6Fdzm94j3zUNT06WiOojblVVaKsJktk8cT9b27Fmcxs5Q==}
     dependencies:
       type-fest: 2.19.0
 
@@ -3290,7 +3290,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.43
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.1-next.0
+      '@storybook/csf': 0.1.2-next.0
       '@storybook/global': 5.0.0
       '@storybook/router': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
@@ -3331,7 +3331,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.43
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.1-next.0
+      '@storybook/csf': 0.1.2-next.0
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.0-beta.43
       '@types/qs': 6.9.7
@@ -3442,7 +3442,7 @@ packages:
       chalk: 4.1.2
       detect-package-manager: 2.0.1
       fetch-retry: 5.0.3
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       isomorphic-unfetch: 3.1.0
       nanoid: 3.3.6
       read-pkg-up: 7.0.1
@@ -3747,8 +3747,8 @@ packages:
   /@types/find-cache-dir@3.2.1:
     resolution: {integrity: sha512-frsJrz2t/CeGifcu/6uRo4b+SzAwT4NYCVPu1GN8IB9XTzrpPkGuV0tmh9mN+/L0PklAlsC3u5Fxt0ju00LXIw==}
 
-  /@types/fs-extra@11.0.1:
-    resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
+  /@types/fs-extra@11.0.4:
+    resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
     dependencies:
       '@types/jsonfile': 6.1.1
       '@types/node': 18.11.18
@@ -6963,7 +6963,7 @@ packages:
   /file-system-cache@2.0.2:
     resolution: {integrity: sha512-lp4BHO4CWqvRyx88Tt3quZic9ZMf4cJyquYq7UI8sH42Bm2ArlBBjKQAalZOo+UfaBassb7X123Lik5qZ/tSAA==}
     dependencies:
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       ramda: 0.28.0
 
   /filelist@1.0.4:
@@ -7101,11 +7101,11 @@ packages:
     resolution: {integrity: sha512-twe20eF1OxVxp/ML/kq2p1uc6KvFK/+vs8WjEbeKmV2He22MKm7YF2ANIt+EOqhJ5L3K/SuuPhk0hWQDjOM23g==}
     dev: true
 
-  /fs-extra@11.1.0:
-    resolution: {integrity: sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==}
+  /fs-extra@11.2.0:
+    resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
     engines: {node: '>=14.14'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       jsonfile: 6.1.0
       universalify: 2.0.0
 
@@ -7308,9 +7308,6 @@ packages:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
       get-intrinsic: 1.1.3
-
-  /graceful-fs@4.2.10:
-    resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
