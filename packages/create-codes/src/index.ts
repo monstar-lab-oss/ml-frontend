@@ -115,8 +115,8 @@ function copyModules(
 ) {
   // TODO: Copy modules (currently only copying the API solution)
   fse.copySync(
-    path.resolve(TEMP_DIR, `module-api-${apiSolution}`),
-    path.resolve(appDir, "src/modules"),
+    path.resolve(TEMP_DIR, `module-api-${apiSolution}/src`),
+    path.resolve(appDir, `src/modules/${apiSolution}`),
     {
       filter: (src) => {
         if (!useUnitTests && /$(?<=\.test\.(ts|tsx))/.test(src)) return false;
@@ -217,6 +217,8 @@ function copyCommon(appDir: string, sharedConfigDir: string) {
   );
 
   // Rewrite package.json
+  packageObjs.name = appDir.replace(/.*\//, "");
+
   fse.writeJsonSync(path.join(appDir, "package.json"), packageObjs, {
     spaces: 2,
     EOL: os.EOL,
