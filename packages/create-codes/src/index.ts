@@ -146,6 +146,17 @@ async function copyTests(
     });
 
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
+
+    // Update the import statement to the path where the mock server is set up
+    const fileContent = fse.readFileSync(
+      path.join(appDir, "vitest.setup.ts"),
+      "utf-8"
+    );
+    const replaced = fileContent.replace(
+      /from "mock-server"/i,
+      'from "./__mocks__/server"'
+    );
+    fse.writeFileSync(path.join(appDir, "vitest.setup.ts"), replaced, "utf-8");
   }
 
   if (tests.useStorybook) {
