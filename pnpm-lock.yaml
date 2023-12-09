@@ -85,11 +85,11 @@ importers:
         specifier: 18.11.18
         version: 18.11.18
       '@types/react':
-        specifier: 18.0.27
-        version: 18.0.27
+        specifier: 18.2.43
+        version: 18.2.43
       '@types/react-dom':
-        specifier: 18.0.10
-        version: 18.0.10
+        specifier: 18.2.17
+        version: 18.2.17
       '@types/testing-library__jest-dom':
         specifier: 5.14.5
         version: 5.14.5
@@ -158,11 +158,11 @@ importers:
         specifier: 4.24.5
         version: 4.24.5
       '@types/react':
-        specifier: 18.0.27
-        version: 18.0.27
+        specifier: 18.2.43
+        version: 18.2.43
       '@types/react-dom':
-        specifier: 18.0.10
-        version: 18.0.10
+        specifier: 18.2.17
+        version: 18.2.17
       '@typescript-eslint/eslint-plugin':
         specifier: 5.51.0
         version: 5.51.0(@typescript-eslint/parser@5.51.0)(eslint@8.33.0)(typescript@4.9.5)
@@ -210,8 +210,8 @@ importers:
         specifier: 14.4.3
         version: 14.4.3(@testing-library/dom@9.3.0)
       '@types/react':
-        specifier: 18.2.0
-        version: 18.2.0
+        specifier: 18.2.43
+        version: 18.2.43
       tsconfig:
         specifier: workspace:*
         version: link:../../../packages/tsconfig
@@ -241,8 +241,8 @@ importers:
         specifier: 14.4.3
         version: 14.4.3(@testing-library/dom@9.3.0)
       '@types/react':
-        specifier: 18.2.0
-        version: 18.2.0
+        specifier: 18.2.43
+        version: 18.2.43
       tsconfig:
         specifier: workspace:*
         version: link:../../../packages/tsconfig
@@ -2658,7 +2658,7 @@ packages:
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.3
-      '@types/react': 18.2.0
+      '@types/react': 18.2.43
       react: 18.2.0
 
   /@mswjs/cookies@0.2.2:
@@ -3799,7 +3799,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.3
       '@testing-library/dom': 8.20.0
-      '@types/react-dom': 18.0.10
+      '@types/react-dom': 18.2.17
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: true
@@ -4061,22 +4061,14 @@ packages:
   /@types/range-parser@1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
 
-  /@types/react-dom@18.0.10:
-    resolution: {integrity: sha512-E42GW/JA4Qv15wQdqJq8DL4JhNpB3prJgjgapN3qJT9K2zO5IIAQh4VXvCEDupoqAwnz0cY4RlXeC/ajX5SFHg==}
+  /@types/react-dom@18.2.17:
+    resolution: {integrity: sha512-rvrT/M7Df5eykWFxn6MYt5Pem/Dbyc1N8Y0S9Mrkw2WFCRiqUgw9P7ul2NpwsXCSM1DVdENzdG9J5SreqfAIWg==}
     dependencies:
-      '@types/react': 18.2.0
+      '@types/react': 18.2.43
     dev: true
 
-  /@types/react@18.0.27:
-    resolution: {integrity: sha512-3vtRKHgVxu3Jp9t718R9BuzoD4NcQ8YJ5XRzsSKxNDiDonD2MXIT1TmSkenxuCycZJoQT5d2vE8LwWJxBC1gmA==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
-      csstype: 3.1.1
-    dev: true
-
-  /@types/react@18.2.0:
-    resolution: {integrity: sha512-0FLj93y5USLHdnhIhABk83rm8XEGA7kH3cr+YUlvxoUGp1xNt/DINUMvqPxLyOQMzLmZe8i4RTHbvb8MC7NmrA==}
+  /@types/react@18.2.43:
+    resolution: {integrity: sha512-nvOV01ZdBdd/KW6FahSbcNplt2jCJfyWdTos61RYHV+FVv5L/g9AOX1bmbVcWcLFL8+KHQfh1zVIQrud6ihyQA==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
