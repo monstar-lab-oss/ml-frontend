@@ -6,9 +6,9 @@
     "build": {
       "dependsOn": ["^build"]
     },
-    "build:e2e": {},
+    "build:dev": {},
     "preview": {
-      "dependsOn": ["build:e2e"]
+      "dependsOn": ["build:dev"]
     },
     "start": {
       "dependsOn": ["build"]

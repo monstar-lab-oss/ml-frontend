@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
+    "build:dev": "tsc && vite build --mode development",
     "preview": "vite preview --port 3000",
     "start": "vite preview --port 3000",
     "type": "tsc --noEmit",
