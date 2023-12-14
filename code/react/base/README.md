@@ -62,8 +62,12 @@ npm run storybook
 npm run build:e2e
 
 # (If Playwright was included in the project)
+# Build and deploy a local web server for E2E testing
+npm run setup:e2e
+
+# (If Playwright was included in the project)
 # Run E2E tests with Playwright
-npm run e2e
+npm run test:e2e
 
 ```
 
