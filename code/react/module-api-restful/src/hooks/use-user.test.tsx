@@ -68,6 +68,7 @@ describe("useAddUser", () => {
     const { result } = renderHook(useAddUser, { wrapper });
 
     await act(async () => result.current.mutate({ name: "Ringo" }));
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
     expect(result.current.data).toMatchObject({ name: "Ringo" });
     expect(result.current.isError).toBe(false);
@@ -84,6 +85,7 @@ describe("useUpdateUser", () => {
         name: "Brian",
       })
     );
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
     expect(result.current.data).toStrictEqual({
       id: "f79e82e8-c34a-4dc7-a49e-9fadc0979fda",
