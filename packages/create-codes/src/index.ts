@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+import { format } from "prettier";
 import fse from "fs-extra";
 import meow from "meow";
 import os from "node:os";
@@ -34,6 +34,7 @@ const EXCLUDE = [
 ];
 
 let packageObjs: Record<string, unknown> = {};
+let tsconfigObjs: Record<string, unknown> = {};
 
 /**
  * Clone selected project template from repository into a temporary directory.
@@ -74,6 +75,11 @@ function copyBase(appDir: string, useEslint: boolean) {
   packageObjs = deepMergeObjects(
     packageObjs,
     fse.readJsonSync(path.join(baseSourceDir, "package.json"))
+  );
+
+  tsconfigObjs = deepMergeObjects(
+    tsconfigObjs,
+    fse.readJsonSync(path.join(baseSourceDir, "tsconfig.json"))
   );
 
   return packageObjs;
@@ -140,12 +146,14 @@ async function copyTests(
   if (tests.useVitest) {
     const sourceDir = path.resolve(TEMP_DIR, "testing-vitest");
     const packages = path.join(configDir, "vitest", "package.json");
+    const tsconfig = path.join(configDir, "vitest", "tsconfig.json");
 
     fse.copySync(sourceDir, appDir, {
       filter: (src) => !EXCLUDE.includes(path.basename(src)),
     });
 
     packageObjs = deepMergeObjects(packageObjs, fse.readJsonSync(packages));
+    tsconfigObjs = deepMergeObjects(tsconfigObjs, fse.readJsonSync(tsconfig));
 
     // Update the import statement to the path where the mock server is set up
     const fileContent = fse.readFileSync(
@@ -234,6 +242,12 @@ function copyCommon(appDir: string, sharedConfigDir: string) {
     spaces: 2,
     EOL: os.EOL,
   });
+
+  // Rewrite tsconfig.json
+  fse.writeFileSync(
+    path.join(appDir, "tsconfig.json"),
+    format(JSON.stringify(tsconfigObjs, null, 2), { parser: "json" })
+  );
 }
 
 /**
