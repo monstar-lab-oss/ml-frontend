@@ -7,7 +7,7 @@ import path from "node:path";
 import { degitConfig, eslintPackages } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
 import { cloneFromRepo } from "./helpers/degit";
-import { omit } from "./helpers/omit";
+import { removeWorkspacePackages } from "./helpers/remove-workspace-packages";
 import {
   promptAppDir,
   promptUserInput,
@@ -252,14 +252,12 @@ function copyCommon(appDir: string, sharedConfigDir: string) {
   delete packageObjs.main;
   delete packageObjs.types;
 
-  // Remove unnecessary packages from dependencies
-  packageObjs.dependencies = omit(
-    packageObjs.dependencies as Record<string, string>,
-    { value: "workspace:*" }
+  // Remove workspace packages from dependencies
+  packageObjs.dependencies = removeWorkspacePackages(
+    packageObjs.dependencies as Record<string, string>
   );
-  packageObjs.devDependencies = omit(
-    packageObjs.devDependencies as Record<string, string>,
-    { value: "workspace:*" }
+  packageObjs.devDependencies = removeWorkspacePackages(
+    packageObjs.devDependencies as Record<string, string>
   );
 
   fse.writeJsonSync(path.join(appDir, "package.json"), packageObjs, {
