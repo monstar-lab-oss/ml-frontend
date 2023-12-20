@@ -1,6 +1,6 @@
 # global owners will be requested for review when someone opens a pull request.
 
-- @monstar-lab-oss/reactjs-boilerplate-maintainers
+- @monstar-lab-oss/ml-frontend-maintainers
 
 # In this example, modifies `docs/*` pattern, only @doc-maintainer and not the global owners will be requested for a review.
 
