@@ -1,9 +1,9 @@
 import classes from "./button.module.css";
 
-export const Button: React.FC<React.PropsWithChildren> = (props) => {
+export const Button = ({ children }: React.PropsWithChildren) => {
   return (
     <button role="button" className={classes.button}>
-      {props.children}
+      {children}
     </button>
   );
 };
