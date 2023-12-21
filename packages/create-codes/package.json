@@ -1,7 +1,7 @@
 {
   "name": "create-codes",
   "repository": "git@github.com:monstar-lab-oss/ml-frontend.git",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "bin": {
     "create-codes": "dist/index.js"
   },
