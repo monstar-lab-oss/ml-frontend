@@ -7,6 +7,7 @@ import path from "node:path";
 import { degitConfig, eslintPackages } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
 import { cloneFromRepo } from "./helpers/degit";
+import { removeWorkspacePackages } from "./helpers/remove-workspace-packages";
 import {
   promptAppDir,
   promptUserInput,
@@ -119,9 +120,13 @@ function copyModules(
   apiSolution: string,
   useUnitTests: boolean
 ) {
-  // TODO: Copy modules (currently only copying the API solution)
+  // Currently, there is only an API module, so this is sufficient.
+  // However, I want to make it flexible enough to accommodate additional modules in the future.
+  const moduleDir = path.resolve(TEMP_DIR, `module-api-${apiSolution}`);
+  const packages = path.join(moduleDir, "package.json");
+
   fse.copySync(
-    path.resolve(TEMP_DIR, `module-api-${apiSolution}/src`),
+    path.resolve(moduleDir, "src"),
     path.resolve(appDir, `src/modules/${apiSolution}`),
     {
       filter: (src) => {
@@ -130,6 +135,11 @@ function copyModules(
       },
     }
   );
+
+  // Merge package.json
+  packageObjs = deepMergeObjects(packageObjs, {
+    dependencies: fse.readJsonSync(packages).dependencies,
+  });
 }
 
 /**
@@ -237,6 +247,18 @@ function copyCommon(appDir: string, sharedConfigDir: string) {
 
   // Rewrite package.json
   packageObjs.name = appDir.replace(/.*\//, "");
+
+  // Remove unnecessary fields
+  delete packageObjs.main;
+  delete packageObjs.types;
+
+  // Remove workspace packages from dependencies
+  packageObjs.dependencies = removeWorkspacePackages(
+    packageObjs.dependencies as Record<string, string>
+  );
+  packageObjs.devDependencies = removeWorkspacePackages(
+    packageObjs.devDependencies as Record<string, string>
+  );
 
   fse.writeJsonSync(path.join(appDir, "package.json"), packageObjs, {
     spaces: 2,
