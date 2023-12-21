@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "e2e": "playwright test"
+    "setup:e2e": "npm run build:dev && vite preview --port 3000",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "1.30.0",

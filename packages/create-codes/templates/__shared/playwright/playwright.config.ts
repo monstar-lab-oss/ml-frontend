@@ -8,6 +8,11 @@ const config: PlaywrightTestConfig = {
   retries: CI ? 2 : 0,
   globalSetup: resolve("./__tests__/utils/global-setup"),
   testDir: "__tests__",
+  webServer: {
+    command: "npm run setup:e2e",
+    url: "http://localhost:3000",
+    reuseExistingServer: !CI,
+  },
   use: {
     baseURL: "http://localhost:3000",
     headless: CI,
