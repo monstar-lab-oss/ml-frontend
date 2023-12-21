@@ -260,7 +260,7 @@ importers:
       '@types/node':
         specifier: 18.11.18
         version: 18.11.18
-      reactjs-boilerplate:
+      ml-frontend:
         specifier: workspace:*
         version: link:../..
       start-server-and-test:
