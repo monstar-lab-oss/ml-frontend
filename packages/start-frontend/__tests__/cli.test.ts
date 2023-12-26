@@ -23,13 +23,13 @@ const createCodes = path.resolve(__dirname, "../dist/index.js");
 const EXPECTED_HELP = `Create a new codes for front-end app
 
     Usage:
-      $ npx create-codes [<dir>] [flags...]
+      $ npx start-frontend [<dir>] [flags...]
 
     Flags:
       --help, -h          Show this help message
       --version, -v       Show the version of this script`;
 
-describe("create-codes cli", () => {
+describe("start-frontend cli", () => {
   beforeAll(() => cleanupTestDir());
   afterAll(() => cleanupTestDir());
 

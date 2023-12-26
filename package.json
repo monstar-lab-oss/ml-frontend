@@ -1,7 +1,7 @@
 {
   "name": "ml-frontend",
   "scripts": {
-    "test:cli": "turbo run build --filter=create-codes test --filter=create-codes",
+    "test:cli": "turbo run build --filter=start-frontend test --filter=start-frontend",
     "test:modules": "turbo run test --filter='./code/*' && turbo run test --filter='./code/*/*'",
     "e2e": "turbo run e2e",
     "type": "turbo run type",

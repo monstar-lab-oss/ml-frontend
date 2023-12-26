@@ -18,7 +18,7 @@ const help = `
 Create a new codes for front-end app
 
   Usage:
-    $ npx create-codes [<dir>] [flags...]
+    $ npx start-frontend [<dir>] [flags...]
 
   Flags:
     --help, -h          Show this help message
