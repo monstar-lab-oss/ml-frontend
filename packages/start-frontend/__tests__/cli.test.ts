@@ -48,10 +48,7 @@ describe("start-frontend cli", () => {
         keys.ENTER,
         keys.ENTER,
         keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
       ]);
-      console.log(results);
 
       expect(results).toContain(`start-frontend`);
       expect(results).toContain(`Welcome!`);
