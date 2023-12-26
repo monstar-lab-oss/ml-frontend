@@ -18,28 +18,27 @@ const testDir = "my-test" as const;
 
 const exe = util.promisify(child.execFile);
 
-const createCodes = path.resolve(__dirname, "../dist/index.js");
+const startFrontend = path.resolve(__dirname, "../dist/index.js");
 
 const EXPECTED_HELP = `Create a new codes for front-end app
 
     Usage:
-      $ npx create-codes [<dir>] [flags...]
+      $ npx start-frontend [<dir>] [flags...]
 
     Flags:
       --help, -h          Show this help message
       --version, -v       Show the version of this script`;
 
-describe("create-codes cli", () => {
+describe("start-frontend cli", () => {
   beforeAll(() => cleanupTestDir());
   afterAll(() => cleanupTestDir());
 
   describe("install react boilerplate with cli", () => {
     test("interactively configure", async () => {
-      const cli = spawn("node", [createCodes], { cwd });
+      const cli = spawn("node", [startFrontend], { cwd });
       const results = await exeInteractive(cli, [
         testDir,
         keys.ENTER,
-
         keys.ENTER,
         keys.ENTER,
         keys.ENTER,
@@ -51,7 +50,7 @@ describe("create-codes cli", () => {
         keys.ENTER,
       ]);
 
-      expect(results).toContain(`Create Codes`);
+      expect(results).toContain(`start-frontend`);
       expect(results).toContain(`Welcome!`);
       expect(results).toContain(
         `? Where Would You like to Create Your Application?`
@@ -72,7 +71,7 @@ describe("create-codes cli", () => {
   // TODO: Skip testing as it is not yet implemented.
   describe.skip("install react boilerplate to specify dir", () => {
     test("install", async () => {
-      await exe("node", [createCodes, testDir], { cwd });
+      await exe("node", [startFrontend, testDir], { cwd });
 
       const expectDirs = [
         ".env.template",
@@ -100,25 +99,25 @@ describe("create-codes cli", () => {
 
   describe("printing help message", () => {
     test("--help flag works", async () => {
-      const { stdout } = await exe("node", [createCodes, "--help"]);
+      const { stdout } = await exe("node", [startFrontend, "--help"]);
       expect(stdout.trim()).toBe(EXPECTED_HELP);
     });
 
     test("-h flag works", async () => {
-      const { stdout } = await exe("node", [createCodes, "-h"]);
+      const { stdout } = await exe("node", [startFrontend, "-h"]);
       expect(stdout.trim()).toBe(EXPECTED_HELP);
     });
   });
 
   describe("printing version", () => {
     test("--version flag works", async () => {
-      const { stdout } = await exe("node", [createCodes, "--version"]);
+      const { stdout } = await exe("node", [startFrontend, "--version"]);
       // eslint-disable-next-line turbo/no-undeclared-env-vars
       expect(stdout.trim()).toBe(process.env.npm_package_version);
     });
 
     test("-v flag works", async () => {
-      const { stdout } = await exe("node", [createCodes, "-v"]);
+      const { stdout } = await exe("node", [startFrontend, "-v"]);
       // eslint-disable-next-line turbo/no-undeclared-env-vars
       expect(stdout.trim()).toBe(process.env.npm_package_version);
     });

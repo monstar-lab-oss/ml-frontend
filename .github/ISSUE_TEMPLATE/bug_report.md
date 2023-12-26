@@ -21,7 +21,7 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 ## Related packages/templates
-Repository packages (`create-codes`, `e2e-testing`, etc.), or code template (`react/base`, etc.) that is related to the bug.
+Repository packages (`start-frontend`, `e2e-testing`, etc.), or code template (`react/base`, etc.) that is related to the bug.
 
 ## Screenshots (optional)
 If applicable, add screenshots to help explain your problem.

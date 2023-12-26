@@ -28,7 +28,7 @@ ml-frontend/
 
 ## Installation and Usage
 
-For installation instructions and details on how to use the ML-Frontend CLI tool `create-codes`, please refer to the [documentation](./packages/create-codes/).
+For installation instructions and details on how to use the ML-Frontend CLI tool `start-frontend`, please refer to the [documentation](./packages/start-frontend/).
 
 ## Contributing
 

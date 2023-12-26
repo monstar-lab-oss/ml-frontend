@@ -18,7 +18,7 @@ const help = `
 Create a new codes for front-end app
 
   Usage:
-    $ npx create-codes [<dir>] [flags...]
+    $ npx start-frontend [<dir>] [flags...]
 
   Flags:
     --help, -h          Show this help message
@@ -297,7 +297,7 @@ async function run() {
 
   const [dir] = input;
 
-  console.log("\nCreate Codes\n");
+  console.log("\nstart-frontend\n");
   console.log("Welcome!\n");
 
   const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
