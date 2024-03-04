@@ -6,7 +6,8 @@
     "e2e": "turbo run e2e",
     "type": "turbo run type",
     "lint": "turbo run lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "turbo run build && changeset version && changeset publish"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
