@@ -1,5 +1,11 @@
 # start-frontend
 
+## 1.0.2
+
+### Patch Changes
+
+- 10962d2: Add release script for publishing by @ptrkdan
+
 ## 1.0.1
 
 ### Patch Changes
