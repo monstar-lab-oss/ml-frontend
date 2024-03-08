@@ -1,5 +1,11 @@
 # start-frontend
 
+## 1.0.4
+
+### Patch Changes
+
+- bf0e067: prevent publish private package to npm
+
 ## 1.0.3
 
 ### Patch Changes
