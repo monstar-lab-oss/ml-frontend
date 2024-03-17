@@ -72,16 +72,9 @@ module.exports = {
             format: ['PascalCase'],
           },
         ],
-        'react/jsx-handler-names': [
-          2,
-          {
-            eventHandlerPrefix: 'handle',
-            eventHandlerPropPrefix: 'on',
-            checkLocalVariables: false,
-            checkInlineFunction: false,
-          },
-        ],
-        'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
+        // React components
+        'react/jsx-handler-names': 2,
+        'react/no-danger': 2,
         'react/destructuring-assignment': [2, 'always'],
         'react/hook-use-state': [2, { allowDestructuredState: false }],
         'react/jsx-props-no-spreading': 2,
