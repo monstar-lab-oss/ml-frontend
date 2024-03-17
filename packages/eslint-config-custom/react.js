@@ -14,12 +14,11 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:unicorn/recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ["unicorn"],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json', './tsconfig.node.json'],
@@ -27,6 +26,24 @@ module.exports = {
   rules: {
     'no-console': 2,
     eqeqeq: 2,
+    "unicorn/filename-case": [2, { case: "kebabCase" }],
+    "react/jsx-filename-extension": [2, { extensions: [".tsx"] }],
+    // Best practices for writing efficient JavaScript code
+    "unicorn/no-array-for-each": 1,
+    "unicorn/no-array-push-push": 1,
+    "unicorn/no-array-reduce": 1,
+    "unicorn/no-for-loop": 1,
+    "unicorn/prefer-array-find": 1,
+    "unicorn/prefer-array-flat": 1,
+    "unicorn/prefer-array-flat-map": 1,
+    "unicorn/prefer-object-from-entries": 1,
+    "unicorn/no-useless-length-check": 1,
+    "unicorn/better-regex": 1,
+    "unicorn/no-negated-condition": 1,
+    "unicorn/prefer-add-event-listener": 1,
+    "unicorn/no-nested-ternary": 2,
+    // Code readability
+    "unicorn/prevent-abbreviations": [2, { allowList: { Props: true } }],
   },
   overrides: [
     {
@@ -71,15 +88,7 @@ module.exports = {
         'react/no-unstable-nested-components': 2,
         'react/prefer-stateless-function': 2,
         'react/jsx-no-useless-fragment': 2,
-        'react/forbid-component-props': 2,
-        'unicorn/prevent-abbreviations': [
-          'error',
-          {
-            allowList: {
-              Props: true,
-            },
-          },
-        ],
+        'react/forbid-component-props': 2
       },
     },
   ],
