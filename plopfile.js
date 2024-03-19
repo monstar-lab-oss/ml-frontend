@@ -1,9 +1,9 @@
 module.exports = function (
-	/** @type {import('plop').NodePlopAPI} */
-	plop
-	) {
+  /** @type {import('plop').NodePlopAPI} */
+  plop
+  ) {
 
-	// declare a new generator
+  // declare a new generator
   plop.setGenerator('component', {
     description: 'Create a React component',
     prompts: [{
@@ -18,13 +18,13 @@ module.exports = function (
     }]
   });
 
-	plop.setGenerator('routes', {
-		description: 'Create routes',
-		prompts: [],
-		actions: [{
-			type: 'add',
-			path: 'src/routes.ts',
-			templateFile: 'plop-templates/routes.hbs'
-		}]
-	})
+  plop.setGenerator('routes', {
+    description: 'Create routes',
+    prompts: [],
+    actions: [{
+      type: 'add',
+      path: 'src/routes.ts',
+      templateFile: 'plop-templates/routes.hbs'
+    }]
+  })
 };
