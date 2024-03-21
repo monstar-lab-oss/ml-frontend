@@ -1,5 +1,6 @@
 {
   "name": "@react-testing/vitest",
+  "private": true,
   "scripts": {
     "test": "vitest run --dir .."
   },

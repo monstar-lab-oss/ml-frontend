@@ -1,5 +1,6 @@
 {
   "name": "mock-server",
+  "private": true,
   "main": "./server.ts",
   "types": "./server.ts",
   "dependencies": {
