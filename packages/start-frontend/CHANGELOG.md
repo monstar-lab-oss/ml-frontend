@@ -1,5 +1,12 @@
 # start-frontend
 
+## 1.0.5
+
+### Patch Changes
+
+- 772748d: Make items not intended for publishing private
+- d8928a1: Update start-frontend README
+
 ## 1.0.4
 
 ### Patch Changes
