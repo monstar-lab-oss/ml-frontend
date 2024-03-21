@@ -1,5 +1,6 @@
 {
   "name": "@react-testing/storybook",
+  "private": true,
   "scripts": {
     "storybook": "storybook dev -p 6006 --ci --disable-telemetry",
     "build:storybook": "storybook build",
