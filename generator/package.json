@@ -1,0 +1,10 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "plop": "4.0.1"
+  }
+}
