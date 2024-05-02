@@ -327,21 +327,12 @@ async function run() {
     removeEslintConfig();
   }
 
-  // console.log(path.resolve(__dirname, `/plopfile.ts`),'SSSSSSSSSSS')
-
-  // console.log(path.resolve(__dirname, "../src/plopfile.ts"), "EEEEEEEEEEE");
-  // console.log(appDir, "appDir");
-  // generate random file using node-plop
-  const plopfilePath = path.resolve(__dirname, "../src/plopfile.ts");
-  console.log(plopfilePath);
-  const plop = await nodePlop(plopfilePath);
-
-  //   const plop = await nodePlop(src.plopfile, { destBasePath, force: true });
-
-  // plop.getGenerator("test").runActions({});
+  const nodePlop = await import("node-plop").then((m) => m.default);
+  const plop = await nodePlop(path.resolve(__dirname, "../src/plopfile.ts"));
+  console.log("QQQQQQQQ", plop);
 
   // Copy commons
-  // copyCommon(appDir, sharedConfigDir);
+  copyCommon(appDir, sharedConfigDir);
 
   console.log();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);

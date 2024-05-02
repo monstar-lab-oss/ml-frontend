@@ -1,6 +1,6 @@
-import type { NodePlopAPI } from "node-plop";
+// import type { NodePlopAPI } from "node-plop";
 
-export default function (plop: NodePlopAPI) {
+export default function (plop) {
   // plop.setHelper("reverseEach", (ctx, { fn }) =>
   //   ctx.reverse().map(fn).join("")
   // );

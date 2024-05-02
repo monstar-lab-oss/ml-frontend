@@ -1,7 +1,8 @@
 {
   "extends": "tsconfig/library.json",
   "compilerOptions": {
-    "rootDir": "."
+    "rootDir": ".",
+    "module": "ESNext"
   },
   "include": ["src", "tsup.config.ts"],
   "exclude": ["templates"]
