@@ -1,7 +1,7 @@
 {
   "name": "start-frontend",
   "repository": "git@github.com:monstar-lab-oss/ml-frontend.git",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "bin": {
     "start-frontend": "dist/index.js"
   },
@@ -30,7 +30,7 @@
     "concat-stream": "2.0.0",
     "dotenv-cli": "7.2.1",
     "tsconfig": "workspace:*",
-    "tsup": "6.5.0",
+    "tsup": "6.7.0",
     "typescript": "4.9.4",
     "vitest": "0.27.2"
   }

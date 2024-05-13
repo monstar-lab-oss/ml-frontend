@@ -7,5 +7,11 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [
+    "@react-modules/api-graphql",
+    "@react-modules/api-restful",
+    "@react-testing/storybook",
+    "@react-testing/vitest",
+    "mock-server"
+  ]
 }
