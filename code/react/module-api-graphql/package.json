@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "4.24.4",
-    "graphql-request": "5.1.0",
+    "graphql-request": "5.2.0",
     "react": "18.2.0"
   },
   "devDependencies": {
