@@ -23,14 +23,14 @@
   },
   "devDependencies": {
     "@types/concat-stream": "2.0.0",
-    "@types/degit": "2.8.3",
+    "@types/degit": "2.8.6",
     "@types/fs-extra": "11.0.1",
     "@types/inquirer": "9.0.3",
     "@types/node": "18.11.18",
     "concat-stream": "2.0.0",
     "dotenv-cli": "7.4.2",
     "tsconfig": "workspace:*",
-    "tsup": "6.5.0",
+    "tsup": "6.7.0",
     "typescript": "4.9.4",
     "vitest": "0.27.2"
   }
