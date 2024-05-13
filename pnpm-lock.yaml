@@ -249,8 +249,8 @@ importers:
         specifier: 2.8.4
         version: 2.8.4
       fs-extra:
-        specifier: 11.1.0
-        version: 11.1.0
+        specifier: 11.2.0
+        version: 11.2.0
       inquirer:
         specifier: 8.2.3
         version: 8.2.3
@@ -265,8 +265,8 @@ importers:
         specifier: 2.8.6
         version: 2.8.6
       '@types/fs-extra':
-        specifier: 11.0.1
-        version: 11.0.1
+        specifier: 11.0.4
+        version: 11.0.4
       '@types/inquirer':
         specifier: 9.0.3
         version: 9.0.3
@@ -2814,7 +2814,7 @@ packages:
       '@storybook/preview-api': 7.0.0-beta.43
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.0-beta.43
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       remark-external-links: 8.0.0
@@ -3007,7 +3007,7 @@ packages:
       esbuild-plugin-alias: 0.2.1
       express: 4.18.2
       find-cache-dir: 3.3.2
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       process: 0.11.10
       slash: 3.0.0
       util: 0.12.5
@@ -3043,7 +3043,7 @@ packages:
       browser-assert: 1.2.1
       es-module-lexer: 0.9.3
       express: 4.18.2
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       glob: 8.1.0
       glob-promise: 4.2.2(glob@8.1.0)
       magic-string: 0.27.0
@@ -3102,7 +3102,7 @@ packages:
       execa: 5.1.1
       express: 4.18.2
       find-up: 5.0.0
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       get-port: 5.1.1
       giget: 1.0.0
       globby: 11.1.0
@@ -3198,7 +3198,7 @@ packages:
       express: 4.18.2
       file-system-cache: 2.0.2
       find-up: 5.0.0
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       glob: 8.1.0
       glob-promise: 4.2.2(glob@8.1.0)
       handlebars: 4.7.7
@@ -3245,7 +3245,7 @@ packages:
       compression: 1.7.4
       detect-port: 1.5.1
       express: 4.18.2
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       globby: 11.1.0
       ip: 2.0.0
       lodash: 4.17.21
@@ -3284,7 +3284,7 @@ packages:
       '@babel/types': 7.22.3
       '@storybook/csf': 0.1.7-next.0
       '@storybook/types': 7.0.0-beta.43
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       recast: 0.23.1
       ts-dedent: 2.2.0
     transitivePeerDependencies:
@@ -3479,7 +3479,7 @@ packages:
       chalk: 4.1.2
       detect-package-manager: 2.0.1
       fetch-retry: 5.0.3
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       isomorphic-unfetch: 3.1.0
       nanoid: 3.3.6
       read-pkg-up: 7.0.1
@@ -3713,8 +3713,8 @@ packages:
     resolution: {integrity: sha512-frsJrz2t/CeGifcu/6uRo4b+SzAwT4NYCVPu1GN8IB9XTzrpPkGuV0tmh9mN+/L0PklAlsC3u5Fxt0ju00LXIw==}
     dev: true
 
-  /@types/fs-extra@11.0.1:
-    resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
+  /@types/fs-extra@11.0.4:
+    resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
     dependencies:
       '@types/jsonfile': 6.1.1
       '@types/node': 18.11.18
@@ -6246,7 +6246,7 @@ packages:
   /file-system-cache@2.0.2:
     resolution: {integrity: sha512-lp4BHO4CWqvRyx88Tt3quZic9ZMf4cJyquYq7UI8sH42Bm2ArlBBjKQAalZOo+UfaBassb7X123Lik5qZ/tSAA==}
     dependencies:
-      fs-extra: 11.1.0
+      fs-extra: 11.2.0
       ramda: 0.28.0
     dev: true
 
@@ -6400,8 +6400,8 @@ packages:
     resolution: {integrity: sha512-twe20eF1OxVxp/ML/kq2p1uc6KvFK/+vs8WjEbeKmV2He22MKm7YF2ANIt+EOqhJ5L3K/SuuPhk0hWQDjOM23g==}
     dev: true
 
-  /fs-extra@11.1.0:
-    resolution: {integrity: sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==}
+  /fs-extra@11.2.0:
+    resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
     engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.11
@@ -8183,10 +8183,6 @@ packages:
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /object-inspect@1.12.3:
-    resolution: {integrity: sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==}
     dev: true
 
   /object-inspect@1.13.1:
