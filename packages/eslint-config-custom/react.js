@@ -26,6 +26,11 @@ module.exports = {
   rules: {
     'no-console': 2,
     eqeqeq: 2,
+    "no-unused-vars": 2,
+    "no-var": 2,
+    "prefer-const": 2,
+    "no-eval": 2,
+    "no-magic-numbers": 2,
     "unicorn/filename-case": [2, { case: "kebabCase" }],
     "react/jsx-filename-extension": [2, { extensions: [".tsx"] }],
     // Best practices for writing efficient JavaScript code
