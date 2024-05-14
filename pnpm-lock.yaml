@@ -31,8 +31,8 @@ importers:
   code/react/base:
     dependencies:
       '@tanstack/react-query':
-        specifier: 4.24.4
-        version: 4.24.4(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.36.1
+        version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -44,8 +44,8 @@ importers:
         version: 2.12.1(react@18.2.0)
     devDependencies:
       '@tanstack/eslint-plugin-query':
-        specifier: 4.24.5
-        version: 4.24.5
+        specifier: 4.38.0
+        version: 4.38.0(eslint@8.33.0)
       '@types/react':
         specifier: 18.0.27
         version: 18.0.27
@@ -80,8 +80,8 @@ importers:
   code/react/module-api-graphql:
     dependencies:
       '@tanstack/react-query':
-        specifier: 4.24.4
-        version: 4.24.4(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.36.1
+        version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       graphql-request:
         specifier: 5.2.0
         version: 5.2.0(graphql@16.6.0)
@@ -90,8 +90,8 @@ importers:
         version: 18.2.0
     devDependencies:
       '@tanstack/eslint-plugin-query':
-        specifier: 4.24.5
-        version: 4.24.5
+        specifier: 4.38.0
+        version: 4.38.0(eslint@8.33.0)
       '@testing-library/react':
         specifier: 13.4.0
         version: 13.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -114,15 +114,15 @@ importers:
   code/react/module-api-restful:
     dependencies:
       '@tanstack/react-query':
-        specifier: 4.24.4
-        version: 4.24.4(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.36.1
+        version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
     devDependencies:
       '@tanstack/eslint-plugin-query':
-        specifier: 4.24.5
-        version: 4.24.5
+        specifier: 4.38.0
+        version: 4.38.0(eslint@8.33.0)
       '@testing-library/react':
         specifier: 13.4.0
         version: 13.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -3824,16 +3824,20 @@ packages:
       - supports-color
     dev: true
 
-  /@tanstack/eslint-plugin-query@4.24.5:
-    resolution: {integrity: sha512-KvuRkA9fYRZF9umwpLpWLcEqAVK7IWK8qjmnR3iwPIpkTFNGzaGogs7YkRCZs6q77QxI+c6MWG4xwjLIK/UmdA==}
+  /@tanstack/eslint-plugin-query@4.38.0(eslint@8.33.0):
+    resolution: {integrity: sha512-KmcrnjTQzONBqxNWSVKyPNi5tLq0URvIiWThE9HIK5qePGtB0VqoHfOsn4nuGJD268xDNDpFQjQiko9mMa5iLQ==}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 8.33.0
     dev: true
 
-  /@tanstack/query-core@4.24.4:
-    resolution: {integrity: sha512-9dqjv9eeB6VHN7lD3cLo16ZAjfjCsdXetSAD5+VyKqLUvcKTL0CklGQRJu+bWzdrS69R6Ea4UZo8obHYZnG6aA==}
+  /@tanstack/query-core@4.36.1:
+    resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
     dev: false
 
-  /@tanstack/react-query@4.24.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-RpaS/3T/a3pHuZJbIAzAYRu+1nkp+/enr9hfRXDS/mojwx567UiMksoqW4wUFWlwIvWTXyhot2nbIipTKEg55Q==}
+  /@tanstack/react-query@4.36.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -3844,7 +3848,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.24.4
+      '@tanstack/query-core': 4.36.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
