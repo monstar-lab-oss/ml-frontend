@@ -83,8 +83,8 @@ importers:
         specifier: 4.24.4
         version: 4.24.4(react-dom@18.2.0)(react@18.2.0)
       graphql-request:
-        specifier: 5.1.0
-        version: 5.1.0(graphql@16.6.0)
+        specifier: 5.2.0
+        version: 5.2.0(graphql@16.6.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -6630,8 +6630,8 @@ packages:
   /grapheme-splitter@1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
 
-  /graphql-request@5.1.0(graphql@16.6.0):
-    resolution: {integrity: sha512-0OeRVYigVwIiXhNmqnPDt+JhMzsjinxHE7TVy3Lm6jUzav0guVcL0lfSbi6jVTRAxcbwgyr6yrZioSHxf9gHzw==}
+  /graphql-request@5.2.0(graphql@16.6.0):
+    resolution: {integrity: sha512-pLhKIvnMyBERL0dtFI3medKqWOz/RhHdcgbZ+hMMIb32mEPa5MJSzS4AuXxfI4sRAu6JVVk5tvXuGfCWl9JYWQ==}
     peerDependencies:
       graphql: 14 - 16
     dependencies:
