@@ -1,0 +1,16 @@
+import React from 'react';
+{{#if router}}
+  import { Router } from '@/router';
+{{else}}
+  import Home from '@/pages';
+{{/if}}
+import { AppProviders } from '@/app-providers'; const App: React.FC = () => {
+return (
+<AppProviders>
+  {{#if router}}
+    <Router />
+  {{else}}
+    <Home />
+  {{/if}}
+</AppProviders>
+); }; export default App;
