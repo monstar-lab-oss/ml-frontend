@@ -4,10 +4,13 @@
 # Include specific folders
 !/code
 !/packages
-
 # But exclude folders anywhere
 node_modules
 dist
 build
 public
 .turbo
+
+# Exclude Handlebars.js (.hbs) files
+# TODO: Figure out how to format hanldebar templates
+**/*.hbs
