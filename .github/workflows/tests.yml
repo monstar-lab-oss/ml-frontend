@@ -28,7 +28,7 @@ jobs:
       # Create cache for Playwright installation
       - name: Restore Playwright Installation Cache
         id: playwright-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm.lock.yaml') }}
