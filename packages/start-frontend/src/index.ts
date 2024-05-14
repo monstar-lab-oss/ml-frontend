@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-ignore
 import { format } from "prettier";
 import fse from "fs-extra";
 import meow from "meow";
@@ -325,6 +326,15 @@ async function run() {
   if (!tests?.useEslint) {
     removeEslintConfig();
   }
+
+  const { default: nodePlop } = await import("node-plop");
+  const plopFilePath = path.resolve(__dirname, "plopfile.js");
+  const plop = await nodePlop(plopFilePath, {
+    destBasePath: appDir,
+    force: true,
+  });
+
+  const baseGenerator = plop.getGenerator("constructBase");
 
   // Copy commons
   copyCommon(appDir, sharedConfigDir);
