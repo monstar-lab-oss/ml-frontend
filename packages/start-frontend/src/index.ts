@@ -335,6 +335,7 @@ async function run() {
   });
 
   const baseGenerator = plop.getGenerator("constructBase");
+  baseGenerator.runActions({});
 
   // Copy commons
   copyCommon(appDir, sharedConfigDir);
