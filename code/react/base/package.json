@@ -15,7 +15,7 @@
     "@tanstack/react-query": "4.24.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "wouter": "2.10.0"
+    "wouter": "2.12.1"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "4.24.5",
