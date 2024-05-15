@@ -4,6 +4,7 @@
 # Include specific folders
 !/code
 !/packages
+
 # But exclude folders anywhere
 node_modules
 dist
