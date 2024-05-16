@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-// @ts-ignore
-import { format } from "prettier";
+import prettier from "prettier";
 import fse from "fs-extra";
 import meow from "meow";
 import os from "node:os";
@@ -237,7 +236,7 @@ async function copyTests(
 /**
  * Copy common files into the target app directory
  */
-function copyCommon(appDir: string, sharedConfigDir: string) {
+async function copyCommon(appDir: string, sharedConfigDir: string) {
   fse.copySync(`${sharedConfigDir}/gitignore`, `${appDir}/gitignore`);
 
   // Rename dot files
@@ -269,7 +268,9 @@ function copyCommon(appDir: string, sharedConfigDir: string) {
   // Rewrite tsconfig.json
   fse.writeFileSync(
     path.join(appDir, "tsconfig.json"),
-    format(JSON.stringify(tsconfigObjs, null, 2), { parser: "json" })
+    await prettier.format(JSON.stringify(tsconfigObjs, null, 2), {
+      parser: "json",
+    })
   );
 }
 
@@ -335,10 +336,10 @@ async function run() {
   });
 
   const baseGenerator = plop.getGenerator("constructBase");
-  baseGenerator.runActions({});
+  await baseGenerator.runActions({});
 
   // Copy commons
-  copyCommon(appDir, sharedConfigDir);
+  await copyCommon(appDir, sharedConfigDir);
 
   console.log();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);

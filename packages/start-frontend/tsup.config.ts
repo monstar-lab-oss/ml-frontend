@@ -7,5 +7,6 @@ export default defineConfig((options: Options) => ({
   define: {
     "process.env.BRANCH_NAME": `"${process.env.BRANCH_NAME}"`,
   },
+  shims: true,
   ...options,
 }));
