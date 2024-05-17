@@ -22,7 +22,7 @@
     "meow": "7.1.1"
   },
   "devDependencies": {
-    "@types/concat-stream": "2.0.0",
+    "@types/concat-stream": "2.0.3",
     "@types/degit": "2.8.6",
     "@types/fs-extra": "11.0.4",
     "@types/inquirer": "9.0.3",
