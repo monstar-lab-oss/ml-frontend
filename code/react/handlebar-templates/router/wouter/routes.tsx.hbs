@@ -1,21 +1,33 @@
-import { lazy } from "react";
+import { lazy, PropsWithChildren } from "react";
 import { Route } from "wouter";
 
-const Home = lazy(() => import("@/pages"));
+const Home = lazy(() => import("@/ui/pages"));
+const About = lazy(() => import("@/ui/pages/about"));
+const NotFound = lazy(() => import("@/ui/pages/not-found"));
 {{#each routes}}
 const {{pascalCase name}} = lazy(() => import("@/pages/{{kebabCase name}}"));
 {{/each}}
 
+const RouteWithLayout = ({ children }: PropsWithChildren<{ path: string }>) => (
+  <Layout>{children}</Layout>
+);
+
 const routes = () => (
   <>
-    <Route path="/">
+    <RouteWithLayout path="/about">
+      <About />
+    </RouteWithLayout>
+    <RouteWithLayout path="/">
       <Home />
-    </Route>
+    </RouteWithLayout>
     {{#each routes}}
-    <Route path="/{{path}}">
+    <RouteWithLayout path="/{{path}}">
       <{{pascalCase name}} />
-    </Route>
+    </RouteWithLayout>
     {{/each}}
+    <Route>
+      <NotFound />
+    </Route>
   </>
 );
 
