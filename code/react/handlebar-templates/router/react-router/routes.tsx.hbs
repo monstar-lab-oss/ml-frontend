@@ -1,0 +1,15 @@
+import { lazy } from "react";
+
+const Home = lazy(() => import("@/pages"));
+{{#each routes}}
+const {{pascalCase name}} = lazy(() => import("@/pages/{{kebabCase name}}"));
+{{/each}}
+
+const routes = [
+  { path: "/", component: Home },
+  {{#each routes}}
+  { path: "/{{path}}", component: {{pascalCase name}} },
+  {{/each}}
+];
+
+export default routes;

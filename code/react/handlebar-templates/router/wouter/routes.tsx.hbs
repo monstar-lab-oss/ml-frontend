@@ -1,0 +1,22 @@
+import { lazy } from "react";
+import { Route } from "wouter";
+
+const Home = lazy(() => import("@/pages"));
+{{#each routes}}
+const {{pascalCase name}} = lazy(() => import("@/pages/{{kebabCase name}}"));
+{{/each}}
+
+const routes = () => (
+  <>
+    <Route path="/">
+      <Home />
+    </Route>
+    {{#each routes}}
+    <Route path="/{{path}}">
+      <{{pascalCase name}} />
+    </Route>
+    {{/each}}
+  </>
+);
+
+export default routes;
