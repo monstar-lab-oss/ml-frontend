@@ -25,6 +25,13 @@ export const CLIOptions = {
       { name: "RESTful", value: "restful" },
       { name: "GraphQL", value: "graphql" },
     ],
-    useModules: [{ name: "Add CRUD Operations", value: "crud" }],
+    useModules: [
+      { name: "Add CRUD Operations", value: "crud" },
+      { name: "Add Routing", value: "routing" },
+    ],
+    routing: [
+      { name: "React Router", value: "react-router" },
+      { name: "wouter", value: "wouter" },
+    ],
   },
 } satisfies Record<JSLibrary, unknown>;

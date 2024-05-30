@@ -304,7 +304,8 @@ async function run() {
 
   const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
-  const { jsLibrary, apiSolution, modules, tests } = await promptUserInput();
+  const { jsLibrary, apiSolution, modules, router, tests } =
+    await promptUserInput();
 
   const templateName = jsLibrary;
   await cloneTemplateToTempDir(templateName);
@@ -335,8 +336,13 @@ async function run() {
     force: true,
   });
 
-  const baseGenerator = plop.getGenerator("constructBase");
-  await baseGenerator.runActions({});
+  if (router) {
+    await plop
+      .getGenerator("constructRouter")
+      .runActions({ router, routes: [] }); // TODO Add additional routes from other modules
+  }
+
+  await plop.getGenerator("constructBase").runActions({ router });
 
   // Copy commons
   await copyCommon(appDir, sharedConfigDir);

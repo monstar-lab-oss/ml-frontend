@@ -13,6 +13,7 @@ export type UserInput = {
   jsLibrary: JSLibrary;
   apiSolution: "restful" | "graphql";
   modules: string[];
+  router: "react-router" | "wouter" | undefined;
   tests: UserInputTests | null;
 };
 
@@ -78,6 +79,18 @@ export async function promptUserInput() {
       },
     ])
   ).useModules;
+
+  const router = (
+    await inquirer.prompt<{ router: "react-router" | "wouter" }>([
+      {
+        type: "list",
+        name: "router",
+        message: "Select a routing solution",
+        choices: CLIOptions[jsLibrary].routing,
+        when: () => modules.includes("routing"),
+      },
+    ])
+  ).router;
 
   // Select testing packages
   const useTesting = (
@@ -165,6 +178,7 @@ export async function promptUserInput() {
     jsLibrary,
     apiSolution,
     modules,
+    router,
     tests,
   };
 
