@@ -1,124 +1,178 @@
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import path from "node:path";
 import util from "node:util";
-import { execFile, spawn } from "node:child_process";
+import { execFile, exec, execSync } from "node:child_process";
 import fse from "fs-extra";
-import concat from "concat-stream";
 
-// variables
-const keys = {
+const START_FRONTEND = path.resolve(__dirname, "..", "dist", "index.js");
+
+const KEY = {
   ENTER: "\x0D",
   DOWN: "\u001B\u005B\u0042",
   SPACE: "\x20",
 };
 
-const cwd = path.resolve(__dirname, "../../../..");
-const testDir = "my-test" as const;
-const cli = path.resolve(__dirname, "..", "dist", "index.js");
-
-// helpers
+const TEST_DIR = execSync("mktemp -d -t my-test").toString("utf-8");
 const exe = util.promisify(execFile);
 
 async function cleanupTestDir() {
-  const installedTestDir = path.resolve(cwd, testDir);
-
-  fse.existsSync(installedTestDir) &&
-    fse.rmSync(installedTestDir, { recursive: true });
+  fse.existsSync(TEST_DIR) && fse.rmSync(TEST_DIR, { recursive: true });
 }
 
-type RunCLIOptions = {
-  inputs?: string[];
-  delay?: number;
-};
-function runCLIWithInputs(cliPath: string, opts: RunCLIOptions) {
-  const cliProcess = spawn("node", [cliPath], { cwd });
-  const { inputs = [], delay = 500 } = opts;
+async function executeCLI(inputs: string[], delay = 500) {
+  const cliProcess = exec(`node ${START_FRONTEND} ${TEST_DIR}`);
+  cliProcess.stdin?.setDefaultEncoding("utf-8");
 
-  let currentInputTimeout: NodeJS.Timeout;
+  function nextPrompt(inputs: string[]) {
+    if (!inputs.length) return;
 
-  function loop(inputs: string[]) {
-    if (!inputs.length) {
-      clearTimeout(currentInputTimeout);
-      return cliProcess.stdin.end();
-    }
-
-    currentInputTimeout = setTimeout(() => {
-      cliProcess.stdin.write(inputs[0]);
-
-      loop(inputs.slice(1));
+    setTimeout(() => {
+      cliProcess?.stdin?.write(inputs[0]);
+      nextPrompt(inputs.slice(1));
     }, delay);
   }
 
-  return new Promise((resolve) => {
-    loop(inputs);
+  nextPrompt(inputs);
 
-    cliProcess.stdout.pipe(
-      concat((result: Buffer) => resolve(result.toString("utf-8")))
-    );
-  });
+  return new Promise((resolve) => cliProcess.on("exit", resolve));
 }
 
-// tests
-describe("start-frontend cli", async () => {
-  beforeAll(() => cleanupTestDir());
-  afterAll(() => cleanupTestDir());
+describe(
+  "start-frontend",
+  async () => {
+    beforeAll(cleanupTestDir);
+    afterAll(cleanupTestDir);
 
-  test("--version flag works", async () => {
-    const { stdout } = await exe("node", [cli, "--version"]);
-    expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
-  });
-
-  test("-v flag works", async () => {
-    const { stdout } = await exe("node", [cli, "-v"]);
-    expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
-  });
-
-  test("--help flag works", async () => {
-    const { stdout } = await exe("node", [cli, "-h"]);
-    expect(stdout.trim()).toBe(`Create a new codes for front-end app
-
-    Usage:
-      $ npx start-frontend [<dir>] [flags...]
-
-    Flags:
-      --help, -h          Show this help message
-      --version, -v       Show the version of this script`);
-  });
-
-  test("-h flag works", async () => {
-    const { stdout } = await exe("node", [cli, "-h"]);
-    expect(stdout.trim()).toBe(`Create a new codes for front-end app
-
-    Usage:
-      $ npx start-frontend [<dir>] [flags...]
-
-    Flags:
-      --help, -h          Show this help message
-      --version, -v       Show the version of this script`);
-  });
-
-  test("handle interactive configuration on CLI", async () => {
-    await runCLIWithInputs(cli, {
-      inputs: [
-        // Where Would You like to Create Your Application?
-        keys.ENTER,
-        // Select a JavsScript library for UI (Use arrow keys)
-        keys.ENTER,
-        // Select an API Solution (Use arrow keys)
-        keys.ENTER,
-        // Select module do you want to use
-        keys.ENTER,
-        // Add Testing codes for Catching bugs early?
-        keys.ENTER,
-        // Add Vitest for Unit Testing?
-        keys.ENTER,
-        // Add Storybook for Visual Testing?
-        keys.ENTER,
-        // Add Playwright for End-To-End Testing?
-        keys.ENTER,
-        // Add Prettier for Code Formatting?
-        keys.ENTER,
-      ],
+    test("--version flag works", async () => {
+      const { stdout } = await exe("node", [START_FRONTEND, "--version"]);
+      expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
     });
-  });
-});
+
+    test("-v flag works", async () => {
+      const { stdout } = await exe("node", [START_FRONTEND, "-v"]);
+      expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
+    });
+
+    test("--help flag works", async () => {
+      const { stdout } = await exe("node", [START_FRONTEND, "-h"]);
+      expect(stdout.trim()).toBe(`Create a new codes for front-end app
+
+    Usage:
+      $ npx start-frontend [<dir>] [flags...]
+
+    Flags:
+      --help, -h          Show this help message
+      --version, -v       Show the version of this script`);
+    });
+
+    test("-h flag works", async () => {
+      const { stdout } = await exe("node", [START_FRONTEND, "-h"]);
+      expect(stdout.trim()).toBe(`Create a new codes for front-end app
+
+    Usage:
+      $ npx start-frontend [<dir>] [flags...]
+
+    Flags:
+      --help, -h          Show this help message
+      --version, -v       Show the version of this script`);
+    });
+
+    test("handle interactive configuration on CLI", async () => {
+      await executeCLI([
+        // Where Would You like to Create Your Application?
+        KEY.ENTER,
+        // Select a JavsScript library for UI (Use arrow keys)
+        KEY.ENTER,
+        // Select an API Solution (Use arrow keys)
+        KEY.ENTER,
+        // Select module do you want to use
+        KEY.ENTER,
+        // Add Testing codes for Catching bugs early?
+        KEY.ENTER,
+        // Add Vitest for Unit Testing?
+        KEY.ENTER,
+        // Add Storybook for Visual Testing?
+        KEY.ENTER,
+        // Add Playwright for End-To-End Testing?
+        KEY.ENTER,
+        // Add Prettier for Code Formatting?
+        KEY.ENTER,
+      ]);
+
+      const result = execSync(
+        `npx tree-cli -a -l 5 --base ${TEST_DIR}`
+      ).toString("utf-8");
+
+      expect(result).toContain(`
+├── .eslintignore
+├── .eslintrc.cjs
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── .storybook
+|  ├── main.ts
+|  ├── preview-head.html
+|  └── preview.ts
+├── __mocks__
+|  ├── browser.ts
+|  ├── index.ts
+|  ├── request-handlers.ts
+|  └── server.ts
+├── __tests__
+|  ├── About.test.ts
+|  ├── Home.test.ts
+|  └── utils
+|     └── global-setup.ts
+├── env.d.ts
+├── index.html
+├── package.json
+├── playwright.config.ts
+├── public
+|  ├── favicon.svg
+|  └── mockServiceWorker.js
+├── src
+|  ├── app.tsx
+|  ├── assets
+|  |  ├── base.css
+|  |  └── main.css
+|  ├── components
+|  |  ├── Button.tsx
+|  |  └── button.module.css
+|  ├── context.tsx
+|  ├── main.tsx
+|  ├── modules
+|  |  └── restful
+|  |     ├── components
+|  |     |  ├── user-form.test.tsx
+|  |     |  ├── user-form.tsx
+|  |     |  ├── user-list.test.tsx
+|  |     |  ├── user-list.tsx
+|  |     |  ├── user-view.test.tsx
+|  |     |  └── user-view.tsx
+|  |     ├── hooks
+|  |     |  ├── use-user.test.tsx
+|  |     |  └── use-user.ts
+|  |     └── index.ts
+|  ├── routes.tsx
+|  └── ui
+|     ├── nav-link.tsx
+|     └── pages
+|        ├── about
+|        |  └── index.tsx
+|        ├── index.tsx
+|        ├── layout.tsx
+|        └── not-found
+|           └── index.tsx
+├── stories
+|  └── Button.stories.tsx
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+├── vitest.config.ts
+└── vitest.setup.ts`);
+    });
+  },
+  {
+    timeout: 10000,
+  }
+);
