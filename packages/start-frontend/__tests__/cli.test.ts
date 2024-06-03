@@ -12,9 +12,11 @@ const KEY = {
   SPACE: "\x20",
 };
 
-const TEST_DIR =
-  // eslint-disable-next-line turbo/no-undeclared-env-vars
-  process.env.RUNNER_TEMP || execSync("mktemp -d -t my-test").toString("utf-8");
+// Timeout duration for interactive tests, to allow for code stub downloads
+const INTERACTIVE_TEST_TIMEOUT = 10000;
+
+let TEST_DIR;
+
 const exe = util.promisify(execFile);
 
 async function cleanupTestDir() {
@@ -28,6 +30,7 @@ async function executeCLI(inputs: string[], delay = 500) {
   function nextPrompt(inputs: string[]) {
     if (!inputs.length) return;
 
+    // Write the input to the CLI process with a delay
     setTimeout(() => {
       cliProcess?.stdin?.write(inputs[0]);
       nextPrompt(inputs.slice(1));
@@ -39,37 +42,31 @@ async function executeCLI(inputs: string[], delay = 500) {
   return new Promise((resolve) => cliProcess.on("exit", resolve));
 }
 
-describe(
-  "start-frontend",
-  async () => {
-    beforeAll(cleanupTestDir);
-    afterAll(cleanupTestDir);
+describe("start-frontend", () => {
+  beforeAll(() => {
+    // Initialize TEST_DIR before all tests
+    TEST_DIR =
+      // eslint-disable-next-line turbo/no-undeclared-env-vars
+      process.env.RUNNER_TEMP ||
+      execSync("mktemp -d -t my-test").toString("utf-8");
+    cleanupTestDir();
+  });
 
-    test("--version flag works", async () => {
-      const { stdout } = await exe("node", [START_FRONTEND, "--version"]);
-      expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
-    });
+  afterAll(cleanupTestDir);
 
-    test("-v flag works", async () => {
-      const { stdout } = await exe("node", [START_FRONTEND, "-v"]);
-      expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
-    });
+  test("--version works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "--version"]);
+    expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
+  });
 
-    test("--help flag works", async () => {
-      const { stdout } = await exe("node", [START_FRONTEND, "-h"]);
-      expect(stdout.trim()).toBe(`Create a new codes for front-end app
+  test("-v flag works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "-v"]);
+    expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
+  });
 
-    Usage:
-      $ npx start-frontend [<dir>] [flags...]
-
-    Flags:
-      --help, -h          Show this help message
-      --version, -v       Show the version of this script`);
-    });
-
-    test("-h flag works", async () => {
-      const { stdout } = await exe("node", [START_FRONTEND, "-h"]);
-      expect(stdout.trim()).toBe(`Create a new codes for front-end app
+  test("--help flag works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "--help"]);
+    expect(stdout.trim()).toBe(`Create a new codes for front-end app
 
     Usage:
       $ npx start-frontend [<dir>] [flags...]
@@ -77,13 +74,27 @@ describe(
     Flags:
       --help, -h          Show this help message
       --version, -v       Show the version of this script`);
-    });
+  });
 
-    test("handle interactive configuration on CLI", async () => {
+  test("-h flag works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "-h"]);
+    expect(stdout.trim()).toBe(`Create a new codes for front-end app
+
+    Usage:
+      $ npx start-frontend [<dir>] [flags...]
+
+    Flags:
+      --help, -h          Show this help message
+      --version, -v       Show the version of this script`);
+  });
+
+  test(
+    "handle interactive configuration on CLI",
+    async () => {
       await executeCLI([
         // Where Would You like to Create Your Application?
         KEY.ENTER,
-        // Select a JavsScript library for UI (Use arrow keys)
+        // Select a JavaScript library for UI (Use arrow keys)
         KEY.ENTER,
         // Select an API Solution (Use arrow keys)
         KEY.ENTER,
@@ -101,6 +112,7 @@ describe(
         KEY.ENTER,
       ]);
 
+      // Execute tree-cli to get the directory structure and convert it to a string
       const result = execSync(
         `npx tree-cli -a -l 5 --base ${TEST_DIR}`
       ).toString("utf-8");
@@ -172,9 +184,7 @@ describe(
 ├── vite.config.ts
 ├── vitest.config.ts
 └── vitest.setup.ts`);
-    });
-  },
-  {
-    timeout: 10000,
-  }
-);
+    },
+    INTERACTIVE_TEST_TIMEOUT
+  );
+});
