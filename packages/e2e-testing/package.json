@@ -9,7 +9,7 @@
     "@playwright/test": "1.44.0"
   },
   "devDependencies": {
-    "start-server-and-test": "1.15.2",
+    "start-server-and-test": "2.0.4",
     "tsconfig": "workspace:*",
     "typescript": "4.9.4",
     "@types/node": "18.11.18"
