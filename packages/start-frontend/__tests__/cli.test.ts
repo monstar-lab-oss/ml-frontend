@@ -15,16 +15,16 @@ const KEY = {
 // Timeout duration for interactive tests, to allow for code stub downloads
 const INTERACTIVE_TEST_TIMEOUT = 10000;
 
-let TEST_DIR;
+let testDir: string;
 
 const exe = util.promisify(execFile);
 
 async function cleanupTestDir() {
-  fse.existsSync(TEST_DIR) && fse.rmSync(TEST_DIR, { recursive: true });
+  fse.existsSync(testDir) && fse.rmSync(testDir, { recursive: true });
 }
 
 async function executeCLI(inputs: string[], delay = 500) {
-  const cliProcess = exec(`node ${START_FRONTEND} ${TEST_DIR}`);
+  const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
   cliProcess.stdin?.setDefaultEncoding("utf-8");
 
   function nextPrompt(inputs: string[]) {
@@ -45,7 +45,7 @@ async function executeCLI(inputs: string[], delay = 500) {
 describe("start-frontend", () => {
   beforeAll(() => {
     // Initialize TEST_DIR before all tests
-    TEST_DIR =
+    testDir =
       // eslint-disable-next-line turbo/no-undeclared-env-vars
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
@@ -114,7 +114,7 @@ describe("start-frontend", () => {
 
       // Execute tree-cli to get the directory structure and convert it to a string
       const result = execSync(
-        `npx tree-cli -a -l 5 --base ${TEST_DIR}`
+        `npx tree-cli -a -l 5 --base ${testDir}`
       ).toString("utf-8");
 
       expect(result).toContain(`
