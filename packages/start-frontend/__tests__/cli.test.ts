@@ -25,7 +25,6 @@ async function cleanupTestDir() {
 
 async function executeCLI(inputs: string[], delay = 500) {
   const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
-  cliProcess.stdin?.setDefaultEncoding("utf-8");
 
   function nextPrompt(inputs: string[]) {
     if (!inputs.length) return;
