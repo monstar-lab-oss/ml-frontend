@@ -11,10 +11,10 @@
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
-    "husky": "8.0.3",
-    "lint-staged": "13.1.1",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
     "prettier": "3.2.5",
-    "turbo": "1.7.4"
+    "turbo": "1.13.3"
   },
   "lint-staged": {
     "*": "prettier --ignore-unknown --write"
