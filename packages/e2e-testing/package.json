@@ -11,7 +11,7 @@
   "devDependencies": {
     "start-server-and-test": "1.15.2",
     "tsconfig": "workspace:*",
-    "typescript": "4.9.4",
+    "typescript": "5.5.2",
     "@types/node": "18.11.18"
   }
 }
