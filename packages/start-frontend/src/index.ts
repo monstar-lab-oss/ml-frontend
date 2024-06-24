@@ -8,11 +8,7 @@ import { degitConfig, eslintPackages } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
 import { cloneFromRepo } from "./helpers/degit";
 import { removeWorkspacePackages } from "./helpers/remove-workspace-packages";
-import {
-  promptAppDir,
-  promptUserInput,
-  type UserInputTests,
-} from "./helpers/prompt";
+import { promptClack, type UserInputTests } from "./helpers/prompt-clack";
 
 const help = `
 Create a new codes for front-end app
@@ -297,12 +293,11 @@ async function run() {
 
   const [dir] = input;
 
-  console.log("\nstart-frontend\n");
-  console.log("Welcome!\n");
+  const { jsLibrary, apiSolution, tests, location } = await promptClack();
 
-  const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
+  // const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
+  const appDir = path.resolve(process.cwd(), dir ? dir : location);
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
-  const { jsLibrary, apiSolution, modules, tests } = await promptUserInput();
 
   const templateName = jsLibrary;
   await cloneTemplateToTempDir(templateName);
