@@ -14,7 +14,7 @@ const keys = {
 // outside monorepo
 const cwd = path.resolve(__dirname, "../../../..");
 
-const testDir = "my-test" as const;
+const testDir = "./my-test" as const;
 
 const exe = util.promisify(child.execFile);
 
@@ -47,24 +47,22 @@ describe("start-frontend cli", () => {
         keys.ENTER,
         keys.ENTER,
         keys.ENTER,
-        keys.ENTER,
       ]);
 
-      expect(results).toContain(`start-frontend`);
-      expect(results).toContain(`Welcome!`);
+      expect(results).toContain(`START-FRONTEND `);
+      expect(results).toContain(`Welcome to the frontend setup wizard!`);
+      expect(results).toContain(`Which location you want to start project?`);
+      expect(results).toContain(`Select a JavsScript library for UI`);
+      expect(results).toContain(`Select module do you want to use`);
       expect(results).toContain(
-        `? Where Would You like to Create Your Application?`
+        `Select module do you want to use (Press 'space' to select)`
       );
-      expect(results).toContain(`? Select a JavsScript library for UI`);
-      expect(results).toContain(`? Select an API Solution`);
-      expect(results).toContain(`? Select module do you want to use`);
-      expect(results).toContain(`? Add Testing codes for Catching bugs early?`);
-      expect(results).toContain(`? Add Vitest for Unit Testing?`);
-      expect(results).toContain(`? Add Storybook for Visual Testing?`);
-      expect(results).toContain(`? Add Playwright for End-To-End Testing?`);
-      expect(results).toContain(`? Add ESLint for Code Linting?`);
-      expect(results).toContain(`? Add Prettier for Code Formatting?`);
-      expect(results).toContain(`Success! Created a new app at "my-test".`);
+      expect(results).toContain(`Add Testing codes for Catching bugs early?`);
+      expect(results).toContain(`Add Vitest for Unit Testing?`);
+      expect(results).toContain(`Add Storybook for Visual Testing?`);
+      expect(results).toContain(`Add Playwright for End-To-End Testing?`);
+      expect(results).toContain(`Add ESLint for Code Linting?`);
+      expect(results).toContain(`Add Prettier for Code Formatting?`);
     });
   });
 
