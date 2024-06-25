@@ -47,7 +47,7 @@ const CLIOptions: CLIOptions = {
 const g = gradient("#53575a", "#53575a");
 const t = gradient("#53575a", "#ffff00");
 
-export async function promptClack() {
+export async function promptClack(dir) {
   // intro example
   intro(
     `${g("ꮙ START-")}${t(
@@ -63,6 +63,7 @@ export async function promptClack() {
         text({
           message: color.blue("Which location you want to start project?"),
           placeholder: "./my-app",
+          initialValue: `./${dir}` || "",
           validate: (value) => {
             if (!value) {
               return "Please provide a location path";
@@ -89,7 +90,7 @@ export async function promptClack() {
       // select example
       apiSolution: () => {
         return select({
-          message: "Select module do you want to use",
+          message: "Select an API Solution (Use arrow keys)",
           options: CLIOptions.react.apiSolution.map((solution) => {
             return {
               value: solution.value,
@@ -181,9 +182,6 @@ export async function promptClack() {
     )}
     `
   );
-
-  console.log("groupUtility", groupUtility);
-  console.log("testGroupUtility", testGroupUtility);
 
   return {
     location: groupUtility.location,

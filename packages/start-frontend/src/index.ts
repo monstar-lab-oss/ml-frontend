@@ -284,7 +284,7 @@ function removeEslintConfig() {
 }
 
 async function run() {
-  const { input } = meow(help, {
+  const { input } = await meow(help, {
     flags: {
       help: { type: "boolean", default: false, alias: "h" },
       version: { type: "boolean", default: false, alias: "v" },
@@ -293,7 +293,7 @@ async function run() {
 
   const [dir] = input;
 
-  const { jsLibrary, apiSolution, tests, location } = await promptClack();
+  const { jsLibrary, apiSolution, tests, location } = await promptClack(dir);
 
   // const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
   const appDir = path.resolve(process.cwd(), dir ? dir : location);
