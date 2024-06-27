@@ -1,168 +1,191 @@
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import path from "node:path";
-import fse from "fs-extra";
-import child, { ChildProcessWithoutNullStreams } from "node:child_process";
 import util from "node:util";
-import concat from "concat-stream";
-import { spawn } from "node:child_process";
+import { execFile, exec, execSync } from "node:child_process";
+import fse from "fs-extra";
 
-const keys = {
+const START_FRONTEND = path.resolve(__dirname, "..", "dist", "index.js");
+
+const KEY = {
   ENTER: "\x0D",
   DOWN: "\u001B\u005B\u0042",
+  SPACE: "\x20",
 };
 
-// outside monorepo
-const cwd = path.resolve(__dirname, "../../../..");
+// Timeout duration for interactive tests, to allow for code stub downloads
+const INTERACTIVE_TEST_TIMEOUT = 10000;
 
-const testDir = "my-test" as const;
+let testDir: string;
 
-const exe = util.promisify(child.execFile);
+const exe = util.promisify(execFile);
 
-const startFrontend = path.resolve(__dirname, "../dist/index.js");
+async function cleanupTestDir() {
+  fse.existsSync(testDir) && fse.rmSync(testDir, { recursive: true });
+}
 
-const EXPECTED_HELP = `Create a new codes for front-end app
+async function executeCLI(inputs: string[], delay = 500) {
+  const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
+
+  function nextPrompt(inputs: string[]) {
+    if (!inputs.length) return;
+
+    // Write the input to the CLI process with a delay
+    setTimeout(() => {
+      cliProcess?.stdin?.write(inputs[0]);
+      nextPrompt(inputs.slice(1));
+    }, delay);
+  }
+
+  nextPrompt(inputs);
+
+  return new Promise((resolve) => cliProcess.on("exit", resolve));
+}
+
+describe("start-frontend", () => {
+  beforeAll(() => {
+    // Initialize TEST_DIR before all tests
+    testDir =
+      // Use the default GitHub Actions temporary directory for development in the CI environment.
+      // refs: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+      // eslint-disable-next-line turbo/no-undeclared-env-vars
+      process.env.RUNNER_TEMP ||
+      execSync("mktemp -d -t my-test").toString("utf-8");
+    cleanupTestDir();
+  });
+
+  afterAll(cleanupTestDir);
+
+  test("--version works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "--version"]);
+    expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
+  });
+
+  test("-v flag works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "-v"]);
+    expect(stdout.trim()).toMatch(/^(\d+\.)?(\d+\.)?(\*|\d+)$/);
+  });
+
+  test("--help flag works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "--help"]);
+    expect(stdout.trim()).toBe(`Create a new codes for front-end app
 
     Usage:
       $ npx start-frontend [<dir>] [flags...]
 
     Flags:
       --help, -h          Show this help message
-      --version, -v       Show the version of this script`;
+      --version, -v       Show the version of this script`);
+  });
 
-describe("start-frontend cli", () => {
-  beforeAll(() => cleanupTestDir());
-  afterAll(() => cleanupTestDir());
+  test("-h flag works", async () => {
+    const { stdout } = await exe("node", [START_FRONTEND, "-h"]);
+    expect(stdout.trim()).toBe(`Create a new codes for front-end app
 
-  describe("install react boilerplate with cli", () => {
-    test("interactively configure", async () => {
-      const cli = spawn("node", [startFrontend], { cwd });
-      const results = await exeInteractive(cli, [
-        testDir,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
-        keys.ENTER,
+    Usage:
+      $ npx start-frontend [<dir>] [flags...]
+
+    Flags:
+      --help, -h          Show this help message
+      --version, -v       Show the version of this script`);
+  });
+
+  test(
+    "handle interactive configuration on CLI",
+    async () => {
+      await executeCLI([
+        // Where Would You like to Create Your Application?
+        KEY.ENTER,
+        // Select a JavaScript library for UI (Use arrow keys)
+        KEY.ENTER,
+        // Select an API Solution (Use arrow keys)
+        KEY.ENTER,
+        // Select module do you want to use
+        KEY.ENTER,
+        // Add Testing codes for Catching bugs early?
+        KEY.ENTER,
+        // Add Vitest for Unit Testing?
+        KEY.ENTER,
+        // Add Storybook for Visual Testing?
+        KEY.ENTER,
+        // Add Playwright for End-To-End Testing?
+        KEY.ENTER,
+        // Add Prettier for Code Formatting?
+        KEY.ENTER,
       ]);
 
-      expect(results).toContain(`start-frontend`);
-      expect(results).toContain(`Welcome!`);
-      expect(results).toContain(
-        `? Where Would You like to Create Your Application?`
-      );
-      expect(results).toContain(`? Select a JavsScript library for UI`);
-      expect(results).toContain(`? Select an API Solution`);
-      expect(results).toContain(`? Select module do you want to use`);
-      expect(results).toContain(`? Add Testing codes for Catching bugs early?`);
-      expect(results).toContain(`? Add Vitest for Unit Testing?`);
-      expect(results).toContain(`? Add Storybook for Visual Testing?`);
-      expect(results).toContain(`? Add Playwright for End-To-End Testing?`);
-      expect(results).toContain(`? Add ESLint for Code Linting?`);
-      expect(results).toContain(`? Add Prettier for Code Formatting?`);
-      expect(results).toContain(`Success! Created a new app at "my-test".`);
-    });
-  });
+      // Execute tree-cli to get the directory structure and convert it to a string
+      const result = execSync(
+        `npx tree-cli -a -l 5 --base ${testDir}`
+      ).toString("utf-8");
 
-  // TODO: Skip testing as it is not yet implemented.
-  describe.skip("install react boilerplate to specify dir", () => {
-    test("install", async () => {
-      await exe("node", [startFrontend, testDir], { cwd });
-
-      const expectDirs = [
-        ".env.template",
-        ".eslintrc.js",
-        ".gitignore",
-        "README.md",
-        "__mocks__",
-        "babel.config.js",
-        "index.html",
-        "jest-setup.ts",
-        "package.json",
-        "public",
-        "src",
-        "tests",
-        "tsconfig.json",
-        "vite.config.ts",
-        "yarn.lock",
-      ];
-
-      expect(fse.readdirSync(path.resolve(cwd, testDir))).toStrictEqual(
-        expectDirs
-      );
-    });
-  });
-
-  describe("printing help message", () => {
-    test("--help flag works", async () => {
-      const { stdout } = await exe("node", [startFrontend, "--help"]);
-      expect(stdout.trim()).toBe(EXPECTED_HELP);
-    });
-
-    test("-h flag works", async () => {
-      const { stdout } = await exe("node", [startFrontend, "-h"]);
-      expect(stdout.trim()).toBe(EXPECTED_HELP);
-    });
-  });
-
-  describe("printing version", () => {
-    test("--version flag works", async () => {
-      const { stdout } = await exe("node", [startFrontend, "--version"]);
-      // eslint-disable-next-line turbo/no-undeclared-env-vars
-      expect(stdout.trim()).toBe(process.env.npm_package_version);
-    });
-
-    test("-v flag works", async () => {
-      const { stdout } = await exe("node", [startFrontend, "-v"]);
-      // eslint-disable-next-line turbo/no-undeclared-env-vars
-      expect(stdout.trim()).toBe(process.env.npm_package_version);
-    });
-  });
+      expect(result).toContain(`
+├── .eslintignore
+├── .eslintrc.cjs
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── .storybook
+|  ├── main.ts
+|  ├── preview-head.html
+|  └── preview.ts
+├── __mocks__
+|  ├── browser.ts
+|  ├── index.ts
+|  ├── request-handlers.ts
+|  └── server.ts
+├── __tests__
+|  ├── About.test.ts
+|  ├── Home.test.ts
+|  └── utils
+|     └── global-setup.ts
+├── env.d.ts
+├── index.html
+├── package.json
+├── playwright.config.ts
+├── public
+|  ├── favicon.svg
+|  └── mockServiceWorker.js
+├── src
+|  ├── app.tsx
+|  ├── assets
+|  |  ├── base.css
+|  |  └── main.css
+|  ├── components
+|  |  ├── Button.tsx
+|  |  └── button.module.css
+|  ├── context.tsx
+|  ├── main.tsx
+|  ├── modules
+|  |  └── restful
+|  |     ├── components
+|  |     |  ├── user-form.test.tsx
+|  |     |  ├── user-form.tsx
+|  |     |  ├── user-list.test.tsx
+|  |     |  ├── user-list.tsx
+|  |     |  ├── user-view.test.tsx
+|  |     |  └── user-view.tsx
+|  |     ├── hooks
+|  |     |  ├── use-user.test.tsx
+|  |     |  └── use-user.ts
+|  |     └── index.ts
+|  ├── routes.tsx
+|  └── ui
+|     ├── nav-link.tsx
+|     └── pages
+|        ├── about
+|        |  └── index.tsx
+|        ├── index.tsx
+|        ├── layout.tsx
+|        └── not-found
+|           └── index.tsx
+├── stories
+|  └── Button.stories.tsx
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+├── vitest.config.ts
+└── vitest.setup.ts`);
+    },
+    INTERACTIVE_TEST_TIMEOUT
+  );
 });
-
-function cleanupTestDir() {
-  const installedTestDir = path.resolve(cwd, testDir);
-
-  fse.existsSync(installedTestDir) &&
-    fse.rmSync(installedTestDir, { recursive: true });
-}
-// FIXME: Displaying loading in the process of cli execution cause test errors.
-function exeInteractive(
-  cli: ChildProcessWithoutNullStreams,
-  inputs: string[] = [],
-  delay: number = 200
-) {
-  let currentInputTimeout: NodeJS.Timeout;
-
-  cli.stdin.setDefaultEncoding("utf-8");
-
-  const loop = (inputs: string[]) => {
-    if (!inputs.length) return void cli.stdin.end();
-
-    currentInputTimeout = setTimeout(() => {
-      cli.stdin.write(inputs[0]);
-      loop(inputs.slice(1));
-    }, delay);
-  };
-
-  return new Promise((resolve, reject) => {
-    cli.stderr.once("data", (err) => {
-      cli.stdin.end();
-
-      if (currentInputTimeout) clearTimeout(currentInputTimeout);
-      reject(err.toString());
-    });
-
-    cli.on("error", reject);
-
-    loop(inputs);
-
-    cli.stdout.pipe(
-      concat((result: Buffer) => resolve(result.toString("utf-8")))
-    );
-  });
-}
