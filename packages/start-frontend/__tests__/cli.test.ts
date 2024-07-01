@@ -119,9 +119,6 @@ describe("start-frontend", () => {
       const result = execSync(
         `npx tree-cli -a -l 5 --base ${testDir}`
       ).toString("utf-8");
-
-      console.log("result", result);
-
       expect(result).toContain(`
 ├── .eslintignore
 ├── .eslintrc.cjs
