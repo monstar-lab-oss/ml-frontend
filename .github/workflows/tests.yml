@@ -51,6 +51,7 @@ jobs:
         run: pnpm test:cli
         env:
           BRANCH_NAME: ${{ github.ref_name }}
+          RUNNER_TEMP: $RUNNER_TEMP
 
       - name: Run E2E test
         run: pnpm e2e
