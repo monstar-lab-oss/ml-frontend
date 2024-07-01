@@ -44,12 +44,7 @@ async function executeCLI(inputs: string[], delay = 500) {
 describe("start-frontend", () => {
   beforeAll(() => {
     // Initialize TEST_DIR before all tests
-    testDir =
-      // Use the default GitHub Actions temporary directory for development in the CI environment.
-      // refs: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
-      // eslint-disable-next-line turbo/no-undeclared-env-vars
-      process.env.RUNNER_TEMP ||
-      execSync("mktemp -d -t my-test").toString("utf-8");
+    testDir = execSync("mktemp -d -t my-test").toString("utf-8");
     cleanupTestDir();
   });
 

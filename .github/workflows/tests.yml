@@ -50,7 +50,6 @@ jobs:
       - name: CLI Test
         run: pnpm test:cli
         env:
-          BRANCH_NAME: ${{ github.ref_name }}
           RUNNER_TEMP: ${{ runner.temp }}
 
       - name: Run E2E test
