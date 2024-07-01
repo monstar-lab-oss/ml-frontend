@@ -187,6 +187,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: 4.2.1
         version: 4.2.1(vite@5.3.2(@types/node@18.11.18))
+      headers-polyfill:
+        specifier: 3.2.5
+        version: 3.2.5
       mock-server:
         specifier: workspace:*
         version: link:../../../packages/mock-server
@@ -3945,9 +3948,6 @@ packages:
 
   headers-polyfill@3.2.5:
     resolution: {integrity: sha512-tUCGvt191vNSQgttSyJoibR+VO+I6+iCHIUdhzEMJKE+EAL8BwCN7fUOZlY4ofOelNHsK+gEjxB/B+9N3EWtdA==}
-
-  headers-polyfill@3.3.0:
-    resolution: {integrity: sha512-5e57etwBpNcDc0b6KCVWEh/Ro063OxPvzVimUdM0/tsYM/T7Hfy3kknIGj78SFTOhNd8AZY41U8mOHoO4LzmIQ==}
 
   hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
@@ -10883,8 +10883,6 @@ snapshots:
 
   headers-polyfill@3.2.5: {}
 
-  headers-polyfill@3.3.0: {}
-
   hosted-git-info@2.8.9: {}
 
   html-encoding-sniffer@3.0.0:
@@ -11654,7 +11652,7 @@ snapshots:
       chokidar: 3.6.0
       cookie: 0.4.2
       graphql: 16.9.0
-      headers-polyfill: 3.3.0
+      headers-polyfill: 3.2.5
       inquirer: 8.2.3
       is-node-process: 1.2.0
       js-levenshtein: 1.1.6
