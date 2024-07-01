@@ -15,7 +15,7 @@ const KEY = {
 // Timeout duration for interactive tests, to allow for code stub downloads
 const INTERACTIVE_TEST_TIMEOUT = 20000;
 
-let testDir = "./my-test";
+let testDir = "my-test";
 
 const exe = util.promisify(execFile);
 
@@ -44,7 +44,12 @@ async function executeCLI(inputs: string[], delay = 500) {
 describe("start-frontend", () => {
   beforeAll(() => {
     // Initialize TEST_DIR before all tests
-    testDir = execSync("mktemp -d -t my-test").toString("utf-8");
+    testDir =
+      // Use the default GitHub Actions temporary directory for development in the CI environment.
+      // refs: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+      // eslint-disable-next-line turbo/no-undeclared-env-vars
+      process.env.RUNNER_TEMP ||
+      execSync("mktemp -d -t my-test").toString("utf-8");
     cleanupTestDir();
   });
 
