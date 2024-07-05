@@ -1,19 +1,19 @@
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import path from "node:path";
 import util from "node:util";
-import { execFile, exec, execSync } from "node:child_process";
+import { execFile, execSync } from "node:child_process";
 import fse from "fs-extra";
 
 const START_FRONTEND = path.resolve(__dirname, "..", "dist", "index.js");
 
-const KEY = {
-  ENTER: "\x0D",
-  DOWN: "\u001B\u005B\u0042",
-  SPACE: "\x20",
-};
+// const KEY = {
+//   ENTER: "\x0D",
+//   DOWN: "\u001B\u005B\u0042",
+//   SPACE: "\x20",
+// };
 
 // Timeout duration for interactive tests, to allow for code stub downloads
-const INTERACTIVE_TEST_TIMEOUT = 20000;
+// const INTERACTIVE_TEST_TIMEOUT = 20000;
 
 let testDir = "my-test";
 
@@ -23,23 +23,23 @@ async function cleanupTestDir() {
   fse.existsSync(testDir) && fse.rmSync(testDir, { recursive: true });
 }
 
-async function executeCLI(inputs: string[], delay = 500) {
-  const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
+// async function executeCLI(inputs: string[], delay = 500) {
+//   const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
 
-  function nextPrompt(inputs: string[]) {
-    if (!inputs.length) return;
+//   function nextPrompt(inputs: string[]) {
+//     if (!inputs.length) return;
 
-    // Write the input to the CLI process with a delay
-    setTimeout(() => {
-      cliProcess?.stdin?.write(inputs[0]);
-      nextPrompt(inputs.slice(1));
-    }, delay);
-  }
+//     // Write the input to the CLI process with a delay
+//     setTimeout(() => {
+//       cliProcess?.stdin?.write(inputs[0]);
+//       nextPrompt(inputs.slice(1));
+//     }, delay);
+//   }
 
-  nextPrompt(inputs);
+//   nextPrompt(inputs);
 
-  return new Promise((resolve) => cliProcess.on("exit", resolve));
-}
+//   return new Promise((resolve) => cliProcess.on("exit", resolve));
+// }
 
 describe("start-frontend", () => {
   beforeAll(() => {
