@@ -6,6 +6,8 @@ import fse from "fs-extra";
 
 const START_FRONTEND = path.resolve(__dirname, "..", "dist", "index.js");
 
+console.log("runner temp path", process.env.RUNNER_TEMP);
+
 // const KEY = {
 //   ENTER: "\x0D",
 //   DOWN: "\u001B\u005B\u0042",
