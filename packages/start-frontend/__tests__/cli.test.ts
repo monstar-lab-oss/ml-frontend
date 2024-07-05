@@ -5,6 +5,7 @@ import { execFile, exec, execSync } from "node:child_process";
 import fse from "fs-extra";
 
 const START_FRONTEND = path.resolve(__dirname, "..", "dist", "index.js");
+console.log('HERE: ', __dirname);
 
 const KEY = {
   ENTER: "\x0D",
