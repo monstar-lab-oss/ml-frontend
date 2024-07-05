@@ -51,7 +51,7 @@ describe("start-frontend", () => {
       // eslint-disable-next-line turbo/no-undeclared-env-vars
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
-    cleanupTestDir();
+    // cleanupTestDir();
   });
 
   afterAll(cleanupTestDir);
