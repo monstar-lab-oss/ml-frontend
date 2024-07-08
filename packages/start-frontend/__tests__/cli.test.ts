@@ -6,9 +6,6 @@ import fse from "fs-extra";
 
 const START_FRONTEND = path.resolve(__dirname, "..", "dist", "index.js");
 
-console.log("runner temp path", process.env.RUNNER_TEMP);
-console.log("START_FRONTEND", START_FRONTEND);
-
 const KEY = {
   ENTER: "\x0D",
   DOWN: "\u001B\u005B\u0042",
@@ -45,11 +42,11 @@ async function executeCLI(inputs: string[], delay = 500) {
 }
 
 describe("start-frontend", () => {
-  const result = execSync(`npx tree-cli -a -l 5 --base ${testDir}`).toString(
-    "utf-8"
-  );
-  console.log("result folder detail", result);
   beforeAll(() => {
+    console.log("runner temp path", process.env.RUNNER_TEMP);
+    console.log("START_FRONTEND", START_FRONTEND);
+    const result = execSync(`npx tree-cli ${testDir}`).toString("utf-8");
+    console.log("result before all", result);
     // Initialize TEST_DIR before all tests
     testDir =
       // Use the default GitHub Actions temporary directory for development in the CI environment.
@@ -58,6 +55,8 @@ describe("start-frontend", () => {
       // path: /home/runner/work/_temp
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
+
+    console.log("testdir", testDir);
   });
 
   afterAll(cleanupTestDir);
