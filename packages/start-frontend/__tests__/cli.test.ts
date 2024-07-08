@@ -45,11 +45,11 @@ async function executeCLI(inputs: string[], delay = 500) {
 }
 
 describe("start-frontend", () => {
+  const result = execSync(`npx tree-cli -a -l 5 --base ${testDir}`).toString(
+    "utf-8"
+  );
+  console.log("result folder detail", result);
   beforeAll(() => {
-    const result = execSync(`npx tree-cli -a -l 5 --base ${testDir}`).toString(
-      "utf-8"
-    );
-    console.log("result folder detail", result);
     // Initialize TEST_DIR before all tests
     testDir =
       // Use the default GitHub Actions temporary directory for development in the CI environment.
