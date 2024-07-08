@@ -186,7 +186,7 @@ describe("start-frontend", () => {
 // ├── vite.config.ts
 // ├── vitest.config.ts
 // └── vitest.setup.ts`);
-//     },
-//     INTERACTIVE_TEST_TIMEOUT
-//   );
+    },
+    INTERACTIVE_TEST_TIMEOUT
+  );
 });
