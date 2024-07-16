@@ -206,8 +206,8 @@ importers:
   packages/e2e-testing:
     dependencies:
       '@playwright/test':
-        specifier: 1.44.0
-        version: 1.44.0
+        specifier: 1.45.2
+        version: 1.45.2
     devDependencies:
       '@types/node':
         specifier: 18.11.18
@@ -3102,12 +3102,12 @@ packages:
     dev: true
     optional: true
 
-  /@playwright/test@1.44.0:
-    resolution: {integrity: sha512-rNX5lbNidamSUorBhB4XZ9SQTjAqfe5M+p37Z8ic0jPFBMo5iCtQz1kRWkEMg+rYOKSlVycpQmpqjSFq7LXOfg==}
-    engines: {node: '>=16'}
+  /@playwright/test@1.45.2:
+    resolution: {integrity: sha512-JxG9eq92ET75EbVi3s+4sYbcG7q72ECeZNbdBlaMkGcNbiDQ4cAi8U2QP5oKkOx+1gpaiL1LDStmzCaEM1Z6fQ==}
+    engines: {node: '>=18'}
     hasBin: true
     dependencies:
-      playwright: 1.44.0
+      playwright: 1.45.2
     dev: false
 
   /@rollup/pluginutils@4.2.1:
@@ -3519,7 +3519,7 @@ packages:
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/components': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.9-next.0
+      '@storybook/csf': 0.1.11-next.0
       '@storybook/docs-tools': 7.0.0-beta.43
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
@@ -3704,7 +3704,7 @@ packages:
       '@babel/core': 7.22.1
       '@babel/preset-env': 7.20.2(@babel/core@7.22.1)
       '@babel/types': 7.24.5
-      '@storybook/csf': 0.1.9-next.0
+      '@storybook/csf': 0.1.11-next.0
       '@storybook/csf-tools': 7.0.0-beta.43
       '@storybook/node-logger': 7.0.0-beta.43
       '@storybook/types': 7.0.0-beta.43
@@ -3726,7 +3726,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.0-beta.43
-      '@storybook/csf': 0.1.9-next.0
+      '@storybook/csf': 0.1.11-next.0
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.0-beta.43
@@ -3842,9 +3842,9 @@ packages:
       '@storybook/builder-manager': 7.0.0-beta.43
       '@storybook/core-common': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.9-next.0
+      '@storybook/csf': 0.1.11-next.0
       '@storybook/csf-tools': 7.0.0-beta.43
-      '@storybook/docs-mdx': 3.1.0-next.0
+      '@storybook/docs-mdx': 4.0.0-next.0
       '@storybook/global': 5.0.0
       '@storybook/node-logger': 7.0.0-beta.43
       '@storybook/preview-api': 7.0.0-beta.43
@@ -3899,7 +3899,7 @@ packages:
     resolution: {integrity: sha512-/KbLRdE36FwbpRB0HYE5BHbDbGKnkVhTqgHvVO9E+NgIGX811EOp1GVeyhrSl+oj7m73MQIqR1al0OcMd4IE8A==}
     dependencies:
       '@babel/types': 7.24.5
-      '@storybook/csf': 0.1.9-next.0
+      '@storybook/csf': 0.1.11-next.0
       '@storybook/types': 7.0.0-beta.43
       fs-extra: 11.2.0
       recast: 0.23.1
@@ -3924,20 +3924,22 @@ packages:
       - supports-color
     dev: true
 
+  /@storybook/csf@0.1.11-next.0:
+    resolution: {integrity: sha512-GhkQcOLVKuCK7Zsj1xkQQSc76nHDb/3BDtyN41oDJkSRHJOqbMxT8xJ4UQbKae+VlPDhuaQbFLQmuIqL890Mfw==}
+    dependencies:
+      type-fest: 2.19.0
+    dev: true
+
   /@storybook/csf@0.1.7:
     resolution: {integrity: sha512-53JeLZBibjQxi0Ep+/AJTfxlofJlxy1jXcSKENlnKxHjWEYyHQCumMP5yTFjf7vhNnMjEpV3zx6t23ssFiGRyw==}
     dependencies:
       type-fest: 2.19.0
     dev: true
 
-  /@storybook/csf@0.1.9-next.0:
-    resolution: {integrity: sha512-8KDkBDsiX1obDfqnuBOG248W/3qK4heK88fVIZAmD8YQgTAT29+oZaY/pNduG5Fi+j8oe4/G5wFRcuvICnG+kg==}
+  /@storybook/docs-mdx@4.0.0-next.0:
+    resolution: {integrity: sha512-LOgLLLxU8/qxED/q7Jbrxx02ggDyUAn7qGyp4ziKRnqlSV8Y6qrBni12nGKEEIBi53F6RZpAFwa5dJz3/lXx8g==}
     dependencies:
-      type-fest: 2.19.0
-    dev: true
-
-  /@storybook/docs-mdx@3.1.0-next.0:
-    resolution: {integrity: sha512-t4syFIeSyufieNovZbLruPt2DmRKpbwL4fERCZ1MifWDRIORCKLc4NCEHy+IqvIqd71/SJV2k4B51nF7vlJfmQ==}
+      acorn: 8.12.1
     dev: true
 
   /@storybook/docs-tools@7.0.0-beta.43:
@@ -3984,7 +3986,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.43
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.9-next.0
+      '@storybook/csf': 0.1.11-next.0
       '@storybook/global': 5.0.0
       '@storybook/router': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
@@ -4034,7 +4036,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.43
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.1.9-next.0
+      '@storybook/csf': 0.1.11-next.0
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.0-beta.43
       '@types/qs': 6.9.7
@@ -4943,6 +4945,12 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  /acorn@8.12.1:
+    resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+    dev: true
+
   /acorn@8.8.2:
     resolution: {integrity: sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==}
     engines: {node: '>=0.4.0'}
@@ -5619,7 +5627,7 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
 
   /chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
@@ -7184,6 +7192,7 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
+    dev: false
     optional: true
 
   /fsevents@2.3.3:
@@ -8108,7 +8117,7 @@ packages:
       micromatch: 4.0.5
       walker: 1.0.8
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /jest-regex-util@29.2.0:
@@ -9371,18 +9380,18 @@ packages:
       mlly: 1.7.1
       pathe: 1.1.2
 
-  /playwright-core@1.44.0:
-    resolution: {integrity: sha512-ZTbkNpFfYcGWohvTTl+xewITm7EOuqIqex0c7dNZ+aXsbrLj0qI8XlGKfPpipjm0Wny/4Lt4CJsWJk1stVS5qQ==}
-    engines: {node: '>=16'}
+  /playwright-core@1.45.2:
+    resolution: {integrity: sha512-ha175tAWb0dTK0X4orvBIqi3jGEt701SMxMhyujxNrgd8K0Uy5wMSwwcQHtyB4om7INUkfndx02XnQ2p6dvLDw==}
+    engines: {node: '>=18'}
     hasBin: true
     dev: false
 
-  /playwright@1.44.0:
-    resolution: {integrity: sha512-F9b3GUCLQ3Nffrfb6dunPOkE5Mh68tR7zN32L4jCk4FjQamgesGay7/dAAe1WaMEGV04DkdJfcJzjoCKygUaRQ==}
-    engines: {node: '>=16'}
+  /playwright@1.45.2:
+    resolution: {integrity: sha512-ReywF2t/0teRvNBpfIgh5e4wnrI/8Su8ssdo5XsQKpjxJj+jspm00jSoz9BTg91TT0c9HRjXO7LBNVrgYj9X0g==}
+    engines: {node: '>=18'}
     hasBin: true
     dependencies:
-      playwright-core: 1.44.0
+      playwright-core: 1.45.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: false
@@ -9964,7 +9973,7 @@ packages:
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /rollup@4.17.2:
@@ -9990,7 +9999,7 @@ packages:
       '@rollup/rollup-win32-arm64-msvc': 4.17.2
       '@rollup/rollup-win32-ia32-msvc': 4.17.2
       '@rollup/rollup-win32-x64-msvc': 4.17.2
-      fsevents: 2.3.2
+      fsevents: 2.3.3
 
   /run-async@2.4.1:
     resolution: {integrity: sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ==}
@@ -11282,7 +11291,7 @@ packages:
       resolve: 1.22.1
       rollup: 3.23.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /vite@4.2.0:
@@ -11315,7 +11324,7 @@ packages:
       resolve: 1.22.1
       rollup: 3.23.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /vite@5.3.2(@types/node@18.11.18):
