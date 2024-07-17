@@ -126,6 +126,32 @@ describe("start-frontend", () => {
         `npx tree-cli -a -l 5 --base ${testDir}`
       ).toString("utf-8");
       expect(result).toContain(`
+├── .eslintignore
+├── .eslintrc.cjs
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── .storybook
+|  ├── main.ts
+|  ├── preview-head.html
+|  └── preview.ts
+├── __mocks__
+|  ├── browser.ts
+|  ├── index.ts
+|  ├── request-handlers.ts
+|  └── server.ts
+├── __tests__
+|  ├── About.test.ts
+|  ├── Home.test.ts
+|  └── utils
+|     └── global-setup.ts
+├── env.d.ts
+├── index.html
+├── package.json
+├── playwright.config.ts
+├── public
+|  ├── favicon.svg
+|  └── mockServiceWorker.js
 ├── src
 |  ├── app.tsx
 |  ├── assets
