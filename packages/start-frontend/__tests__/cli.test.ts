@@ -125,8 +125,47 @@ describe("start-frontend", () => {
       const result = execSync(
         `npx tree-cli -a -l 5 --base ${testDir}`
       ).toString("utf-8");
-      expect(result).toContain("__mocks__");
-      expect(result).toContain("__tests__");
+      expect(result).toContain(`
+├── src
+|  ├── app.tsx
+|  ├── assets
+|  |  ├── base.css
+|  |  └── main.css
+|  ├── components
+|  |  ├── Button.tsx
+|  |  └── button.module.css
+|  ├── context.tsx
+|  ├── main.tsx
+|  ├── modules
+|  |  └── restful
+|  |     ├── components
+|  |     |  ├── user-form.test.tsx
+|  |     |  ├── user-form.tsx
+|  |     |  ├── user-list.test.tsx
+|  |     |  ├── user-list.tsx
+|  |     |  ├── user-view.test.tsx
+|  |     |  └── user-view.tsx
+|  |     ├── hooks
+|  |     |  ├── use-user.test.tsx
+|  |     |  └── use-user.ts
+|  |     └── index.ts
+|  ├── routes.tsx
+|  └── ui
+|     ├── nav-link.tsx
+|     └── pages
+|        ├── about
+|        |  └── index.tsx
+|        ├── index.tsx
+|        ├── layout.tsx
+|        └── not-found
+|           └── index.tsx
+├── stories
+|  └── Button.stories.tsx
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+├── vitest.config.ts
+└── vitest.setup.ts`);
     },
     INTERACTIVE_TEST_TIMEOUT
   );
