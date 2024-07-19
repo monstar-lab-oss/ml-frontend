@@ -187,9 +187,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: 4.2.1
         version: 4.2.1(vite@5.3.2(@types/node@18.11.18))
-      headers-polyfill:
-        specifier: 3.2.5
-        version: 3.2.5
       mock-server:
         specifier: workspace:*
         version: link:../../../packages/mock-server
