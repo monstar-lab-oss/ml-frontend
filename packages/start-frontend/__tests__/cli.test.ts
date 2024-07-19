@@ -52,6 +52,7 @@ describe("start-frontend", () => {
       // path: /home/runner/work/_temp
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
+    cleanupTestDir();
   });
 
   afterAll(cleanupTestDir);
