@@ -11,3 +11,7 @@ dist
 build
 public
 .turbo
+
+# Exclude Handlebars.js (.hbs) files
+# TODO: Figure out how to format hanldebar templates
+**/*.hbs
