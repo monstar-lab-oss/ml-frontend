@@ -1,6 +1,3 @@
-// to execute this file
-// run node ./packages/start-frontend/src/helpers/prompt-clack.js
-
 import {
   intro,
   outro,
@@ -48,18 +45,15 @@ const g = gradient("#53575a", "#53575a");
 const t = gradient("#53575a", "#ffff00");
 
 export async function promptClack(dir) {
-  // intro example
   intro(
     `${g("ꮙ START-")}${t(
       "FRONTEND"
     )} \n\n Welcome to the frontend setup wizard!`
   );
 
-  // group example
   const groupUtility = await group(
     {
       location: () =>
-        // text example
         text({
           message: color.blue("Which location you want to start project?"),
           placeholder: "./my-app",
@@ -77,7 +71,7 @@ export async function promptClack(dir) {
         }),
       jsLibrary: () => {
         return select({
-          message: "Select a JavsScript library for UI",
+          message: "Select a JavaScript library for UI",
           options: Object.keys(CLIOptions).map((key) => {
             return {
               value: key,
@@ -152,7 +146,6 @@ export async function promptClack(dir) {
     },
   });
 
-  // spinner example
   const s = spinner();
   s.start("Installing fake api solution with fake location");
 
@@ -160,7 +153,6 @@ export async function promptClack(dir) {
 
   s.stop(`Installed fake modules successfully`);
 
-  // outro example
   outro(
     `Finish setting up! 
     Here is your configurations:
