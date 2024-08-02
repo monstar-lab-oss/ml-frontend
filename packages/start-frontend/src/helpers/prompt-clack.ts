@@ -152,7 +152,6 @@ export async function promptClack(dir) {
     },
   });
 
-  // spinner example
   const s = spinner();
   s.start("Installing fake api solution with fake location");
 
