@@ -1,6 +1,3 @@
-// to execute this file
-// run node ./packages/start-frontend/src/helpers/prompt-clack.js
-
 import {
   intro,
   outro,
