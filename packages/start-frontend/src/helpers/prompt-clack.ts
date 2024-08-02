@@ -1,7 +1,5 @@
 import {
   intro,
-  outro,
-  spinner,
   text,
   select,
   group,
@@ -10,8 +8,7 @@ import {
   cancel,
 } from "@clack/prompts";
 import * as color from "picocolors";
-import { setTimeout as sleep } from "node:timers/promises";
-import gradient = require("gradient-string");
+import gradient from "gradient-string";
 
 export type UserInputTests = {
   useVitest: boolean | undefined;
@@ -21,7 +18,7 @@ export type UserInputTests = {
   usePrettier: boolean | undefined;
 };
 
-interface CLIOptions {
+interface CLIOptionsInterface {
   [key: string]: {
     name: string;
     apiSolution: { name: string; value: "graphql" | "restful" }[];
@@ -29,7 +26,7 @@ interface CLIOptions {
   };
 }
 
-const CLIOptions: CLIOptions = {
+const CLIOptions: CLIOptionsInterface = {
   react: {
     name: "React",
     apiSolution: [
@@ -44,20 +41,18 @@ const CLIOptions: CLIOptions = {
 const g = gradient("#53575a", "#53575a");
 const t = gradient("#53575a", "#ffff00");
 
-export async function promptClack(dir) {
-  intro(
-    `${g("ꮙ START-")}${t(
-      "FRONTEND"
-    )} \n\n Welcome to the frontend setup wizard!`
-  );
+export async function promptClack(dir: string) {
+  intro(`${g("ꮙ START-")}${t("FRONTEND")}`);
 
   const groupUtility = await group(
     {
       location: () =>
         text({
-          message: color.blue("Which location you want to start project?"),
+          message: color.blue(
+            "Where Would You like to Create Your Application?"
+          ),
           placeholder: "./my-app",
-          initialValue: `./${dir}` || "",
+          initialValue: dir ? `./${dir}` : "./my-app",
           validate: (value) => {
             if (!value) {
               return "Please provide a location path";
@@ -111,7 +106,7 @@ export async function promptClack(dir) {
     {
       // On Cancel callback that wraps the group
       // So if the user cancels one of the prompts in the group this function will be called
-      onCancel: ({ results }) => {
+      onCancel: () => {
         cancel("Operation cancelled.");
         process.exit(0);
       },
@@ -145,35 +140,6 @@ export async function promptClack(dir) {
       });
     },
   });
-
-  const s = spinner();
-  s.start("Installing fake api solution with fake location");
-
-  await sleep(3000);
-
-  s.stop(`Installed fake modules successfully`);
-
-  outro(
-    `Finish setting up! 
-    Here is your configurations:
-    JS library: ${color.blue(groupUtility.jsLibrary)}
-    Options: ${color.blue(
-      (groupUtility.modules as string[]).length > 0
-        ? (groupUtility.modules as string[]).join(", ")
-        : "No"
-    )}
-    Test sample: ${color.blue(groupUtility.isUseSampleTestCode ? "Yes" : "No")}
-    Use Vitest: ${color.blue(testGroupUtility.useVitest ? "Yes" : "No")}
-    Use Storybook: ${color.blue(testGroupUtility.useStorybook ? "Yes" : "No")}
-    Use E2E: ${color.blue(testGroupUtility.useE2E ? "Yes" : "No")}
-    Use Eslint: ${color.blue(testGroupUtility.useEslint ? "Yes" : "No")}
-    Use Prettier: ${color.blue(testGroupUtility.usePrettier ? "Yes" : "No")}
-
-    ${color.yellow("Next step:")} ${color.blue(
-      `cd: ${groupUtility.location} && npm start`
-    )}
-    `
-  );
 
   return {
     location: groupUtility.location,
