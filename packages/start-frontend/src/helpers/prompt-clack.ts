@@ -59,7 +59,6 @@ export async function promptClack(dir) {
   const groupUtility = await group(
     {
       location: () =>
-        // text example
         text({
           message: color.blue("Which location you want to start project?"),
           placeholder: "./my-app",
