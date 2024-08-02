@@ -77,7 +77,7 @@ export async function promptClack(dir) {
         }),
       jsLibrary: () => {
         return select({
-          message: "Select a JavsScript library for UI",
+          message: "Select a JavaScript library for UI",
           options: Object.keys(CLIOptions).map((key) => {
             return {
               value: key,
