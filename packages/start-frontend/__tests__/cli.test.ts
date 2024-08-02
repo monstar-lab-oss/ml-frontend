@@ -13,7 +13,7 @@ const KEY = {
 };
 
 // Timeout duration for interactive tests, to allow for code stub downloads
-const INTERACTIVE_TEST_TIMEOUT = 20000;
+const INTERACTIVE_TEST_TIMEOUT = 10000;
 
 let testDir = "my-test";
 
@@ -43,7 +43,6 @@ async function executeCLI(inputs: string[], delay = 500) {
 
 describe("start-frontend", () => {
   beforeAll(() => {
-    const result = execSync(`npx tree-cli ${testDir}`).toString("utf-8");
     // Initialize TEST_DIR before all tests
     testDir =
       // Use the default GitHub Actions temporary directory for development in the CI environment.
