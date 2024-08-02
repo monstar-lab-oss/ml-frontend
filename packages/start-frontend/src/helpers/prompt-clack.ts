@@ -48,7 +48,6 @@ const g = gradient("#53575a", "#53575a");
 const t = gradient("#53575a", "#ffff00");
 
 export async function promptClack(dir) {
-  // intro example
   intro(
     `${g("ꮙ START-")}${t(
       "FRONTEND"
