@@ -97,7 +97,7 @@ describe("start-frontend", () => {
       await executeCLI([
         // Which location you want to start project?
         KEY.ENTER,
-        // Select a JavsScript library for UI
+        // Select a JavaScript library for UI
         KEY.ENTER,
         // Select an API Solution (Use arrow keys)
         KEY.ENTER,
