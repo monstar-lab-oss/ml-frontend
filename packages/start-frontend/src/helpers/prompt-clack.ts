@@ -159,7 +159,6 @@ export async function promptClack(dir) {
 
   s.stop(`Installed fake modules successfully`);
 
-  // outro example
   outro(
     `Finish setting up! 
     Here is your configurations:
