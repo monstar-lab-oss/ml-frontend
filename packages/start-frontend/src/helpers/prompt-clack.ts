@@ -55,7 +55,6 @@ export async function promptClack(dir) {
     )} \n\n Welcome to the frontend setup wizard!`
   );
 
-  // group example
   const groupUtility = await group(
     {
       location: () =>
