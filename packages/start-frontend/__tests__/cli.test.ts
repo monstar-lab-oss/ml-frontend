@@ -13,7 +13,7 @@ const KEY = {
 };
 
 // Timeout duration for interactive tests, to allow for code stub downloads
-const INTERACTIVE_TEST_TIMEOUT = 10000;
+const INTERACTIVE_TEST_TIMEOUT = 60000;
 
 let testDir = "my-test";
 
@@ -31,6 +31,7 @@ async function executeCLI(inputs: string[], delay = 500) {
 
     // Write the input to the CLI process with a delay
     setTimeout(() => {
+      console.log("test" + inputs[0]);
       cliProcess?.stdin?.write(inputs[0]);
       nextPrompt(inputs.slice(1));
     }, delay);
@@ -122,6 +123,9 @@ describe("start-frontend", () => {
       const result = execSync(
         `npx tree-cli -a -l 5 --base ${testDir}`
       ).toString("utf-8");
+
+      console.log("result", result);
+
       expect(result).toContain(`
 ├── .eslintignore
 ├── .eslintrc.cjs
