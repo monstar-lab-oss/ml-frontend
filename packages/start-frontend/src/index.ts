@@ -302,7 +302,6 @@ async function run() {
   console.log("tests", tests);
   console.log("location", location);
 
-  // const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
   const appDir = path.resolve(process.cwd(), dir ? dir : location);
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
 
