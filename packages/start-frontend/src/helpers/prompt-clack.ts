@@ -91,7 +91,8 @@ export async function promptClack(dir: string) {
 
       modules: (value) => {
         return multiselect({
-          message: "Select module do you want to use (Press 'space' to select)",
+          message:
+            "Select the modules that you would like to use (Press 'space' to select)",
           options: CLIOptions[value.results.jsLibrary as string].useModules,
           required: false,
         }) as Promise<string[]>;
@@ -99,7 +100,7 @@ export async function promptClack(dir: string) {
 
       isUseSampleTestCode: () => {
         return confirm({
-          message: "Add Testing codes for Catching bugs early?",
+          message: "Add testing codes for catching bugs early?",
         });
       },
     },

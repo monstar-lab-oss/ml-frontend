@@ -291,16 +291,9 @@ async function run() {
     },
   });
 
-  console.log("input", input);
-
   const [dir] = input;
 
   const { jsLibrary, apiSolution, tests, location } = await promptClack(dir);
-
-  console.log("jsLibrary", jsLibrary);
-  console.log("apiSolution", apiSolution);
-  console.log("tests", tests);
-  console.log("location", location);
 
   // const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
   const appDir = path.resolve(process.cwd(), dir ? dir : location);
