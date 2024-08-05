@@ -15,7 +15,7 @@ const KEY = {
 // Timeout duration for interactive tests, to allow for code stub downloads
 const INTERACTIVE_TEST_TIMEOUT = 60000;
 
-let testDir = "my-test";
+let testDir: string;
 
 const exe = util.promisify(execFile);
 
@@ -25,9 +25,10 @@ async function cleanupTestDir() {
 
 async function executeCLI(inputs: string[], delay = 500) {
   const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
+  console.log("node command", `node ${START_FRONTEND} ${testDir}`);
 
   function nextPrompt(inputs: string[]) {
-    console.log("test" + inputs);
+    console.log(JSON.stringify(inputs));
     if (!inputs.length) return;
     // Write the input to the CLI process with a delay
     setTimeout(() => {
@@ -113,10 +114,6 @@ describe("start-frontend", () => {
         // Add Playwright for End-To-End Testing?
         KEY.ENTER,
         // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add Prettier for Code Formatting?
-        KEY.ENTER,
-        // for confirmation
         KEY.ENTER,
       ]);
 
