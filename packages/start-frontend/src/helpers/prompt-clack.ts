@@ -42,12 +42,14 @@ const g = gradient("#53575a", "#53575a");
 const t = gradient("#53575a", "#ffff00");
 
 export async function promptClack(dir: string) {
+  console.log("start promptClack");
   intro(`${g("ꮙ START-")}${t("FRONTEND")}`);
 
   const groupUtility = await group(
     {
-      location: () =>
-        text({
+      location: () => {
+        console.log("location cli");
+        return text({
           message: color.blue(
             "Where Would You like to Create Your Application?"
           ),
@@ -63,8 +65,10 @@ export async function promptClack(dir: string) {
               return "Please input a valid location path";
             }
           },
-        }),
+        });
+      },
       jsLibrary: () => {
+        console.log("jslibrary cli");
         return select({
           message: "Select a JavaScript library for UI",
           options: Object.keys(CLIOptions).map((key) => {

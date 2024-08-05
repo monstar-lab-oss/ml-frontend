@@ -284,7 +284,7 @@ function removeEslintConfig() {
 }
 
 async function run() {
-  const { input } = meow(help, {
+  const { input } = await meow(help, {
     flags: {
       help: { type: "boolean", default: false, alias: "h" },
       version: { type: "boolean", default: false, alias: "v" },
