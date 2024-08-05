@@ -27,11 +27,10 @@ async function executeCLI(inputs: string[], delay = 500) {
   const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
 
   function nextPrompt(inputs: string[]) {
+    console.log("test" + inputs);
     if (!inputs.length) return;
-
     // Write the input to the CLI process with a delay
     setTimeout(() => {
-      console.log("test" + inputs[0]);
       cliProcess?.stdin?.write(inputs[0]);
       nextPrompt(inputs.slice(1));
     }, delay);
@@ -52,6 +51,8 @@ describe("start-frontend", () => {
       // path: /home/runner/work/_temp
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
+
+    console.log("testDir", testDir);
     cleanupTestDir();
   });
 
