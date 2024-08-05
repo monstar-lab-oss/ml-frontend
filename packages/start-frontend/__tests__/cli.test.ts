@@ -13,7 +13,7 @@ const KEY = {
 };
 
 // Timeout duration for interactive tests, to allow for code stub downloads
-const INTERACTIVE_TEST_TIMEOUT = 20000;
+const INTERACTIVE_TEST_TIMEOUT = 10000;
 
 let testDir = "my-test";
 
@@ -113,6 +113,8 @@ describe("start-frontend", () => {
         // Add ESLint for Code Linting?
         KEY.ENTER,
         // Add Prettier for Code Formatting?
+        KEY.ENTER,
+        // for confirmation
         KEY.ENTER,
       ]);
 
