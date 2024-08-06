@@ -7,11 +7,9 @@ import {
   cancel,
   multiselect,
   spinner,
-  outro,
 } from "@clack/prompts";
 import * as color from "picocolors";
 import gradient from "gradient-string";
-import { setTimeout as sleep } from "node:timers/promises";
 
 export type UserInputTests = {
   useVitest: boolean | undefined;

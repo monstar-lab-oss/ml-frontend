@@ -13,7 +13,7 @@ const KEY = {
 };
 
 // Timeout duration for interactive tests, to allow for code stub downloads
-const INTERACTIVE_TEST_TIMEOUT = 20000;
+const INTERACTIVE_TEST_TIMEOUT = 10000;
 
 let testDir: string;
 
