@@ -47,7 +47,6 @@ describe("start-frontend", () => {
       // Use the default GitHub Actions temporary directory for development in the CI environment.
       // refs: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
       // eslint-disable-next-line turbo/no-undeclared-env-vars
-      // path: /home/runner/work/_temp
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
 
@@ -109,46 +108,6 @@ describe("start-frontend", () => {
         // Add Storybook for Visual Testing?
         KEY.ENTER,
         // Add Playwright for End-To-End Testing?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
-        KEY.ENTER,
-        // Add ESLint for Code Linting?
         KEY.ENTER,
         // Add ESLint for Code Linting?
         KEY.ENTER,
