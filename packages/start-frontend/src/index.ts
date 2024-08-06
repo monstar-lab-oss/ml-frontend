@@ -13,7 +13,6 @@ import {
   propmtClackDir,
   type UserInputTests,
 } from "./helpers/prompt-clack";
-import { promptAppDir, promptUserInput } from "./helpers/prompt";
 
 const help = `
 Create a new codes for front-end app

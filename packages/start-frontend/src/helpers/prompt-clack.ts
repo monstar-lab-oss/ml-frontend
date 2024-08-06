@@ -6,9 +6,12 @@ import {
   confirm,
   cancel,
   multiselect,
+  spinner,
+  outro,
 } from "@clack/prompts";
 import * as color from "picocolors";
 import gradient from "gradient-string";
+import { setTimeout as sleep } from "node:timers/promises";
 
 export type UserInputTests = {
   useVitest: boolean | undefined;
@@ -167,6 +170,12 @@ export async function promptClack() {
       }
     );
   }
+
+  // running spinner after all the prompts are done
+  // test would be failed if no spinner is running
+  const s = spinner();
+  s.start("Installing...");
+  s.stop(`Installed successfully`);
 
   return {
     jsLibrary: groupUtility.jsLibrary,
