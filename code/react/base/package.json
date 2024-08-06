@@ -28,7 +28,7 @@
     "eslint-plugin-react": "7.34.1",
     "msw": "1.3.1",
     "typescript": "5.5.4",
-    "vite": "4.2.0"
+    "vite": "5.3.5"
   },
   "msw": {
     "workerDirectory": "public"
