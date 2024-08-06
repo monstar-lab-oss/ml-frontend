@@ -13,7 +13,7 @@ const KEY = {
 };
 
 // Timeout duration for interactive tests, to allow for code stub downloads
-const INTERACTIVE_TEST_TIMEOUT = 60000;
+const INTERACTIVE_TEST_TIMEOUT = 20000;
 
 let testDir: string;
 
@@ -25,10 +25,8 @@ async function cleanupTestDir() {
 
 async function executeCLI(inputs: string[], delay = 500) {
   const cliProcess = exec(`node ${START_FRONTEND} ${testDir}`);
-  console.log("node command", `node ${START_FRONTEND} ${testDir}`);
 
   function nextPrompt(inputs: string[]) {
-    console.log(JSON.stringify(inputs));
     if (!inputs.length) return;
     // Write the input to the CLI process with a delay
     setTimeout(() => {
@@ -53,7 +51,6 @@ describe("start-frontend", () => {
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
 
-    console.log("testDir", testDir);
     cleanupTestDir();
   });
 
@@ -115,14 +112,52 @@ describe("start-frontend", () => {
         KEY.ENTER,
         // Add ESLint for Code Linting?
         KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
+        // Add ESLint for Code Linting?
+        KEY.ENTER,
       ]);
 
       // Execute tree-cli to get the directory structure and convert it to a string
       const result = execSync(
         `npx tree-cli -a -l 5 --base ${testDir}`
       ).toString("utf-8");
-
-      console.log("result", result);
 
       expect(result).toContain(`
 ├── .eslintignore

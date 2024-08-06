@@ -3,9 +3,9 @@ import {
   text,
   select,
   group,
-  multiselect,
   confirm,
   cancel,
+  multiselect,
 } from "@clack/prompts";
 import * as color from "picocolors";
 import gradient from "gradient-string";
@@ -41,34 +41,32 @@ const CLIOptions: CLIOptionsInterface = {
 const g = gradient("#53575a", "#53575a");
 const t = gradient("#53575a", "#ffff00");
 
-export async function promptClack(dir: string) {
-  console.log("start promptClack");
+export async function propmtClackDir() {
   intro(`${g("ꮙ START-")}${t("FRONTEND")}`);
+  const result = await text({
+    message: color.blue("Where Would You like to Create Your Application?"),
+    placeholder: "./my-app",
+    initialValue: "./my-app",
+    validate: (value) => {
+      if (!value) {
+        return "Please provide a location path";
+      }
+      // regular expression that text start from ./
+      const Reg = new RegExp("^\\./");
+      if (!Reg.test(value)) {
+        return "Please input a valid location path";
+      }
+    },
+  });
 
+  return JSON.stringify(result);
+}
+
+export async function promptClack() {
   const groupUtility = await group(
     {
-      location: () => {
-        console.log("location cli");
-        return text({
-          message: color.blue(
-            "Where Would You like to Create Your Application?"
-          ),
-          placeholder: "./my-app",
-          initialValue: dir ? `./${dir}` : "./my-app",
-          validate: (value) => {
-            if (!value) {
-              return "Please provide a location path";
-            }
-            // regular expression that text start from ./
-            const Reg = new RegExp("^\\./");
-            if (!Reg.test(value)) {
-              return "Please input a valid location path";
-            }
-          },
-        });
-      },
+      // Select JS Library
       jsLibrary: () => {
-        console.log("jslibrary cli");
         return select({
           message: "Select a JavaScript library for UI",
           options: Object.keys(CLIOptions).map((key) => {
@@ -80,7 +78,7 @@ export async function promptClack(dir: string) {
         }) as Promise<string>;
       },
 
-      // select example
+      // Select API Solution
       apiSolution: () => {
         return select({
           message: "Select an API Solution (Use arrow keys)",
@@ -93,12 +91,16 @@ export async function promptClack(dir: string) {
         }) as Promise<"graphql" | "restful">;
       },
 
+      // Select modules for selected JS Library
       modules: (value) => {
         return multiselect({
           message:
             "Select the modules that you would like to use (Press 'space' to select)",
           options: CLIOptions[value.results.jsLibrary as string].useModules,
           required: false,
+          initialValues: [
+            CLIOptions[value.results.jsLibrary as string].useModules[0].value,
+          ],
         }) as Promise<string[]>;
       },
 
@@ -118,39 +120,58 @@ export async function promptClack(dir: string) {
     }
   );
 
-  const testGroupUtility = await group({
-    useVitest: () => {
-      return confirm({
-        message: "Add Vitest for Unit Testing?",
-      });
-    },
-    useStorybook: () => {
-      return confirm({
-        message: "Add Storybook for Visual Testing?",
-      });
-    },
-    useE2E: () => {
-      return confirm({
-        message: "Add Playwright for End-To-End Testing?",
-      });
-    },
-    useEslint: () => {
-      return confirm({
-        message: "Add ESLint for Code Linting?",
-      });
-    },
-    usePrettier: () => {
-      return confirm({
-        message: "Add Prettier for Code Formatting?",
-      });
-    },
-  });
+  let testGroupUtility: UserInputTests | undefined;
+
+  if (groupUtility.isUseSampleTestCode) {
+    // Select testing packages
+    testGroupUtility = await group(
+      {
+        useVitest: () => {
+          return confirm({
+            message: "Add Vitest for Unit Testing?",
+            initialValue: true,
+          });
+        },
+        useStorybook: () => {
+          return confirm({
+            message: "Add Storybook for Visual Testing?",
+            initialValue: true,
+          });
+        },
+        useE2E: () => {
+          return confirm({
+            message: "Add Playwright for End-To-End Testing?",
+            initialValue: true,
+          });
+        },
+        useEslint: () => {
+          return confirm({
+            message: "Add ESLint for Code Linting?",
+            initialValue: true,
+          });
+        },
+        usePrettier: () => {
+          return confirm({
+            message: "Add Prettier for Code Formatting?",
+            initialValue: true,
+          });
+        },
+      },
+      {
+        // On Cancel callback that wraps the group
+        // So if the user cancels one of the prompts in the group this function will be called
+        onCancel: () => {
+          cancel("Operation cancelled.");
+          process.exit(0);
+        },
+      }
+    );
+  }
 
   return {
-    location: groupUtility.location,
     jsLibrary: groupUtility.jsLibrary,
     apiSolution: groupUtility.apiSolution,
+    tests: testGroupUtility ?? null,
     modules: groupUtility.modules,
-    tests: testGroupUtility,
   };
 }

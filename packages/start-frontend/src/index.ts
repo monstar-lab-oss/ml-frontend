@@ -8,7 +8,12 @@ import { degitConfig, eslintPackages } from "./constants";
 import { deepMergeObjects } from "./helpers/deep-merge-objects";
 import { cloneFromRepo } from "./helpers/degit";
 import { removeWorkspacePackages } from "./helpers/remove-workspace-packages";
-import { promptClack, type UserInputTests } from "./helpers/prompt-clack";
+import {
+  promptClack,
+  propmtClackDir,
+  type UserInputTests,
+} from "./helpers/prompt-clack";
+import { promptAppDir, promptUserInput } from "./helpers/prompt";
 
 const help = `
 Create a new codes for front-end app
@@ -284,20 +289,20 @@ function removeEslintConfig() {
 }
 
 async function run() {
-  const { input } = await meow(help, {
+  const { input } = meow(help, {
     flags: {
       help: { type: "boolean", default: false, alias: "h" },
       version: { type: "boolean", default: false, alias: "v" },
     },
   });
-
   const [dir] = input;
 
-  const { jsLibrary, apiSolution, tests, location } = await promptClack(dir);
-
-  // const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
-  const appDir = path.resolve(process.cwd(), dir ? dir : location);
+  const appDir = path.resolve(
+    process.cwd(),
+    dir ? dir : await propmtClackDir()
+  );
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
+  const { jsLibrary, apiSolution, tests } = await promptClack();
 
   const templateName = jsLibrary;
   await cloneTemplateToTempDir(templateName);
