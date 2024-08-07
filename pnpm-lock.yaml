@@ -40,8 +40,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       wouter:
-        specifier: 2.12.1
-        version: 2.12.1(react@18.3.1)
+        specifier: 3.3.1
+        version: 3.3.1(react@18.3.1)
     devDependencies:
       '@tanstack/eslint-plugin-query':
         specifier: 4.38.0
@@ -3969,6 +3969,9 @@ packages:
     resolution: {integrity: sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg==}
     engines: {node: '>= 8'}
 
+  mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+
   mixme@0.5.10:
     resolution: {integrity: sha512-5H76ANWinB1H3twpJ6JY8uvAtpmFvHNArpilJAjXRKXSDDLPIMoZArw5SH0q9z+lLs8IrMw7Q2VWpWimFKFT1Q==}
     engines: {node: '>= 8.0.0'}
@@ -4530,6 +4533,10 @@ packages:
   regexp.prototype.flags@1.5.2:
     resolution: {integrity: sha512-NcDiDkTLuPR+++OCKB0nWafEmhg/Da8aUPLPMQbK+bxKKCm1/S5he+AqYa4PlMCVBalb4/yxIRub6qkEx5yJbw==}
     engines: {node: '>= 0.4'}
+
+  regexparam@3.0.0:
+    resolution: {integrity: sha512-RSYAtP31mvYLkAHrOlh25pCNQ5hWnT106VukGaaFfuJrZFkGRX5GhUAdPqpSDXxOhA2c4akmRuplv1mRqnBn6Q==}
+    engines: {node: '>=8'}
 
   regexpu-core@5.2.2:
     resolution: {integrity: sha512-T0+1Zp2wjF/juXMrMxHxidqGYn8U4R+zleSJhX9tQ1PUsS8a9UtYfbsF9LdiVgNX3kiX8RNaKM42nfSgvFJjmw==}
@@ -5430,8 +5437,8 @@ packages:
   wordwrap@1.0.0:
     resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
 
-  wouter@2.12.1:
-    resolution: {integrity: sha512-G7a6JMSLSNcu6o8gdOfIzqxuo8Qx1qs+9rpVnlurH69angsSFPZP5gESNuVNeJct/MGpQg191pDo4HUjTx7IIQ==}
+  wouter@3.3.1:
+    resolution: {integrity: sha512-Fea/W5OHl8WOLgxpqx5jCheWjXXHYHaq33UNfgs7ewS9hXA+cBhvFTf3atxS/M5RBa1dQTXHZLE2J++9QKSkPA==}
     peerDependencies:
       react: '>=16.8.0'
 
@@ -9831,6 +9838,8 @@ snapshots:
       minipass: 3.3.6
       yallist: 4.0.0
 
+  mitt@3.0.1: {}
+
   mixme@0.5.10: {}
 
   mkdirp@1.0.4: {}
@@ -10430,6 +10439,8 @@ snapshots:
       define-properties: 1.2.1
       es-errors: 1.3.0
       set-function-name: 2.0.2
+
+  regexparam@3.0.0: {}
 
   regexpu-core@5.2.2:
     dependencies:
@@ -11446,9 +11457,11 @@ snapshots:
 
   wordwrap@1.0.0: {}
 
-  wouter@2.12.1(react@18.3.1):
+  wouter@3.3.1(react@18.3.1):
     dependencies:
+      mitt: 3.0.1
       react: 18.3.1
+      regexparam: 3.0.0
       use-sync-external-store: 1.2.0(react@18.3.1)
 
   wrap-ansi@6.2.0:
