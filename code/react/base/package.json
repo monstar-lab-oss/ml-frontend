@@ -12,13 +12,13 @@
     "lint": "eslint . --ext .js,jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@tanstack/react-query": "4.36.1",
+    "@tanstack/react-query": "5.51.21",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "wouter": "2.12.1"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "4.38.0",
+    "@tanstack/eslint-plugin-query": "5.51.15",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "@typescript-eslint/eslint-plugin": "8.0.1",
