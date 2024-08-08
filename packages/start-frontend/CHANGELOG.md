@@ -1,5 +1,15 @@
 # start-frontend
 
+## 1.1.0
+
+### Minor Changes
+
+- cfee1a9: Fix CLI test failure by adjusting build process
+
+### Patch Changes
+
+- 688770e: Improve start-frontend CLI test
+
 ## 1.0.5
 
 ### Patch Changes
