@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "jsdom": "24.1.1",
-    "node-fetch": "3.3.0",
+    "node-fetch": "3.3.2",
     "vitest": "1.6.0"
   }
 }
