@@ -15,11 +15,16 @@
     "test": "vitest run --dir __tests__"
   },
   "dependencies": {
+    "@clack/core": "0.3.4",
+    "@clack/prompts": "0.7.0",
+    "@types/gradient-string": "1.1.6",
     "chalk": "5.3.0",
     "degit": "2.8.4",
     "fs-extra": "11.2.0",
+    "gradient-string": "2.0.2",
     "inquirer": "8.2.3",
-    "meow": "7.1.1"
+    "meow": "7.1.1",
+    "picocolors": "1.0.1"
   },
   "devDependencies": {
     "@types/concat-stream": "2.0.0",
