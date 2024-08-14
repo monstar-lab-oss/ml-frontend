@@ -63,6 +63,8 @@ export async function propmtClackDir() {
   return JSON.stringify(result);
 }
 
+const s = spinner();
+
 export async function promptClack() {
   const groupUtility = await group(
     {
@@ -169,16 +171,12 @@ export async function promptClack() {
     );
   }
 
-  // running spinner after all the prompts are done
-  // test would be failed if no spinner is running
-  const s = spinner();
-  s.start("Installing...");
-  s.stop(`Installed successfully`);
-
   return {
     jsLibrary: groupUtility.jsLibrary,
     apiSolution: groupUtility.apiSolution,
     tests: testGroupUtility ?? null,
     modules: groupUtility.modules,
+    loadingStart: () => s.start("Installing..."),
+    loadingStop: () => s.stop(`Installed successfully`),
   };
 }
