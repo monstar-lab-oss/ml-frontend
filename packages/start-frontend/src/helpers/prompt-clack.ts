@@ -169,16 +169,15 @@ export async function promptClack() {
     );
   }
 
-  // running spinner after all the prompts are done
-  // test would be failed if no spinner is running
+  // spinner instance for loading
   const s = spinner();
-  s.start("Installing...");
-  s.stop(`Installed successfully`);
 
   return {
     jsLibrary: groupUtility.jsLibrary,
     apiSolution: groupUtility.apiSolution,
     tests: testGroupUtility ?? null,
     modules: groupUtility.modules,
+    loadingStart: () => s.start("Installing..."),
+    loadingStop: () => s.stop("Installed successfully"),
   };
 }

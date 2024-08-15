@@ -301,7 +301,11 @@ async function run() {
     dir ? dir : await propmtClackDir()
   );
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
-  const { jsLibrary, apiSolution, tests } = await promptClack();
+  const { jsLibrary, apiSolution, tests, loadingStart, loadingStop } =
+    await promptClack();
+
+  // start spinner
+  loadingStart();
 
   const templateName = jsLibrary;
   await cloneTemplateToTempDir(templateName);
@@ -328,7 +332,8 @@ async function run() {
   // Copy commons
   copyCommon(appDir, sharedConfigDir);
 
-  console.log();
+  // stop spinner
+  loadingStop();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);
   console.log("Inside this directory, you can run:");
   console.log();
