@@ -1,5 +1,11 @@
 # start-frontend
 
+## 1.1.1
+
+### Patch Changes
+
+- 14d6428: Introduce Clack cli by @G-N555
+
 ## 1.1.0
 
 ### Minor Changes
