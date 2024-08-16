@@ -1,7 +1,7 @@
 {
   "name": "start-frontend",
   "repository": "git@github.com:monstar-lab-oss/ml-frontend.git",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "bin": {
     "start-frontend": "dist/index.js"
   },
