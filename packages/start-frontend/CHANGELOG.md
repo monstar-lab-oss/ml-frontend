@@ -1,5 +1,11 @@
 # start-frontend
 
+## 1.1.2
+
+### Patch Changes
+
+- dff61e6: fix: remove JSON.stringify by @ptrkdan @jinmayamashita
+
 ## 1.1.1
 
 ### Patch Changes
