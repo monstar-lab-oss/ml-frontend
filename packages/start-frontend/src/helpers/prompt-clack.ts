@@ -44,23 +44,38 @@ const t = gradient("#53575a", "#ffff00");
 
 export async function propmtClackDir() {
   intro(`${g("ꮙ START-")}${t("FRONTEND")}`);
-  const result = await text({
-    message: color.blue("Where Would You like to Create Your Application?"),
-    placeholder: "./my-app",
-    initialValue: "./my-app",
-    validate: (value) => {
-      if (!value) {
-        return "Please provide a location path";
-      }
-      // regular expression that text start from ./
-      const Reg = new RegExp("^\\./");
-      if (!Reg.test(value)) {
-        return "Please input a valid location path";
-      }
+  const { dir } = await group(
+    {
+      dir: () =>
+        text({
+          message: color.blue(
+            "Where Would You like to Create Your Application?"
+          ),
+          placeholder: "./my-app",
+          initialValue: "./my-app",
+          validate: (value) => {
+            if (!value) {
+              return "Please provide a location path";
+            }
+            // regular expression that text start from ./
+            const Reg = new RegExp("^\\./");
+            if (!Reg.test(value)) {
+              return "Please input a valid location path";
+            }
+          },
+        }),
     },
-  });
+    {
+      // On Cancel callback that wraps the group
+      // So if the user cancels one of the prompts in the group this function will be called
+      onCancel: () => {
+        cancel("Operation cancelled.");
+        process.exit(0);
+      },
+    }
+  );
 
-  return JSON.stringify(result);
+  return dir;
 }
 
 export async function promptClack() {
