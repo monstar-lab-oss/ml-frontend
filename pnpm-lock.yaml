@@ -60,7 +60,7 @@ importers:
         version: 8.0.1(eslint@8.57.0)(typescript@5.5.4)
       '@vitejs/plugin-react':
         specifier: 4.3.1
-        version: 4.3.1(vite@5.4.0(@types/node@18.19.43))
+        version: 4.3.1(vite@5.4.3(@types/node@18.19.43))
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -74,8 +74,8 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
       vite:
-        specifier: 5.4.0
-        version: 5.4.0(@types/node@18.19.43)
+        specifier: 5.4.3
+        version: 5.4.3(@types/node@18.19.43)
 
   code/react/module-api-graphql:
     dependencies:
@@ -152,10 +152,10 @@ importers:
         version: 8.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)
       '@storybook/react-vite':
         specifier: 8.2.8
-        version: 8.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.20.0)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.0(@types/node@18.19.43))
+        version: 8.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.20.0)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.3(@types/node@18.19.43))
       '@vitejs/plugin-react':
         specifier: 4.3.1
-        version: 4.3.1(vite@5.4.0(@types/node@18.19.43))
+        version: 4.3.1(vite@5.4.3(@types/node@18.19.43))
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -169,8 +169,8 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
       vite:
-        specifier: 5.4.0
-        version: 5.4.0(@types/node@18.19.43)
+        specifier: 5.4.3
+        version: 5.4.3(@types/node@18.19.43)
 
   code/react/testing-vitest:
     dependencies:
@@ -186,7 +186,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-react':
         specifier: 4.3.1
-        version: 4.3.1(vite@5.4.0(@types/node@18.19.43))
+        version: 4.3.1(vite@5.4.3(@types/node@18.19.43))
       mock-server:
         specifier: workspace:*
         version: link:../../../packages/mock-server
@@ -299,7 +299,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(postcss@8.4.41)(typescript@5.5.4)
+        version: 8.2.4(postcss@8.4.45)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1419,6 +1419,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1426,6 +1427,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -4158,8 +4160,8 @@ packages:
       yaml:
         optional: true
 
-  postcss@8.4.41:
-    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
+  postcss@8.4.45:
+    resolution: {integrity: sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==}
     engines: {node: ^10 || ^12 || >=14}
 
   preferred-pm@3.1.2:
@@ -4406,6 +4408,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rollup@4.20.0:
@@ -5068,8 +5071,8 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
-  vite@5.4.0:
-    resolution: {integrity: sha512-5xokfMX0PIiwCMCMb9ZJcMyh5wbBun0zUzKib+L65vAZ8GY9ePZMXxFrHbr/Kyll2+LSCY7xtERPpxkBDKngwg==}
+  vite@5.4.3:
+    resolution: {integrity: sha512-IH+nl64eq9lJjFqU+/yrRnrHPVTlgy42/+IzbOdaFDVlyLgI/wDlf+FCobXLX1cT0X5+7LMyH1mIy2xJdLfo8Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -6638,13 +6641,13 @@ snapshots:
     dependencies:
       '@sinclair/typebox': 0.27.8
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.5.4)(vite@5.4.0(@types/node@18.19.43))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.5.4)(vite@5.4.3(@types/node@18.19.43))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.5.4)
-      vite: 5.4.0(@types/node@18.19.43)
+      vite: 5.4.3(@types/node@18.19.43)
     optionalDependencies:
       typescript: 5.5.4
 
@@ -6917,7 +6920,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.0(@types/node@18.19.43))':
+  '@storybook/builder-vite@8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.3(@types/node@18.19.43))':
     dependencies:
       '@storybook/csf-plugin': 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))
       '@types/find-cache-dir': 3.2.1
@@ -6929,7 +6932,7 @@ snapshots:
       magic-string: 0.30.10
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5))
       ts-dedent: 2.2.0
-      vite: 5.4.0(@types/node@18.19.43)
+      vite: 5.4.3(@types/node@18.19.43)
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -7007,11 +7010,11 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5))
 
-  '@storybook/react-vite@8.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.20.0)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.0(@types/node@18.19.43))':
+  '@storybook/react-vite@8.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.20.0)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.3(@types/node@18.19.43))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.1(typescript@5.5.4)(vite@5.4.0(@types/node@18.19.43))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.1(typescript@5.5.4)(vite@5.4.3(@types/node@18.19.43))
       '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
-      '@storybook/builder-vite': 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.0(@types/node@18.19.43))
+      '@storybook/builder-vite': 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)(vite@5.4.3(@types/node@18.19.43))
       '@storybook/react': 8.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5)))(typescript@5.5.4)
       find-up: 5.0.0
       magic-string: 0.30.10
@@ -7021,7 +7024,7 @@ snapshots:
       resolve: 1.22.8
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.24.5))
       tsconfig-paths: 4.2.0
-      vite: 5.4.0(@types/node@18.19.43)
+      vite: 5.4.3(@types/node@18.19.43)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - rollup
@@ -7348,14 +7351,14 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react@4.3.1(vite@5.4.0(@types/node@18.19.43))':
+  '@vitejs/plugin-react@4.3.1(vite@5.4.3(@types/node@18.19.43))':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/plugin-transform-react-jsx-self': 7.24.5(@babel/core@7.24.5)
       '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.5)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.0(@types/node@18.19.43)
+      vite: 5.4.3(@types/node@18.19.43)
     transitivePeerDependencies:
       - supports-color
 
@@ -9757,13 +9760,13 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-load-config@6.0.1(postcss@8.4.41):
+  postcss-load-config@6.0.1(postcss@8.4.45):
     dependencies:
       lilconfig: 3.1.1
     optionalDependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
 
-  postcss@8.4.41:
+  postcss@8.4.45:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.0.1
@@ -10549,7 +10552,7 @@ snapshots:
 
   tslib@2.4.1: {}
 
-  tsup@8.2.4(postcss@8.4.41)(typescript@5.5.4):
+  tsup@8.2.4(postcss@8.4.45)(typescript@5.5.4):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
@@ -10561,14 +10564,14 @@ snapshots:
       globby: 11.1.0
       joycon: 3.1.1
       picocolors: 1.0.1
-      postcss-load-config: 6.0.1(postcss@8.4.41)
+      postcss-load-config: 6.0.1(postcss@8.4.45)
       resolve-from: 5.0.0
       rollup: 4.20.0
       source-map: 0.8.0-beta.0
       sucrase: 3.35.0
       tree-kill: 1.2.2
     optionalDependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       typescript: 5.5.4
     transitivePeerDependencies:
       - jiti
@@ -10787,7 +10790,7 @@ snapshots:
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.1
-      vite: 5.4.0(@types/node@18.19.43)
+      vite: 5.4.3(@types/node@18.19.43)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -10799,10 +10802,10 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.4.0(@types/node@18.19.43):
+  vite@5.4.3(@types/node@18.19.43):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.4.41
+      postcss: 8.4.45
       rollup: 4.20.0
     optionalDependencies:
       '@types/node': 18.19.43
@@ -10827,7 +10830,7 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.4.0(@types/node@18.19.43)
+      vite: 5.4.3(@types/node@18.19.43)
       vite-node: 1.6.0(@types/node@18.19.43)
       why-is-node-running: 2.2.2
     optionalDependencies:
