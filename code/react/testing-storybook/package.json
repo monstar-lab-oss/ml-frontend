@@ -14,7 +14,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "storybook": "8.2.8",
-    "typescript": "5.5.4",
+    "typescript": "5.6.2",
     "vite": "5.4.0"
   }
 }
