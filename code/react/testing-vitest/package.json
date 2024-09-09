@@ -13,7 +13,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "jsdom": "24.1.1",
+    "jsdom": "25.0.0",
     "node-fetch": "3.3.0",
     "vitest": "1.6.0"
   }
