@@ -12,6 +12,6 @@
     "start-server-and-test": "1.15.2",
     "tsconfig": "workspace:*",
     "typescript": "5.5.4",
-    "@types/node": "18.19.43"
+    "@types/node": "22.5.4"
   }
 }
