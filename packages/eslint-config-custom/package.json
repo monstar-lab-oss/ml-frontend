@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "eslint": "8.57.0",
+    "@typescript-eslint/parser": "5.62.0",
+    "eslint": "9.10.0",
     "eslint-config-turbo": "0.0.10",
-    "@typescript-eslint/parser": "5.62.0"
+    "eslint-plugin-storybook": "0.8.0",
+    "typescript-eslint": "8.5.0",
+    "eslint-plugin-react": "7.34.1",
+    "eslint-plugin-tailwindcss": "3.17.4"
   }
 }
