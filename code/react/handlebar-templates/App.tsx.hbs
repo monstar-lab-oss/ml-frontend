@@ -1,0 +1,23 @@
+import { Suspense } from "react";
+{{#if router}}
+  import { Router } from './routes';
+{{else}}
+  import Home from './ui/pages';
+{{/if}}
+import { AppProviders } from "./context";
+
+function App() {
+  return (
+    <AppProviders>
+      <Suspense>
+        {{#if router}}
+        <Router />
+        {{else}}
+        <Home />
+        {{/if}}
+      </Suspense>
+    </AppProviders>
+  )
+}
+
+export default App;

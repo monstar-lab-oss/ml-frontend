@@ -24,6 +24,7 @@
     "gradient-string": "2.0.2",
     "inquirer": "8.2.3",
     "meow": "7.1.1",
+    "node-plop": "0.32.0",
     "picocolors": "1.1.0"
   },
   "devDependencies": {
