@@ -9,10 +9,10 @@ import { deepMergeObjects } from "./helpers/deep-merge-objects";
 import { cloneFromRepo } from "./helpers/degit";
 import { removeWorkspacePackages } from "./helpers/remove-workspace-packages";
 import {
-  promptAppDir,
-  promptUserInput,
+  promptClack,
+  propmtClackDir,
   type UserInputTests,
-} from "./helpers/prompt";
+} from "./helpers/prompt-clack";
 
 const help = `
 Create a new codes for front-end app
@@ -296,15 +296,18 @@ async function run() {
       version: { type: "boolean", default: false, alias: "v" },
     },
   });
-
   const [dir] = input;
 
-  console.log("\nstart-frontend\n");
-  console.log("Welcome!\n");
-
-  const appDir = path.resolve(process.cwd(), dir ? dir : await promptAppDir());
+  const appDir = path.resolve(
+    process.cwd(),
+    dir ? dir : await propmtClackDir()
+  );
   const sharedConfigDir = path.resolve(CONFIG_TEMPLATES, "__shared");
-  const { jsLibrary, apiSolution, modules, tests } = await promptUserInput();
+  const { jsLibrary, apiSolution, tests, loadingStart, loadingStop } =
+    await promptClack();
+
+  // start spinner
+  loadingStart();
 
   const templateName = jsLibrary;
   await cloneTemplateToTempDir(templateName);
@@ -341,7 +344,8 @@ async function run() {
   // Copy commons
   await copyCommon(appDir, sharedConfigDir);
 
-  console.log();
+  // stop spinner
+  loadingStop();
   console.log(`Success! Created a new app at "${path.basename(appDir)}".`);
   console.log("Inside this directory, you can run:");
   console.log();

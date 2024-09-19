@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import path from "node:path";
 import util from "node:util";
-import { execFile, exec, execSync } from "node:child_process";
+import { exec, execFile, execSync } from "node:child_process";
 import fse from "fs-extra";
 
 const START_FRONTEND = path.resolve(__dirname, "..", "dist", "index.js");
@@ -28,7 +28,6 @@ async function executeCLI(inputs: string[], delay = 500) {
 
   function nextPrompt(inputs: string[]) {
     if (!inputs.length) return;
-
     // Write the input to the CLI process with a delay
     setTimeout(() => {
       cliProcess?.stdin?.write(inputs[0]);
@@ -50,6 +49,7 @@ describe("start-frontend", () => {
       // eslint-disable-next-line turbo/no-undeclared-env-vars
       process.env.RUNNER_TEMP ||
       execSync("mktemp -d -t my-test").toString("utf-8");
+
     cleanupTestDir();
   });
 
@@ -93,13 +93,13 @@ describe("start-frontend", () => {
     "handle interactive configuration on CLI",
     async () => {
       await executeCLI([
-        // Where Would You like to Create Your Application?
+        // Which location you want to start project?
         KEY.ENTER,
-        // Select a JavaScript library for UI (Use arrow keys)
+        // Select a JavaScript library for UI
         KEY.ENTER,
         // Select an API Solution (Use arrow keys)
         KEY.ENTER,
-        // Select module do you want to use
+        // Select module do you want to use (Press 'space' to select)
         KEY.ENTER,
         // Add Testing codes for Catching bugs early?
         KEY.ENTER,
@@ -109,7 +109,7 @@ describe("start-frontend", () => {
         KEY.ENTER,
         // Add Playwright for End-To-End Testing?
         KEY.ENTER,
-        // Add Prettier for Code Formatting?
+        // Add ESLint for Code Linting?
         KEY.ENTER,
       ]);
 

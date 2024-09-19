@@ -1,7 +1,7 @@
 {
   "name": "ml-frontend",
   "scripts": {
-    "test:cli": "turbo run build --filter=start-frontend test --filter=start-frontend",
+    "test:cli": "turbo run build --filter=start-frontend && turbo run test --filter=start-frontend",
     "test:modules": "turbo run test --filter='./code/*' && turbo run test --filter='./code/*/*'",
     "e2e": "turbo run e2e",
     "type": "turbo run type",
@@ -11,10 +11,10 @@
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
-    "husky": "9.0.11",
+    "husky": "9.1.6",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
-    "turbo": "1.13.3"
+    "turbo": "1.13.4"
   },
   "lint-staged": {
     "*": "prettier --ignore-unknown --write"

@@ -1,5 +1,27 @@
 # start-frontend
 
+## 1.1.2
+
+### Patch Changes
+
+- dff61e6: fix: remove JSON.stringify by @ptrkdan @jinmayamashita
+
+## 1.1.1
+
+### Patch Changes
+
+- 14d6428: Introduce Clack cli by @G-N555
+
+## 1.1.0
+
+### Minor Changes
+
+- cfee1a9: Fix CLI test failure by adjusting build process
+
+### Patch Changes
+
+- 688770e: Improve start-frontend CLI test
+
 ## 1.0.5
 
 ### Patch Changes
