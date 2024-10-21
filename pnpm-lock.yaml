@@ -231,8 +231,8 @@ importers:
         specifier: 8.57.0
         version: 8.57.0
       eslint-config-turbo:
-        specifier: 2.1.1
-        version: 2.1.1(eslint@8.57.0)
+        specifier: 2.2.3
+        version: 2.2.3(eslint@8.57.0)
 
   packages/mock-server:
     dependencies:
@@ -2113,8 +2113,8 @@ packages:
     engines: {node: '>=6.0'}
     hasBin: true
 
-  eslint-config-turbo@2.1.1:
-    resolution: {integrity: sha512-JJF8SZErmgKCGkt124WUmTt0sQ5YLvPo2YxDsfzn9avGJC7/BQIa+3FZoDb3zeYYsZx91pZ6htQAJaKK8NQQAg==}
+  eslint-config-turbo@2.2.3:
+    resolution: {integrity: sha512-/zwNU+G2w0HszXzWILdl6/Catt86ejUG7vsFSdpnFzFAAUbbT2TxgoCFvC1fKtm6+SkQsXwkRRe9tFz0aMftpg==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -2124,8 +2124,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
 
-  eslint-plugin-turbo@2.1.1:
-    resolution: {integrity: sha512-E/34kdQd0n3RP18+e0DSV0f3YTSCOojUh1p4X0Xrho2PBYmJ3umSnNo9FhkZt6UDACl+nBQcYTFkRHMz76lJdw==}
+  eslint-plugin-turbo@2.2.3:
+    resolution: {integrity: sha512-LHt35VwxthdGVO6hQRfvmFb6ee8/exAzAYWCy4o87Bnp7urltP8qg7xMd4dPSLAhtfnI2xSo1WgeVaR3MeItxw==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -2140,6 +2140,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -6464,10 +6465,10 @@ snapshots:
     optionalDependencies:
       source-map: 0.6.1
 
-  eslint-config-turbo@2.1.1(eslint@8.57.0):
+  eslint-config-turbo@2.2.3(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
-      eslint-plugin-turbo: 2.1.1(eslint@8.57.0)
+      eslint-plugin-turbo: 2.2.3(eslint@8.57.0)
 
   eslint-plugin-react@7.36.1(eslint@8.57.0):
     dependencies:
@@ -6491,7 +6492,7 @@ snapshots:
       string.prototype.matchall: 4.0.11
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-turbo@2.1.1(eslint@8.57.0):
+  eslint-plugin-turbo@2.2.3(eslint@8.57.0):
     dependencies:
       dotenv: 16.0.3
       eslint: 8.57.0
